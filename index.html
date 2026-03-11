@@ -1,1 +1,1082 @@
 
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOVU — Do avião à cidadania</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue-deep: #0A2540;
+    --blue-mid: #1A4A7A;
+    --blue-bright: #2E7FD4;
+    --blue-light: #EBF4FF;
+    --blue-pale: #F5F9FF;
+    --white: #FFFFFF;
+    --gray-100: #F8FAFC;
+    --gray-200: #E8EEF5;
+    --gray-400: #8FA3BC;
+    --gray-600: #4A6580;
+    --text: #0A2540;
+    --accent: #1A6DD4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 0 5%;
+    height: 68px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--blue-deep);
+    letter-spacing: -0.5px;
+  }
+
+  .nav-logo span { color: var(--blue-bright); }
+
+  .nav-cta {
+    background: var(--blue-deep);
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .nav-cta:hover { background: var(--blue-mid); transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 5% 80px;
+    background: linear-gradient(160deg, #F5F9FF 0%, #EBF3FF 40%, #FAFCFF 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(46,127,212,0.08) 0%, transparent 70%);
+    top: -100px; right: -100px;
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(10,37,64,0.05) 0%, transparent 70%);
+    bottom: 0; left: -50px;
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-radius: 50px;
+    padding: 8px 18px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--gray-600);
+    margin-bottom: 32px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-badge .dot {
+    width: 8px; height: 8px;
+    background: #22C55E;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.3); }
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    text-align: center;
+    color: var(--blue-deep);
+    max-width: 780px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .hero-title em {
+    font-style: normal;
+    color: var(--blue-bright);
+    position: relative;
+  }
+
+  .hero-title em::after {
+    content: '';
+    position: absolute;
+    bottom: 4px; left: 0; right: 0;
+    height: 3px;
+    background: var(--blue-bright);
+    opacity: 0.25;
+    border-radius: 2px;
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--gray-600);
+    text-align: center;
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+    font-weight: 400;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-cta-wrap {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .btn-primary {
+    background: var(--blue-deep);
+    color: white;
+    border: none;
+    padding: 16px 36px;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: 0 4px 20px rgba(10,37,64,0.2);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(10,37,64,0.28); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--blue-deep);
+    border: 1.5px solid var(--gray-200);
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
+
+  .hero-stats {
+    display: flex;
+    gap: 48px;
+    margin-top: 64px;
+    padding-top: 48px;
+    border-top: 1px solid var(--gray-200);
+    animation: fadeUp 0.6s 0.4s ease both;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .stat { text-align: center; }
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--blue-deep);
+    display: block;
+  }
+  .stat-label {
+    font-size: 0.82rem;
+    color: var(--gray-400);
+    font-weight: 500;
+    letter-spacing: 0.3px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* JOURNEY */
+  .journey {
+    padding: 100px 5%;
+    background: white;
+  }
+
+  .section-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    text-align: center;
+    color: var(--blue-deep);
+    max-width: 600px;
+    margin: 0 auto 60px;
+    line-height: 1.2;
+  }
+
+  .phases {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .phase-card {
+    background: var(--blue-pale);
+    border: 1px solid var(--gray-200);
+    border-radius: 20px;
+    padding: 28px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .phase-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--blue-bright), var(--blue-mid));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .phase-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(10,37,64,0.1); }
+  .phase-card:hover::before { opacity: 1; }
+
+  .phase-num {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    margin-bottom: 10px;
+  }
+
+  .phase-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--blue-deep);
+    margin-bottom: 12px;
+  }
+
+  .phase-desc {
+    font-size: 0.88rem;
+    color: var(--gray-600);
+    line-height: 1.65;
+  }
+
+  /* CHATBOT SECTION */
+  .chatbot-section {
+    padding: 100px 5%;
+    background: linear-gradient(160deg, var(--blue-deep) 0%, #0D2E50 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .chatbot-section::before {
+    content: '';
+    position: absolute;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(46,127,212,0.15) 0%, transparent 70%);
+    top: -100px; right: -100px;
+  }
+
+  .chatbot-section .section-label { color: rgba(255,255,255,0.5); }
+  .chatbot-section .section-title { color: white; }
+
+  .chat-container {
+    max-width: 680px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.3);
+  }
+
+  .chat-header {
+    background: var(--blue-deep);
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .chat-avatar {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, var(--blue-bright), var(--blue-mid));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+  }
+
+  .chat-header-info h3 {
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .chat-header-info p {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.78rem;
+  }
+
+  .chat-status {
+    margin-left: auto;
+    display: flex; align-items: center; gap: 6px;
+    font-size: 0.78rem;
+    color: #22C55E;
+    font-weight: 500;
+  }
+
+  .chat-status::before {
+    content: '';
+    width: 7px; height: 7px;
+    background: #22C55E;
+    border-radius: 50%;
+  }
+
+  .chat-messages {
+    padding: 24px;
+    min-height: 320px;
+    max-height: 420px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: #FAFCFF;
+  }
+
+  .chat-messages::-webkit-scrollbar { width: 4px; }
+  .chat-messages::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 2px; }
+
+  .msg {
+    display: flex;
+    gap: 10px;
+    animation: msgIn 0.35s ease both;
+  }
+
+  @keyframes msgIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .msg-avatar {
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, var(--blue-bright), var(--blue-mid));
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: white;
+  }
+
+  .msg-bubble {
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-radius: 0 16px 16px 16px;
+    padding: 12px 16px;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--text);
+    max-width: 85%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .msg.user { flex-direction: row-reverse; }
+  .msg.user .msg-bubble {
+    background: var(--blue-deep);
+    color: white;
+    border: none;
+    border-radius: 16px 0 16px 16px;
+  }
+
+  .msg.user .msg-avatar {
+    background: var(--gray-200);
+    color: var(--gray-600);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
+  .chat-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0 24px 16px;
+    background: #FAFCFF;
+  }
+
+  .chat-opt-btn {
+    background: white;
+    border: 1.5px solid var(--blue-bright);
+    color: var(--blue-bright);
+    padding: 9px 18px;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .chat-opt-btn:hover { background: var(--blue-bright); color: white; }
+
+  .chat-input-area {
+    padding: 16px 24px;
+    border-top: 1px solid var(--gray-200);
+    display: flex;
+    gap: 10px;
+    background: white;
+    align-items: center;
+  }
+
+  .chat-input {
+    flex: 1;
+    border: 1.5px solid var(--gray-200);
+    border-radius: 50px;
+    padding: 11px 18px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+    color: var(--text);
+  }
+  .chat-input:focus { border-color: var(--blue-bright); }
+  .chat-input::placeholder { color: var(--gray-400); }
+
+  .chat-send {
+    width: 42px; height: 42px;
+    background: var(--blue-deep);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .chat-send:hover { background: var(--blue-mid); transform: scale(1.05); }
+  .chat-send svg { width: 16px; height: 16px; fill: white; }
+
+  /* EMAIL CAPTURE */
+  .email-capture {
+    background: linear-gradient(135deg, #EBF4FF, #F0F7FF);
+    border: 1px solid #C8DFFE;
+    border-radius: 16px;
+    padding: 20px;
+    margin: 16px 24px;
+    animation: msgIn 0.4s ease both;
+  }
+
+  .email-capture p {
+    font-size: 0.88rem;
+    color: var(--blue-deep);
+    font-weight: 500;
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+
+  .email-form { display: flex; gap: 8px; }
+
+  .email-input {
+    flex: 1;
+    border: 1.5px solid var(--gray-200);
+    border-radius: 50px;
+    padding: 10px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .email-input:focus { border-color: var(--blue-bright); }
+
+  .email-submit {
+    background: var(--blue-deep);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .email-submit:hover { background: var(--blue-mid); }
+
+  .success-msg {
+    display: none;
+    text-align: center;
+    padding: 16px;
+    color: #166534;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  /* HOW IT WORKS */
+  .how {
+    padding: 100px 5%;
+    background: var(--gray-100);
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 32px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .step {
+    text-align: center;
+    padding: 20px;
+  }
+
+  .step-icon {
+    width: 60px; height: 60px;
+    background: white;
+    border: 1.5px solid var(--gray-200);
+    border-radius: 18px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem;
+    margin: 0 auto 20px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  }
+
+  .step h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--blue-deep);
+    margin-bottom: 10px;
+  }
+
+  .step p {
+    font-size: 0.88rem;
+    color: var(--gray-600);
+    line-height: 1.65;
+  }
+
+  /* SOCIAL PROOF */
+  .proof {
+    padding: 80px 5%;
+    background: white;
+    text-align: center;
+  }
+
+  .proof-numbers {
+    display: flex;
+    justify-content: center;
+    gap: 64px;
+    flex-wrap: wrap;
+  }
+
+  .proof-item .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--blue-deep);
+    display: block;
+  }
+
+  .proof-item .label {
+    font-size: 0.85rem;
+    color: var(--gray-400);
+    font-weight: 500;
+  }
+
+  /* FINAL CTA */
+  .final-cta {
+    padding: 100px 5%;
+    background: var(--blue-deep);
+    text-align: center;
+  }
+
+  .final-cta h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    color: white;
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+
+  .final-cta p {
+    color: rgba(255,255,255,0.6);
+    font-size: 1.05rem;
+    margin-bottom: 40px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+  }
+
+  .final-cta .btn-primary {
+    background: white;
+    color: var(--blue-deep);
+    font-size: 1.05rem;
+    padding: 18px 44px;
+  }
+  .final-cta .btn-primary:hover { background: var(--blue-light); }
+
+  /* FOOTER */
+  footer {
+    padding: 32px 5%;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    background: #071B30;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: gap;
+    gap: 16px;
+  }
+
+  footer .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: white;
+  }
+
+  footer p {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.3);
+  }
+
+  /* TYPING INDICATOR */
+  .typing {
+    display: flex; gap: 4px; align-items: center;
+    padding: 12px 16px;
+  }
+  .typing span {
+    width: 7px; height: 7px;
+    background: var(--gray-400);
+    border-radius: 50%;
+    animation: bounce 1.2s infinite;
+  }
+  .typing span:nth-child(2) { animation-delay: 0.2s; }
+  .typing span:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes bounce {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-6px); }
+  }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">N<span>O</span>VU</div>
+  <button class="nav-cta" onclick="document.getElementById('chatbot').scrollIntoView({behavior:'smooth'})">Experimentar grátis</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">
+    <span class="dot"></span>
+    Agora em fase de acesso antecipado
+  </div>
+  <h1 class="hero-title">
+    A burocracia portuguesa<br>em <em>linguagem simples</em>
+  </h1>
+  <p class="hero-sub">
+    Do avião à cidadania — a NOVU guia-te por cada passo da tua vida em Portugal, sem juridiquês, sem filas, sem stress.
+  </p>
+  <div class="hero-cta-wrap">
+    <button class="btn-primary" onclick="document.getElementById('chatbot').scrollIntoView({behavior:'smooth'})">
+      Fazer a minha primeira pergunta
+    </button>
+    <button class="btn-secondary" onclick="document.getElementById('journey').scrollIntoView({behavior:'smooth'})">
+      Ver como funciona
+    </button>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-number">1,5M</span>
+      <span class="stat-label">imigrantes em Portugal</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4,6/5</span>
+      <span class="stat-label">dificuldade reportada</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">87%</span>
+      <span class="stat-label">usariam a NOVU</span>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section class="journey" id="journey">
+  <p class="section-label">A tua jornada</p>
+  <h2 class="section-title">De cada fase, um guia completo</h2>
+  <div class="phases">
+    <div class="phase-card">
+      <p class="phase-num">Fase 01</p>
+      <h3 class="phase-title">Antes de chegar</h3>
+      <p class="phase-desc">Visto certo para o teu caso, documentos a trazer, checklist de preparação antes de sair do país.</p>
+    </div>
+    <div class="phase-card">
+      <p class="phase-num">Fase 02</p>
+      <h3 class="phase-title">Primeiros passos</h3>
+      <p class="phase-desc">NIF, NISS, conta bancária, número de utente SNS e como encontrar casa — tudo na ordem certa.</p>
+    </div>
+    <div class="phase-card">
+      <p class="phase-num">Fase 03</p>
+      <h3 class="phase-title">Residência e AIMA</h3>
+      <p class="phase-desc">Autorização de residência, reagrupamento familiar, reconhecimento de diploma, abertura de empresa.</p>
+    </div>
+    <div class="phase-card">
+      <p class="phase-num">Fase 04</p>
+      <h3 class="phase-title">Renovação</h3>
+      <p class="phase-desc">Renovação de residência, IRS, atualização de documentos — sem surpresas de última hora.</p>
+    </div>
+    <div class="phase-card">
+      <p class="phase-num">Fase 05</p>
+      <h3 class="phase-title">Integração</h3>
+      <p class="phase-desc">Compra de carro, crédito bancário, busca de emprego e currículo europeu. A vida normal começa aqui.</p>
+    </div>
+    <div class="phase-card">
+      <p class="phase-num">Fase 06</p>
+      <h3 class="phase-title">Cidadania</h3>
+      <p class="phase-desc">Requisitos, processo completo, teste de língua e o que muda depois. O capítulo final da tua jornada.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CHATBOT -->
+<section class="chatbot-section" id="chatbot">
+  <p class="section-label">Experimenta agora</p>
+  <h2 class="section-title" style="margin-bottom:40px;">Faz a tua primeira pergunta</h2>
+
+  <div class="chat-container">
+    <div class="chat-header">
+      <div class="chat-avatar">N</div>
+      <div class="chat-header-info">
+        <h3>Assistente NOVU</h3>
+        <p>Especialista em burocracia portuguesa</p>
+      </div>
+      <div class="chat-status">Online</div>
+    </div>
+
+    <div class="chat-messages" id="chatMessages">
+      <div class="msg">
+        <div class="msg-avatar">N</div>
+        <div class="msg-bubble">
+          Olá! 👋 Sou a NOVU, o teu guia de burocracia em Portugal.<br><br>
+          Com que podes precisar de ajuda hoje?
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-options" id="chatOptions">
+      <button class="chat-opt-btn" onclick="selectOption('NIF / NISS')">NIF / NISS</button>
+      <button class="chat-opt-btn" onclick="selectOption('Residência / AIMA')">Residência / AIMA</button>
+      <button class="chat-opt-btn" onclick="selectOption('Reagrupamento familiar')">Reagrupamento familiar</button>
+      <button class="chat-opt-btn" onclick="selectOption('Recibo verde / Empresa')">Recibo verde / Empresa</button>
+      <button class="chat-opt-btn" onclick="selectOption('IRS')">IRS</button>
+      <button class="chat-opt-btn" onclick="selectOption('Cidadania')">Cidadania</button>
+    </div>
+
+    <div id="emailCapture" class="email-capture hidden">
+      <p>🎁 Queres receber o guia completo e ser um dos primeiros a aceder à NOVU gratuitamente?</p>
+      <div class="email-form">
+        <input type="email" class="email-input" id="emailInput" placeholder="o teu email">
+        <button class="email-submit" onclick="submitEmail()">Entrar na lista</button>
+      </div>
+    </div>
+
+    <div id="successMsg" class="success-msg">
+      ✅ Perfeito! Vais ser um dos primeiros a saber quando abrirmos. Obrigado! 🙏
+    </div>
+
+    <div class="chat-input-area">
+      <input type="text" class="chat-input" id="chatInput" placeholder="Escreve a tua dúvida..." onkeypress="if(event.key==='Enter')sendMessage()">
+      <button class="chat-send" onclick="sendMessage()">
+        <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <p class="section-label">Como funciona</p>
+  <h2 class="section-title">Simples como deve ser</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-icon">💬</div>
+      <h3>Descreve a situação</h3>
+      <p>Conta-nos em linguagem normal o que precisas — sem formulários complicados.</p>
+    </div>
+    <div class="step">
+      <div class="step-icon">🧭</div>
+      <h3>Recebe o guia</h3>
+      <p>A NOVU analisa o teu caso e gera um caminho personalizado, passo a passo.</p>
+    </div>
+    <div class="step">
+      <div class="step-icon">⏰</div>
+      <h3>Alertas de prazo</h3>
+      <p>Nunca perdes um prazo. Enviamos lembretes antes que seja tarde.</p>
+    </div>
+    <div class="step">
+      <div class="step-icon">👨‍⚖️</div>
+      <h3>Profissional quando precisas</h3>
+      <p>Para casos complexos, ligamos-te a advogados e contabilistas verificados.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF -->
+<section class="proof">
+  <p class="section-label">Validado pelos dados</p>
+  <h2 class="section-title" style="margin-bottom:48px;">Os números falam por si</h2>
+  <div class="proof-numbers">
+    <div class="proof-item">
+      <span class="num">1,5M</span>
+      <span class="label">imigrantes em Portugal</span>
+    </div>
+    <div class="proof-item">
+      <span class="num">4,6/5</span>
+      <span class="label">nível de dificuldade reportado</span>
+    </div>
+    <div class="proof-item">
+      <span class="num">87%</span>
+      <span class="label">dispostos a usar a NOVU</span>
+    </div>
+    <div class="proof-item">
+      <span class="num">€600+</span>
+      <span class="label">gastos em advogados por processo</span>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <h2>A tua nova vida<br>começa aqui.</h2>
+  <p>Junta-te à lista de espera e sê um dos primeiros a experimentar a NOVU gratuitamente.</p>
+  <button class="btn-primary" onclick="document.getElementById('chatbot').scrollIntoView({behavior:'smooth'})">
+    Quero acesso antecipado
+  </button>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">NOVU</div>
+  <p>© 2026 NOVU. Informação, não aconselhamento jurídico.</p>
+</footer>
+
+<script>
+const conversationHistory = [];
+let emailShown = false;
+let messageCount = 0;
+
+const SYSTEM_PROMPT = `És a NOVU, uma assistente especializada em burocracia portuguesa para imigrantes. 
+
+O teu papel é guiar imigrantes em Portugal por todos os processos burocráticos e de integração — da chegada à cidadania.
+
+Comportamento:
+- Responde sempre em Português de Portugal (não brasileiro)
+- Sê calorosa, clara e encorajadora — a burocracia já é stressante o suficiente
+- Usa linguagem simples, nunca juridiquês
+- Estrutura as respostas com bullet points quando há listas de documentos ou passos
+- Usa emojis com moderação para tornar as respostas mais amigáveis
+- Respostas concisas — máximo 150 palavras por resposta
+- Nunca dás aconselhamento jurídico — dás informação e orientação
+- No final de cada resposta, inclui sempre uma frase convidando o utilizador a continuar a explorar ou a deixar o email
+- Para casos complexos ou situações muito específicas, recomenda sempre consultar um advogado especializado
+
+Áreas de conhecimento:
+- NIF, NISS, SNS, conta bancária
+- Autorização de residência e renovação (AIMA)
+- Reagrupamento familiar
+- Reconhecimento de diplomas
+- Abertura de empresa e recibo verde
+- IRS e obrigações fiscais
+- Compra de carro, crédito bancário
+- Busca de emprego e currículo europeu
+- Processo de cidadania portuguesa
+
+Importante: És uma ferramenta informativa, não substituis aconselhamento jurídico profissional.`;
+
+async function callClaude(userMessage) {
+  conversationHistory.push({ role: 'user', content: userMessage });
+
+  const response = await fetch('/api/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ messages: conversationHistory })
+  });
+
+  const data = await response.json();
+  const reply = data.reply || 'Desculpa, ocorreu um erro. Tenta novamente.';
+  conversationHistory.push({ role: 'assistant', content: reply });
+  return reply;
+}
+
+async function selectOption(topic) {
+  document.getElementById('chatOptions').classList.add('hidden');
+  addMessage(topic, 'user');
+  showTyping();
+
+  try {
+    const reply = await callClaude(topic);
+    removeTyping();
+    addMessage(reply, 'bot');
+    messageCount++;
+    if (messageCount >= 2 && !emailShown) {
+      setTimeout(() => showEmailCapture(), 800);
+      emailShown = true;
+    }
+  } catch (e) {
+    removeTyping();
+    addMessage('Desculpa, ocorreu um erro de ligação. Tenta novamente em breve.', 'bot');
+  }
+}
+
+async function sendMessage() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+
+  input.value = '';
+  document.getElementById('chatOptions').classList.add('hidden');
+  addMessage(text, 'user');
+  showTyping();
+
+  try {
+    const reply = await callClaude(text);
+    removeTyping();
+    addMessage(reply, 'bot');
+    messageCount++;
+    if (messageCount >= 2 && !emailShown) {
+      setTimeout(() => showEmailCapture(), 800);
+      emailShown = true;
+    }
+  } catch (e) {
+    removeTyping();
+    addMessage('Desculpa, ocorreu um erro de ligação. Tenta novamente em breve.', 'bot');
+  }
+}
+
+function addMessage(text, type) {
+  const container = document.getElementById('chatMessages');
+  const msg = document.createElement('div');
+  msg.className = `msg ${type}`;
+
+  const avatar = document.createElement('div');
+  avatar.className = 'msg-avatar';
+  avatar.textContent = type === 'bot' ? 'N' : 'Tu';
+
+  const bubble = document.createElement('div');
+  bubble.className = 'msg-bubble';
+  bubble.innerHTML = text.replace(/\n/g, '<br>');
+
+  msg.appendChild(avatar);
+  msg.appendChild(bubble);
+  container.appendChild(msg);
+  container.scrollTop = container.scrollHeight;
+}
+
+function showTyping() {
+  const container = document.getElementById('chatMessages');
+  const typing = document.createElement('div');
+  typing.className = 'msg';
+  typing.id = 'typingIndicator';
+  typing.innerHTML = `<div class="msg-avatar">N</div><div class="msg-bubble"><div class="typing"><span></span><span></span><span></span></div></div>`;
+  container.appendChild(typing);
+  container.scrollTop = container.scrollHeight;
+}
+
+function removeTyping() {
+  const el = document.getElementById('typingIndicator');
+  if (el) el.remove();
+}
+
+function showEmailCapture() {
+  document.getElementById('emailCapture').classList.remove('hidden');
+  document.getElementById('chatMessages').scrollTop = 99999;
+}
+
+async function submitEmail() {
+  const email = document.getElementById('emailInput').value.trim();
+  if (!email || !email.includes('@')) {
+    document.getElementById('emailInput').style.borderColor = '#EF4444';
+    return;
+  }
+  const btn = document.querySelector('.email-submit');
+  btn.textContent = 'A guardar...';
+  btn.disabled = true;
+  try {
+    await fetch('https://formspree.io/f/xdawgkvq', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ email, source: 'chatbot-waitlist' })
+    });
+  } catch (e) {}
+  document.getElementById('emailCapture').classList.add('hidden');
+  document.getElementById('successMsg').style.display = 'block';
+}
+</script>
+</body>
+</html>
+
