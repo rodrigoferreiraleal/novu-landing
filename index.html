@@ -822,6 +822,24 @@ function removeTyping() {
 }
 
 // Init counter
+// Init counter — restore from cookie
+function getCookie(name) {
+  const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+  return match ? match[2] : null;
+}
+function setCookie(name, value, hours) {
+  const expires = new Date(Date.now() + hours * 3600000).toUTCString();
+  document.cookie = `${name}=${value}; expires=${expires}; path=/`;
+}
+
+const savedUnlocked = getCookie('novu_unlocked');
+const savedQuestions = getCookie('novu_questions');
+if (savedUnlocked === 'true') {
+  isUnlocked = true;
+} else if (savedQuestions) {
+  questionsUsed = parseInt(savedQuestions) || 0;
+  if (questionsUsed >= MAX_FREE) showEmailCapture();
+}
 updateCounter();
 </script>
 </body>
