@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Privacidade — NOVU</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; color: #0A2540; background: #F5F9FF; line-height: 1.7; }
+  nav { background: white; border-bottom: 1px solid #E8EEF5; padding: 0 5%; height: 68px; display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: #0A2540; text-decoration: none; }
+  .logo span { color: #2E7FD4; }
+  .back-btn { font-size: 0.88rem; color: #2E7FD4; text-decoration: none; display: flex; align-items: center; gap: 6px; }
+  .back-btn:hover { text-decoration: underline; }
+  .container { max-width: 760px; margin: 60px auto; padding: 0 5% 80px; }
+  .page-title { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: #0A2540; margin-bottom: 8px; }
+  .updated { font-size: 0.82rem; color: #8FA3BC; margin-bottom: 40px; }
+  h2 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 600; color: #0A2540; margin-top: 36px; margin-bottom: 12px; }
+  p { font-size: 0.95rem; color: #4A6580; margin-bottom: 14px; }
+  ul { padding-left: 20px; margin-bottom: 14px; }
+  ul li { font-size: 0.95rem; color: #4A6580; margin-bottom: 6px; }
+  a { color: #2E7FD4; }
+  .highlight-box { background: white; border: 1px solid #E8EEF5; border-left: 4px solid #2E7FD4; border-radius: 12px; padding: 20px 24px; margin: 24px 0; }
+  .highlight-box p { margin: 0; font-size: 0.92rem; }
+  footer { text-align: center; padding: 32px; background: #071B30; color: rgba(255,255,255,0.4); font-size: 0.8rem; }
+  footer a { color: rgba(255,255,255,0.6); }
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo">N<span>O</span>VU</a>
+  <a href="/" class="back-btn">← Voltar ao site</a>
+</nav>
+
+<div class="container">
+  <h1 class="page-title">Política de Privacidade</h1>
+  <p class="updated">Última actualização: Março de 2026</p>
+
+  <div class="highlight-box">
+    <p>A NOVU respeita a tua privacidade. Esta política explica que dados recolhemos, como os usamos e os teus direitos ao abrigo do RGPD (Regulamento Geral sobre a Protecção de Dados — UE 2016/679).</p>
+  </div>
+
+  <h2>1. Quem somos</h2>
+  <p>A NOVU é uma plataforma de informação e orientação para imigrantes em Portugal, operada a título pessoal. Contacto: <a href="mailto:geral@novuai.pt">geral@novuai.pt</a></p>
+
+  <h2>2. Que dados recolhemos</h2>
+  <ul>
+    <li><strong>Nome e email</strong> — quando te registas para acesso ao assistente ou lista de espera</li>
+    <li><strong>Idioma de preferência</strong> — para personalizar a experiência</li>
+    <li><strong>Mensagens enviadas ao assistente</strong> — processadas pela API da Anthropic para gerar respostas</li>
+    <li><strong>Dados de utilização</strong> — número de perguntas, timestamps (através de cookies)</li>
+    <li><strong>Endereço IP</strong> — para controlo de taxa de utilização (rate limiting)</li>
+  </ul>
+
+  <h2>3. Como usamos os dados</h2>
+  <ul>
+    <li>Prestar o serviço de assistência via chat</li>
+    <li>Enviar comunicações sobre o produto (apenas com consentimento)</li>
+    <li>Melhorar a qualidade das respostas e a experiência do utilizador</li>
+    <li>Cumprir obrigações legais</li>
+  </ul>
+
+  <h2>4. Base legal do tratamento (RGPD)</h2>
+  <ul>
+    <li><strong>Consentimento</strong> (Art. 6.º, n.º 1, al. a)) — para o registo de email e comunicações de marketing</li>
+    <li><strong>Execução de contrato</strong> (Art. 6.º, n.º 1, al. b)) — para prestar o serviço solicitado</li>
+    <li><strong>Interesse legítimo</strong> (Art. 6.º, n.º 1, al. f)) — para segurança e melhoria do serviço</li>
+  </ul>
+
+  <h2>5. Subcontratantes (terceiros)</h2>
+  <p>Os teus dados podem ser processados pelos seguintes subcontratantes:</p>
+  <ul>
+    <li><strong>Anthropic</strong> (EUA) — processamento das mensagens do chat via API. Política: anthropic.com/privacy</li>
+    <li><strong>Supabase</strong> (UE — Ireland) — base de dados para armazenamento de emails registados</li>
+    <li><strong>Vercel</strong> (EUA) — alojamento do site e APIs</li>
+    <li><strong>Formspree</strong> — reencaminhamento de emails de contacto</li>
+    <li><strong>Google Analytics</strong> — estatísticas de utilização anónimas</li>
+  </ul>
+  <p>As transferências para fora da UE (Anthropic, Vercel) são efectuadas com garantias adequadas (Cláusulas Contratuais Padrão).</p>
+
+  <h2>6. Retenção de dados</h2>
+  <ul>
+    <li>Emails registados: conservados enquanto o serviço estiver activo ou até pedido de eliminação</li>
+    <li>Mensagens do chat: não são armazenadas permanentemente pela NOVU (processadas em tempo real)</li>
+    <li>Cookies: expiram em 24 horas (sessão) ou 30 dias (preferências)</li>
+  </ul>
+
+  <h2>7. Os teus direitos (RGPD)</h2>
+  <p>Tens os seguintes direitos relativamente aos teus dados pessoais:</p>
+  <ul>
+    <li><strong>Acesso</strong> — pedir uma cópia dos teus dados</li>
+    <li><strong>Rectificação</strong> — corrigir dados incorrectos</li>
+    <li><strong>Eliminação</strong> ("direito ao esquecimento") — pedir a eliminação dos teus dados</li>
+    <li><strong>Portabilidade</strong> — receber os teus dados num formato estruturado</li>
+    <li><strong>Oposição</strong> — opor-te ao tratamento para fins de marketing</li>
+    <li><strong>Retirada de consentimento</strong> — a qualquer momento, sem afectar o tratamento anterior</li>
+  </ul>
+  <p>Para exercer os teus direitos, envia um email para <a href="mailto:geral@novuai.pt">geral@novuai.pt</a>. Respondemos em até 30 dias.</p>
+
+  <h2>8. Cookies</h2>
+  <p>Utilizamos os seguintes tipos de cookies:</p>
+  <ul>
+    <li><strong>Essenciais</strong> — necessários para o funcionamento do site (sessão, preferências de idioma, contador de perguntas)</li>
+    <li><strong>Analíticos</strong> — Google Analytics (anónimo) para compreender como o site é utilizado</li>
+  </ul>
+  <p>Podes gerir as tuas preferências de cookies a qualquer momento através do banner de cookies.</p>
+
+  <h2>9. Segurança</h2>
+  <p>Adoptamos medidas técnicas e organizacionais para proteger os teus dados, incluindo encriptação HTTPS, acesso restrito à base de dados e uso de fornecedores certificados.</p>
+
+  <h2>10. Reclamações</h2>
+  <p>Tens o direito de apresentar reclamação à autoridade de controlo competente em Portugal: <strong>CNPD</strong> (Comissão Nacional de Protecção de Dados) — <a href="https://www.cnpd.pt" target="_blank">cnpd.pt</a></p>
+
+  <h2>11. Alterações a esta política</h2>
+  <p>Podemos actualizar esta política periodicamente. A data de "última actualização" no topo indica quando foi revista pela última vez. Alterações significativas serão comunicadas por email aos utilizadores registados.</p>
+
+  <h2>Contacto</h2>
+  <p>Para qualquer questão sobre privacidade: <a href="mailto:geral@novuai.pt">geral@novuai.pt</a></p>
+</div>
+
+<footer>
+  <p>© 2026 NOVU — <a href="/">novuai.pt</a> | <a href="/termos.html">Termos de Serviço</a></p>
+</footer>
+</body>
+</html>
