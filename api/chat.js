@@ -1,4 +1,4 @@
-require { createClient } from "@supabase/supabase-js";
+const { createClient } = require("@supabase/supabase-js");
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
@@ -26,60 +26,44 @@ Só respondes sobre imigração, burocracia e integração em Portugal. Para qua
 - D4 (Estudante): inscrição em instituição reconhecida pelo DGES
 - Golden Visa: a partir de 500.000€ em fundos (imobiliário residencial excluído desde 2023)
 
-## AUTORIZAÇÃO DE RESIDÊNCIA — PASSO A PASSO
-Fase 1 — Chegada: visto válido → morada na Junta → NIF nas Finanças → NISS → SNS
-Fase 2 — Pedido AIMA (antes do visto expirar, aima.gov.pt ou 808 202 653):
-- Passaporte + cópia, visto válido, 2 fotos tipo passe
-- Comprovativo de morada, meios de subsistência, NIF, NISS
-- Registo criminal apostilado do país de origem
-- Taxa: ~83€ concessão / ~53€ renovação
-Fase 3: AIMA emite prova de pedido → decisão 3-6 meses → biometria → cartão por CTT
-Validade: 2 anos (1ª vez), 3 anos (renovações), permanente após 5 anos (Art. 80º)
+## AUTORIZAÇÃO DE RESIDÊNCIA
+Fase 1: visto válido → morada na Junta → NIF → NISS → SNS
+Fase 2 (AIMA, antes do visto expirar): passaporte, visto, 2 fotos, comprovativo morada, NIF, NISS, registo criminal apostilado, taxa ~83€
+Fase 3: prova de pedido → decisão 3-6 meses → biometria → cartão por CTT
+Validade: 2 anos (1ª vez), 3 anos (renovações), permanente após 5 anos
 
 ## RENOVAÇÃO DA AR
-- Iniciar 3 meses antes de expirar
-- Portal: aima.gov.pt/renovacoes (100% online)
-- ARs expiradas até jun/2025 → EMAIMA; após jun/2025 → Portal AIMA
-- Documentos expirados aceites até 15 abril 2026 com comprovativo de pagamento
-- Necessário: Finanças e Segurança Social sem dívidas
+- Iniciar 3 meses antes. Portal: aima.gov.pt/renovacoes
+- Finanças e Segurança Social sem dívidas obrigatório
 
 ## REAGRUPAMENTO FAMILIAR
-1. Residente pede autorização na AIMA (AR válida há mín. 1 ano)
-2. Familiar pede visto D6 no consulado português
-3. Familiar entra e pede AR na AIMA antes do visto expirar
+1. Residente pede na AIMA (AR válida há mín. 1 ano)
+2. Familiar pede visto D6 no consulado
+3. Familiar pede AR na AIMA após entrada
 
 ## PRIMEIROS DOCUMENTOS
-- NIF: Finanças, gratuito, mesmo dia — portaldasfinancas.gov.pt
-- NISS: Segurança Social, gratuito, 1-2 semanas — seg-social.pt
-- SNS: Centro de Saúde da área de residência — sns24.gov.pt
+- NIF: portaldasfinancas.gov.pt — gratuito, mesmo dia
+- NISS: seg-social.pt — gratuito, 1-2 semanas
+- SNS: Centro de Saúde da área de residência
 
 ## RECIBO VERDE
-- Inscrever na AT, emitir em portaldasfinancas.gov.pt
-- Isenção IVA até 14.500€/ano; IRS de 13% a 48%
+Inscrever na AT, emitir em portaldasfinancas.gov.pt. IVA isento até 14.500€/ano. IRS de 13% a 48%.
 
 ## CIDADANIA
-- Por residência: 5 anos (lusófonos) — ATENÇÃO: proposta de lei jun/2025 pode passar para 7/10 anos, ainda não aprovada
-- Documentos: passaporte, AR, certidão nascimento apostilada, registo criminal PT e origem
-- Taxa: 250€ | Prazo actual: 18-36 meses | Estado: justica.gov.pt
+- Por residência: 5 anos (lusófonos) — proposta jun/2025 pode passar para 7 anos, ainda não aprovada
+- Taxa: 250€ | Prazo: 18-36 meses | Estado: justica.gov.pt
 - Por descendência: 175€, 6-12 meses
 - Por casamento: mínimo 3 anos, 250€
 
-## PORTAIS ESSENCIAIS
+## PORTAIS
 AIMA: aima.gov.pt / 808 202 653 | Finanças: portaldasfinancas.gov.pt
 Seg. Social: seg-social.pt | SNS: sns24.gov.pt | IRN: justica.gov.pt
 
-## ERROS MAIS COMUNS
-1. Deixar visto expirar antes de pedir AR
-2. Não renovar AR 3 meses antes
-3. Dívidas às Finanças ou Segurança Social
-4. Saídas longas de Portugal (interrompem contagem para cidadania)
-5. Não apostilar documentos do país de origem
-
-Sou uma ferramenta de informação — não presto aconselhamento jurídico. Para casos complexos, consulta sempre um advogado ou solicitador.`;
+Sou uma ferramenta de informação — não presto aconselhamento jurídico.`;
 
 const rateLimitMap = new Map();
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
@@ -170,4 +154,4 @@ export default async function handler(req, res) {
     console.error("Handler error:", err);
     return res.status(500).json({ error: "Erro interno. Tenta novamente." });
   }
-}
+};
