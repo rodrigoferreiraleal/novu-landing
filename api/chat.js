@@ -66,7 +66,8 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { messages, action, name, email, lang } = req.body;
+  const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
+const { messages, action, name, email, lang } = body;
   const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress || "unknown";
 
   if (action === "register") {
