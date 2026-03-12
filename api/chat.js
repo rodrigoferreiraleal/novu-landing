@@ -127,7 +127,7 @@ const { messages, action, name, email, lang } = body;
         "anthropic-version": "2023-06-01",
       },
       body: JSON.stringify({
-        model: "claude-3-haiku-latest",
+        model: "claude-sonnet-4-6",
         max_tokens: 1024,
         system: SYSTEM_PROMPT,
         messages: messages,
