@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NOVU — Do avião à cidadania</title>
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZJLBVGPQT5"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -30,7 +29,6 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; }
-
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
@@ -47,7 +45,7 @@
   .lang-btn.active { background: var(--blue-deep); color: white; border-color: var(--blue-deep); }
   .nav-cta { background: var(--blue-deep); color: white; border: none; padding: 10px 24px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
   .nav-cta:hover { background: var(--blue-mid); transform: translateY(-1px); }
-
+  /* MODAL */
   .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(10,37,64,0.6); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
   .modal-overlay.open { display: flex; }
   .modal { background: white; border-radius: 24px; padding: 48px 40px; max-width: 480px; width: 90%; text-align: center; box-shadow: 0 40px 80px rgba(0,0,0,0.2); position: relative; animation: slideUp 0.3s ease; }
@@ -64,7 +62,7 @@
   .modal-submit:disabled { opacity: 0.6; cursor: not-allowed; }
   .modal-note { font-size: 0.78rem; color: var(--gray-400); margin-top: 4px; }
   .modal-success { display: none; color: #166534; font-size: 1rem; font-weight: 500; padding: 16px; }
-
+  /* HERO */
   .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 100px 5% 80px; background: linear-gradient(160deg, #F5F9FF 0%, #EBF3FF 40%, #FAFCFF 100%); position: relative; overflow: hidden; }
   .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: white; border: 1px solid var(--gray-200); border-radius: 50px; padding: 8px 18px; font-size: 0.82rem; font-weight: 500; color: var(--gray-600); margin-bottom: 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); animation: fadeUp 0.6s ease both; }
   .hero-badge .dot { width: 8px; height: 8px; background: #22C55E; border-radius: 50%; animation: pulse 2s infinite; }
@@ -82,7 +80,7 @@
   .stat-number { font-family: 'DM Sans', sans-serif; font-size: 2.2rem; font-weight: 700; color: var(--blue-deep); display: block; letter-spacing: -0.5px; }
   .stat-label { font-size: 0.82rem; color: var(--gray-400); font-weight: 500; }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-
+  /* JOURNEY */
   .journey { padding: 100px 5%; background: white; }
   .section-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--blue-bright); text-align: center; margin-bottom: 16px; }
   .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; text-align: center; color: var(--blue-deep); max-width: 600px; margin: 0 auto 60px; line-height: 1.2; }
@@ -94,10 +92,26 @@
   .phase-num { font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue-bright); margin-bottom: 10px; }
   .phase-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; color: var(--blue-deep); margin-bottom: 12px; }
   .phase-desc { font-size: 0.88rem; color: var(--gray-600); line-height: 1.65; }
-
+  /* ── NOVA SECÇÃO: EXEMPLOS DE PERGUNTAS ── */
+  .faq-examples { padding: 80px 5%; background: var(--blue-pale); }
+  .faq-examples .section-title { margin-bottom: 40px; }
+  .faq-grid { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; max-width: 900px; margin: 0 auto; }
+  .faq-btn {
+    background: white; border: 1.5px solid var(--gray-200); color: var(--blue-deep);
+    padding: 12px 20px; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500;
+    cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; gap: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .faq-btn:hover { border-color: var(--blue-bright); color: var(--blue-bright); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(46,127,212,0.15); }
+  .faq-btn .faq-icon { font-size: 1rem; }
+  .faq-note { text-align: center; margin-top: 24px; font-size: 0.82rem; color: var(--gray-400); }
+  /* CHATBOT */
   .chatbot-section { padding: 100px 5%; background: linear-gradient(160deg, var(--blue-deep) 0%, #0D2E50 100%); position: relative; overflow: hidden; }
   .chatbot-section .section-label { color: rgba(255,255,255,0.5); }
   .chatbot-section .section-title { color: white; }
+  .chat-context-line { text-align: center; color: rgba(255,255,255,0.55); font-size: 0.95rem; margin-top: -24px; margin-bottom: 32px; font-weight: 400; }
   .chat-container { max-width: 680px; margin: 0 auto; background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,0.3); }
   .chat-header { background: var(--blue-deep); padding: 18px 24px; display: flex; align-items: center; gap: 12px; }
   .chat-avatar { width: 40px; height: 40px; background: linear-gradient(135deg, var(--blue-bright), var(--blue-mid)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: white; }
@@ -143,17 +157,21 @@
   .email-submit:hover { background: var(--blue-mid); }
   .success-msg { display: none; text-align: center; padding: 16px; color: #166534; font-size: 0.9rem; font-weight: 500; }
   .hidden { display: none !important; }
-
+  /* ── SECÇÃO COMO FUNCIONA (melhorada) ── */
   .how { padding: 100px 5%; background: var(--gray-100); }
-  .steps { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; max-width: 800px; margin: 0 auto; }
-  .step { text-align: center; padding: 20px; }
-  .step-icon { width: 60px; height: 60px; background: white; border: 1.5px solid var(--gray-200); border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin: 0 auto 20px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
-  .step h3 { font-family: 'Playfair Display', serif; font-size: 1.21rem; font-weight: 600; color: var(--blue-deep); margin-bottom: 10px; }
-  .step p { font-size: 0.97rem; color: var(--gray-600); line-height: 1.65; }
+  .how-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 900px; margin: 0 auto; }
+  @media (max-width: 640px) { .how-steps { grid-template-columns: 1fr; } }
+  .how-step { text-align: center; padding: 32px 24px; background: white; border-radius: 20px; border: 1px solid var(--gray-200); box-shadow: 0 4px 16px rgba(0,0,0,0.05); transition: all 0.3s; }
+  .how-step:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(10,37,64,0.1); }
+  .how-step-num { width: 48px; height: 48px; background: var(--blue-deep); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin: 0 auto 20px; }
+  .how-step h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 600; color: var(--blue-deep); margin-bottom: 10px; }
+  .how-step p { font-size: 0.9rem; color: var(--gray-600); line-height: 1.65; }
+  /* PROOF */
   .proof { padding: 80px 5%; background: white; text-align: center; }
   .proof-numbers { display: flex; justify-content: center; gap: 64px; flex-wrap: wrap; }
   .proof-item .num { font-family: 'DM Sans', sans-serif; font-size: 3rem; font-weight: 700; color: var(--blue-deep); display: block; letter-spacing: -1px; }
   .proof-item .label { font-size: 0.85rem; color: var(--gray-400); font-weight: 500; }
+  /* FINAL CTA */
   .final-cta { padding: 100px 5%; background: var(--blue-deep); text-align: center; }
   .final-cta h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3.2rem); color: white; margin-bottom: 16px; font-weight: 700; }
   .final-cta p { color: rgba(255,255,255,0.6); font-size: 1.05rem; margin-bottom: 40px; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.6; }
@@ -171,6 +189,7 @@
 </head>
 <body>
 
+<!-- MODAL -->
 <div class="modal-overlay" id="emailModal">
   <div class="modal">
     <button class="modal-close" onclick="closeModal()">×</button>
@@ -187,6 +206,7 @@
   </div>
 </div>
 
+<!-- NAV -->
 <nav>
   <div class="nav-logo">N<span>O</span>VU</div>
   <div class="nav-right">
@@ -199,12 +219,13 @@
   </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
   <div class="hero-badge"><span class="dot"></span><span id="hero-badge-text">Agora em fase de acesso antecipado</span></div>
   <h1 class="hero-title" id="hero-title">A tecnologia que guia<br>a sua jornada em <em>Portugal</em></h1>
   <p class="hero-sub" id="hero-sub">Do avião à cidadania — a NOVU guia-te por cada passo da tua vida em Portugal, de forma simples, clara e sem complicações.</p>
   <div class="hero-cta-wrap">
-    <button class="btn-primary" onclick="openModal()" id="hero-btn-primary">Fazer a minha primeira pergunta</button>
+    <button class="btn-primary" onclick="document.getElementById('chatbot').scrollIntoView({behavior:'smooth'})" id="hero-btn-primary">Fazer a minha primeira pergunta</button>
     <button class="btn-secondary" onclick="document.getElementById('journey').scrollIntoView({behavior:'smooth'})" id="hero-btn-secondary">Ver como funciona</button>
   </div>
   <div class="hero-stats">
@@ -214,6 +235,7 @@
   </div>
 </section>
 
+<!-- JOURNEY -->
 <section class="journey" id="journey">
   <p class="section-label" id="journey-label">A tua jornada</p>
   <h2 class="section-title" id="journey-title">De cada fase, um guia completo</h2>
@@ -227,9 +249,21 @@
   </div>
 </section>
 
+<!-- EXEMPLOS DE PERGUNTAS (NOVO) -->
+<section class="faq-examples">
+  <p class="section-label" id="faq-label">Exemplos reais</p>
+  <h2 class="section-title" id="faq-title">Perguntas que a NOVU responde</h2>
+  <div class="faq-grid" id="faqGrid">
+    <!-- preenchido pelo JS conforme o idioma -->
+  </div>
+  <p class="faq-note" id="faq-note">Clica numa pergunta para enviar directamente ao assistente ↓</p>
+</section>
+
+<!-- CHATBOT -->
 <section class="chatbot-section" id="chatbot">
   <p class="section-label" id="chat-section-label">Experimenta agora</p>
-  <h2 class="section-title" id="chat-section-title" style="margin-bottom:40px;">Faz a tua primeira pergunta</h2>
+  <h2 class="section-title" id="chat-section-title" style="margin-bottom:16px;">Faz a tua primeira pergunta</h2>
+  <p class="chat-context-line" id="chat-context-line">Vistos · Documentos · Trabalho · Moradia · Bancos · Cidadania</p>
   <div class="chat-container">
     <div class="chat-header">
       <div class="chat-avatar">N</div>
@@ -282,17 +316,30 @@
   </div>
 </section>
 
-<section class="how">
+<!-- COMO FUNCIONA (melhorado) -->
+<section class="how" id="how">
   <p class="section-label" id="how-label">Como funciona</p>
-  <h2 class="section-title" id="how-title">Simples como deve ser</h2>
-  <div class="steps">
-    <div class="step"><div class="step-icon">💬</div><h3 id="step1-title">Descreve a situação</h3><p id="step1-desc">Conta-nos em linguagem normal o que precisas — sem formulários complicados.</p></div>
-    <div class="step"><div class="step-icon">🧭</div><h3 id="step2-title">Recebe o guia</h3><p id="step2-desc">A NOVU analisa o teu caso e gera um caminho personalizado, passo a passo.</p></div>
-    <div class="step"><div class="step-icon">⏰</div><h3 id="step3-title">Alertas de prazo</h3><p id="step3-desc">Nunca perdes um prazo. Enviamos lembretes antes que seja tarde.</p></div>
-    <div class="step"><div class="step-icon">👨‍⚖️</div><h3 id="step4-title">Profissional quando precisas</h3><p id="step4-desc">Para casos complexos, ligamos-te a advogados e contabilistas verificados.</p></div>
+  <h2 class="section-title" id="how-title">Como a NOVU te ajuda em Portugal</h2>
+  <div class="how-steps">
+    <div class="how-step">
+      <div class="how-step-num">1</div>
+      <h3 id="step1-title">Pergunta</h3>
+      <p id="step1-desc">Descreve a tua dúvida ou situação em linguagem normal — sem formulários complicados.</p>
+    </div>
+    <div class="how-step">
+      <div class="how-step-num">2</div>
+      <h3 id="step2-title">Recebe orientação</h3>
+      <p id="step2-desc">A NOVU explica documentos necessários, próximos passos e todas as opções disponíveis.</p>
+    </div>
+    <div class="how-step">
+      <div class="how-step-num">3</div>
+      <h3 id="step3-title">Avança com segurança</h3>
+      <p id="step3-desc">Sabes exactamente o que fazer em Portugal, sem perder tempo nem dinheiro desnecessário.</p>
+    </div>
   </div>
 </section>
 
+<!-- PROVA SOCIAL -->
 <section class="proof">
   <p class="section-label" id="proof-label">Validado pelos dados</p>
   <h2 class="section-title" id="proof-title" style="margin-bottom:48px;">Os números falam por si</h2>
@@ -304,6 +351,7 @@
   </div>
 </section>
 
+<!-- CTA FINAL -->
 <section class="final-cta">
   <h2 id="cta-title">A tua nova vida<br>começa aqui.</h2>
   <p id="cta-desc">Junta-te à lista de espera e seja um dos primeiros a experimentar a NOVU gratuitamente.</p>
@@ -324,7 +372,20 @@ const T = {
     hero_btn1: 'Fazer a minha primeira pergunta', hero_btn2: 'Ver como funciona',
     stat1: 'imigrantes em Portugal', stat2: 'dificuldade reportada', stat3: 'usariam a NOVU',
     journey_label: 'A tua jornada', journey_title: 'De cada fase, um guia completo',
+    faq_label: 'Exemplos reais', faq_title: 'Perguntas que a NOVU responde',
+    faq_note: 'Clica numa pergunta para enviar directamente ao assistente ↓',
+    faq_questions: [
+      { icon: '📋', text: 'Como tirar o NIF em Portugal?' },
+      { icon: '🏥', text: 'Como obter o número de utente SNS?' },
+      { icon: '💼', text: 'Como conseguir contrato de trabalho?' },
+      { icon: '🎓', text: 'Como validar o meu diploma em Portugal?' },
+      { icon: '🌍', text: 'Como funciona o visto D7?' },
+      { icon: '🏠', text: 'Como encontrar quarto para alugar?' },
+      { icon: '📊', text: 'Como abrir actividade nas Finanças?' },
+      { icon: '🆔', text: 'Como tirar o NISS?' },
+    ],
     chat_section_label: 'Experimenta agora', chat_section_title: 'Faz a tua primeira pergunta',
+    chat_context_line: 'Vistos · Documentos · Trabalho · Moradia · Bancos · Cidadania',
     chat_subtitle: 'Especialista em burocracia portuguesa', chat_status: 'Online', chat_lang_label: 'Idioma:',
     counter: 'Tens {n} perguntas grátis — regista-te para acesso ilimitado',
     counter_unlimited: '✅ Acesso ilimitado desbloqueado!',
@@ -337,11 +398,10 @@ const T = {
     modal_title: 'Acesso antecipado gratuito', modal_desc: 'Junta-te à lista de espera e seja um dos primeiros a experimentar a NOVU.',
     modal_name_ph: 'o teu nome', modal_email_ph: 'o teu email', modal_btn: 'Garantir o meu lugar',
     modal_note: 'Gratuito. Sem spam. Só boas novidades.', modal_success: '✅ Perfeito! Estás na lista. Vamos avisar-te em primeiro lugar! 🙌',
-    how_label: 'Como funciona', how_title: 'Simples como deve ser',
-    step1_title: 'Descreve a situação', step1_desc: 'Conta-nos em linguagem normal o que precisas.',
-    step2_title: 'Recebe o guia', step2_desc: 'A NOVU gera um caminho personalizado, passo a passo.',
-    step3_title: 'Alertas de prazo', step3_desc: 'Nunca perdes um prazo. Enviamos lembretes antes que seja tarde.',
-    step4_title: 'Profissional quando precisas', step4_desc: 'Para casos complexos, ligamos-te a especialistas verificados.',
+    how_label: 'Como funciona', how_title: 'Como a NOVU te ajuda em Portugal',
+    step1_title: 'Pergunta', step1_desc: 'Descreve a tua dúvida ou situação em linguagem normal — sem formulários complicados.',
+    step2_title: 'Recebe orientação', step2_desc: 'A NOVU explica documentos necessários, próximos passos e todas as opções disponíveis.',
+    step3_title: 'Avança com segurança', step3_desc: 'Sabes exactamente o que fazer em Portugal, sem perder tempo nem dinheiro desnecessário.',
     proof_label: 'Validado pelos dados', proof_title: 'Os números falam por si',
     proof1: 'imigrantes em Portugal', proof2: 'nível de dificuldade reportado', proof3: 'dispostos a usar a NOVU', proof4: 'gastos em advogados por processo',
     cta_title: 'A tua nova vida<br>começa aqui.', cta_desc: 'Junta-te à lista e seja um dos primeiros a experimentar a NOVU gratuitamente.', cta_btn: 'Quero acesso antecipado',
@@ -361,7 +421,20 @@ const T = {
     hero_btn1: 'Ask my first question', hero_btn2: 'See how it works',
     stat1: 'immigrants in Portugal', stat2: 'reported difficulty', stat3: 'would use NOVU',
     journey_label: 'Your journey', journey_title: 'A complete guide for every phase',
+    faq_label: 'Real examples', faq_title: 'Questions NOVU can answer',
+    faq_note: 'Click a question to send it directly to the assistant ↓',
+    faq_questions: [
+      { icon: '📋', text: 'How to get a NIF in Portugal?' },
+      { icon: '🏥', text: 'How to get an NHS number in Portugal?' },
+      { icon: '💼', text: 'How to get a work contract in Portugal?' },
+      { icon: '🎓', text: 'How to validate my degree in Portugal?' },
+      { icon: '🌍', text: 'How does the D7 visa work?' },
+      { icon: '🏠', text: 'How to find a room to rent?' },
+      { icon: '📊', text: 'How to register as a freelancer?' },
+      { icon: '🆔', text: 'How to get a NISS number?' },
+    ],
     chat_section_label: 'Try it now', chat_section_title: 'Ask your first question',
+    chat_context_line: 'Visas · Documents · Work · Housing · Banking · Citizenship',
     chat_subtitle: 'Portuguese bureaucracy specialist', chat_status: 'Online', chat_lang_label: 'Language:',
     counter: 'You have {n} free questions — register for unlimited access',
     counter_unlimited: '✅ Unlimited access unlocked!',
@@ -374,11 +447,10 @@ const T = {
     modal_title: 'Free early access', modal_desc: 'Join the waitlist and be one of the first to try NOVU.',
     modal_name_ph: 'your name', modal_email_ph: 'your email', modal_btn: 'Reserve my spot',
     modal_note: 'Free. No spam. Only good news.', modal_success: '✅ Perfect! You\'re on the list. We\'ll notify you first! 🙌',
-    how_label: 'How it works', how_title: 'Simple as it should be',
-    step1_title: 'Describe your situation', step1_desc: 'Tell us in plain language what you need.',
-    step2_title: 'Get your guide', step2_desc: 'NOVU generates a personalised step-by-step path.',
-    step3_title: 'Deadline alerts', step3_desc: 'Never miss a deadline. We send reminders in advance.',
-    step4_title: 'Expert when you need one', step4_desc: 'For complex cases, we connect you with verified specialists.',
+    how_label: 'How it works', how_title: 'How NOVU helps you in Portugal',
+    step1_title: 'Ask', step1_desc: 'Describe your question or situation in plain language — no complicated forms.',
+    step2_title: 'Get guidance', step2_desc: 'NOVU explains required documents, next steps and all available options.',
+    step3_title: 'Move forward confidently', step3_desc: 'You know exactly what to do in Portugal, without wasting time or money.',
     proof_label: 'Backed by data', proof_title: 'The numbers speak for themselves',
     proof1: 'immigrants in Portugal', proof2: 'reported difficulty level', proof3: 'would use NOVU', proof4: 'spent on lawyers per process',
     cta_title: 'Your new life<br>starts here.', cta_desc: 'Join the waitlist and be one of the first to try NOVU for free.', cta_btn: 'Get early access',
@@ -398,7 +470,20 @@ const T = {
     hero_btn1: 'Hacer mi primera pregunta', hero_btn2: 'Ver cómo funciona',
     stat1: 'inmigrantes en Portugal', stat2: 'dificultad reportada', stat3: 'usarían NOVU',
     journey_label: 'Tu viaje', journey_title: 'Una guía completa para cada fase',
+    faq_label: 'Ejemplos reales', faq_title: 'Preguntas que NOVU puede responder',
+    faq_note: 'Haz clic en una pregunta para enviarla directamente al asistente ↓',
+    faq_questions: [
+      { icon: '📋', text: '¿Cómo obtener el NIF en Portugal?' },
+      { icon: '🏥', text: '¿Cómo obtener el número de usuario del SNS?' },
+      { icon: '💼', text: '¿Cómo conseguir contrato de trabajo?' },
+      { icon: '🎓', text: '¿Cómo validar mi título en Portugal?' },
+      { icon: '🌍', text: '¿Cómo funciona el visado D7?' },
+      { icon: '🏠', text: '¿Cómo encontrar habitación para alquilar?' },
+      { icon: '📊', text: '¿Cómo abrir actividad en Hacienda?' },
+      { icon: '🆔', text: '¿Cómo obtener el NISS?' },
+    ],
     chat_section_label: 'Pruébalo ahora', chat_section_title: 'Haz tu primera pregunta',
+    chat_context_line: 'Visados · Documentos · Trabajo · Vivienda · Banca · Ciudadanía',
     chat_subtitle: 'Especialista en burocracia portuguesa', chat_status: 'En línea', chat_lang_label: 'Idioma:',
     counter: 'Tienes {n} preguntas gratis — regístrate para acceso ilimitado',
     counter_unlimited: '✅ ¡Acceso ilimitado desbloqueado!',
@@ -411,11 +496,10 @@ const T = {
     modal_title: 'Acceso anticipado gratuito', modal_desc: 'Únete a la lista de espera y sea uno de los primeros en probar NOVU.',
     modal_name_ph: 'tu nombre', modal_email_ph: 'tu email', modal_btn: 'Reservar mi lugar',
     modal_note: 'Gratis. Sin spam. Solo buenas noticias.', modal_success: '✅ ¡Perfecto! Estás en la lista. ¡Te avisaremos primero! 🙌',
-    how_label: 'Cómo funciona', how_title: 'Simple como debe ser',
-    step1_title: 'Describe tu situación', step1_desc: 'Cuéntanos en lenguaje normal lo que necesitas.',
-    step2_title: 'Recibe tu guía', step2_desc: 'NOVU genera un camino personalizado, paso a paso.',
-    step3_title: 'Alertas de plazo', step3_desc: 'Nunca pierdes un plazo. Enviamos recordatorios con antelación.',
-    step4_title: 'Experto cuando lo necesitas', step4_desc: 'Para casos complejos, te conectamos con especialistas verificados.',
+    how_label: 'Cómo funciona', how_title: 'Cómo NOVU te ayuda en Portugal',
+    step1_title: 'Pregunta', step1_desc: 'Describe tu duda o situación en lenguaje normal — sin formularios complicados.',
+    step2_title: 'Recibe orientación', step2_desc: 'NOVU explica documentos necesarios, próximos pasos y todas las opciones disponibles.',
+    step3_title: 'Avanza con seguridad', step3_desc: 'Sabes exactamente qué hacer en Portugal, sin perder tiempo ni dinero innecesario.',
     proof_label: 'Respaldado por datos', proof_title: 'Los números hablan por sí solos',
     proof1: 'inmigrantes en Portugal', proof2: 'nivel de dificultad reportado', proof3: 'usarían NOVU', proof4: 'gastados en abogados por proceso',
     cta_title: 'Tu nueva vida<br>empieza aquí.', cta_desc: 'Únete a la lista y sea uno de los primeros en probar NOVU gratis.', cta_btn: 'Quiero acceso anticipado',
@@ -445,6 +529,7 @@ let currentLang = 'pt';
 let conversationHistory = [];
 let questionsUsed = 0;
 const MAX_FREE = 4;
+const MAX_HISTORY = 12; // ← LIMITE DE HISTÓRICO (tarefa 3)
 let isUnlocked = false;
 
 // LANGUAGE
@@ -470,8 +555,15 @@ function setLang(lang) {
     document.getElementById('phase'+i+'-title').textContent = t['phase'+i+'_title'];
     document.getElementById('phase'+i+'-desc').textContent = t['phase'+i+'_desc'];
   }
+  // FAQ exemplos
+  document.getElementById('faq-label').textContent = t.faq_label;
+  document.getElementById('faq-title').textContent = t.faq_title;
+  document.getElementById('faq-note').textContent = t.faq_note;
+  renderFAQButtons(t.faq_questions);
+
   document.getElementById('chat-section-label').textContent = t.chat_section_label;
   document.getElementById('chat-section-title').textContent = t.chat_section_title;
+  document.getElementById('chat-context-line').textContent = t.chat_context_line;
   document.getElementById('chat-subtitle').textContent = t.chat_subtitle;
   document.getElementById('chat-status-text').textContent = t.chat_status;
   document.getElementById('chat-lang-label').textContent = t.chat_lang_label;
@@ -491,10 +583,12 @@ function setLang(lang) {
   document.getElementById('modal-note').textContent = t.modal_note;
   document.getElementById('how-label').textContent = t.how_label;
   document.getElementById('how-title').textContent = t.how_title;
-  for(let i=1;i<=4;i++) {
-    document.getElementById('step'+i+'-title').textContent = t['step'+i+'_title'];
-    document.getElementById('step'+i+'-desc').textContent = t['step'+i+'_desc'];
-  }
+  document.getElementById('step1-title').textContent = t.step1_title;
+  document.getElementById('step1-desc').textContent = t.step1_desc;
+  document.getElementById('step2-title').textContent = t.step2_title;
+  document.getElementById('step2-desc').textContent = t.step2_desc;
+  document.getElementById('step3-title').textContent = t.step3_title;
+  document.getElementById('step3-desc').textContent = t.step3_desc;
   document.getElementById('proof-label').textContent = t.proof_label;
   document.getElementById('proof-title').textContent = t.proof_title;
   for(let i=1;i<=4;i++) document.getElementById('proof'+i).textContent = t['proof'+i];
@@ -506,6 +600,25 @@ function setLang(lang) {
   const chatMessages = document.getElementById('chatMessages');
   chatMessages.innerHTML = '';
   addMessage(t.welcome, 'bot');
+}
+
+// RENDER FAQ BUTTONS (tarefa 1)
+function renderFAQButtons(questions) {
+  const grid = document.getElementById('faqGrid');
+  grid.innerHTML = questions.map(q =>
+    `<button class="faq-btn" onclick="sendFAQQuestion('${q.text.replace(/'/g,"\\'")}')">
+      <span class="faq-icon">${q.icon}</span>${q.text}
+    </button>`
+  ).join('');
+}
+
+function sendFAQQuestion(question) {
+  // Scroll para o chatbot e envia a pergunta
+  document.getElementById('chatbot').scrollIntoView({ behavior: 'smooth' });
+  setTimeout(() => {
+    document.getElementById('chatOptions').classList.add('hidden');
+    handleUserMessage(question);
+  }, 600);
 }
 
 function updateCounter() {
@@ -529,6 +642,12 @@ function updateCounter() {
 // CHAT
 async function callClaude(userMessage) {
   conversationHistory.push({ role: 'user', content: userMessage });
+
+  // ── LIMITE DE HISTÓRICO (tarefa 3) ──
+  if (conversationHistory.length > MAX_HISTORY) {
+    conversationHistory = conversationHistory.slice(-MAX_HISTORY);
+  }
+
   const response = await fetch('/api/chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -640,7 +759,7 @@ function addMessage(text, type) {
   avatar.textContent = type === 'bot' ? 'N' : 'Tu';
   const bubble = document.createElement('div');
   bubble.className = 'msg-bubble';
-  bubble.innerHTML = text.replace(/\n/g, '<br>');
+  bubble.innerHTML = text.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
   msg.appendChild(avatar);
   msg.appendChild(bubble);
   wrapper.appendChild(msg);
@@ -677,7 +796,7 @@ function removeTyping() {
   if(el) el.remove();
 }
 
-// INIT — restore state from cookies
+// INIT
 const savedUnlocked = getCookie('novu_unlocked');
 const savedQuestions = getCookie('novu_questions');
 if (savedUnlocked === 'true') {
@@ -687,6 +806,7 @@ if (savedUnlocked === 'true') {
   if (questionsUsed >= MAX_FREE) setTimeout(() => showEmailCapture(), 500);
 }
 updateCounter();
+renderFAQButtons(T['pt'].faq_questions);
 </script>
 </body>
 </html>
