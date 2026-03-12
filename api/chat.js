@@ -12,7 +12,7 @@ const SYSTEM_PROMPT = `És a NOVU — a assistente especialista em imigração e
 - Respondes em PT, EN ou ES conforme a língua do utilizador.
 - Máximo 180 palavras por resposta. Usa bullet points quando listares documentos ou passos.
 ## ÂMBITO — SÓ RESPONDES SOBRE:
-Temas de imigração, burocracia e integração em Portugal. Para qualquer outro tema, diz: "Só posso ajudar com temas relacionados com a vida em Portugal como imigrante."
+Temas de imigração, burocracia, integração e vida quotidiana em Portugal: vistos, documentos, residência, trabalho, moradia, bancos, telemóveis, crédito, cidadania e tudo o que envolve viver em Portugal como imigrante. Para qualquer outro tema sem relação com Portugal ou imigração, diz: "Só posso ajudar com temas relacionados com a vida em Portugal como imigrante."
 ### VISTOS
 - D1 Trabalho: contrato PT, válido 4 meses → AR na AIMA
 - D8 Nómada Digital: rendimento estrangeiro mín. 3.480€/mês
@@ -91,7 +91,7 @@ const FAQ = {
 
   "numero de utente": "Para obter o número de utente SNS:\n\n• Vai ao Centro de Saúde da tua área de residência\n• Documentos: passaporte, NIF e comprovativo de morada portuguesa\n• Gratuito\n• Alternativa: liga para o SNS 24: 808 24 24 24\n\nCom o número de utente tens acesso a consultas, urgências e medicamentos comparticipados no SNS. 🏥",
 
-  "visto d7": "O Visto D7 é para pessoas com rendimentos passivos ou estáveis do estrangeiro:\n\n**Quem pode pedir:** pensionistas, rendas, dividendos, trabalho remoto com contrato estrangeiro\n\n**Rendimento mínimo:** ~760€/mês\n\n**Processo:**\n• Pede no Consulado português do teu país\n• Documentos: passaporte, extracto bancário (3 meses), comprovativo de rendimento\n• Após entrada em PT: pede Autorização de Residência na AIMA\n\n**Prazo:** 2-3 meses no consulado 🌍",
+  "qual o visto": "Portugal tem vários vistos para imigrantes. Os principais:\n\n• **D1 — Trabalho**: tens contrato de trabalho com empresa portuguesa\n• **D7 — Rendimento passivo**: pensão, rendas, trabalho remoto com cliente estrangeiro\n• **D8 — Nómada Digital**: trabalho remoto, rendimento mín. ~3.480€/mês\n• **D2 — Empreendedor**: abrir empresa ou projecto aprovado pelo IAPMEI\n• **D4 — Estudante**: inscrição em universidade ou escola reconhecida\n• **D6 — Reagrupamento familiar**: familiar de residente em Portugal\n• **Golden Visa**: investimento mín. 500.000€ em fundos (imobiliário residencial excluído desde 2023)\n\nQual é a tua situação? Posso dizer exactamente qual o visto certo para ti. 🇵🇹",
 
   "validar diploma": "Para reconhecimento de diploma em Portugal:\n\n**Diplomas universitários:**\n• Processo na instituição de ensino superior equivalente\n• Portal: dges.gov.pt | Prazo: 3-6 meses | Taxa: ~50-150€\n\n**Diplomas profissionais** (médicos, advogados, engenheiros):\n• Cada ordem profissional tem o seu processo\n\n**Apostila de Haia:** verifica se o teu país é signatário — alguns documentos precisam de apostila antes. 🎓",
 
