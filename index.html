@@ -312,7 +312,7 @@
 
 <footer>
   <div class="logo">NOVU</div>
-  <p id="footer-text">© 2026 NOVU. Informação, não aconselhamento jurídico.</p>
+  <p id="footer-text">© 2026 NOVU. Informação, não aconselhamento jurídico. | <a href="mailto:geral@novuai.pt" style="color:rgba(255,255,255,0.4);text-decoration:none;">geral@novuai.pt</a></p>
 </footer>
 
 <script>
@@ -345,7 +345,7 @@ const T = {
     proof_label: 'Validado pelos dados', proof_title: 'Os números falam por si',
     proof1: 'imigrantes em Portugal', proof2: 'nível de dificuldade reportado', proof3: 'dispostos a usar a NOVU', proof4: 'gastos em advogados por processo',
     cta_title: 'A tua nova vida<br>começa aqui.', cta_desc: 'Junta-te à lista e seja um dos primeiros a experimentar a NOVU gratuitamente.', cta_btn: 'Quero acesso antecipado',
-    footer: '© 2026 NOVU. Informação, não aconselhamento jurídico.',
+    footer: '© 2026 NOVU. Informação, não aconselhamento jurídico. | <a href="mailto:geral@novuai.pt" style="color:rgba(255,255,255,0.4);text-decoration:none;">geral@novuai.pt</a>',
     phase1_title: 'Antes de chegar', phase1_desc: 'Visto certo para o teu caso, documentos a trazer, checklist de preparação.',
     phase2_title: 'Primeiros passos', phase2_desc: 'NIF, NISS, conta bancária, número SNS e como encontrar casa.',
     phase3_title: 'Residência e AIMA', phase3_desc: 'Autorização de residência, reagrupamento familiar, reconhecimento de diploma.',
@@ -382,7 +382,7 @@ const T = {
     proof_label: 'Backed by data', proof_title: 'The numbers speak for themselves',
     proof1: 'immigrants in Portugal', proof2: 'reported difficulty level', proof3: 'would use NOVU', proof4: 'spent on lawyers per process',
     cta_title: 'Your new life<br>starts here.', cta_desc: 'Join the waitlist and be one of the first to try NOVU for free.', cta_btn: 'Get early access',
-    footer: '© 2026 NOVU. Information, not legal advice.',
+    footer: '© 2026 NOVU. Information, not legal advice. | <a href="mailto:geral@novuai.pt" style="color:rgba(255,255,255,0.4);text-decoration:none;">geral@novuai.pt</a>',
     phase1_title: 'Before you arrive', phase1_desc: 'Right visa for your case, documents to bring, preparation checklist.',
     phase2_title: 'First steps', phase2_desc: 'NIF, NISS, bank account, NHS number and how to find housing.',
     phase3_title: 'Residence & AIMA', phase3_desc: 'Residence permit, family reunification, diploma recognition.',
@@ -419,7 +419,7 @@ const T = {
     proof_label: 'Respaldado por datos', proof_title: 'Los números hablan por sí solos',
     proof1: 'inmigrantes en Portugal', proof2: 'nivel de dificultad reportado', proof3: 'usarían NOVU', proof4: 'gastados en abogados por proceso',
     cta_title: 'Tu nueva vida<br>empieza aquí.', cta_desc: 'Únete a la lista y sea uno de los primeros en probar NOVU gratis.', cta_btn: 'Quiero acceso anticipado',
-    footer: '© 2026 NOVU. Información, no asesoramiento jurídico.',
+    footer: '© 2026 NOVU. Información, no asesoramiento jurídico. | <a href="mailto:geral@novuai.pt" style="color:rgba(255,255,255,0.4);text-decoration:none;">geral@novuai.pt</a>',
     phase1_title: 'Antes de llegar', phase1_desc: 'Visado correcto para tu caso, documentos a traer, checklist de preparación.',
     phase2_title: 'Primeros pasos', phase2_desc: 'NIF, NISS, cuenta bancaria, número SNS y cómo encontrar vivienda.',
     phase3_title: 'Residencia y AIMA', phase3_desc: 'Autorización de residencia, reagrupación familiar, reconocimiento de diploma.',
@@ -501,7 +501,7 @@ function setLang(lang) {
   document.getElementById('cta-title').innerHTML = t.cta_title;
   document.getElementById('cta-desc').textContent = t.cta_desc;
   document.getElementById('cta-btn').textContent = t.cta_btn;
-  document.getElementById('footer-text').textContent = t.footer;
+  document.getElementById('footer-text').innerHTML = t.footer;
   conversationHistory = [];
   const chatMessages = document.getElementById('chatMessages');
   chatMessages.innerHTML = '';
