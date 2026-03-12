@@ -399,7 +399,7 @@ export default async function handler(req, res) {
     if (userEmail) {
       await supabase
         .from("waitlist")
-        .update({ questions_used: supabase.raw("questions_used + 1") })
+        ..rpc('increment_questions', { user_email: userEmail })
         .eq("email", userEmail);
     }
 
