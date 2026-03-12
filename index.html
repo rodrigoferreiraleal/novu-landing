@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Google tag (gtag.js) -->
+<title>NOVU — Do avião à cidadania</title>
+<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZJLBVGPQT5"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -11,7 +12,6 @@
   gtag('js', new Date());
   gtag('config', 'G-ZJLBVGPQT5');
 </script>
-<title>NOVU — Do avião à cidadania</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -31,7 +31,6 @@
   html { scroll-behavior: smooth; }
   body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; }
 
-  /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
@@ -43,120 +42,52 @@
   .nav-logo span { color: var(--blue-bright); }
   .nav-right { display: flex; align-items: center; gap: 16px; }
   .lang-selector { display: flex; gap: 4px; }
-  .lang-btn {
-    background: transparent; border: 1.5px solid var(--gray-200); color: var(--gray-600);
-    padding: 5px 10px; border-radius: 50px; font-family: 'DM Sans', sans-serif;
-    font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
-  }
+  .lang-btn { background: transparent; border: 1.5px solid var(--gray-200); color: var(--gray-600); padding: 5px 10px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
   .lang-btn:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
   .lang-btn.active { background: var(--blue-deep); color: white; border-color: var(--blue-deep); }
-  .nav-cta {
-    background: var(--blue-deep); color: white; border: none;
-    padding: 10px 24px; border-radius: 50px; font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: all 0.2s;
-  }
+  .nav-cta { background: var(--blue-deep); color: white; border: none; padding: 10px 24px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
   .nav-cta:hover { background: var(--blue-mid); transform: translateY(-1px); }
 
-  /* MODAL */
-  .modal-overlay {
-    display: none; position: fixed; inset: 0;
-    background: rgba(10,37,64,0.6); z-index: 1000;
-    align-items: center; justify-content: center;
-    backdrop-filter: blur(4px);
-  }
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(10,37,64,0.6); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
   .modal-overlay.open { display: flex; }
-  .modal {
-    background: white; border-radius: 24px; padding: 48px 40px;
-    max-width: 480px; width: 90%; text-align: center;
-    box-shadow: 0 40px 80px rgba(0,0,0,0.2); position: relative;
-    animation: slideUp 0.3s ease;
-  }
+  .modal { background: white; border-radius: 24px; padding: 48px 40px; max-width: 480px; width: 90%; text-align: center; box-shadow: 0 40px 80px rgba(0,0,0,0.2); position: relative; animation: slideUp 0.3s ease; }
   @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-  .modal-close {
-    position: absolute; top: 16px; right: 20px;
-    background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--gray-400);
-  }
+  .modal-close { position: absolute; top: 16px; right: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--gray-400); }
   .modal-icon { font-size: 2.5rem; margin-bottom: 16px; }
   .modal h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--blue-deep); margin-bottom: 10px; }
   .modal p { color: var(--gray-600); font-size: 0.95rem; line-height: 1.6; margin-bottom: 24px; }
   .modal-form { display: flex; flex-direction: column; gap: 12px; }
-  .modal-input {
-    border: 1.5px solid var(--gray-200); border-radius: 50px;
-    padding: 14px 20px; font-family: 'DM Sans', sans-serif;
-    font-size: 0.95rem; outline: none; transition: border-color 0.2s; text-align: center;
-  }
+  .modal-input { border: 1.5px solid var(--gray-200); border-radius: 50px; padding: 14px 20px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; outline: none; transition: border-color 0.2s; text-align: center; }
   .modal-input:focus { border-color: var(--blue-bright); }
-  .modal-submit {
-    background: var(--blue-deep); color: white; border: none;
-    padding: 14px 32px; border-radius: 50px; font-family: 'DM Sans', sans-serif;
-    font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
-  }
+  .modal-submit { background: var(--blue-deep); color: white; border: none; padding: 14px 32px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
   .modal-submit:hover { background: var(--blue-mid); }
   .modal-submit:disabled { opacity: 0.6; cursor: not-allowed; }
   .modal-note { font-size: 0.78rem; color: var(--gray-400); margin-top: 4px; }
   .modal-success { display: none; color: #166534; font-size: 1rem; font-weight: 500; padding: 16px; }
 
-  /* HERO */
-  .hero {
-    min-height: 100vh; display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    padding: 100px 5% 80px;
-    background: linear-gradient(160deg, #F5F9FF 0%, #EBF3FF 40%, #FAFCFF 100%);
-    position: relative; overflow: hidden;
-  }
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: white; border: 1px solid var(--gray-200); border-radius: 50px;
-    padding: 8px 18px; font-size: 0.82rem; font-weight: 500; color: var(--gray-600);
-    margin-bottom: 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    animation: fadeUp 0.6s ease both;
-  }
+  .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 100px 5% 80px; background: linear-gradient(160deg, #F5F9FF 0%, #EBF3FF 40%, #FAFCFF 100%); position: relative; overflow: hidden; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: white; border: 1px solid var(--gray-200); border-radius: 50px; padding: 8px 18px; font-size: 0.82rem; font-weight: 500; color: var(--gray-600); margin-bottom: 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); animation: fadeUp 0.6s ease both; }
   .hero-badge .dot { width: 8px; height: 8px; background: #22C55E; border-radius: 50%; animation: pulse 2s infinite; }
   @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(1.3); } }
-  .hero-title {
-    font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 6vw, 5rem);
-    font-weight: 700; line-height: 1.1; text-align: center; color: var(--blue-deep);
-    max-width: 780px; margin-bottom: 24px; animation: fadeUp 0.6s 0.1s ease both;
-  }
+  .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 700; line-height: 1.1; text-align: center; color: var(--blue-deep); max-width: 780px; margin-bottom: 24px; animation: fadeUp 0.6s 0.1s ease both; }
   .hero-title em { font-style: normal; color: var(--blue-bright); }
-  .hero-sub {
-    font-size: 1.15rem; color: var(--gray-600); text-align: center;
-    max-width: 560px; line-height: 1.7; margin-bottom: 48px;
-    animation: fadeUp 0.6s 0.2s ease both;
-  }
+  .hero-sub { font-size: 1.15rem; color: var(--gray-600); text-align: center; max-width: 560px; line-height: 1.7; margin-bottom: 48px; animation: fadeUp 0.6s 0.2s ease both; }
   .hero-cta-wrap { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; animation: fadeUp 0.6s 0.3s ease both; }
-  .btn-primary {
-    background: var(--blue-deep); color: white; border: none;
-    padding: 16px 36px; border-radius: 50px; font-family: 'DM Sans', sans-serif;
-    font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.25s;
-    box-shadow: 0 4px 20px rgba(10,37,64,0.2);
-  }
+  .btn-primary { background: var(--blue-deep); color: white; border: none; padding: 16px 36px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.25s; box-shadow: 0 4px 20px rgba(10,37,64,0.2); }
   .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(10,37,64,0.28); }
-  .btn-secondary {
-    background: transparent; color: var(--blue-deep);
-    border: 1.5px solid var(--gray-200); padding: 16px 32px; border-radius: 50px;
-    font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500; cursor: pointer; transition: all 0.2s;
-  }
+  .btn-secondary { background: transparent; color: var(--blue-deep); border: 1.5px solid var(--gray-200); padding: 16px 32px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
   .btn-secondary:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
-  .hero-stats {
-    display: flex; gap: 48px; margin-top: 64px; padding-top: 48px;
-    border-top: 1px solid var(--gray-200); animation: fadeUp 0.6s 0.4s ease both;
-    flex-wrap: wrap; justify-content: center;
-  }
+  .hero-stats { display: flex; gap: 48px; margin-top: 64px; padding-top: 48px; border-top: 1px solid var(--gray-200); animation: fadeUp 0.6s 0.4s ease both; flex-wrap: wrap; justify-content: center; }
   .stat { text-align: center; }
   .stat-number { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--blue-deep); display: block; }
   .stat-label { font-size: 0.82rem; color: var(--gray-400); font-weight: 500; }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 
-  /* JOURNEY */
   .journey { padding: 100px 5%; background: white; }
   .section-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--blue-bright); text-align: center; margin-bottom: 16px; }
   .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; text-align: center; color: var(--blue-deep); max-width: 600px; margin: 0 auto 60px; line-height: 1.2; }
   .phases { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 1100px; margin: 0 auto; }
-  .phase-card {
-    background: var(--blue-pale); border: 1px solid var(--gray-200); border-radius: 20px;
-    padding: 28px; transition: all 0.3s; position: relative; overflow: hidden;
-  }
+  .phase-card { background: var(--blue-pale); border: 1px solid var(--gray-200); border-radius: 20px; padding: 28px; transition: all 0.3s; position: relative; overflow: hidden; }
   .phase-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--blue-bright), var(--blue-mid)); opacity: 0; transition: opacity 0.3s; }
   .phase-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(10,37,64,0.1); }
   .phase-card:hover::before { opacity: 1; }
@@ -164,7 +95,6 @@
   .phase-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; color: var(--blue-deep); margin-bottom: 12px; }
   .phase-desc { font-size: 0.88rem; color: var(--gray-600); line-height: 1.65; }
 
-  /* CHATBOT */
   .chatbot-section { padding: 100px 5%; background: linear-gradient(160deg, var(--blue-deep) 0%, #0D2E50 100%); position: relative; overflow: hidden; }
   .chatbot-section .section-label { color: rgba(255,255,255,0.5); }
   .chatbot-section .section-title { color: white; }
@@ -175,19 +105,13 @@
   .chat-header-info p { color: rgba(255,255,255,0.5); font-size: 0.78rem; }
   .chat-status { margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: #22C55E; font-weight: 500; }
   .chat-status::before { content: ''; width: 7px; height: 7px; background: #22C55E; border-radius: 50%; }
-
-  /* CHAT LANG SELECTOR */
   .chat-lang-bar { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: var(--gray-100); border-bottom: 1px solid var(--gray-200); }
   .chat-lang-bar span { font-size: 0.75rem; color: var(--gray-400); font-weight: 500; }
   .chat-lang-btns { display: flex; gap: 4px; }
   .chat-lang-btn { background: transparent; border: 1px solid var(--gray-200); color: var(--gray-600); padding: 3px 10px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.72rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
   .chat-lang-btn:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
   .chat-lang-btn.active { background: var(--blue-deep); color: white; border-color: var(--blue-deep); }
-
-  /* QUESTION COUNTER */
   .question-counter { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 8px 16px; background: #FFF8E7; border-bottom: 1px solid #FDE68A; font-size: 0.78rem; color: #92400E; font-weight: 500; }
-  .question-counter.hidden { display: none; }
-
   .chat-messages { padding: 24px; min-height: 320px; max-height: 420px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; background: #FAFCFF; }
   .msg { display: flex; gap: 10px; animation: msgIn 0.35s ease both; }
   @keyframes msgIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -196,11 +120,13 @@
   .msg.user { flex-direction: row-reverse; }
   .msg.user .msg-bubble { background: var(--blue-deep); color: white; border: none; border-radius: 16px 0 16px 16px; }
   .msg.user .msg-avatar { background: var(--gray-200); color: var(--gray-600); font-family: 'DM Sans', sans-serif; font-size: 0.7rem; font-weight: 600; }
-
+  .msg-actions { display: flex; gap: 8px; margin-top: 6px; margin-left: 42px; }
+  .whatsapp-btn { display: inline-flex; align-items: center; gap: 5px; background: #25D366; color: white; border: none; padding: 5px 12px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+  .whatsapp-btn:hover { background: #1ebe5d; transform: translateY(-1px); }
+  .whatsapp-btn svg { width: 13px; height: 13px; fill: white; }
   .chat-options { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 24px 16px; background: #FAFCFF; }
   .chat-opt-btn { background: white; border: 1.5px solid var(--blue-bright); color: var(--blue-bright); padding: 9px 18px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
   .chat-opt-btn:hover { background: var(--blue-bright); color: white; }
-
   .chat-input-area { padding: 16px 24px; border-top: 1px solid var(--gray-200); display: flex; gap: 10px; background: white; align-items: center; }
   .chat-input { flex: 1; border: 1.5px solid var(--gray-200); border-radius: 50px; padding: 11px 18px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; outline: none; transition: border-color 0.2s; color: var(--text); }
   .chat-input:focus { border-color: var(--blue-bright); }
@@ -208,8 +134,6 @@
   .chat-send { width: 42px; height: 42px; background: var(--blue-deep); border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; flex-shrink: 0; }
   .chat-send:hover { background: var(--blue-mid); }
   .chat-send svg { width: 16px; height: 16px; fill: white; }
-
-  /* INLINE EMAIL CAPTURE */
   .email-capture { background: linear-gradient(135deg, #EBF4FF, #F0F7FF); border: 1px solid #C8DFFE; border-radius: 16px; padding: 20px; margin: 16px 24px; animation: msgIn 0.4s ease both; }
   .email-capture p { font-size: 0.88rem; color: var(--blue-deep); font-weight: 500; margin-bottom: 12px; line-height: 1.5; }
   .email-form { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -220,54 +144,33 @@
   .success-msg { display: none; text-align: center; padding: 16px; color: #166534; font-size: 0.9rem; font-weight: 500; }
   .hidden { display: none !important; }
 
-  /* HOW */
   .how { padding: 100px 5%; background: var(--gray-100); }
   .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; max-width: 1000px; margin: 0 auto; }
   .step { text-align: center; padding: 20px; }
   .step-icon { width: 60px; height: 60px; background: white; border: 1.5px solid var(--gray-200); border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin: 0 auto 20px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
   .step h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; color: var(--blue-deep); margin-bottom: 10px; }
   .step p { font-size: 0.88rem; color: var(--gray-600); line-height: 1.65; }
-
-  /* PROOF */
   .proof { padding: 80px 5%; background: white; text-align: center; }
   .proof-numbers { display: flex; justify-content: center; gap: 64px; flex-wrap: wrap; }
   .proof-item .num { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700; color: var(--blue-deep); display: block; }
   .proof-item .label { font-size: 0.85rem; color: var(--gray-400); font-weight: 500; }
-
-  /* FINAL CTA */
   .final-cta { padding: 100px 5%; background: var(--blue-deep); text-align: center; }
   .final-cta h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3.2rem); color: white; margin-bottom: 16px; font-weight: 700; }
   .final-cta p { color: rgba(255,255,255,0.6); font-size: 1.05rem; margin-bottom: 40px; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.6; }
   .final-cta .btn-primary { background: white; color: var(--blue-deep); font-size: 1.05rem; padding: 18px 44px; }
   .final-cta .btn-primary:hover { background: var(--blue-light); }
-
   footer { padding: 32px 5%; background: #071B30; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
   footer .logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: white; }
   footer p { font-size: 0.8rem; color: rgba(255,255,255,0.3); }
-
   .typing { display: flex; gap: 4px; align-items: center; padding: 12px 16px; }
   .typing span { width: 7px; height: 7px; background: var(--gray-400); border-radius: 50%; animation: bounce 1.2s infinite; }
   .typing span:nth-child(2) { animation-delay: 0.2s; }
   .typing span:nth-child(3) { animation-delay: 0.4s; }
   @keyframes bounce { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-6px); } }
-  @keyframes bounce { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-6px); } }
-
-  .msg-actions { display: flex; gap: 8px; margin-top: 6px; margin-left: 42px; }
-  .whatsapp-btn {
-    display: inline-flex; align-items: center; gap: 5px;
-    background: #25D366; color: white; border: none;
-    padding: 5px 12px; border-radius: 50px;
-    font-family: 'DM Sans', sans-serif; font-size: 0.75rem; font-weight: 600;
-    cursor: pointer; transition: all 0.2s; text-decoration: none;
-  }
-  .whatsapp-btn:hover { background: #1ebe5d; transform: translateY(-1px); }
-  .whatsapp-btn svg { width: 13px; height: 13px; fill: white; }
-</style>
 </style>
 </head>
 <body>
 
-<!-- MODAL -->
 <div class="modal-overlay" id="emailModal">
   <div class="modal">
     <button class="modal-close" onclick="closeModal()">×</button>
@@ -284,7 +187,6 @@
   </div>
 </div>
 
-<!-- NAV -->
 <nav>
   <div class="nav-logo">N<span>O</span>VU</div>
   <div class="nav-right">
@@ -297,7 +199,6 @@
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-badge"><span class="dot"></span><span id="hero-badge-text">Agora em fase de acesso antecipado</span></div>
   <h1 class="hero-title" id="hero-title">A burocracia portuguesa<br>em <em>linguagem simples</em></h1>
@@ -313,7 +214,6 @@
   </div>
 </section>
 
-<!-- JOURNEY -->
 <section class="journey" id="journey">
   <p class="section-label" id="journey-label">A tua jornada</p>
   <h2 class="section-title" id="journey-title">De cada fase, um guia completo</h2>
@@ -327,7 +227,6 @@
   </div>
 </section>
 
-<!-- CHATBOT -->
 <section class="chatbot-section" id="chatbot">
   <p class="section-label" id="chat-section-label">Experimenta agora</p>
   <h2 class="section-title" id="chat-section-title" style="margin-bottom:40px;">Faz a tua primeira pergunta</h2>
@@ -351,7 +250,7 @@
     <div class="chat-messages" id="chatMessages">
       <div class="msg">
         <div class="msg-avatar">N</div>
-        <div class="msg-bubble" id="welcome-msg">Olá! 👋 Sou a NOVU, o teu guia de burocracia em Portugal.<br><br>Com que podes precisar de ajuda hoje?</div>
+        <div class="msg-bubble">Olá! 👋 Sou a NOVU, o teu guia de burocracia em Portugal.<br><br>Com que podes precisar de ajuda hoje?</div>
       </div>
     </div>
     <div class="chat-options" id="chatOptions">
@@ -380,7 +279,6 @@
   </div>
 </section>
 
-<!-- HOW -->
 <section class="how">
   <p class="section-label" id="how-label">Como funciona</p>
   <h2 class="section-title" id="how-title">Simples como deve ser</h2>
@@ -392,7 +290,6 @@
   </div>
 </section>
 
-<!-- PROOF -->
 <section class="proof">
   <p class="section-label" id="proof-label">Validado pelos dados</p>
   <h2 class="section-title" id="proof-title" style="margin-bottom:48px;">Os números falam por si</h2>
@@ -404,7 +301,6 @@
   </div>
 </section>
 
-<!-- FINAL CTA -->
 <section class="final-cta">
   <h2 id="cta-title">A tua nova vida<br>começa aqui.</h2>
   <p id="cta-desc">Junta-te à lista de espera e sê um dos primeiros a experimentar a NOVU gratuitamente.</p>
@@ -417,34 +313,27 @@
 </footer>
 
 <script>
-// ============ TRANSLATIONS ============
 const T = {
   pt: {
-    nav_cta: 'Experimentar grátis',
-    hero_badge: 'Agora em fase de acesso antecipado',
+    nav_cta: 'Experimentar grátis', hero_badge: 'Agora em fase de acesso antecipado',
     hero_title: 'A burocracia portuguesa<br>em <em>linguagem simples</em>',
     hero_sub: 'Do avião à cidadania — a NOVU guia-te por cada passo da tua vida em Portugal, sem juridiquês, sem filas, sem stress.',
-    hero_btn1: 'Fazer a minha primeira pergunta',
-    hero_btn2: 'Ver como funciona',
+    hero_btn1: 'Fazer a minha primeira pergunta', hero_btn2: 'Ver como funciona',
     stat1: 'imigrantes em Portugal', stat2: 'dificuldade reportada', stat3: 'usariam a NOVU',
     journey_label: 'A tua jornada', journey_title: 'De cada fase, um guia completo',
     chat_section_label: 'Experimenta agora', chat_section_title: 'Faz a tua primeira pergunta',
-    chat_subtitle: 'Especialista em burocracia portuguesa', chat_status: 'Online',
-    chat_lang_label: 'Idioma:',
+    chat_subtitle: 'Especialista em burocracia portuguesa', chat_status: 'Online', chat_lang_label: 'Idioma:',
     counter: 'Tens {n} perguntas grátis — regista-te para acesso ilimitado',
     counter_unlimited: '✅ Acesso ilimitado desbloqueado!',
     welcome: 'Olá! 👋 Sou a NOVU, o teu guia de burocracia em Portugal.<br><br>Com que podes precisar de ajuda hoje?',
     options: ['NIF / NISS','Residência / AIMA','Reagrupamento familiar','Recibo verde / Empresa','IRS','Cidadania'],
     input_placeholder: 'Escreve a tua dúvida...',
     email_capture: '🎁 Regista-te para acesso ilimitado ao assistente NOVU!',
-    name_placeholder: 'o teu nome', email_placeholder: 'o teu email',
-    email_btn: 'Aceder grátis',
+    name_placeholder: 'o teu nome', email_placeholder: 'o teu email', email_btn: 'Aceder grátis',
     success: '✅ Acesso desbloqueado! Bem-vindo à NOVU 🙌',
-    modal_title: 'Acesso antecipado gratuito',
-    modal_desc: 'Junta-te à lista de espera e sê um dos primeiros a experimentar a NOVU.',
-    modal_name_ph: 'o teu nome', modal_email_ph: 'o teu email',
-    modal_btn: 'Garantir o meu lugar', modal_note: 'Gratuito. Sem spam. Só boas novidades.',
-    modal_success: '✅ Perfeito! Estás na lista. Vamos avisar-te em primeiro lugar! 🙌',
+    modal_title: 'Acesso antecipado gratuito', modal_desc: 'Junta-te à lista de espera e sê um dos primeiros a experimentar a NOVU.',
+    modal_name_ph: 'o teu nome', modal_email_ph: 'o teu email', modal_btn: 'Garantir o meu lugar',
+    modal_note: 'Gratuito. Sem spam. Só boas novidades.', modal_success: '✅ Perfeito! Estás na lista. Vamos avisar-te em primeiro lugar! 🙌',
     how_label: 'Como funciona', how_title: 'Simples como deve ser',
     step1_title: 'Descreve a situação', step1_desc: 'Conta-nos em linguagem normal o que precisas.',
     step2_title: 'Recebe o guia', step2_desc: 'A NOVU gera um caminho personalizado, passo a passo.',
@@ -460,32 +349,28 @@ const T = {
     phase4_title: 'Renovação', phase4_desc: 'Renovação de residência, IRS, atualização de documentos.',
     phase5_title: 'Integração', phase5_desc: 'Compra de carro, crédito bancário, busca de emprego e currículo europeu.',
     phase6_title: 'Cidadania', phase6_desc: 'Requisitos, processo completo, teste de língua e o que muda depois.',
+    whatsapp_share: '💬 Resposta da NOVU:\n\n{text}\n\n👉 Experimenta em novuai.pt',
   },
   en: {
-    nav_cta: 'Try for free',
-    hero_badge: 'Now in early access phase',
+    nav_cta: 'Try for free', hero_badge: 'Now in early access phase',
     hero_title: 'Portuguese bureaucracy<br>in <em>plain language</em>',
     hero_sub: 'From the plane to citizenship — NOVU guides you through every step of your life in Portugal, no legal jargon, no queues, no stress.',
     hero_btn1: 'Ask my first question', hero_btn2: 'See how it works',
     stat1: 'immigrants in Portugal', stat2: 'reported difficulty', stat3: 'would use NOVU',
     journey_label: 'Your journey', journey_title: 'A complete guide for every phase',
     chat_section_label: 'Try it now', chat_section_title: 'Ask your first question',
-    chat_subtitle: 'Portuguese bureaucracy specialist', chat_status: 'Online',
-    chat_lang_label: 'Language:',
+    chat_subtitle: 'Portuguese bureaucracy specialist', chat_status: 'Online', chat_lang_label: 'Language:',
     counter: 'You have {n} free questions — register for unlimited access',
     counter_unlimited: '✅ Unlimited access unlocked!',
     welcome: 'Hi! 👋 I\'m NOVU, your guide to Portuguese bureaucracy.<br><br>What can I help you with today?',
     options: ['NIF / NISS','Residence / AIMA','Family reunification','Freelance / Company','Tax return','Citizenship'],
     input_placeholder: 'Type your question...',
     email_capture: '🎁 Register for unlimited access to the NOVU assistant!',
-    name_placeholder: 'your name', email_placeholder: 'your email',
-    email_btn: 'Get free access',
+    name_placeholder: 'your name', email_placeholder: 'your email', email_btn: 'Get free access',
     success: '✅ Access unlocked! Welcome to NOVU 🙌',
-    modal_title: 'Free early access',
-    modal_desc: 'Join the waitlist and be one of the first to try NOVU.',
-    modal_name_ph: 'your name', modal_email_ph: 'your email',
-    modal_btn: 'Reserve my spot', modal_note: 'Free. No spam. Only good news.',
-    modal_success: '✅ Perfect! You\'re on the list. We\'ll notify you first! 🙌',
+    modal_title: 'Free early access', modal_desc: 'Join the waitlist and be one of the first to try NOVU.',
+    modal_name_ph: 'your name', modal_email_ph: 'your email', modal_btn: 'Reserve my spot',
+    modal_note: 'Free. No spam. Only good news.', modal_success: '✅ Perfect! You\'re on the list. We\'ll notify you first! 🙌',
     how_label: 'How it works', how_title: 'Simple as it should be',
     step1_title: 'Describe your situation', step1_desc: 'Tell us in plain language what you need.',
     step2_title: 'Get your guide', step2_desc: 'NOVU generates a personalised step-by-step path.',
@@ -501,32 +386,28 @@ const T = {
     phase4_title: 'Renewal', phase4_desc: 'Residence renewal, tax returns, document updates.',
     phase5_title: 'Integration', phase5_desc: 'Buying a car, bank credit, job search and European CV.',
     phase6_title: 'Citizenship', phase6_desc: 'Requirements, full process, language test and what changes after.',
+    whatsapp_share: '💬 NOVU Answer:\n\n{text}\n\n👉 Try it at novuai.pt',
   },
   es: {
-    nav_cta: 'Probar gratis',
-    hero_badge: 'Ahora en fase de acceso anticipado',
+    nav_cta: 'Probar gratis', hero_badge: 'Ahora en fase de acceso anticipado',
     hero_title: 'La burocracia portuguesa<br>en <em>lenguaje simple</em>',
     hero_sub: 'Del avión a la ciudadanía — NOVU te guía en cada paso de tu vida en Portugal, sin tecnicismos, sin colas, sin estrés.',
     hero_btn1: 'Hacer mi primera pregunta', hero_btn2: 'Ver cómo funciona',
     stat1: 'inmigrantes en Portugal', stat2: 'dificultad reportada', stat3: 'usarían NOVU',
     journey_label: 'Tu viaje', journey_title: 'Una guía completa para cada fase',
     chat_section_label: 'Pruébalo ahora', chat_section_title: 'Haz tu primera pregunta',
-    chat_subtitle: 'Especialista en burocracia portuguesa', chat_status: 'En línea',
-    chat_lang_label: 'Idioma:',
+    chat_subtitle: 'Especialista en burocracia portuguesa', chat_status: 'En línea', chat_lang_label: 'Idioma:',
     counter: 'Tienes {n} preguntas gratis — regístrate para acceso ilimitado',
     counter_unlimited: '✅ ¡Acceso ilimitado desbloqueado!',
     welcome: '¡Hola! 👋 Soy NOVU, tu guía de burocracia portuguesa.<br><br>¿En qué puedo ayudarte hoy?',
     options: ['NIF / NISS','Residencia / AIMA','Reagrupación familiar','Autónomo / Empresa','Declaración fiscal','Ciudadanía'],
     input_placeholder: 'Escribe tu pregunta...',
     email_capture: '🎁 ¡Regístrate para acceso ilimitado al asistente NOVU!',
-    name_placeholder: 'tu nombre', email_placeholder: 'tu email',
-    email_btn: 'Acceder gratis',
+    name_placeholder: 'tu nombre', email_placeholder: 'tu email', email_btn: 'Acceder gratis',
     success: '✅ ¡Acceso desbloqueado! Bienvenido a NOVU 🙌',
-    modal_title: 'Acceso anticipado gratuito',
-    modal_desc: 'Únete a la lista de espera y sé uno de los primeros en probar NOVU.',
-    modal_name_ph: 'tu nombre', modal_email_ph: 'tu email',
-    modal_btn: 'Reservar mi lugar', modal_note: 'Gratis. Sin spam. Solo buenas noticias.',
-    modal_success: '✅ ¡Perfecto! Estás en la lista. ¡Te avisaremos primero! 🙌',
+    modal_title: 'Acceso anticipado gratuito', modal_desc: 'Únete a la lista de espera y sé uno de los primeros en probar NOVU.',
+    modal_name_ph: 'tu nombre', modal_email_ph: 'tu email', modal_btn: 'Reservar mi lugar',
+    modal_note: 'Gratis. Sin spam. Solo buenas noticias.', modal_success: '✅ ¡Perfecto! Estás en la lista. ¡Te avisaremos primero! 🙌',
     how_label: 'Cómo funciona', how_title: 'Simple como debe ser',
     step1_title: 'Describe tu situación', step1_desc: 'Cuéntanos en lenguaje normal lo que necesitas.',
     step2_title: 'Recibe tu guía', step2_desc: 'NOVU genera un camino personalizado, paso a paso.',
@@ -542,31 +423,36 @@ const T = {
     phase4_title: 'Renovación', phase4_desc: 'Renovación de residencia, impuestos, actualización de documentos.',
     phase5_title: 'Integración', phase5_desc: 'Compra de coche, crédito bancario, búsqueda de empleo y CV europeo.',
     phase6_title: 'Ciudadanía', phase6_desc: 'Requisitos, proceso completo, examen de idioma y qué cambia después.',
+    whatsapp_share: '💬 Respuesta de NOVU:\n\n{text}\n\n👉 Pruébalo en novuai.pt',
   }
 };
 
-// ============ STATE ============
+// COOKIES
+function getCookie(name) {
+  const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+  return match ? match[2] : null;
+}
+function setCookie(name, value, hours) {
+  const expires = new Date(Date.now() + hours * 3600000).toUTCString();
+  document.cookie = name + '=' + value + '; expires=' + expires + '; path=/';
+}
+
+// STATE
 let currentLang = 'pt';
 let conversationHistory = [];
 let questionsUsed = 0;
 const MAX_FREE = 4;
 let isUnlocked = false;
 
-// ============ LANGUAGE ============
+// LANGUAGE
 function setLang(lang) {
   currentLang = lang;
   const t = T[lang];
-
-  // Nav buttons
   ['pt','en','es'].forEach(l => {
     document.getElementById('lang-'+l)?.classList.toggle('active', l===lang);
     document.getElementById('clang-'+l)?.classList.toggle('active', l===lang);
   });
-
-  // Nav
   document.getElementById('nav-cta-btn').textContent = t.nav_cta;
-
-  // Hero
   document.getElementById('hero-badge-text').textContent = t.hero_badge;
   document.getElementById('hero-title').innerHTML = t.hero_title;
   document.getElementById('hero-sub').textContent = t.hero_sub;
@@ -575,64 +461,44 @@ function setLang(lang) {
   document.getElementById('stat1').textContent = t.stat1;
   document.getElementById('stat2').textContent = t.stat2;
   document.getElementById('stat3').textContent = t.stat3;
-
-  // Journey
   document.getElementById('journey-label').textContent = t.journey_label;
   document.getElementById('journey-title').textContent = t.journey_title;
   for(let i=1;i<=6;i++) {
     document.getElementById('phase'+i+'-title').textContent = t['phase'+i+'_title'];
     document.getElementById('phase'+i+'-desc').textContent = t['phase'+i+'_desc'];
   }
-
-  // Chat section
   document.getElementById('chat-section-label').textContent = t.chat_section_label;
   document.getElementById('chat-section-title').textContent = t.chat_section_title;
   document.getElementById('chat-subtitle').textContent = t.chat_subtitle;
   document.getElementById('chat-status-text').textContent = t.chat_status;
   document.getElementById('chat-lang-label').textContent = t.chat_lang_label;
   document.getElementById('chatInput').placeholder = t.input_placeholder;
-
-  // Counter
   updateCounter();
-
-  // Chat options
   const opts = document.getElementById('chatOptions');
   opts.innerHTML = t.options.map(o => `<button class="chat-opt-btn" onclick="selectOption('${o}')">${o}</button>`).join('');
-
-  // Email capture
   document.getElementById('email-capture-text').textContent = t.email_capture;
   document.getElementById('inlineNameInput').placeholder = t.name_placeholder;
   document.getElementById('emailInput').placeholder = t.email_placeholder;
   document.querySelector('.email-submit').textContent = t.email_btn;
-
-  // Modal
   document.getElementById('modal-title').textContent = t.modal_title;
   document.getElementById('modal-desc').textContent = t.modal_desc;
   document.getElementById('modalNameInput').placeholder = t.modal_name_ph;
   document.getElementById('modalEmailInput').placeholder = t.modal_email_ph;
   document.getElementById('modal-submit-btn').textContent = t.modal_btn;
   document.getElementById('modal-note').textContent = t.modal_note;
-
-  // How
   document.getElementById('how-label').textContent = t.how_label;
   document.getElementById('how-title').textContent = t.how_title;
   for(let i=1;i<=4;i++) {
     document.getElementById('step'+i+'-title').textContent = t['step'+i+'_title'];
     document.getElementById('step'+i+'-desc').textContent = t['step'+i+'_desc'];
   }
-
-  // Proof
   document.getElementById('proof-label').textContent = t.proof_label;
   document.getElementById('proof-title').textContent = t.proof_title;
   for(let i=1;i<=4;i++) document.getElementById('proof'+i).textContent = t['proof'+i];
-
-  // CTA
   document.getElementById('cta-title').innerHTML = t.cta_title;
   document.getElementById('cta-desc').textContent = t.cta_desc;
   document.getElementById('cta-btn').textContent = t.cta_btn;
   document.getElementById('footer-text').textContent = t.footer;
-
-  // Reset chat
   conversationHistory = [];
   const chatMessages = document.getElementById('chatMessages');
   chatMessages.innerHTML = '';
@@ -651,10 +517,13 @@ function updateCounter() {
   } else {
     const remaining = MAX_FREE - questionsUsed;
     counterText.textContent = t.counter.replace('{n}', remaining);
+    counter.style.background = '#FFF8E7';
+    counter.style.borderColor = '#FDE68A';
+    counter.style.color = '#92400E';
   }
 }
 
-// ============ CHAT ============
+// CHAT
 async function callClaude(userMessage) {
   conversationHistory.push({ role: 'user', content: userMessage });
   const response = await fetch('/api/chat', {
@@ -683,25 +552,18 @@ async function sendMessage() {
 }
 
 async function handleUserMessage(text) {
-  if (!isUnlocked && questionsUsed >= MAX_FREE) {
-    showEmailCapture();
-    return;
-  }
-
+  if (!isUnlocked && questionsUsed >= MAX_FREE) { showEmailCapture(); return; }
   addMessage(text, 'user');
   showTyping();
-
   try {
     const reply = await callClaude(text);
     removeTyping();
     addMessage(reply, 'bot');
-
     if (!isUnlocked) {
       questionsUsed++;
+      setCookie('novu_questions', questionsUsed, 24);
       updateCounter();
-      if (questionsUsed >= MAX_FREE) {
-        setTimeout(() => showEmailCapture(), 800);
-      }
+      if (questionsUsed >= MAX_FREE) setTimeout(() => showEmailCapture(), 800);
     }
   } catch(e) {
     removeTyping();
@@ -717,20 +579,17 @@ function showEmailCapture() {
 async function submitInlineEmail() {
   const name = document.getElementById('inlineNameInput').value.trim();
   const email = document.getElementById('emailInput').value.trim();
-  if (!email || !email.includes('@')) {
-    document.getElementById('emailInput').style.borderColor = '#EF4444';
-    return;
-  }
+  if (!email || !email.includes('@')) { document.getElementById('emailInput').style.borderColor = '#EF4444'; return; }
   await registerUser(name, email);
   document.getElementById('emailCapture').classList.add('hidden');
   const successMsg = document.getElementById('successMsg');
   successMsg.textContent = T[currentLang].success;
   successMsg.style.display = 'block';
   isUnlocked = true;
+  setCookie('novu_unlocked', 'true', 720);
   updateCounter();
 }
 
-// ============ MODAL ============
 function openModal() { document.getElementById('emailModal').classList.add('open'); }
 function closeModal() { document.getElementById('emailModal').classList.remove('open'); }
 document.getElementById('emailModal').addEventListener('click', function(e) { if(e.target===this) closeModal(); });
@@ -738,19 +597,16 @@ document.getElementById('emailModal').addEventListener('click', function(e) { if
 async function submitModalEmail() {
   const name = document.getElementById('modalNameInput').value.trim();
   const email = document.getElementById('modalEmailInput').value.trim();
-  if (!email || !email.includes('@')) {
-    document.getElementById('modalEmailInput').style.borderColor = '#EF4444';
-    return;
-  }
+  if (!email || !email.includes('@')) { document.getElementById('modalEmailInput').style.borderColor = '#EF4444'; return; }
   const btn = document.getElementById('modal-submit-btn');
-  btn.textContent = '...';
-  btn.disabled = true;
+  btn.textContent = '...'; btn.disabled = true;
   await registerUser(name, email);
   document.getElementById('modalForm').style.display = 'none';
   const s = document.getElementById('modalSuccess');
   s.textContent = T[currentLang].modal_success;
   s.style.display = 'block';
   isUnlocked = true;
+  setCookie('novu_unlocked', 'true', 720);
   updateCounter();
   setTimeout(() => closeModal(), 3000);
 }
@@ -762,7 +618,6 @@ async function registerUser(name, email) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'register', name, email, lang: currentLang })
     });
-    // Also send to Formspree as backup
     await fetch('https://formspree.io/f/xdawgkvq', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -771,13 +626,12 @@ async function registerUser(name, email) {
   } catch(e) {}
 }
 
-// ============ CHAT UI ============
+// CHAT UI
 function addMessage(text, type) {
   const container = document.getElementById('chatMessages');
   const wrapper = document.createElement('div');
-
   const msg = document.createElement('div');
-  msg.className = `msg ${type}`;
+  msg.className = 'msg ' + type;
   const avatar = document.createElement('div');
   avatar.className = 'msg-avatar';
   avatar.textContent = type === 'bot' ? 'N' : 'Tu';
@@ -787,22 +641,21 @@ function addMessage(text, type) {
   msg.appendChild(avatar);
   msg.appendChild(bubble);
   wrapper.appendChild(msg);
-
   if (type === 'bot') {
     const actions = document.createElement('div');
     actions.className = 'msg-actions';
     const cleanText = bubble.innerText || text.replace(/<[^>]*>/g, '');
-    const waText = encodeURIComponent('💬 Resposta da NOVU:\n\n' + cleanText + '\n\n👉 Experimenta em novuai.pt');
+    const shareTemplate = T[currentLang].whatsapp_share || '💬 Resposta da NOVU:\n\n{text}\n\n👉 novuai.pt';
+    const waText = encodeURIComponent(shareTemplate.replace('{text}', cleanText));
     const waBtn = document.createElement('a');
     waBtn.className = 'whatsapp-btn';
-    waBtn.href = `https://wa.me/?text=${waText}`;
+    waBtn.href = 'https://wa.me/?text=' + waText;
     waBtn.target = '_blank';
     waBtn.rel = 'noopener noreferrer';
-    waBtn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Partilhar no WhatsApp`;
+    waBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Partilhar no WhatsApp';
     actions.appendChild(waBtn);
     wrapper.appendChild(actions);
   }
-
   container.appendChild(wrapper);
   container.scrollTop = container.scrollHeight;
 }
@@ -811,7 +664,7 @@ function showTyping() {
   const container = document.getElementById('chatMessages');
   const typing = document.createElement('div');
   typing.className = 'msg'; typing.id = 'typingIndicator';
-  typing.innerHTML = `<div class="msg-avatar">N</div><div class="msg-bubble"><div class="typing"><span></span><span></span><span></span></div></div>`;
+  typing.innerHTML = '<div class="msg-avatar">N</div><div class="msg-bubble"><div class="typing"><span></span><span></span><span></span></div></div>';
   container.appendChild(typing);
   container.scrollTop = container.scrollHeight;
 }
@@ -821,24 +674,14 @@ function removeTyping() {
   if(el) el.remove();
 }
 
-// Init counter
-// Init counter — restore from cookie
-function getCookie(name) {
-  const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-  return match ? match[2] : null;
-}
-function setCookie(name, value, hours) {
-  const expires = new Date(Date.now() + hours * 3600000).toUTCString();
-  document.cookie = `${name}=${value}; expires=${expires}; path=/`;
-}
-
+// INIT — restore state from cookies
 const savedUnlocked = getCookie('novu_unlocked');
 const savedQuestions = getCookie('novu_questions');
 if (savedUnlocked === 'true') {
   isUnlocked = true;
 } else if (savedQuestions) {
   questionsUsed = parseInt(savedQuestions) || 0;
-  if (questionsUsed >= MAX_FREE) showEmailCapture();
+  if (questionsUsed >= MAX_FREE) setTimeout(() => showEmailCapture(), 500);
 }
 updateCounter();
 </script>
