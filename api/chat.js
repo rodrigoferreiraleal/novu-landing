@@ -79,6 +79,49 @@ Para quem chega sem contrato, recomendações por perfil:
 ### PORTAIS
 AIMA: aima.gov.pt / 808 202 653 | Finanças: portaldasfinancas.gov.pt
 Seg. Social: seg-social.pt | SNS: sns24.gov.pt | IRN: justica.gov.pt
+### EMPREGO EM PORTUGAL
+**Portais de emprego — onde procurar:**
+- **LinkedIn** (linkedin.com/jobs) — o mais usado para escritório, tecnologia, gestão
+- **Net-Empregos** (net-empregos.com) — o maior portal generalista português
+- **ITJobs** (itjobs.pt) — exclusivo para tecnologia e IT
+- **Sapo Emprego** (emprego.sapo.pt) — generalista, muitas ofertas nacionais
+- **Indeed Portugal** (indeed.pt) — agrega ofertas de vários portais
+- **Expresso Empregos** (expressoemprego.pt) — generalista
+- **IEFP** (iefp.pt) — Instituto do Emprego, ofertas oficiais + formações gratuitas
+- **Glassdoor** (glassdoor.pt) — ver salários e avaliações de empresas
+**Para áreas específicas:**
+- Saúde: ordemdosmedicos.pt, ordemdosenfermeiros.pt
+- Educação: recrutamento-escola.mec.pt
+- Hotelaria/restauração: hoteljob.pt, turijobs.com
+- Construção: construlink.com
+**Como procurar emprego como imigrante:**
+1. Ter NIF e NISS activos (obrigatório para contratar)
+2. Criar CV em formato Europass (europass.eu) — o mais aceite em Portugal
+3. Carta de apresentação em português (mesmo que o trabalho seja em inglês)
+4. Registar no IEFP como desempregado — dá acesso a formações e apoios
+5. LinkedIn em português + perfil actualizado
+**Salários médios em Portugal (2025-2026):**
+- Salário mínimo nacional: **870€/mês** (bruto, 14 meses)
+- Tecnologia (júnior): 1.200–1.800€ | Sénior: 2.500–4.000€
+- Saúde (enfermeiro): 1.100–1.600€ | Médico: 2.000–4.500€
+- Hotelaria: 900–1.200€
+- Construção: 950–1.400€
+**Direitos laborais essenciais:**
+- Contrato de trabalho obrigatório por escrito (sem termo = efectivo)
+- 22 dias úteis de férias/ano + subsídio de férias (1 mês extra)
+- Subsídio de Natal (13º mês)
+- Período experimental: 90 dias (geral), 180 dias (quadros), 240 dias (gestão)
+- Baixa médica: SNS paga a partir do 4º dia (primeiros 3 dias sem remuneração)
+- Despedimento sem justa causa: tem direito a indemnização (12 dias/ano)
+**Para imigrantes — atenção:**
+- Visto de trabalho D1: precisas do contrato ANTES de pedir o visto
+- Depois de entrar em Portugal, tens 4 meses para pedir AR na AIMA
+- Com AR podes mudar de empregador sem problemas
+- Contrato a recibos verdes (freelance): abre actividade nas Finanças primeiro
+**IEFP — Centro de Emprego:**
+- Regista-te em iefp.pt ou no Centro de Emprego da tua área
+- Acesso a: bolsa de emprego, formações gratuitas, apoios à colocação
+- Linha de apoio: 300 041 414
 Sou uma ferramenta de informação — não presto aconselhamento jurídico.`;
 
 // ─── FAQ CACHE ────────────────────────────────────────────────────────────────
@@ -97,7 +140,13 @@ const FAQ = {
 
   "encontrar quarto": "Para encontrar quarto/casa em Portugal:\n\n**Plataformas principais:**\n• idealista.pt — o maior portal imobiliário\n• imovirtual.com\n• uniplaces.com — focado em estudantes\n• Grupos Facebook locais de arrendamento\n\n**Dicas:**\n• Exige sempre contrato de arrendamento escrito\n• O contrato deve ser registado nas Finanças (AT)\n• Lisboa/Porto: quartos ~400-700€/mês; fora das capitais mais barato\n\nO comprovativo de morada é essencial para tirar NIF, NISS e outros documentos. 🏠",
 
-  "contrato de trabalho": "Para conseguir emprego e contrato de trabalho em Portugal:\n\n**Portais de emprego:**\n• linkedin.com/jobs\n• net-empregos.com\n• itjobs.pt (tecnologia)\n• sapo.pt/emprego\n\n**Após ter oferta:**\n1. Contrato assinado por ambas as partes\n2. Registo na Segurança Social pelo empregador\n\n**Para visto D1:**\n• Precisas do contrato antes de pedir o visto no consulado\n• Contrato válido mín. 4 meses → depois pedes AR na AIMA\n\nUsa o formato Europass para o teu CV: europass.eu 💼",
+  "bancos": "Para abrir conta bancária em Portugal como imigrante:\n\n• **ActivoBank** ⭐ — 100% digital, sem mensalidade, só precisas de NIF + passaporte. O mais fácil\n• **Millennium BCP** — presencial, aceita visto válido + NIF\n• **Novobanco** — conta jovem gratuita até 30 anos\n• **BPI / Santander** — opções semelhantes ao BCP\n\n**Alternativas digitais (enquanto não tens conta PT):**\n• **Revolut** — abre com passaporte, sem morada PT. Útil nos primeiros meses\n• **Wise** — excelente para receber em moeda estrangeira\n\n**Documentos necessários:** passaporte, NIF, comprovativo de morada (contrato de arrendamento) 🏦",
+
+  "telemovel": "Operadoras de telemóvel em Portugal — para quem chega:\n\n• **NOS** — melhor cobertura geral, pré-pago a partir de ~10€/mês\n• **MEO** — boa cobertura, planos \"Go\" a partir de ~7€/mês\n• **Vodafone** — excelente cobertura urbana, ~8€/mês\n• **NOWO** — mais barato mas cobertura limitada fora das grandes cidades\n\n**Dica:** nos primeiros dias compra um pré-pago NOS ou MEO no aeroporto ou em qualquer supermercado (Continente, Pingo Doce). Não precisas de NIF nem morada.\n\nApós 3-6 meses podes mudar para plano contrato com desconto 📱",
+
+  "site de emprego": "Os principais portais de emprego em Portugal:\n\n• **LinkedIn** — o mais usado para escritório, tech e gestão\n• **Net-Empregos** (net-empregos.com) — o maior portal generalista\n• **ITJobs** (itjobs.pt) — exclusivo para tecnologia e IT\n• **Sapo Emprego** (emprego.sapo.pt) — muitas ofertas nacionais\n• **Indeed Portugal** (indeed.pt) — agrega ofertas de vários portais\n• **IEFP** (iefp.pt) — ofertas oficiais + formações gratuitas\n• **Glassdoor** — para ver salários e avaliações de empresas\n\n**Dica para imigrantes:** regista-te no IEFP mesmo que já tenhas emprego — dá acesso a formações gratuitas. O CV em formato Europass (europass.eu) é o mais aceite em Portugal. 💼",
+
+  "contrato de trabalho": "Para conseguir emprego e contrato de trabalho em Portugal:\n\n**Portais de emprego:**\n• linkedin.com/jobs\n• net-empregos.com\n• itjobs.pt (tecnologia)\n• indeed.pt | emprego.sapo.pt\n• iefp.pt (ofertas oficiais + formações gratuitas)\n\n**Direitos com contrato:**\n• 22 dias úteis de férias + subsídio de férias (1 mês extra)\n• Subsídio de Natal (13º mês)\n• Salário mínimo: 870€/mês (2025)\n\n**Para visto D1:** precisas do contrato ANTES de pedir o visto no consulado. Após entrada em PT, tens 4 meses para pedir AR na AIMA.\n\nO CV em formato Europass é o mais aceite: europass.eu 💼",
 };
 
 function normalizeFAQ(text) {
