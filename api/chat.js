@@ -395,7 +395,13 @@ export default async function handler(req, res) {
     const data = await response.json();
     const reply = data.content?.[0]?.text || "Não consegui obter uma resposta. Tenta novamente.";
 
-
+    // Guardar interacção no Supabase (opcional — para análise futura)
+    if (userEmail) {
+      await supabase
+        .from("waitlist")
+        .update({ questions_used: supabase.raw("questions_used + 1") })
+        .eq("email", userEmail);
+    }
 
     return res.status(200).json({ reply });
   } catch (err) {
