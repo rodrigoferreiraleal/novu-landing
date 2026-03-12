@@ -177,9 +177,11 @@
   .final-cta p { color: rgba(255,255,255,0.6); font-size: 1.05rem; margin-bottom: 40px; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.6; }
   .final-cta .btn-primary { background: white; color: var(--blue-deep); font-size: 1.05rem; padding: 18px 44px; }
   .final-cta .btn-primary:hover { background: var(--blue-light); }
-  footer { padding: 32px 5%; background: #071B30; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  footer { padding: 40px 5%; background: #071B30; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
   footer .logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: white; }
-  footer p { font-size: 0.8rem; color: rgba(255,255,255,0.3); }
+  footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+  .footer-email { display: inline-flex; align-items: center; gap: 7px; color: rgba(255,255,255,0.75) !important; font-size: 0.9rem !important; font-weight: 500; text-decoration: none; border: 1px solid rgba(255,255,255,0.15); border-radius: 50px; padding: 8px 16px; transition: all 0.2s; }
+  .footer-email:hover { color: white !important; border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.05); }
   .typing { display: flex; gap: 4px; align-items: center; padding: 12px 16px; }
   .typing span { width: 7px; height: 7px; background: var(--gray-400); border-radius: 50%; animation: bounce 1.2s infinite; }
   .typing span:nth-child(2) { animation-delay: 0.2s; }
@@ -360,7 +362,8 @@
 
 <footer>
   <div class="logo">NOVU</div>
-  <p id="footer-text">© 2026 NOVU. Informação, não aconselhamento jurídico. | <a href="mailto:geral@novuai.pt" style="color:rgba(255,255,255,0.4);text-decoration:none;">geral@novuai.pt</a></p>
+  <p id="footer-text">© 2026 NOVU. Informação, não aconselhamento jurídico.</p>
+  <a href="mailto:geral@novuai.pt" class="footer-email" id="footer-email-link">✉ geral@novuai.pt</a>
 </footer>
 
 <script>
@@ -379,7 +382,7 @@ const T = {
       { icon: '🏥', text: 'Como obter o número de utente SNS?' },
       { icon: '💼', text: 'Como conseguir contrato de trabalho?' },
       { icon: '🎓', text: 'Como validar o meu diploma em Portugal?' },
-      { icon: '🌍', text: 'Como funciona o visto D7?' },
+      { icon: '🌍', text: 'Qual o visto certo para o meu caso?' },
       { icon: '🏠', text: 'Como encontrar quarto para alugar?' },
       { icon: '📊', text: 'Como abrir actividade nas Finanças?' },
       { icon: '🆔', text: 'Como tirar o NISS?' },
@@ -405,7 +408,7 @@ const T = {
     proof_label: 'Validado pelos dados', proof_title: 'Os números falam por si',
     proof1: 'imigrantes em Portugal', proof2: 'nível de dificuldade reportado', proof3: 'dispostos a usar a NOVU', proof4: 'gastos em advogados por processo',
     cta_title: 'A tua nova vida<br>começa aqui.', cta_desc: 'Junta-te à lista e seja um dos primeiros a experimentar a NOVU gratuitamente.', cta_btn: 'Quero acesso antecipado',
-    footer: '© 2026 NOVU. Informação, não aconselhamento jurídico. | <a href="mailto:geral@novuai.pt" style="color:rgba(255,255,255,0.4);text-decoration:none;">geral@novuai.pt</a>',
+    footer: '© 2026 NOVU. Informação, não aconselhamento jurídico.',
     phase1_title: 'Antes de chegar', phase1_desc: 'Visto certo para o teu caso, documentos a trazer, checklist de preparação.',
     phase2_title: 'Primeiros passos', phase2_desc: 'NIF, NISS, conta bancária, número SNS e como encontrar casa.',
     phase3_title: 'Residência e AIMA', phase3_desc: 'Autorização de residência, reagrupamento familiar, reconhecimento de diploma.',
@@ -428,7 +431,7 @@ const T = {
       { icon: '🏥', text: 'How to get an NHS number in Portugal?' },
       { icon: '💼', text: 'How to get a work contract in Portugal?' },
       { icon: '🎓', text: 'How to validate my degree in Portugal?' },
-      { icon: '🌍', text: 'How does the D7 visa work?' },
+      { icon: '🌍', text: 'Which visa is right for my situation?' },
       { icon: '🏠', text: 'How to find a room to rent?' },
       { icon: '📊', text: 'How to register as a freelancer?' },
       { icon: '🆔', text: 'How to get a NISS number?' },
@@ -454,7 +457,7 @@ const T = {
     proof_label: 'Backed by data', proof_title: 'The numbers speak for themselves',
     proof1: 'immigrants in Portugal', proof2: 'reported difficulty level', proof3: 'would use NOVU', proof4: 'spent on lawyers per process',
     cta_title: 'Your new life<br>starts here.', cta_desc: 'Join the waitlist and be one of the first to try NOVU for free.', cta_btn: 'Get early access',
-    footer: '© 2026 NOVU. Information, not legal advice. | <a href="mailto:geral@novuai.pt" style="color:rgba(255,255,255,0.4);text-decoration:none;">geral@novuai.pt</a>',
+    footer: '© 2026 NOVU. Information, not legal advice.',
     phase1_title: 'Before you arrive', phase1_desc: 'Right visa for your case, documents to bring, preparation checklist.',
     phase2_title: 'First steps', phase2_desc: 'NIF, NISS, bank account, NHS number and how to find housing.',
     phase3_title: 'Residence & AIMA', phase3_desc: 'Residence permit, family reunification, diploma recognition.',
@@ -477,7 +480,7 @@ const T = {
       { icon: '🏥', text: '¿Cómo obtener el número de usuario del SNS?' },
       { icon: '💼', text: '¿Cómo conseguir contrato de trabajo?' },
       { icon: '🎓', text: '¿Cómo validar mi título en Portugal?' },
-      { icon: '🌍', text: '¿Cómo funciona el visado D7?' },
+      { icon: '🌍', text: '¿Qué visado es el correcto para mi caso?' },
       { icon: '🏠', text: '¿Cómo encontrar habitación para alquilar?' },
       { icon: '📊', text: '¿Cómo abrir actividad en Hacienda?' },
       { icon: '🆔', text: '¿Cómo obtener el NISS?' },
@@ -503,7 +506,7 @@ const T = {
     proof_label: 'Respaldado por datos', proof_title: 'Los números hablan por sí solos',
     proof1: 'inmigrantes en Portugal', proof2: 'nivel de dificultad reportado', proof3: 'usarían NOVU', proof4: 'gastados en abogados por proceso',
     cta_title: 'Tu nueva vida<br>empieza aquí.', cta_desc: 'Únete a la lista y sea uno de los primeros en probar NOVU gratis.', cta_btn: 'Quiero acceso anticipado',
-    footer: '© 2026 NOVU. Información, no asesoramiento jurídico. | <a href="mailto:geral@novuai.pt" style="color:rgba(255,255,255,0.4);text-decoration:none;">geral@novuai.pt</a>',
+    footer: '© 2026 NOVU. Información, no asesoramiento jurídico.',
     phase1_title: 'Antes de llegar', phase1_desc: 'Visado correcto para tu caso, documentos a traer, checklist de preparación.',
     phase2_title: 'Primeros pasos', phase2_desc: 'NIF, NISS, cuenta bancaria, número SNS y cómo encontrar vivienda.',
     phase3_title: 'Residencia y AIMA', phase3_desc: 'Autorización de residencia, reagrupación familiar, reconocimiento de diploma.',
