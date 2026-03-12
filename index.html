@@ -79,7 +79,7 @@
   .btn-secondary:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
   .hero-stats { display: flex; gap: 48px; margin-top: 64px; padding-top: 48px; border-top: 1px solid var(--gray-200); animation: fadeUp 0.6s 0.4s ease both; flex-wrap: wrap; justify-content: center; }
   .stat { text-align: center; }
-  .stat-number { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--blue-deep); display: block; }
+  .stat-number { font-family: 'DM Sans', sans-serif; font-size: 2.2rem; font-weight: 700; color: var(--blue-deep); display: block; letter-spacing: -0.5px; }
   .stat-label { font-size: 0.82rem; color: var(--gray-400); font-weight: 500; }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -145,14 +145,14 @@
   .hidden { display: none !important; }
 
   .how { padding: 100px 5%; background: var(--gray-100); }
-  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; max-width: 1000px; margin: 0 auto; }
+  .steps { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; max-width: 800px; margin: 0 auto; }
   .step { text-align: center; padding: 20px; }
   .step-icon { width: 60px; height: 60px; background: white; border: 1.5px solid var(--gray-200); border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin: 0 auto 20px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
-  .step h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; color: var(--blue-deep); margin-bottom: 10px; }
-  .step p { font-size: 0.88rem; color: var(--gray-600); line-height: 1.65; }
+  .step h3 { font-family: 'Playfair Display', serif; font-size: 1.21rem; font-weight: 600; color: var(--blue-deep); margin-bottom: 10px; }
+  .step p { font-size: 0.97rem; color: var(--gray-600); line-height: 1.65; }
   .proof { padding: 80px 5%; background: white; text-align: center; }
   .proof-numbers { display: flex; justify-content: center; gap: 64px; flex-wrap: wrap; }
-  .proof-item .num { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700; color: var(--blue-deep); display: block; }
+  .proof-item .num { font-family: 'DM Sans', sans-serif; font-size: 3rem; font-weight: 700; color: var(--blue-deep); display: block; letter-spacing: -1px; }
   .proof-item .label { font-size: 0.85rem; color: var(--gray-400); font-weight: 500; }
   .final-cta { padding: 100px 5%; background: var(--blue-deep); text-align: center; }
   .final-cta h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3.2rem); color: white; margin-bottom: 16px; font-weight: 700; }
@@ -176,7 +176,7 @@
     <button class="modal-close" onclick="closeModal()">×</button>
     <div class="modal-icon">🇵🇹</div>
     <h2 id="modal-title">Acesso antecipado gratuito</h2>
-    <p id="modal-desc">Junta-te à lista de espera e sê um dos primeiros a experimentar a NOVU — o teu guia completo da vida em Portugal.</p>
+    <p id="modal-desc">Junta-te à lista de espera e seja um dos primeiros a experimentar a NOVU — o teu guia completo da vida em Portugal.</p>
     <div class="modal-form" id="modalForm">
       <input type="text" class="modal-input" id="modalNameInput" placeholder="o teu nome">
       <input type="email" class="modal-input" id="modalEmailInput" placeholder="o teu email">
@@ -201,8 +201,8 @@
 
 <section class="hero">
   <div class="hero-badge"><span class="dot"></span><span id="hero-badge-text">Agora em fase de acesso antecipado</span></div>
-  <h1 class="hero-title" id="hero-title">A tecnologia que guia a sua<br>jornada em <em>Portugal</em></h1>
-  <p class="hero-sub" id="hero-sub">Do avião à cidadania — a NOVU guia-te por cada passo da tua vida em Portugal, sem juridiquês, sem filas, sem stress.</p>
+  <h1 class="hero-title" id="hero-title">A tecnologia que guia<br>a sua jornada em <em>Portugal</em></h1>
+  <p class="hero-sub" id="hero-sub">Do avião à cidadania — a NOVU guia-te por cada passo da tua vida em Portugal, de forma simples, clara e sem complicações.</p>
   <div class="hero-cta-wrap">
     <button class="btn-primary" onclick="openModal()" id="hero-btn-primary">Fazer a minha primeira pergunta</button>
     <button class="btn-secondary" onclick="document.getElementById('journey').scrollIntoView({behavior:'smooth'})" id="hero-btn-secondary">Ver como funciona</button>
@@ -260,6 +260,9 @@
       <button class="chat-opt-btn" onclick="selectOption('Recibo verde / Empresa')">Recibo verde / Empresa</button>
       <button class="chat-opt-btn" onclick="selectOption('IRS')">IRS</button>
       <button class="chat-opt-btn" onclick="selectOption('Cidadania')">Cidadania</button>
+      <button class="chat-opt-btn" onclick="selectOption('Vistos')">Vistos</button>
+      <button class="chat-opt-btn" onclick="selectOption('Site de emprego')">Site de emprego</button>
+      <button class="chat-opt-btn" onclick="selectOption('Moradias')">Moradias</button>
     </div>
     <div id="emailCapture" class="email-capture hidden">
       <p id="email-capture-text">🎁 Regista-te para acesso ilimitado ao assistente NOVU!</p>
@@ -303,7 +306,7 @@
 
 <section class="final-cta">
   <h2 id="cta-title">A tua nova vida<br>começa aqui.</h2>
-  <p id="cta-desc">Junta-te à lista de espera e sê um dos primeiros a experimentar a NOVU gratuitamente.</p>
+  <p id="cta-desc">Junta-te à lista de espera e seja um dos primeiros a experimentar a NOVU gratuitamente.</p>
   <button class="btn-primary" onclick="openModal()" id="cta-btn">Quero acesso antecipado</button>
 </section>
 
@@ -316,8 +319,8 @@
 const T = {
   pt: {
     nav_cta: 'Experimentar grátis', hero_badge: 'Agora em fase de acesso antecipado',
-    hero_title: 'A tecnologia que guia a sua<br>jornada em <em>Portugal</em>',
-    hero_sub: 'Do avião à cidadania — a NOVU guia-te por cada passo da tua vida em Portugal, sem juridiquês, sem filas, sem stress.',
+    hero_title: 'A tecnologia que guia<br>a sua jornada em <em>Portugal</em>',
+    hero_sub: 'Do avião à cidadania — a NOVU guia-te por cada passo da tua vida em Portugal, de forma simples, clara e sem complicações.',
     hero_btn1: 'Fazer a minha primeira pergunta', hero_btn2: 'Ver como funciona',
     stat1: 'imigrantes em Portugal', stat2: 'dificuldade reportada', stat3: 'usariam a NOVU',
     journey_label: 'A tua jornada', journey_title: 'De cada fase, um guia completo',
@@ -326,12 +329,12 @@ const T = {
     counter: 'Tens {n} perguntas grátis — regista-te para acesso ilimitado',
     counter_unlimited: '✅ Acesso ilimitado desbloqueado!',
     welcome: 'Olá! 👋 Sou a NOVU, o teu guia de burocracia em Portugal.<br><br>Com que podes precisar de ajuda hoje?',
-    options: ['NIF / NISS','Residência / AIMA','Reagrupamento familiar','Recibo verde / Empresa','IRS','Cidadania'],
+    options: ['NIF / NISS','Residência / AIMA','Reagrupamento familiar','Recibo verde / Empresa','IRS','Cidadania','Vistos','Site de emprego','Moradias'],
     input_placeholder: 'Escreve a tua dúvida...',
     email_capture: '🎁 Regista-te para acesso ilimitado ao assistente NOVU!',
     name_placeholder: 'o teu nome', email_placeholder: 'o teu email', email_btn: 'Aceder grátis',
     success: '✅ Acesso desbloqueado! Bem-vindo à NOVU 🙌',
-    modal_title: 'Acesso antecipado gratuito', modal_desc: 'Junta-te à lista de espera e sê um dos primeiros a experimentar a NOVU.',
+    modal_title: 'Acesso antecipado gratuito', modal_desc: 'Junta-te à lista de espera e seja um dos primeiros a experimentar a NOVU.',
     modal_name_ph: 'o teu nome', modal_email_ph: 'o teu email', modal_btn: 'Garantir o meu lugar',
     modal_note: 'Gratuito. Sem spam. Só boas novidades.', modal_success: '✅ Perfeito! Estás na lista. Vamos avisar-te em primeiro lugar! 🙌',
     how_label: 'Como funciona', how_title: 'Simples como deve ser',
@@ -341,7 +344,7 @@ const T = {
     step4_title: 'Profissional quando precisas', step4_desc: 'Para casos complexos, ligamos-te a especialistas verificados.',
     proof_label: 'Validado pelos dados', proof_title: 'Os números falam por si',
     proof1: 'imigrantes em Portugal', proof2: 'nível de dificuldade reportado', proof3: 'dispostos a usar a NOVU', proof4: 'gastos em advogados por processo',
-    cta_title: 'A tua nova vida<br>começa aqui.', cta_desc: 'Junta-te à lista e sê um dos primeiros a experimentar a NOVU gratuitamente.', cta_btn: 'Quero acesso antecipado',
+    cta_title: 'A tua nova vida<br>começa aqui.', cta_desc: 'Junta-te à lista e seja um dos primeiros a experimentar a NOVU gratuitamente.', cta_btn: 'Quero acesso antecipado',
     footer: '© 2026 NOVU. Informação, não aconselhamento jurídico.',
     phase1_title: 'Antes de chegar', phase1_desc: 'Visto certo para o teu caso, documentos a trazer, checklist de preparação.',
     phase2_title: 'Primeiros passos', phase2_desc: 'NIF, NISS, conta bancária, número SNS e como encontrar casa.',
@@ -354,7 +357,7 @@ const T = {
   en: {
     nav_cta: 'Try for free', hero_badge: 'Now in early access phase',
     hero_title: 'The technology that guides<br>your journey in <em>Portugal</em>',
-    hero_sub: 'From the plane to citizenship — NOVU guides you through every step of your life in Portugal, no legal jargon, no queues, no stress.',
+    hero_sub: 'From the plane to citizenship — NOVU guides you through every step of your life in Portugal, simply, clearly and without complications.',
     hero_btn1: 'Ask my first question', hero_btn2: 'See how it works',
     stat1: 'immigrants in Portugal', stat2: 'reported difficulty', stat3: 'would use NOVU',
     journey_label: 'Your journey', journey_title: 'A complete guide for every phase',
@@ -363,7 +366,7 @@ const T = {
     counter: 'You have {n} free questions — register for unlimited access',
     counter_unlimited: '✅ Unlimited access unlocked!',
     welcome: 'Hi! 👋 I\'m NOVU, your guide to Portuguese bureaucracy.<br><br>What can I help you with today?',
-    options: ['NIF / NISS','Residence / AIMA','Family reunification','Freelance / Company','Tax return','Citizenship'],
+    options: ['NIF / NISS','Residence / AIMA','Family reunification','Freelance / Company','Tax return','Citizenship','Visas','Job sites','Housing'],
     input_placeholder: 'Type your question...',
     email_capture: '🎁 Register for unlimited access to the NOVU assistant!',
     name_placeholder: 'your name', email_placeholder: 'your email', email_btn: 'Get free access',
@@ -391,7 +394,7 @@ const T = {
   es: {
     nav_cta: 'Probar gratis', hero_badge: 'Ahora en fase de acceso anticipado',
     hero_title: 'La tecnología que guía<br>tu viaje en <em>Portugal</em>',
-    hero_sub: 'Del avión a la ciudadanía — NOVU te guía en cada paso de tu vida en Portugal, sin tecnicismos, sin colas, sin estrés.',
+    hero_sub: 'Del avión a la ciudadanía — NOVU te guía en cada paso de tu vida en Portugal, de forma sencilla, clara y sin complicaciones.',
     hero_btn1: 'Hacer mi primera pregunta', hero_btn2: 'Ver cómo funciona',
     stat1: 'inmigrantes en Portugal', stat2: 'dificultad reportada', stat3: 'usarían NOVU',
     journey_label: 'Tu viaje', journey_title: 'Una guía completa para cada fase',
@@ -400,12 +403,12 @@ const T = {
     counter: 'Tienes {n} preguntas gratis — regístrate para acceso ilimitado',
     counter_unlimited: '✅ ¡Acceso ilimitado desbloqueado!',
     welcome: '¡Hola! 👋 Soy NOVU, tu guía de burocracia portuguesa.<br><br>¿En qué puedo ayudarte hoy?',
-    options: ['NIF / NISS','Residencia / AIMA','Reagrupación familiar','Autónomo / Empresa','Declaración fiscal','Ciudadanía'],
+    options: ['NIF / NISS','Residencia / AIMA','Reagrupación familiar','Autónomo / Empresa','Declaración fiscal','Ciudadanía','Visados','Sitios de empleo','Vivienda'],
     input_placeholder: 'Escribe tu pregunta...',
     email_capture: '🎁 ¡Regístrate para acceso ilimitado al asistente NOVU!',
     name_placeholder: 'tu nombre', email_placeholder: 'tu email', email_btn: 'Acceder gratis',
     success: '✅ ¡Acceso desbloqueado! Bienvenido a NOVU 🙌',
-    modal_title: 'Acceso anticipado gratuito', modal_desc: 'Únete a la lista de espera y sé uno de los primeros en probar NOVU.',
+    modal_title: 'Acceso anticipado gratuito', modal_desc: 'Únete a la lista de espera y sea uno de los primeros en probar NOVU.',
     modal_name_ph: 'tu nombre', modal_email_ph: 'tu email', modal_btn: 'Reservar mi lugar',
     modal_note: 'Gratis. Sin spam. Solo buenas noticias.', modal_success: '✅ ¡Perfecto! Estás en la lista. ¡Te avisaremos primero! 🙌',
     how_label: 'Cómo funciona', how_title: 'Simple como debe ser',
@@ -415,7 +418,7 @@ const T = {
     step4_title: 'Experto cuando lo necesitas', step4_desc: 'Para casos complejos, te conectamos con especialistas verificados.',
     proof_label: 'Respaldado por datos', proof_title: 'Los números hablan por sí solos',
     proof1: 'inmigrantes en Portugal', proof2: 'nivel de dificultad reportado', proof3: 'usarían NOVU', proof4: 'gastados en abogados por proceso',
-    cta_title: 'Tu nueva vida<br>empieza aquí.', cta_desc: 'Únete a la lista y sé uno de los primeros en probar NOVU gratis.', cta_btn: 'Quiero acceso anticipado',
+    cta_title: 'Tu nueva vida<br>empieza aquí.', cta_desc: 'Únete a la lista y sea uno de los primeros en probar NOVU gratis.', cta_btn: 'Quiero acceso anticipado',
     footer: '© 2026 NOVU. Información, no asesoramiento jurídico.',
     phase1_title: 'Antes de llegar', phase1_desc: 'Visado correcto para tu caso, documentos a traer, checklist de preparación.',
     phase2_title: 'Primeros pasos', phase2_desc: 'NIF, NISS, cuenta bancaria, número SNS y cómo encontrar vivienda.',
