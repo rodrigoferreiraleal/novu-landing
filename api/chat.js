@@ -86,7 +86,7 @@ const { messages, action, name, email, lang } = body;
     }
   }
 
-  const userEmail = req.body.userEmail || null;
+  const userEmail = body.userEmail || null;
   let isRegistered = false;
   if (userEmail) {
     const { data } = await supabase
