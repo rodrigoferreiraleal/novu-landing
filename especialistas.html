@@ -42,9 +42,24 @@
   .lang-btn { background: transparent; border: 1.5px solid var(--gray-200); color: var(--gray-600); padding: 4px 10px; border-radius: 50px; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
   .lang-btn:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
   .lang-btn.active { background: var(--blue-deep); color: white; border-color: var(--blue-deep); }
+  /* NAV MOBILE */
+  .nav-mobile { display: none; align-items: center; gap: 8px; }
+  .hamburger { background: none; border: none; cursor: pointer; padding: 4px; display: flex; flex-direction: column; gap: 5px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--blue-deep); border-radius: 2px; transition: all 0.3s; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu { display: none; position: fixed; top: 56px; left: 0; right: 0; z-index: 99; background: white; border-bottom: 1px solid var(--gray-200); padding: 16px 20px 24px; flex-direction: column; gap: 4px; box-shadow: 0 8px 24px rgba(10,37,64,0.1); }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu-link { display: flex; align-items: center; gap: 12px; padding: 13px 16px; border-radius: 12px; text-decoration: none; color: var(--blue-deep); font-weight: 600; font-size: 0.95rem; transition: background 0.2s; }
+  .mobile-menu-link:hover { background: var(--blue-pale); }
+
+  @media (max-width: 820px) {
+    #navDesktop { display: none !important; }
+    .nav-mobile { display: flex; }
+  }
   @media (max-width: 600px) {
     nav { padding: 0 16px; height: 56px; }
-    .nav-back { display: none; }
   }
 
   /* HERO */
@@ -267,15 +282,38 @@
 <!-- NAV -->
 <nav>
   <a href="/index.html" class="nav-logo">N<span>O</span>VU</a>
-  <div class="nav-right">
+
+  <!-- NAV DESKTOP -->
+  <div class="nav-right" id="navDesktop">
+    <a href="/index.html" class="nav-back" id="nav-home-link">🤖 Assistente</a>
+    <a href="/documentos.html" class="nav-back" id="nav-docs-link">📄 Documentos</a>
     <div class="lang-selector">
       <button id="lang-pt" class="lang-btn active" onclick="setLang('pt')">PT</button>
       <button id="lang-en" class="lang-btn" onclick="setLang('en')">EN</button>
       <button id="lang-es" class="lang-btn" onclick="setLang('es')">ES</button>
     </div>
-    <a href="/index.html" class="nav-back" id="nav-back-link">← Início</a>
+  </div>
+
+  <!-- HAMBURGER MOBILE -->
+  <div class="nav-mobile">
+    <div class="lang-selector">
+      <button id="lang-pt-m" class="lang-btn active" onclick="setLang('pt')">PT</button>
+      <button id="lang-en-m" class="lang-btn" onclick="setLang('en')">EN</button>
+      <button id="lang-es-m" class="lang-btn" onclick="setLang('es')">ES</button>
+    </div>
+    <button class="hamburger" id="hamburgerBtn" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- MENU MOBILE -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/index.html" class="mobile-menu-link">🤖 <span id="mm-home">Assistente IA</span></a>
+  <a href="/documentos.html" class="mobile-menu-link">📄 <span id="mm-docs">Documentos</span></a>
+  <a href="/especialistas.html" class="mobile-menu-link" style="color:var(--blue-bright);font-weight:700;">🤝 <span id="mm-esp">Especialistas</span></a>
+  <a href="/afiliados.html" class="mobile-menu-link">💼 <span id="mm-afil">Programa de Afiliados</span></a>
+</div>
 
 <!-- HERO -->
 <div class="hero">
@@ -325,6 +363,13 @@
       <span class="cat-icon">🏠</span>
       <div class="cat-name" id="cat-imobiliario-name">Agente Imobiliário</div>
       <div class="cat-desc" id="cat-imobiliario-desc">Arrendamento para imigrantes, compra de casa, apoio em contratos e garantias.</div>
+    </div>
+
+    <div class="cat-card" onclick="selectCat('seguro', this)" data-cat="seguro">
+      <div class="cat-check">✓</div>
+      <span class="cat-icon">🛡️</span>
+      <div class="cat-name" id="cat-seguro-name">Agente de Seguros</div>
+      <div class="cat-desc" id="cat-seguro-desc">Seguros de saúde, vida, habitação e viagem. Apoio na escolha do melhor plano para imigrantes.</div>
     </div>
 
     <div class="cat-card" onclick="selectCat('cambio', this)" data-cat="cambio">
@@ -450,6 +495,8 @@ const T = {
     cat_saude_desc: 'Seguros de saúde aceites para vistos, cobertura para imigrantes, planos familiares.',
     cat_imobiliario_name: 'Agente Imobiliário',
     cat_imobiliario_desc: 'Arrendamento para imigrantes, compra de casa, apoio em contratos e garantias.',
+    cat_seguro_name: 'Agente de Seguros',
+    cat_seguro_desc: 'Seguros de saúde, vida, habitação e viagem. Apoio na escolha do melhor plano para imigrantes.',
     cat_cambio_name: 'Câmbio Internacional',
     cat_cambio_desc: 'Transferências internacionais, câmbio de moeda, envio de dinheiro para o exterior.',
     cat_empresa_name: 'Abrir Empresa',
@@ -498,6 +545,8 @@ const T = {
     cat_saude_desc: 'Health insurance accepted for visas, immigrant coverage, family plans.',
     cat_imobiliario_name: 'Real Estate Agent',
     cat_imobiliario_desc: 'Renting for immigrants, buying property, contract and guarantee support.',
+    cat_seguro_name: 'Insurance Agent',
+    cat_seguro_desc: 'Health, life, home and travel insurance. Support in choosing the best plan for immigrants.',
     cat_cambio_name: 'International Exchange',
     cat_cambio_desc: 'International transfers, currency exchange, sending money abroad.',
     cat_empresa_name: 'Open a Business',
@@ -546,6 +595,8 @@ const T = {
     cat_saude_desc: 'Seguros de salud aceptados para visados, cobertura para inmigrantes, planes familiares.',
     cat_imobiliario_name: 'Agente Inmobiliario',
     cat_imobiliario_desc: 'Alquiler para inmigrantes, compra de casa, apoyo en contratos y garantías.',
+    cat_seguro_name: 'Agente de Seguros',
+    cat_seguro_desc: 'Seguros de salud, vida, hogar y viaje. Apoyo en la elección del mejor plan para inmigrantes.',
     cat_cambio_name: 'Cambio Internacional',
     cat_cambio_desc: 'Transferencias internacionales, cambio de divisa, envío de dinero al exterior.',
     cat_empresa_name: 'Abrir Empresa',
@@ -581,6 +632,7 @@ const CATS = {
   contabilista:{ icon: '🧾', nameKey: 'cat_contabilista_name' },
   saude:       { icon: '🏥', nameKey: 'cat_saude_name' },
   imobiliario: { icon: '🏠', nameKey: 'cat_imobiliario_name' },
+  seguro:      { icon: '🛡️', nameKey: 'cat_seguro_name' },
   cambio:      { icon: '💱', nameKey: 'cat_cambio_name' },
   empresa:     { icon: '🏢', nameKey: 'cat_empresa_name' },
 };
@@ -594,6 +646,7 @@ function setLang(lang) {
   const t = T[lang];
   ['pt','en','es'].forEach(l => {
     document.getElementById('lang-'+l)?.classList.toggle('active', l === lang);
+    document.getElementById('lang-'+l+'-m')?.classList.toggle('active', l === lang);
   });
   const set = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val; };
   set('nav-back-link', t.nav_back);
@@ -614,6 +667,8 @@ function setLang(lang) {
   set('cat-saude-desc', t.cat_saude_desc);
   set('cat-imobiliario-name', t.cat_imobiliario_name);
   set('cat-imobiliario-desc', t.cat_imobiliario_desc);
+  set('cat-seguro-name', t.cat_seguro_name);
+  set('cat-seguro-desc', t.cat_seguro_desc);
   set('cat-cambio-name', t.cat_cambio_name);
   set('cat-cambio-desc', t.cat_cambio_desc);
   set('cat-empresa-name', t.cat_empresa_name);
@@ -723,6 +778,22 @@ function resetForm() {
   document.getElementById('btn-submit-text').textContent = T[currentLang].btn_submit;
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+// ── MENU MOBILE ──
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const btn = document.getElementById('hamburgerBtn');
+  menu.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  const menu = document.getElementById('mobileMenu');
+  const btn = document.getElementById('hamburgerBtn');
+  if (menu && !menu.contains(e.target) && btn && !btn.contains(e.target)) {
+    menu.classList.remove('open');
+    btn.classList.remove('open');
+  }
+});
 
 // INIT
 setLang(currentLang);
