@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Documentos para Imigrantes em Portugal — NOVU</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+  :root {
+    --blue-deep: #0A2540;
+    --blue-mid: #1A4A7A;
+    --blue-bright: #2E7FD4;
+    --blue-light: #EBF4FF;
+    --blue-pale: #F5F9FF;
+    --white: #FFFFFF;
+    --gray-100: #F8FAFC;
+    --gray-200: #E8EEF5;
+    --gray-400: #8FA3BC;
+    --gray-600: #4A6580;
+    --text: #0A2540;
+    --green: #16A34A;
+    --green-light: #DCFCE7;
+    --orange: #EA580C;
+    --orange-light: #FFF7ED;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav { background: var(--white); border-bottom: 1px solid var(--gray-200); padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--blue-deep); text-decoration: none; }
+  .nav-logo span { color: var(--blue-bright); }
+  .nav-right { display: flex; align-items: center; gap: 14px; }
+  .nav-back { background: transparent; border: 1.5px solid var(--gray-200); color: var(--gray-600); padding: 7px 16px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 500; cursor: pointer; text-decoration: none; transition: all 0.2s; }
+  .nav-back:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
+
+  /* ── HERO ── */
+  .hero { background: var(--blue-deep); color: white; padding: 64px 24px 48px; text-align: center; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(46,127,212,0.2); border: 1px solid rgba(46,127,212,0.35); border-radius: 50px; padding: 5px 14px; font-size: 0.78rem; font-weight: 500; color: #90C4F5; margin-bottom: 20px; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; margin-bottom: 12px; }
+  .hero p { color: rgba(255,255,255,0.65); font-size: 1rem; max-width: 540px; margin: 0 auto 28px; line-height: 1.6; }
+  .hero-legal { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 12px 18px; max-width: 560px; margin: 0 auto; font-size: 0.78rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+  .hero-legal strong { color: rgba(255,255,255,0.7); }
+
+  /* ── DADOS GUARDADOS ── */
+  .saved-bar { background: var(--blue-light); border-bottom: 1px solid #C8DEFA; padding: 10px 24px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .saved-bar-left { display: flex; align-items: center; gap: 10px; font-size: 0.83rem; color: var(--blue-mid); }
+  .saved-bar-left svg { color: var(--blue-bright); flex-shrink: 0; }
+  .saved-bar-right { display: flex; gap: 8px; }
+  .btn-saved { border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 500; border-radius: 50px; padding: 5px 14px; transition: all 0.2s; }
+  .btn-edit { background: var(--blue-deep); color: white; }
+  .btn-edit:hover { background: var(--blue-mid); }
+  .btn-clear { background: transparent; color: var(--gray-600); border: 1px solid var(--gray-200); }
+  .btn-clear:hover { border-color: var(--orange); color: var(--orange); }
+  .saved-bar.hidden { display: none; }
+
+  /* ── CONTADOR GRÁTIS ── */
+  .counter-bar { background: var(--orange-light); border-bottom: 1px solid #FED7AA; padding: 9px 24px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .counter-bar p { font-size: 0.82rem; color: #7C2D12; }
+  .counter-bar strong { color: var(--orange); }
+  .counter-bar.hidden { display: none; }
+  .counter-bar.limit-reached { background: #FFF1F2; border-color: #FECDD3; }
+  .counter-bar.limit-reached p { color: #881337; }
+
+  /* ── MAIN LAYOUT ── */
+  main { max-width: 1100px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  /* ── CATEGORIAS ── */
+  .category { margin-bottom: 52px; }
+  .category-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--blue-deep); margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid var(--gray-200); display: flex; align-items: center; gap: 10px; }
+  .category-title .cat-icon { font-size: 1.1rem; }
+  .docs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+
+  /* ── CARD DE DOCUMENTO ── */
+  .doc-card { background: var(--white); border: 1.5px solid var(--gray-200); border-radius: 14px; padding: 22px; transition: all 0.22s; display: flex; flex-direction: column; gap: 14px; }
+  .doc-card:hover { border-color: var(--blue-bright); box-shadow: 0 4px 20px rgba(46,127,212,0.1); transform: translateY(-2px); }
+  .doc-card-header { display: flex; align-items: flex-start; gap: 12px; }
+  .doc-icon { width: 40px; height: 40px; background: var(--blue-light); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+  .doc-info h3 { font-size: 0.95rem; font-weight: 600; color: var(--blue-deep); margin-bottom: 3px; }
+  .doc-info p { font-size: 0.78rem; color: var(--gray-600); line-height: 1.5; }
+  .doc-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn-generate { background: var(--blue-deep); color: white; border: none; padding: 9px 18px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 500; cursor: pointer; transition: all 0.2s; flex: 1; min-width: 120px; }
+  .btn-generate:hover { background: var(--blue-mid); }
+  .btn-generate:disabled { background: var(--gray-200); color: var(--gray-400); cursor: not-allowed; }
+  .btn-official { background: transparent; color: var(--blue-bright); border: 1.5px solid var(--gray-200); padding: 8px 14px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 500; cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; }
+  .btn-official:hover { border-color: var(--blue-bright); background: var(--blue-pale); }
+
+  /* ── MODAL BASE ── */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(10,37,64,0.55); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal-box { background: white; border-radius: 20px; width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto; padding: 36px 32px; position: relative; transform: translateY(20px); transition: transform 0.25s; }
+  .modal-overlay.open .modal-box { transform: translateY(0); }
+  .modal-close { position: absolute; top: 16px; right: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--gray-400); line-height: 1; }
+  .modal-close:hover { color: var(--text); }
+  .modal-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--blue-deep); margin-bottom: 6px; }
+  .modal-sub { font-size: 0.82rem; color: var(--gray-600); margin-bottom: 24px; line-height: 1.5; }
+
+  /* ── FORM ── */
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+  .form-group { display: flex; flex-direction: column; gap: 5px; }
+  .form-group.full { grid-column: 1 / -1; }
+  .form-group label { font-size: 0.75rem; font-weight: 600; color: var(--blue-deep); letter-spacing: 0.3px; text-transform: uppercase; }
+  .form-group input, .form-group select, .form-group textarea { border: 1.5px solid var(--gray-200); border-radius: 10px; padding: 10px 14px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; color: var(--text); outline: none; transition: border-color 0.2s; background: white; }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--blue-bright); }
+  .form-group textarea { resize: vertical; min-height: 80px; }
+  .form-legal { background: var(--blue-pale); border: 1px solid #C8DEFA; border-radius: 10px; padding: 11px 14px; font-size: 0.75rem; color: var(--blue-mid); line-height: 1.5; margin-bottom: 20px; }
+  .btn-pdf { background: var(--blue-deep); color: white; border: none; padding: 13px 28px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .btn-pdf:hover { background: var(--blue-mid); transform: translateY(-1px); }
+  .btn-pdf:active { transform: translateY(0); }
+
+  /* ── MODAL DADOS PESSOAIS ── */
+  .storage-note { background: var(--gray-100); border-radius: 8px; padding: 9px 12px; font-size: 0.73rem; color: var(--gray-600); margin-top: 16px; text-align: center; }
+
+  /* ── MODAL BLOQUEIO ── */
+  .lock-modal .modal-box { text-align: center; max-width: 420px; }
+  .lock-icon { font-size: 3rem; margin-bottom: 16px; }
+  .lock-modal .modal-title { font-size: 1.4rem; }
+  .lock-modal .modal-sub { font-size: 0.9rem; margin-bottom: 28px; }
+  .lock-plans { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+  .lock-plan { border: 1.5px solid var(--gray-200); border-radius: 12px; padding: 16px; text-align: left; }
+  .lock-plan.featured { border-color: var(--blue-bright); background: var(--blue-pale); }
+  .lock-plan .plan-name { font-size: 0.75rem; font-weight: 600; color: var(--gray-600); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .lock-plan.featured .plan-name { color: var(--blue-bright); }
+  .lock-plan .plan-price { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--blue-deep); }
+  .lock-plan .plan-desc { font-size: 0.75rem; color: var(--gray-600); margin-top: 6px; line-height: 1.4; }
+  .btn-subscribe { background: var(--blue-bright); color: white; border: none; padding: 13px 28px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s; width: 100%; margin-bottom: 10px; }
+  .btn-subscribe:hover { background: var(--blue-mid); }
+  .btn-later { background: transparent; border: none; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; color: var(--gray-400); cursor: pointer; text-decoration: underline; }
+
+  /* ── SUCCESS TOAST ── */
+  .toast { position: fixed; bottom: 28px; right: 28px; background: var(--blue-deep); color: white; padding: 12px 20px; border-radius: 50px; font-size: 0.85rem; font-weight: 500; z-index: 500; transform: translateY(80px); opacity: 0; transition: all 0.35s; display: flex; align-items: center; gap: 8px; }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  /* ── FOOTER ── */
+  footer { background: var(--blue-deep); color: white; padding: 28px 24px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .footer-links { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; justify-content: center; }
+  .footer-link { font-size: 0.75rem; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+  .footer-link:hover { color: rgba(255,255,255,0.65); }
+  .footer-email { display: inline-flex; align-items: center; gap: 7px; color: rgba(255,255,255,0.75); font-size: 0.88rem; font-weight: 500; text-decoration: none; border: 1px solid rgba(255,255,255,0.15); border-radius: 50px; padding: 7px 14px; transition: all 0.2s; }
+  .footer-email:hover { color: white; border-color: rgba(255,255,255,0.4); }
+  .footer-text { font-size: 0.75rem; color: rgba(255,255,255,0.35); }
+
+  @media (max-width: 600px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .lock-plans { grid-template-columns: 1fr; }
+    .modal-box { padding: 28px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/index.html" class="nav-logo">N<span>O</span>VU</a>
+  <div class="nav-right">
+    <a href="/index.html" class="nav-back">← Início</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M6 4v2.5l1.5 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    Ferramenta gratuita
+  </div>
+  <h1>Documentos essenciais para imigrantes</h1>
+  <p>Cria declarações e cartas administrativas para processos em Portugal — em segundos, sem complicações.</p>
+  <div class="hero-legal">
+    <strong>⚠ Aviso legal:</strong> Os documentos gerados são modelos e minutas informativas, não documentos emitidos por entidades públicas. Algumas entidades podem exigir assinatura presencial, reconhecimento notarial ou documentação adicional.
+  </div>
+</div>
+
+<!-- BARRA DADOS GUARDADOS -->
+<div class="saved-bar hidden" id="savedBar">
+  <div class="saved-bar-left">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm0 1.5a5.5 5.5 0 110 11 5.5 5.5 0 010-11zM8 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 018 5zm0 6a.75.75 0 100 1.5.75.75 0 000-1.5z" fill="currentColor"/></svg>
+    <span>Dados guardados: <strong id="savedName">—</strong> · Os teus campos são preenchidos automaticamente.</span>
+  </div>
+  <div class="saved-bar-right">
+    <button class="btn-saved btn-edit" onclick="openUserDataModal()">Editar dados</button>
+    <button class="btn-saved btn-clear" onclick="clearSavedData()">Limpar dados</button>
+  </div>
+</div>
+
+<!-- BARRA CONTADOR -->
+<div class="counter-bar" id="counterBar">
+  <p id="counterText2">Tens <strong id="docCountDisplay">2 documentos gratuitos</strong> disponíveis</p>
+  <button class="btn-saved btn-edit" onclick="openLockModal()" style="font-size:0.75rem;">Ver plano Premium</button>
+</div>
+
+<!-- MAIN -->
+<main>
+
+  <!-- INTRO + PROVA DE VALOR -->
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:36px;padding-bottom:28px;border-bottom:1.5px solid var(--gray-200);">
+    <div>
+      <p style="font-size:1rem;color:var(--gray-600);line-height:1.6;">Escolhe o documento que precisas, preenche os teus dados e descarrega o modelo em PDF — pronto a entregar.</p>
+    </div>
+    <div style="display:flex;gap:20px;flex-shrink:0;">
+      <div style="text-align:center;">
+        <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--blue-deep);">10+</div>
+        <div style="font-size:0.72rem;color:var(--gray-400);text-transform:uppercase;letter-spacing:1px;">modelos úteis</div>
+      </div>
+      <div style="width:1px;background:var(--gray-200);"></div>
+      <div style="text-align:center;">
+        <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--blue-deep);">5</div>
+        <div style="font-size:0.72rem;color:var(--gray-400);text-transform:uppercase;letter-spacing:1px;">categorias</div>
+      </div>
+      <div style="width:1px;background:var(--gray-200);"></div>
+      <div style="text-align:center;">
+        <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--blue-deep);">PDF</div>
+        <div style="font-size:0.72rem;color:var(--gray-400);text-transform:uppercase;letter-spacing:1px;">download imediato</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORIA: MORADIA -->
+  <div class="category">
+    <div class="category-title"><span class="cat-icon">🏠</span> Moradia</div>
+    <div class="docs-grid">
+
+      <div class="doc-card">
+        <div class="doc-card-header">
+          <div class="doc-icon">📋</div>
+          <div class="doc-info">
+            <h3>Atestado de Morada</h3>
+            <p>Confirma que resides num determinado endereço. Necessário para NIF, NISS e outros processos.</p>
+          </div>
+        </div>
+        <div class="doc-actions">
+          <button class="btn-generate" onclick="openDocModal('atestado-morada')">📄 Gerar PDF</button>
+          <a href="https://eportugal.gov.pt/pt/espaco-cidadao/servicos/obter-atestado-de-residencia" target="_blank" class="btn-official">🔗 ePortugal</a>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-card-header">
+          <div class="doc-icon">📋</div>
+          <div class="doc-info">
+            <h3>Declaração de Residência</h3>
+            <p>Declaração formal de que resides em Portugal. Usada em processos de autorização de residência.</p>
+          </div>
+        </div>
+        <div class="doc-actions">
+          <button class="btn-generate" onclick="openDocModal('declaracao-residencia')">📄 Gerar PDF</button>
+          <a href="https://aima.gov.pt/pt/contactos" target="_blank" class="btn-official">🔗 AIMA Contactos</a>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-card-header">
+          <div class="doc-icon">📋</div>
+          <div class="doc-info">
+            <h3>Declaração de Coabitação</h3>
+            <p>Confirma que partilhas habitação com outra pessoa. Útil para processos de reagrupamento familiar.</p>
+          </div>
+        </div>
+        <div class="doc-actions">
+          <button class="btn-generate" onclick="openDocModal('coabitacao')">📄 Gerar PDF</button>
+          <a href="https://eportugal.gov.pt/pt/espaco-cidadao/servicos/reagrupamento-familiar" target="_blank" class="btn-official">🔗 Reagrupamento familiar</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CATEGORIA: IMIGRAÇÃO -->
+  <div class="category">
+    <div class="category-title"><span class="cat-icon">✈️</span> Imigração</div>
+    <div class="docs-grid">
+
+      <div class="doc-card">
+        <div class="doc-card-header">
+          <div class="doc-icon">📮</div>
+          <div class="doc-info">
+            <h3>Carta para AIMA</h3>
+            <p>Carta dirigida à Agência para a Integração, Migrações e Asilo para pedidos e solicitações diversas.</p>
+          </div>
+        </div>
+        <div class="doc-actions">
+          <button class="btn-generate" onclick="openDocModal('carta-aima')">📄 Gerar PDF</button>
+          <a href="https://aima.gov.pt/pt/servicos/pedidos-de-autorizacao-de-residencia" target="_blank" class="btn-official">🔗 AIMA — AR</a>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-card-header">
+          <div class="doc-icon">📅</div>
+          <div class="doc-info">
+            <h3>Pedido de Agendamento</h3>
+            <p>Carta formal a solicitar marcação de atendimento presencial na AIMA ou outros serviços.</p>
+          </div>
+        </div>
+        <div class="doc-actions">
+          <button class="btn-generate" onclick="openDocModal('agendamento')">📄 Gerar PDF</button>
+          <a href="https://www.siga.aima.gov.pt" target="_blank" class="btn-official">🔗 SIGA (agendamento)</a>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-card-header">
+          <div class="doc-icon">📋</div>
+          <div class="doc-info">
+            <h3>Declaração de Entrada em Portugal</h3>
+            <p>Confirma a data de entrada e os motivos da permanência em território nacional.</p>
+          </div>
+        </div>
+        <div class="doc-actions">
+          <button class="btn-generate" onclick="openDocModal('entrada-portugal')">📄 Gerar PDF</button>
+          <a href="https://aima.gov.pt/pt/servicos" target="_blank" class="btn-official">🔗 AIMA Serviços</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CATEGORIA: ARRENDAMENTO -->
+  <div class="category">
+    <div class="category-title"><span class="cat-icon">🔑</span> Arrendamento</div>
+    <div class="docs-grid">
+
+      <div class="doc-card">
+        <div class="doc-card-header">
+          <div class="doc-icon">✉️</div>
+          <div class="doc-info">
+            <h3>Carta de Apresentação para Senhorio</h3>
+            <p>Carta de apresentação pessoal dirigida ao proprietário para aumentar as tuas hipóteses de arrendamento.</p>
+          </div>
+        </div>
+        <div class="doc-actions">
+          <button class="btn-generate" onclick="openDocModal('carta-senhorio')">📄 Gerar PDF</button>
+          <a href="https://eportugal.gov.pt/pt/espaco-cidadao/servicos/registar-contrato-arrendamento" target="_blank" class="btn-official">🔗 Arrendamento</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CATEGORIA: TRABALHO -->
+  <div class="category">
+    <div class="category-title"><span class="cat-icon">💼</span> Trabalho</div>
+    <div class="docs-grid">
+
+      <div class="doc-card">
+        <div class="doc-card-header">
+          <div class="doc-icon">📋</div>
+          <div class="doc-info">
+            <h3>Declaração de Experiência Profissional</h3>
+            <p>Documento que certifica a tua experiência e competências profissionais. Usado em candidaturas de emprego.</p>
+          </div>
+        </div>
+        <div class="doc-actions">
+          <button class="btn-generate" onclick="openDocModal('experiencia-profissional')">📄 Gerar PDF</button>
+          <a href="https://www.portaldasfinancas.gov.pt" target="_blank" class="btn-official">🔗 Finanças</a>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-card-header">
+          <div class="doc-icon">📋</div>
+          <div class="doc-info">
+            <h3>Declaração sob Compromisso de Honra</h3>
+            <p>Declaração solene em que o signatário afirma a veracidade de determinados factos sob responsabilidade pessoal.</p>
+          </div>
+        </div>
+        <div class="doc-actions">
+          <button class="btn-generate" onclick="openDocModal('compromisso-honra')">📄 Gerar PDF</button>
+          <a href="https://eportugal.gov.pt/pt/espaco-cidadao" target="_blank" class="btn-official">🔗 ePortugal</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CATEGORIA: FAMÍLIA -->
+  <div class="category">
+    <div class="category-title"><span class="cat-icon">👨‍👩‍👧</span> Família</div>
+    <div class="docs-grid">
+
+      <div class="doc-card">
+        <div class="doc-card-header">
+          <div class="doc-icon">✈️</div>
+          <div class="doc-info">
+            <h3>Autorização para Menor Viajar</h3>
+            <p>Autorização de progenitor ou tutor para que um menor viaje acompanhado por terceiros ou sozinho.</p>
+          </div>
+        </div>
+        <div class="doc-actions">
+          <button class="btn-generate" onclick="openDocModal('menor-viajar')">📄 Gerar PDF</button>
+          <a href="https://eportugal.gov.pt/pt/espaco-cidadao/servicos/requerer-passaporte-para-menor" target="_blank" class="btn-official">🔗 ePortugal — Menor</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<!-- MODAL: FORMULÁRIO DOCUMENTO -->
+<div class="modal-overlay" id="docModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeDocModal()">×</button>
+    <div class="modal-title" id="docModalTitle">Gerar Documento</div>
+    <div class="modal-sub" id="docModalSub">Preenche os teus dados para gerar o documento em PDF.</div>
+    <div class="form-legal">
+      🔒 <strong>Os teus dados são guardados apenas no teu navegador.</strong> A NOVU não tem acesso a esta informação.
+    </div>
+    <form id="docForm" onsubmit="generatePDF(event)">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Nome completo *</label>
+          <input type="text" id="f-nome" required placeholder="Ex: João da Silva">
+        </div>
+        <div class="form-group">
+          <label>Nacionalidade *</label>
+          <input type="text" id="f-nacionalidade" required placeholder="Ex: Brasileira">
+        </div>
+        <div class="form-group">
+          <label>NIF *</label>
+          <input type="text" id="f-nif" required placeholder="Ex: 123456789" maxlength="9">
+        </div>
+        <div class="form-group">
+          <label>Nº Passaporte / Título</label>
+          <input type="text" id="f-documento" placeholder="Ex: AA123456">
+        </div>
+        <div class="form-group full">
+          <label>Morada completa *</label>
+          <input type="text" id="f-morada" required placeholder="Ex: Rua das Flores, 25, 2º Dto">
+        </div>
+        <div class="form-group">
+          <label>Código Postal *</label>
+          <input type="text" id="f-cp" required placeholder="Ex: 1200-001">
+        </div>
+        <div class="form-group">
+          <label>Cidade / Freguesia *</label>
+          <input type="text" id="f-cidade" required placeholder="Ex: Lisboa">
+        </div>
+        <div class="form-group" id="extraField1Wrap" style="display:none;">
+          <label id="extraField1Label">Campo extra</label>
+          <input type="text" id="f-extra1" placeholder="">
+        </div>
+        <div class="form-group full" id="extraField2Wrap" style="display:none;">
+          <label id="extraField2Label">Finalidade / Motivo</label>
+          <textarea id="f-extra2" placeholder="Descreve brevemente o motivo do documento..."></textarea>
+        </div>
+      </div>
+      <button type="submit" class="btn-pdf">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1v10M4 7l5 5 5-5M2 14v1a1 1 0 001 1h12a1 1 0 001-1v-1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Gerar e Descarregar PDF
+      </button>
+    </form>
+    <div class="storage-note">Os teus dados são guardados localmente para facilitar futuros documentos.</div>
+  </div>
+</div>
+
+<!-- MODAL: EDITAR DADOS PESSOAIS -->
+<div class="modal-overlay" id="userDataModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeUserDataModal()">×</button>
+    <div class="modal-title">Os teus dados guardados</div>
+    <div class="modal-sub">Edita as informações que aparecem automaticamente nos formulários.</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Nome completo</label>
+        <input type="text" id="ud-nome" placeholder="Ex: João da Silva">
+      </div>
+      <div class="form-group">
+        <label>Nacionalidade</label>
+        <input type="text" id="ud-nacionalidade" placeholder="Ex: Brasileira">
+      </div>
+      <div class="form-group">
+        <label>NIF</label>
+        <input type="text" id="ud-nif" placeholder="Ex: 123456789">
+      </div>
+      <div class="form-group">
+        <label>Nº Passaporte / Título</label>
+        <input type="text" id="ud-documento" placeholder="Ex: AA123456">
+      </div>
+      <div class="form-group full">
+        <label>Morada completa</label>
+        <input type="text" id="ud-morada" placeholder="Ex: Rua das Flores, 25, 2º Dto">
+      </div>
+      <div class="form-group">
+        <label>Código Postal</label>
+        <input type="text" id="ud-cp" placeholder="Ex: 1200-001">
+      </div>
+      <div class="form-group">
+        <label>Cidade / Freguesia</label>
+        <input type="text" id="ud-cidade" placeholder="Ex: Lisboa">
+      </div>
+    </div>
+    <button class="btn-pdf" onclick="saveUserData()">Guardar dados</button>
+    <div class="storage-note">Os teus dados são guardados apenas no teu navegador.</div>
+  </div>
+</div>
+
+<!-- MODAL: BLOQUEIO / SUBSCRIÇÃO -->
+<div class="modal-overlay lock-modal" id="lockModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeLockModal()">×</button>
+    <div class="lock-icon">🔒</div>
+    <div class="modal-title">Limite gratuito atingido</div>
+    <div class="modal-sub">Geraste os teus 2 documentos gratuitos. Para continuar sem limites, subscreve o NOVU Premium.</div>
+    <div class="lock-plans">
+      <div class="lock-plan">
+        <div class="plan-name">Gratuito</div>
+        <div class="plan-price">€0</div>
+        <div class="plan-desc">2 documentos/mês · Chat básico</div>
+      </div>
+      <div class="lock-plan featured">
+        <div class="plan-name">Premium ⭐</div>
+        <div class="plan-price">€9,90<span style="font-size:0.8rem;font-weight:400;color:var(--gray-600)">/mês</span></div>
+        <div class="plan-desc">Documentos ilimitados · Chat ilimitado · Prioridade</div>
+      </div>
+    </div>
+    <button class="btn-subscribe" onclick="goToPremium()">Subscrever Premium — €9,90/mês</button>
+    <button class="btn-later" onclick="closeLockModal()">Agora não</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5L6.5 11.5L3 8" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <span id="toastMsg">PDF gerado com sucesso!</span>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-links">
+    <span class="footer-text">© 2026 NOVU. Informação, não aconselhamento jurídico.</span>
+    <a href="/privacidade.html" class="footer-link">Política de Privacidade</a>
+    <a href="/termos.html" class="footer-link">Termos de Serviço</a>
+    <a href="/afiliados.html" class="footer-link">Programa de Afiliados</a>
+  </div>
+  <a href="#" class="footer-email" onclick="this.href='mai'+'lto:'+'geral'+'@'+'novuai.pt';return true;">✉ <span class="__cf_email__" data-cfemail="46212334272a0628293033272f683632">[email&#160;protected]</span></a>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ── CONSTANTES ──
+const MAX_FREE_DOCS = 2;
+const STORAGE_KEY_DOCS = 'novu_docs_count';
+const STORAGE_KEY_USER = 'novu_user_data';
+
+// ── ESTADO ──
+let currentDocType = null;
+let docsGenerated = parseInt(localStorage.getItem(STORAGE_KEY_DOCS) || '0');
+
+// ── TEMPLATES ──
+const DOC_TEMPLATES = {
+  'atestado-morada': {
+    title: 'Atestado de Morada',
+    sub: 'Declaração formal de residência para entidades públicas e privadas.',
+    extraFields: false,
+    generate: (d) => [
+      { type: 'title', text: 'DECLARAÇÃO DE MORADA' },
+      { type: 'subtitle', text: '(Modelo informativo — não é documento oficial)' },
+      { type: 'spacer' },
+      { type: 'body', text: `Eu, ${d.nome}, de nacionalidade ${d.nacionalidade}, titular do documento de identificação nº ${d.documento || 'N/A'} e NIF nº ${d.nif}, residente na ${d.morada}, ${d.cp} ${d.cidade}, Portugal,` },
+      { type: 'spacer' },
+      { type: 'body', text: 'DECLARO, sob compromisso de honra, que a morada acima indicada é a minha residência efectiva e habitual em território nacional.' },
+      { type: 'spacer' },
+      { type: 'body', text: 'Esta declaração é emitida para os devidos efeitos legais e administrativos.' },
+      { type: 'footer', text: d.cidade },
+    ]
+  },
+  'declaracao-residencia': {
+    title: 'Declaração de Residência',
+    sub: 'Declaração de residência em Portugal para processos administrativos.',
+    extraFields: false,
+    generate: (d) => [
+      { type: 'title', text: 'DECLARAÇÃO DE RESIDÊNCIA' },
+      { type: 'subtitle', text: '(Modelo informativo — não é documento oficial)' },
+      { type: 'spacer' },
+      { type: 'body', text: `Eu, ${d.nome}, de nacionalidade ${d.nacionalidade}, portador(a) do documento nº ${d.documento || 'N/A'} e NIF ${d.nif},` },
+      { type: 'spacer' },
+      { type: 'body', text: `DECLARO que resido em Portugal, na morada: ${d.morada}, ${d.cp}, ${d.cidade}.` },
+      { type: 'spacer' },
+      { type: 'body', text: 'Declaro ainda que a informação acima prestada é verdadeira e exacta, assumindo plena responsabilidade pela sua veracidade.' },
+      { type: 'footer', text: d.cidade },
+    ]
+  },
+  'coabitacao': {
+    title: 'Declaração de Coabitação',
+    sub: 'Confirma que partilhas habitação com outra pessoa.',
+    extraField1: { label: 'Nome do(a) coabitante', placeholder: 'Ex: Maria Santos' },
+    generate: (d) => [
+      { type: 'title', text: 'DECLARAÇÃO DE COABITAÇÃO' },
+      { type: 'subtitle', text: '(Modelo informativo — não é documento oficial)' },
+      { type: 'spacer' },
+      { type: 'body', text: `Eu, ${d.nome}, de nacionalidade ${d.nacionalidade}, NIF ${d.nif}, residente em ${d.morada}, ${d.cp} ${d.cidade},` },
+      { type: 'spacer' },
+      { type: 'body', text: `DECLARO, para os devidos efeitos, que coabito na referida morada com ${d.extra1 || '[nome do coabitante]'}, partilhando o mesmo espaço de habitação.` },
+      { type: 'spacer' },
+      { type: 'body', text: 'Esta declaração é prestada sob compromisso de honra e destina-se a ser apresentada às entidades competentes.' },
+      { type: 'footer', text: d.cidade },
+    ]
+  },
+  'carta-aima': {
+    title: 'Carta para a AIMA',
+    sub: 'Carta formal dirigida à Agência para a Integração, Migrações e Asilo.',
+    extraField2: { label: 'Assunto / Motivo da carta', placeholder: 'Ex: Pedido de informação sobre o processo de autorização de residência nº ...' },
+    generate: (d) => [
+      { type: 'title', text: 'CARTA DIRIGIDA À AIMA' },
+      { type: 'subtitle', text: 'Agência para a Integração, Migrações e Asilo' },
+      { type: 'spacer' },
+      { type: 'label', text: 'Exmo(a). Sr(a). Director(a),' },
+      { type: 'spacer' },
+      { type: 'body', text: `${d.nome}, de nacionalidade ${d.nacionalidade}, portador(a) do documento de identificação nº ${d.documento || 'N/A'} e NIF nº ${d.nif}, residente em ${d.morada}, ${d.cp} ${d.cidade}, vem por este meio, respeitosamente, solicitar a Vossa Exa.:` },
+      { type: 'spacer' },
+      { type: 'body', text: d.extra2 || '[Descreva o motivo da sua solicitação]' },
+      { type: 'spacer' },
+      { type: 'body', text: 'Agradeço desde já a atenção dispensada e aguardo resposta com a brevidade possível.' },
+      { type: 'body', text: 'Com os melhores cumprimentos,' },
+      { type: 'footer', text: d.cidade },
+      { type: 'signature', text: d.nome },
+    ]
+  },
+  'agendamento': {
+    title: 'Pedido de Agendamento — AIMA',
+    sub: 'Carta a solicitar marcação de atendimento presencial.',
+    extraField1: { label: 'Tipo de serviço pretendido', placeholder: 'Ex: Autorização de residência' },
+    generate: (d) => [
+      { type: 'title', text: 'PEDIDO DE AGENDAMENTO' },
+      { type: 'subtitle', text: 'Agência para a Integração, Migrações e Asilo — AIMA' },
+      { type: 'spacer' },
+      { type: 'label', text: 'Exmo(a). Sr(a.),' },
+      { type: 'spacer' },
+      { type: 'body', text: `${d.nome}, de nacionalidade ${d.nacionalidade}, NIF ${d.nif}, residente em ${d.morada}, ${d.cp} ${d.cidade}, vem solicitar o agendamento de atendimento presencial para o serviço: ${d.extra1 || '[serviço pretendido]'}.` },
+      { type: 'spacer' },
+      { type: 'body', text: 'Estou disponível para comparecer em qualquer data e hora que Vossas Excelências entendam adequada. Para contacto, pode utilizar o email ou telefone registados no processo.' },
+      { type: 'spacer' },
+      { type: 'body', text: 'Grato(a) pela atenção.' },
+      { type: 'footer', text: d.cidade },
+      { type: 'signature', text: d.nome },
+    ]
+  },
+  'entrada-portugal': {
+    title: 'Declaração de Entrada em Portugal',
+    sub: 'Confirma a data de entrada e motivos de permanência em Portugal.',
+    extraField1: { label: 'Data de entrada em Portugal', placeholder: 'Ex: 15 de Janeiro de 2025' },
+    extraField2: { label: 'Motivo da permanência', placeholder: 'Ex: Trabalho, estudo, reagrupamento familiar...' },
+    generate: (d) => [
+      { type: 'title', text: 'DECLARAÇÃO DE ENTRADA EM PORTUGAL' },
+      { type: 'subtitle', text: '(Modelo informativo — não é documento oficial)' },
+      { type: 'spacer' },
+      { type: 'body', text: `Eu, ${d.nome}, de nacionalidade ${d.nacionalidade}, portador(a) do documento de identificação nº ${d.documento || 'N/A'} e NIF ${d.nif},` },
+      { type: 'spacer' },
+      { type: 'body', text: `DECLARO que entrei em território português em ${d.extra1 || '[data de entrada]'}, encontrando-me actualmente residente em ${d.morada}, ${d.cp} ${d.cidade}.` },
+      { type: 'spacer' },
+      { type: 'body', text: `O motivo da minha permanência em Portugal é: ${d.extra2 || '[motivo]'}.` },
+      { type: 'spacer' },
+      { type: 'body', text: 'Declaro que a informação acima é verdadeira, assumindo responsabilidade pela sua veracidade.' },
+      { type: 'footer', text: d.cidade },
+    ]
+  },
+  'carta-senhorio': {
+    title: 'Carta de Apresentação para Senhorio',
+    sub: 'Carta de apresentação pessoal para aumentar as tuas hipóteses de arrendamento.',
+    extraField2: { label: 'Breve apresentação (profissão, situação)', placeholder: 'Ex: Trabalho como programador numa empresa em Lisboa, tenho contrato de trabalho...' },
+    generate: (d) => [
+      { type: 'title', text: 'CARTA DE APRESENTAÇÃO' },
+      { type: 'subtitle', text: 'Para candidatura a arrendamento' },
+      { type: 'spacer' },
+      { type: 'label', text: 'Exmo(a). Sr(a.) Proprietário(a),' },
+      { type: 'spacer' },
+      { type: 'body', text: `O meu nome é ${d.nome}, sou de nacionalidade ${d.nacionalidade} e resido actualmente em ${d.morada}, ${d.cidade}.` },
+      { type: 'spacer' },
+      { type: 'body', text: d.extra2 || '[Apresentação pessoal e profissional]' },
+      { type: 'spacer' },
+      { type: 'body', text: 'Sou uma pessoa responsável, cumpridora das minhas obrigações e com referências disponíveis mediante solicitação. O meu NIF é ' + d.nif + '.' },
+      { type: 'spacer' },
+      { type: 'body', text: 'Estou disponível para qualquer esclarecimento adicional e agradeço a atenção dispensada à minha candidatura.' },
+      { type: 'body', text: 'Com os melhores cumprimentos,' },
+      { type: 'footer', text: d.cidade },
+      { type: 'signature', text: d.nome },
+    ]
+  },
+  'experiencia-profissional': {
+    title: 'Declaração de Experiência Profissional',
+    sub: 'Certifica a tua experiência e competências profissionais.',
+    extraField1: { label: 'Área / Função profissional', placeholder: 'Ex: Programação Web, Gestão, Saúde...' },
+    extraField2: { label: 'Descrição da experiência', placeholder: 'Ex: 5 anos de experiência em desenvolvimento de software, tendo trabalhado em...' },
+    generate: (d) => [
+      { type: 'title', text: 'DECLARAÇÃO DE EXPERIÊNCIA PROFISSIONAL' },
+      { type: 'subtitle', text: '(Modelo informativo — não é documento oficial)' },
+      { type: 'spacer' },
+      { type: 'body', text: `Eu, ${d.nome}, de nacionalidade ${d.nacionalidade}, NIF ${d.nif}, residente em ${d.morada}, ${d.cidade},` },
+      { type: 'spacer' },
+      { type: 'body', text: `DECLARO, sob compromisso de honra, que possuo experiência profissional na área de ${d.extra1 || '[área profissional]'}.` },
+      { type: 'spacer' },
+      { type: 'body', text: d.extra2 || '[Descrição detalhada da experiência profissional]' },
+      { type: 'spacer' },
+      { type: 'body', text: 'Esta declaração é emitida para os devidos efeitos, nomeadamente para candidaturas de emprego e processos de reconhecimento de qualificações.' },
+      { type: 'footer', text: d.cidade },
+    ]
+  },
+  'compromisso-honra': {
+    title: 'Declaração sob Compromisso de Honra',
+    sub: 'Declaração solene que afirma a veracidade de determinados factos.',
+    extraField2: { label: 'Factos declarados sob compromisso de honra', placeholder: 'Ex: Declaro que nunca fui condenado(a) por crime doloso em Portugal ou no estrangeiro...' },
+    generate: (d) => [
+      { type: 'title', text: 'DECLARAÇÃO SOB COMPROMISSO DE HONRA' },
+      { type: 'subtitle', text: '(Modelo informativo — não é documento oficial)' },
+      { type: 'spacer' },
+      { type: 'body', text: `Eu, ${d.nome}, de nacionalidade ${d.nacionalidade}, portador(a) do documento de identificação nº ${d.documento || 'N/A'} e NIF ${d.nif}, residente em ${d.morada}, ${d.cp} ${d.cidade},` },
+      { type: 'spacer' },
+      { type: 'body', text: 'DECLARO, sob compromisso de honra e ciente das responsabilidades legais daí decorrentes, que:' },
+      { type: 'spacer' },
+      { type: 'body', text: d.extra2 || '[Insira aqui os factos declarados sob compromisso de honra]' },
+      { type: 'spacer' },
+      { type: 'body', text: 'Declaro ainda que a presente declaração é verdadeira e que assumo plena responsabilidade pelas declarações prestadas.' },
+      { type: 'footer', text: d.cidade },
+    ]
+  },
+  'menor-viajar': {
+    title: 'Autorização para Menor Viajar',
+    sub: 'Autorização de progenitor ou tutor para menor viajar.',
+    extraField1: { label: 'Nome do menor', placeholder: 'Ex: Ana da Silva' },
+    extraField2: { label: 'Destino e período da viagem', placeholder: 'Ex: Brasil, de 10/06/2025 a 20/06/2025, acompanhado(a) por [nome]' },
+    generate: (d) => [
+      { type: 'title', text: 'AUTORIZAÇÃO PARA MENOR VIAJAR' },
+      { type: 'subtitle', text: '(Modelo informativo — consulte as autoridades competentes)' },
+      { type: 'spacer' },
+      { type: 'body', text: `Eu, ${d.nome}, de nacionalidade ${d.nacionalidade}, portador(a) do documento nº ${d.documento || 'N/A'} e NIF ${d.nif}, residente em ${d.morada}, ${d.cp} ${d.cidade},` },
+      { type: 'spacer' },
+      { type: 'body', text: `na qualidade de progenitor(a) / tutor(a) legal de ${d.extra1 || '[nome do menor]'},` },
+      { type: 'spacer' },
+      { type: 'body', text: `AUTORIZO o menor acima identificado a viajar para ${d.extra2 || '[destino e período]'}.` },
+      { type: 'spacer' },
+      { type: 'body', text: 'Responsabilizo-me por esta autorização e declaro que a informação prestada é verdadeira.' },
+      { type: 'spacer' },
+      { type: 'body', text: '⚠ Nota: Para viagens internacionais de menores, poderá ser exigido reconhecimento notarial desta declaração. Consulte as autoridades de fronteira do país de destino.' },
+      { type: 'footer', text: d.cidade },
+      { type: 'signature', text: d.nome },
+    ]
+  },
+};
+
+// ── INIT ──
+window.addEventListener('load', () => {
+  updateCounterBar();
+  loadSavedBar();
+});
+
+function updateCounterBar() {
+  const bar = document.getElementById('counterBar');
+  const display = document.getElementById('docCountDisplay');
+  const remaining = MAX_FREE_DOCS - docsGenerated;
+  if (docsGenerated === 0) {
+    display.textContent = `${MAX_FREE_DOCS} documentos gratuitos`;
+    document.getElementById('counterText2').innerHTML = `Tens <strong id="docCountDisplay">${MAX_FREE_DOCS} documentos gratuitos</strong> disponíveis`;
+  } else if (remaining > 0) {
+    display.textContent = `Restam ${remaining} de ${MAX_FREE_DOCS} gratuitos`;
+    document.getElementById('counterText2').innerHTML = `<strong id="docCountDisplay">Restam ${remaining} de ${MAX_FREE_DOCS} gratuitos</strong>`;
+  } else {
+    bar.classList.add('limit-reached');
+    document.getElementById('counterText2').innerHTML = `<strong>Limite gratuito atingido.</strong> Subscreve o Premium para continuar.`;
+  }
+}
+
+function loadSavedBar() {
+  const saved = getSavedUser();
+  if (saved && saved.nome) {
+    document.getElementById('savedBar').classList.remove('hidden');
+    document.getElementById('savedName').textContent = saved.nome;
+  }
+}
+
+function getSavedUser() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY_USER) || 'null'); } catch { return null; }
+}
+
+function prefillForm(saved) {
+  if (!saved) return;
+  if (saved.nome) document.getElementById('f-nome').value = saved.nome;
+  if (saved.nacionalidade) document.getElementById('f-nacionalidade').value = saved.nacionalidade;
+  if (saved.nif) document.getElementById('f-nif').value = saved.nif;
+  if (saved.documento) document.getElementById('f-documento').value = saved.documento;
+  if (saved.morada) document.getElementById('f-morada').value = saved.morada;
+  if (saved.cp) document.getElementById('f-cp').value = saved.cp;
+  if (saved.cidade) document.getElementById('f-cidade').value = saved.cidade;
+}
+
+function saveFormToStorage() {
+  const data = {
+    nome: document.getElementById('f-nome').value,
+    nacionalidade: document.getElementById('f-nacionalidade').value,
+    nif: document.getElementById('f-nif').value,
+    documento: document.getElementById('f-documento').value,
+    morada: document.getElementById('f-morada').value,
+    cp: document.getElementById('f-cp').value,
+    cidade: document.getElementById('f-cidade').value,
+  };
+  localStorage.setItem(STORAGE_KEY_USER, JSON.stringify(data));
+  loadSavedBar();
+}
+
+function clearSavedData() {
+  if (confirm('Tens a certeza que queres apagar os dados guardados?')) {
+    localStorage.removeItem(STORAGE_KEY_USER);
+    document.getElementById('savedBar').classList.add('hidden');
+    showToast('Dados apagados.');
+  }
+}
+
+// ── MODAL DOCUMENTO ──
+function openDocModal(docType) {
+  if (docsGenerated >= MAX_FREE_DOCS) {
+    openLockModal();
+    return;
+  }
+  currentDocType = docType;
+  const tpl = DOC_TEMPLATES[docType];
+  document.getElementById('docModalTitle').textContent = tpl.title;
+  document.getElementById('docModalSub').textContent = tpl.sub;
+
+  // Extra fields
+  const e1w = document.getElementById('extraField1Wrap');
+  const e2w = document.getElementById('extraField2Wrap');
+  e1w.style.display = 'none';
+  e2w.style.display = 'none';
+  document.getElementById('f-extra1').value = '';
+  document.getElementById('f-extra2').value = '';
+
+  if (tpl.extraField1) {
+    e1w.style.display = 'flex';
+    document.getElementById('extraField1Label').textContent = tpl.extraField1.label;
+    document.getElementById('f-extra1').placeholder = tpl.extraField1.placeholder;
+  }
+  if (tpl.extraField2) {
+    e2w.style.display = 'flex';
+    document.getElementById('extraField2Label').textContent = tpl.extraField2.label;
+    document.getElementById('f-extra2').placeholder = tpl.extraField2.placeholder;
+  }
+
+  prefillForm(getSavedUser());
+  document.getElementById('docModal').classList.add('open');
+}
+
+function closeDocModal() {
+  document.getElementById('docModal').classList.remove('open');
+  currentDocType = null;
+}
+
+// ── MODAL USER DATA ──
+function openUserDataModal() {
+  const saved = getSavedUser();
+  if (saved) {
+    if (saved.nome) document.getElementById('ud-nome').value = saved.nome;
+    if (saved.nacionalidade) document.getElementById('ud-nacionalidade').value = saved.nacionalidade;
+    if (saved.nif) document.getElementById('ud-nif').value = saved.nif;
+    if (saved.documento) document.getElementById('ud-documento').value = saved.documento;
+    if (saved.morada) document.getElementById('ud-morada').value = saved.morada;
+    if (saved.cp) document.getElementById('ud-cp').value = saved.cp;
+    if (saved.cidade) document.getElementById('ud-cidade').value = saved.cidade;
+  }
+  document.getElementById('userDataModal').classList.add('open');
+}
+
+function closeUserDataModal() {
+  document.getElementById('userDataModal').classList.remove('open');
+}
+
+function saveUserData() {
+  const data = {
+    nome: document.getElementById('ud-nome').value,
+    nacionalidade: document.getElementById('ud-nacionalidade').value,
+    nif: document.getElementById('ud-nif').value,
+    documento: document.getElementById('ud-documento').value,
+    morada: document.getElementById('ud-morada').value,
+    cp: document.getElementById('ud-cp').value,
+    cidade: document.getElementById('ud-cidade').value,
+  };
+  localStorage.setItem(STORAGE_KEY_USER, JSON.stringify(data));
+  loadSavedBar();
+  closeUserDataModal();
+  showToast('Dados guardados com sucesso!');
+}
+
+// ── MODAL LOCK ──
+function openLockModal() { document.getElementById('lockModal').classList.add('open'); }
+function closeLockModal() { document.getElementById('lockModal').classList.remove('open'); }
+function goToPremium() { window.location.href = '/index.html#pricing'; }
+
+// ── FECHAR MODAIS AO CLICAR FORA ──
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove('open');
+      currentDocType = null;
+    }
+  });
+});
+
+// ── TOAST ──
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ── GERADOR DE PDF ──
+function generatePDF(e) {
+  e.preventDefault();
+  const tpl = DOC_TEMPLATES[currentDocType];
+  if (!tpl) return;
+
+  const data = {
+    nome: document.getElementById('f-nome').value.trim(),
+    nacionalidade: document.getElementById('f-nacionalidade').value.trim(),
+    nif: document.getElementById('f-nif').value.trim(),
+    documento: document.getElementById('f-documento').value.trim(),
+    morada: document.getElementById('f-morada').value.trim(),
+    cp: document.getElementById('f-cp').value.trim(),
+    cidade: document.getElementById('f-cidade').value.trim(),
+    extra1: document.getElementById('f-extra1').value.trim(),
+    extra2: document.getElementById('f-extra2').value.trim(),
+  };
+
+  saveFormToStorage();
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ format: 'a4', unit: 'mm' });
+
+  const marginL = 25, marginR = 25, marginT = 28;
+  const pageW = 210, contentW = pageW - marginL - marginR;
+  let y = marginT;
+
+  // Header NOVU
+  doc.setFillColor(10, 37, 64);
+  doc.rect(0, 0, 210, 18, 'F');
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(13);
+  doc.setTextColor(255, 255, 255);
+  doc.text('NOVU', 15, 12);
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(8);
+  doc.setTextColor(144, 196, 245);
+  doc.text('novuai.pt — Your new life in Portugal', 15, 16.5);
+
+  y = 32;
+
+  // Conteúdo do template
+  const blocks = tpl.generate(data);
+
+  blocks.forEach(block => {
+    if (y > 260) {
+      doc.addPage();
+      y = 20;
+    }
+
+    switch (block.type) {
+      case 'title':
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(14);
+        doc.setTextColor(10, 37, 64);
+        doc.text(block.text, pageW / 2, y, { align: 'center' });
+        y += 8;
+        break;
+
+      case 'subtitle':
+        doc.setFont('helvetica', 'italic');
+        doc.setFontSize(9);
+        doc.setTextColor(100, 120, 140);
+        doc.text(block.text, pageW / 2, y, { align: 'center' });
+        y += 4;
+        // underline
+        doc.setDrawColor(220, 230, 240);
+        doc.setLineWidth(0.3);
+        doc.line(marginL, y + 2, pageW - marginR, y + 2);
+        y += 8;
+        break;
+
+      case 'spacer':
+        y += 5;
+        break;
+
+      case 'label':
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(10.5);
+        doc.setTextColor(10, 37, 64);
+        doc.text(block.text, marginL, y);
+        y += 7;
+        break;
+
+      case 'body': {
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(10.5);
+        doc.setTextColor(30, 50, 70);
+        const lines = doc.splitTextToSize(block.text, contentW);
+        lines.forEach(line => {
+          if (y > 265) { doc.addPage(); y = 20; }
+          doc.text(line, marginL, y);
+          y += 6.2;
+        });
+        y += 1;
+        break;
+      }
+
+      case 'footer': {
+        y += 6;
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(10);
+        doc.setTextColor(30, 50, 70);
+        const today = new Date().toLocaleDateString('pt-PT', { day: 'numeric', month: 'long', year: 'numeric' });
+        doc.text(`${block.text}, ${today}`, marginL, y);
+        y += 12;
+        doc.setDrawColor(180, 200, 220);
+        doc.setLineWidth(0.3);
+        doc.line(marginL, y, marginL + 65, y);
+        y += 5;
+        doc.setFontSize(9);
+        doc.setTextColor(100, 120, 140);
+        doc.text('Assinatura do(a) declarante', marginL, y);
+        break;
+      }
+
+      case 'signature':
+        y += 4;
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(10);
+        doc.setTextColor(10, 37, 64);
+        doc.text(block.text, marginL, y);
+        break;
+    }
+  });
+
+  // Rodapé legal
+  const pageCount = doc.internal.getNumberOfPages();
+  for (let i = 1; i <= pageCount; i++) {
+    doc.setPage(i);
+    doc.setFillColor(248, 250, 252);
+    doc.rect(0, 281, 210, 16, 'F');
+    doc.setFont('helvetica', 'italic');
+    doc.setFontSize(7.5);
+    doc.setTextColor(130, 150, 170);
+    doc.text('Este documento é apenas um modelo informativo. Não substitui aconselhamento jurídico. Algumas entidades podem exigir assinatura presencial ou reconhecimento notarial.', 15, 288, { maxWidth: 155 });
+    doc.setTextColor(46, 127, 212);
+    doc.text('novuai.pt', 185, 288, { align: 'right' });
+  }
+
+  // Download
+  const filename = tpl.title.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '') + '_novu.pdf';
+  doc.save(filename);
+
+  // Incrementar cont
