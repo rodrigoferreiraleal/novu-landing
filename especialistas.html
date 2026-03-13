@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Especialistas de Confiança — NOVU</title>
+<meta name="description" content="Encontra advogados, contabilistas, agentes imobiliários e outros especialistas verificados pela NOVU para imigrantes em Portugal.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue-deep: #0A2540;
+    --blue-mid:  #1A4A7A;
+    --blue-bright: #2E7FD4;
+    --blue-light: #EBF4FF;
+    --blue-pale: #F4F8FF;
+    --gray-100: #F7F9FC;
+    --gray-200: #E8EDF4;
+    --gray-400: #8A9BB0;
+    --gray-600: #4A5568;
+    --white: #FFFFFF;
+    --green: #16A34A;
+    --green-light: #DCFCE7;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--blue-deep); background: var(--white); }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.95); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 0 5%; height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--blue-deep); text-decoration: none; }
+  .nav-logo span { color: var(--blue-bright); }
+  .nav-right { display: flex; align-items: center; gap: 12px; }
+  .nav-back { border: 1.5px solid var(--gray-200); color: var(--gray-600); padding: 7px 16px; border-radius: 50px; font-size: 0.82rem; font-weight: 500; cursor: pointer; text-decoration: none; transition: all 0.2s; }
+  .nav-back:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
+  .lang-selector { display: flex; gap: 4px; }
+  .lang-btn { background: transparent; border: 1.5px solid var(--gray-200); color: var(--gray-600); padding: 4px 10px; border-radius: 50px; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+  .lang-btn:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
+  .lang-btn.active { background: var(--blue-deep); color: white; border-color: var(--blue-deep); }
+  @media (max-width: 600px) {
+    nav { padding: 0 16px; height: 56px; }
+    .nav-back { display: none; }
+  }
+
+  /* HERO */
+  .hero {
+    padding: 120px 5% 60px;
+    background: linear-gradient(160deg, var(--blue-pale) 0%, var(--white) 70%);
+    text-align: center;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--green-light); color: var(--green);
+    border: 1px solid #BBF7D0; border-radius: 50px;
+    padding: 6px 16px; font-size: 0.78rem; font-weight: 600;
+    margin-bottom: 24px; letter-spacing: 0.3px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800; line-height: 1.2;
+    color: var(--blue-deep); margin-bottom: 16px;
+  }
+  .hero h1 span { color: var(--blue-bright); }
+  .hero p {
+    font-size: 1.08rem; color: var(--gray-600);
+    max-width: 560px; margin: 0 auto 32px;
+    line-height: 1.7;
+  }
+  .hero-trust {
+    display: flex; align-items: center; justify-content: center; gap: 24px;
+    flex-wrap: wrap; margin-top: 8px;
+  }
+  .trust-item { display: flex; align-items: center; gap: 6px; font-size: 0.82rem; color: var(--gray-600); }
+  .trust-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+
+  /* CATEGORIAS */
+  .categories-section {
+    padding: 64px 5%;
+    max-width: 960px; margin: 0 auto;
+  }
+  .section-label {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--blue-bright);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; font-weight: 700;
+    color: var(--blue-deep); margin-bottom: 8px;
+  }
+  .section-sub {
+    font-size: 0.96rem; color: var(--gray-600);
+    margin-bottom: 40px; line-height: 1.6;
+  }
+
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .cat-card {
+    border: 2px solid var(--gray-200);
+    border-radius: 16px;
+    padding: 24px 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--white);
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+  }
+  .cat-card:hover { border-color: var(--blue-bright); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(10,37,64,0.1); }
+  .cat-card.selected { border-color: var(--blue-bright); background: var(--blue-pale); box-shadow: 0 0 0 3px rgba(46,127,212,0.15); }
+  .cat-icon { font-size: 2rem; margin-bottom: 12px; display: block; }
+  .cat-name { font-weight: 700; font-size: 1rem; color: var(--blue-deep); margin-bottom: 6px; }
+  .cat-desc { font-size: 0.82rem; color: var(--gray-600); line-height: 1.5; }
+  .cat-check {
+    position: absolute; top: 14px; right: 14px;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--blue-bright); color: white;
+    display: none; align-items: center; justify-content: center;
+    font-size: 0.7rem;
+  }
+  .cat-card.selected .cat-check { display: flex; }
+
+  /* FORMULÁRIO */
+  .form-section {
+    background: var(--blue-pale);
+    border: 1px solid var(--gray-200);
+    border-radius: 20px;
+    padding: 40px;
+    display: none;
+    margin-top: 8px;
+  }
+  .form-section.visible { display: block; }
+  .form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--blue-deep); margin-bottom: 6px;
+  }
+  .form-sub { font-size: 0.88rem; color: var(--gray-600); margin-bottom: 28px; line-height: 1.6; }
+  .selected-cat-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--blue-deep); color: white;
+    border-radius: 50px; padding: 6px 16px;
+    font-size: 0.82rem; font-weight: 600;
+    margin-bottom: 24px;
+  }
+
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group.full { grid-column: 1 / -1; }
+  .form-group label { font-size: 0.82rem; font-weight: 600; color: var(--blue-deep); }
+  .form-group input, .form-group select, .form-group textarea {
+    padding: 11px 14px;
+    border: 1.5px solid var(--gray-200);
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.92rem;
+    color: var(--blue-deep);
+    background: white;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--blue-bright);
+  }
+  .form-group textarea { resize: vertical; min-height: 90px; }
+
+  .form-privacy {
+    background: white; border: 1px solid var(--gray-200);
+    border-radius: 10px; padding: 12px 16px;
+    font-size: 0.78rem; color: var(--gray-600);
+    margin-top: 4px; line-height: 1.5;
+  }
+
+  .btn-submit {
+    background: var(--blue-deep); color: white;
+    border: none; border-radius: 50px;
+    padding: 14px 36px; font-size: 0.95rem; font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer; transition: all 0.2s;
+    margin-top: 20px; width: 100%;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .btn-submit:hover { background: var(--blue-mid); transform: translateY(-1px); }
+  .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+  /* SUCCESS */
+  .success-box {
+    display: none;
+    text-align: center;
+    padding: 48px 24px;
+    background: var(--green-light);
+    border: 1px solid #BBF7D0;
+    border-radius: 20px;
+    margin-top: 8px;
+  }
+  .success-box.visible { display: block; }
+  .success-icon { font-size: 3rem; margin-bottom: 16px; }
+  .success-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 700;
+    color: var(--blue-deep); margin-bottom: 10px;
+  }
+  .success-msg { font-size: 0.95rem; color: var(--gray-600); line-height: 1.7; max-width: 440px; margin: 0 auto 24px; }
+  .btn-new-request {
+    background: var(--blue-deep); color: white;
+    border: none; border-radius: 50px;
+    padding: 12px 28px; font-size: 0.88rem; font-weight: 600;
+    font-family: 'DM Sans', sans-serif; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-new-request:hover { background: var(--blue-mid); }
+
+  /* COMO FUNCIONA */
+  .how-section {
+    padding: 64px 5%;
+    background: var(--blue-deep);
+    color: white; text-align: center;
+  }
+  .how-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 12px; }
+  .how-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; margin-bottom: 48px; }
+  .how-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 800px; margin: 0 auto; }
+  .how-step { text-align: center; }
+  .how-num {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--blue-bright); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 1rem;
+    margin: 0 auto 16px;
+  }
+  .how-step-title { font-weight: 700; font-size: 1rem; margin-bottom: 8px; }
+  .how-step-desc { font-size: 0.84rem; color: rgba(255,255,255,0.65); line-height: 1.6; }
+  @media (max-width: 600px) { .how-steps { grid-template-columns: 1fr; gap: 24px; } }
+
+  /* FOOTER */
+  footer {
+    background: var(--blue-deep); color: rgba(255,255,255,0.6);
+    padding: 32px 5%; text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-bottom: 12px; }
+  .footer-link { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.8rem; transition: color 0.2s; }
+  .footer-link:hover { color: white; }
+  .footer-copy { font-size: 0.78rem; }
+
+  @media (max-width: 640px) {
+    .categories-grid { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .form-section { padding: 24px 20px; }
+    .categories-section { padding: 48px 20px; }
+    .hero { padding: 100px 20px 48px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/index.html" class="nav-logo">N<span>O</span>VU</a>
+  <div class="nav-right">
+    <div class="lang-selector">
+      <button id="lang-pt" class="lang-btn active" onclick="setLang('pt')">PT</button>
+      <button id="lang-en" class="lang-btn" onclick="setLang('en')">EN</button>
+      <button id="lang-es" class="lang-btn" onclick="setLang('es')">ES</button>
+    </div>
+    <a href="/index.html" class="nav-back" id="nav-back-link">← Início</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">
+    <span>✓</span> <span id="hero-badge">Especialistas verificados pela NOVU</span>
+  </div>
+  <h1 id="hero-title">Encontra o especialista <span>certo para ti</span></h1>
+  <p id="hero-sub">Sem pesquisar no Google. Sem arriscar. A NOVU liga-te a profissionais de confiança que entendem a realidade do imigrante em Portugal.</p>
+  <div class="hero-trust">
+    <div class="trust-item"><div class="trust-dot"></div><span id="trust1">Profissionais verificados</span></div>
+    <div class="trust-item"><div class="trust-dot"></div><span id="trust2">Resposta em 24-48h</span></div>
+    <div class="trust-item"><div class="trust-dot"></div><span id="trust3">100% gratuito para ti</span></div>
+  </div>
+</div>
+
+<!-- CATEGORIAS + FORM -->
+<div class="categories-section">
+  <div class="section-label" id="section-label">O que precisas?</div>
+  <h2 class="section-title" id="section-title">Escolhe a tua área</h2>
+  <p class="section-sub" id="section-sub">Clica na área em que precisas de ajuda. Vais preencher os teus dados e um especialista parceiro da NOVU entra em contacto contigo.</p>
+
+  <div class="categories-grid" id="categoriesGrid">
+
+    <div class="cat-card" onclick="selectCat('advogado', this)" data-cat="advogado">
+      <div class="cat-check">✓</div>
+      <span class="cat-icon">⚖️</span>
+      <div class="cat-name" id="cat-advogado-name">Advogado de Imigração</div>
+      <div class="cat-desc" id="cat-advogado-desc">Processos AIMA, autorização de residência, nacionalidade, reagrupamento familiar.</div>
+    </div>
+
+    <div class="cat-card" onclick="selectCat('contabilista', this)" data-cat="contabilista">
+      <div class="cat-check">✓</div>
+      <span class="cat-icon">🧾</span>
+      <div class="cat-name" id="cat-contabilista-name">Contabilista</div>
+      <div class="cat-desc" id="cat-contabilista-desc">Abertura de actividade, recibos verdes, IRS, NHR, NIF, declarações fiscais.</div>
+    </div>
+
+    <div class="cat-card" onclick="selectCat('saude', this)" data-cat="saude">
+      <div class="cat-check">✓</div>
+      <span class="cat-icon">🏥</span>
+      <div class="cat-name" id="cat-saude-name">Plano de Saúde</div>
+      <div class="cat-desc" id="cat-saude-desc">Seguros de saúde aceites para vistos, cobertura para imigrantes, planos familiares.</div>
+    </div>
+
+    <div class="cat-card" onclick="selectCat('imobiliario', this)" data-cat="imobiliario">
+      <div class="cat-check">✓</div>
+      <span class="cat-icon">🏠</span>
+      <div class="cat-name" id="cat-imobiliario-name">Agente Imobiliário</div>
+      <div class="cat-desc" id="cat-imobiliario-desc">Arrendamento para imigrantes, compra de casa, apoio em contratos e garantias.</div>
+    </div>
+
+    <div class="cat-card" onclick="selectCat('cambio', this)" data-cat="cambio">
+      <div class="cat-check">✓</div>
+      <span class="cat-icon">💱</span>
+      <div class="cat-name" id="cat-cambio-name">Câmbio Internacional</div>
+      <div class="cat-desc" id="cat-cambio-desc">Transferências internacionais, câmbio de moeda, envio de dinheiro para o exterior.</div>
+    </div>
+
+    <div class="cat-card" onclick="selectCat('empresa', this)" data-cat="empresa">
+      <div class="cat-check">✓</div>
+      <span class="cat-icon">🏢</span>
+      <div class="cat-name" id="cat-empresa-name">Abrir Empresa</div>
+      <div class="cat-desc" id="cat-empresa-desc">Constituição de sociedade, NIF de empresa, registo comercial, apoio jurídico.</div>
+    </div>
+
+  </div>
+
+  <!-- FORMULÁRIO -->
+  <div class="form-section" id="formSection">
+    <div class="selected-cat-badge" id="selectedCatBadge">⚖️ Advogado de Imigração</div>
+    <div class="form-title" id="form-title">Entra em contacto com um especialista</div>
+    <div class="form-sub" id="form-sub">Preenche os teus dados. Um profissional parceiro da NOVU irá contactar-te em breve — sem compromisso.</div>
+
+    <form id="expertForm">
+      <div class="form-grid">
+        <div class="form-group">
+          <label id="lbl-nome">Nome completo *</label>
+          <input type="text" id="f-nome" required placeholder="Ex: João da Silva">
+        </div>
+        <div class="form-group">
+          <label id="lbl-cidade">Cidade *</label>
+          <input type="text" id="f-cidade" required placeholder="Ex: Lisboa">
+        </div>
+        <div class="form-group">
+          <label id="lbl-tel">Telefone / WhatsApp *</label>
+          <input type="tel" id="f-tel" required placeholder="Ex: +351 912 345 678">
+        </div>
+        <div class="form-group">
+          <label id="lbl-email">Email *</label>
+          <input type="email" id="f-email" required placeholder="Ex: joao@email.com">
+        </div>
+        <div class="form-group full">
+          <label id="lbl-descricao">Descreve brevemente o que precisas</label>
+          <textarea id="f-descricao" placeholder="Ex: Preciso de ajuda para renovar a minha autorização de residência..."></textarea>
+        </div>
+      </div>
+
+      <div class="form-privacy" id="form-privacy">
+        🔒 Os teus dados são usados apenas para te ligar ao especialista certo. Não partilhamos com terceiros sem o teu consentimento. Ver <a href="/privacidade.html" style="color:var(--blue-bright);">Política de Privacidade</a>.
+      </div>
+
+      <button type="submit" class="btn-submit" id="btn-submit">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M15.75 2.25L8.25 9.75M15.75 2.25H10.5M15.75 2.25V7.5M7.5 3.75H3.75C2.92 3.75 2.25 4.42 2.25 5.25V14.25C2.25 15.08 2.92 15.75 3.75 15.75H12.75C13.58 15.75 14.25 15.08 14.25 14.25V10.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span id="btn-submit-text">Quero ser contactado por um especialista</span>
+      </button>
+    </form>
+  </div>
+
+  <!-- SUCESSO -->
+  <div class="success-box" id="successBox">
+    <div class="success-icon">✅</div>
+    <div class="success-title" id="success-title">Pedido recebido!</div>
+    <p class="success-msg" id="success-msg">Um especialista parceiro da NOVU vai entrar em contacto contigo nas próximas 24 a 48 horas. Verifica o teu email e WhatsApp.</p>
+    <button class="btn-new-request" onclick="resetForm()" id="btn-new">Fazer outro pedido</button>
+  </div>
+</div>
+
+<!-- COMO FUNCIONA -->
+<div class="how-section">
+  <div class="how-label" id="how-label">Como funciona</div>
+  <div class="how-title" id="how-title">Simples e sem complicações</div>
+  <div class="how-steps">
+    <div class="how-step">
+      <div class="how-num">1</div>
+      <div class="how-step-title" id="step1-title">Escolhe a área</div>
+      <div class="how-step-desc" id="step1-desc">Selecciona o tipo de especialista que precisas — advogado, contabilista, imobiliário e mais.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">2</div>
+      <div class="how-step-title" id="step2-title">Preenches os teus dados</div>
+      <div class="how-step-desc" id="step2-desc">Nome, cidade, telefone e uma breve descrição do que precisas. Leva menos de 1 minuto.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">3</div>
+      <div class="how-step-title" id="step3-title">O especialista contacta-te</div>
+      <div class="how-step-desc" id="step3-desc">Um profissional verificado pela NOVU entra em contacto contigo nas próximas 24 a 48 horas.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="/index.html" class="footer-link" id="footer-home">Início</a>
+    <a href="/documentos.html" class="footer-link">Documentos</a>
+    <a href="/privacidade.html" class="footer-link">Política de Privacidade</a>
+    <a href="/termos.html" class="footer-link">Termos de Serviço</a>
+  </div>
+  <p class="footer-copy" id="footer-copy">© 2026 NOVU. Informação, não aconselhamento jurídico.</p>
+</footer>
+
+<script>
+// ── TRADUÇÕES ──
+const T = {
+  pt: {
+    nav_back: '← Início',
+    hero_badge: 'Especialistas verificados pela NOVU',
+    hero_title_1: 'Encontra o especialista',
+    hero_title_2: 'certo para ti',
+    hero_sub: 'Sem pesquisar no Google. Sem arriscar. A NOVU liga-te a profissionais de confiança que entendem a realidade do imigrante em Portugal.',
+    trust1: 'Profissionais verificados',
+    trust2: 'Resposta em 24-48h',
+    trust3: '100% gratuito para ti',
+    section_label: 'O que precisas?',
+    section_title: 'Escolhe a tua área',
+    section_sub: 'Clica na área em que precisas de ajuda. Vais preencher os teus dados e um especialista parceiro da NOVU entra em contacto contigo.',
+    cat_advogado_name: 'Advogado de Imigração',
+    cat_advogado_desc: 'Processos AIMA, autorização de residência, nacionalidade, reagrupamento familiar.',
+    cat_contabilista_name: 'Contabilista',
+    cat_contabilista_desc: 'Abertura de actividade, recibos verdes, IRS, NHR, NIF, declarações fiscais.',
+    cat_saude_name: 'Plano de Saúde',
+    cat_saude_desc: 'Seguros de saúde aceites para vistos, cobertura para imigrantes, planos familiares.',
+    cat_imobiliario_name: 'Agente Imobiliário',
+    cat_imobiliario_desc: 'Arrendamento para imigrantes, compra de casa, apoio em contratos e garantias.',
+    cat_cambio_name: 'Câmbio Internacional',
+    cat_cambio_desc: 'Transferências internacionais, câmbio de moeda, envio de dinheiro para o exterior.',
+    cat_empresa_name: 'Abrir Empresa',
+    cat_empresa_desc: 'Constituição de sociedade, NIF de empresa, registo comercial, apoio jurídico.',
+    form_title: 'Entra em contacto com um especialista',
+    form_sub: 'Preenche os teus dados. Um profissional parceiro da NOVU irá contactar-te em breve — sem compromisso.',
+    lbl_nome: 'Nome completo *',
+    lbl_cidade: 'Cidade *',
+    lbl_tel: 'Telefone / WhatsApp *',
+    lbl_email: 'Email *',
+    lbl_descricao: 'Descreve brevemente o que precisas',
+    form_privacy: '🔒 Os teus dados são usados apenas para te ligar ao especialista certo. Não partilhamos com terceiros sem o teu consentimento.',
+    btn_submit: 'Quero ser contactado por um especialista',
+    btn_submitting: 'A enviar...',
+    success_title: 'Pedido recebido!',
+    success_msg: 'Um especialista parceiro da NOVU vai entrar em contacto contigo nas próximas 24 a 48 horas. Verifica o teu email e WhatsApp.',
+    btn_new: 'Fazer outro pedido',
+    how_label: 'Como funciona',
+    how_title: 'Simples e sem complicações',
+    step1_title: 'Escolhe a área',
+    step1_desc: 'Selecciona o tipo de especialista que precisas — advogado, contabilista, imobiliário e mais.',
+    step2_title: 'Preenches os teus dados',
+    step2_desc: 'Nome, cidade, telefone e uma breve descrição do que precisas. Leva menos de 1 minuto.',
+    step3_title: 'O especialista contacta-te',
+    step3_desc: 'Um profissional verificado pela NOVU entra em contacto contigo nas próximas 24 a 48 horas.',
+    footer_home: 'Início',
+    footer_copy: '© 2026 NOVU. Informação, não aconselhamento jurídico.',
+  },
+  en: {
+    nav_back: '← Home',
+    hero_badge: 'Specialists verified by NOVU',
+    hero_title_1: 'Find the right',
+    hero_title_2: 'specialist for you',
+    hero_sub: 'No random Google searches. No risks. NOVU connects you with trusted professionals who understand the immigrant experience in Portugal.',
+    trust1: 'Verified professionals',
+    trust2: 'Response within 24-48h',
+    trust3: '100% free for you',
+    section_label: 'What do you need?',
+    section_title: 'Choose your area',
+    section_sub: 'Click on the area where you need help. Fill in your details and a NOVU partner specialist will get in touch with you.',
+    cat_advogado_name: 'Immigration Lawyer',
+    cat_advogado_desc: 'AIMA processes, residence permits, nationality, family reunification.',
+    cat_contabilista_name: 'Accountant',
+    cat_contabilista_desc: 'Self-employment registration, invoices, IRS, NHR, NIF, tax returns.',
+    cat_saude_name: 'Health Insurance',
+    cat_saude_desc: 'Health insurance accepted for visas, immigrant coverage, family plans.',
+    cat_imobiliario_name: 'Real Estate Agent',
+    cat_imobiliario_desc: 'Renting for immigrants, buying property, contract and guarantee support.',
+    cat_cambio_name: 'International Exchange',
+    cat_cambio_desc: 'International transfers, currency exchange, sending money abroad.',
+    cat_empresa_name: 'Open a Business',
+    cat_empresa_desc: 'Company formation, business NIF, commercial registration, legal support.',
+    form_title: 'Get in touch with a specialist',
+    form_sub: 'Fill in your details. A NOVU partner professional will contact you shortly — no commitment.',
+    lbl_nome: 'Full name *',
+    lbl_cidade: 'City *',
+    lbl_tel: 'Phone / WhatsApp *',
+    lbl_email: 'Email *',
+    lbl_descricao: 'Briefly describe what you need',
+    form_privacy: '🔒 Your data is used only to connect you with the right specialist. We do not share it with third parties without your consent.',
+    btn_submit: 'I want to be contacted by a specialist',
+    btn_submitting: 'Sending...',
+    success_title: 'Request received!',
+    success_msg: 'A NOVU partner specialist will contact you within the next 24 to 48 hours. Check your email and WhatsApp.',
+    btn_new: 'Make another request',
+    how_label: 'How it works',
+    how_title: 'Simple and straightforward',
+    step1_title: 'Choose your area',
+    step1_desc: 'Select the type of specialist you need — lawyer, accountant, real estate agent and more.',
+    step2_title: 'Fill in your details',
+    step2_desc: 'Name, city, phone and a brief description of what you need. Takes less than 1 minute.',
+    step3_title: 'The specialist contacts you',
+    step3_desc: 'A NOVU-verified professional will get in touch within the next 24 to 48 hours.',
+    footer_home: 'Home',
+    footer_copy: '© 2026 NOVU. Information, not legal advice.',
+  },
+  es: {
+    nav_back: '← Inicio',
+    hero_badge: 'Especialistas verificados por NOVU',
+    hero_title_1: 'Encuentra el especialista',
+    hero_title_2: 'adecuado para ti',
+    hero_sub: 'Sin buscar en Google. Sin arriesgarte. NOVU te conecta con profesionales de confianza que entienden la realidad del inmigrante en Portugal.',
+    trust1: 'Profesionales verificados',
+    trust2: 'Respuesta en 24-48h',
+    trust3: '100% gratuito para ti',
+    section_label: '¿Qué necesitas?',
+    section_title: 'Elige tu área',
+    section_sub: 'Haz clic en el área donde necesitas ayuda. Rellena tus datos y un especialista socio de NOVU se pondrá en contacto contigo.',
+    cat_advogado_name: 'Abogado de Inmigración',
+    cat_advogado_desc: 'Procesos AIMA, autorización de residencia, nacionalidad, reagrupación familiar.',
+    cat_contabilista_name: 'Contable',
+    cat_contabilista_desc: 'Alta de actividad, facturas, IRPF, NHR, NIF, declaraciones fiscales.',
+    cat_saude_name: 'Plan de Salud',
+    cat_saude_desc: 'Seguros de salud aceptados para visados, cobertura para inmigrantes, planes familiares.',
+    cat_imobiliario_name: 'Agente Inmobiliario',
+    cat_imobiliario_desc: 'Alquiler para inmigrantes, compra de casa, apoyo en contratos y garantías.',
+    cat_cambio_name: 'Cambio Internacional',
+    cat_cambio_desc: 'Transferencias internacionales, cambio de divisa, envío de dinero al exterior.',
+    cat_empresa_name: 'Abrir Empresa',
+    cat_empresa_desc: 'Constitución de sociedad, NIF de empresa, registro mercantil, apoyo jurídico.',
+    form_title: 'Contacta con un especialista',
+    form_sub: 'Rellena tus datos. Un profesional socio de NOVU se pondrá en contacto contigo pronto — sin compromiso.',
+    lbl_nome: 'Nombre completo *',
+    lbl_cidade: 'Ciudad *',
+    lbl_tel: 'Teléfono / WhatsApp *',
+    lbl_email: 'Email *',
+    lbl_descricao: 'Describe brevemente lo que necesitas',
+    form_privacy: '🔒 Tus datos se usan solo para conectarte con el especialista adecuado. No los compartimos con terceros sin tu consentimiento.',
+    btn_submit: 'Quiero ser contactado por un especialista',
+    btn_submitting: 'Enviando...',
+    success_title: '¡Solicitud recibida!',
+    success_msg: 'Un especialista socio de NOVU se pondrá en contacto contigo en las próximas 24 a 48 horas. Revisa tu email y WhatsApp.',
+    btn_new: 'Hacer otra solicitud',
+    how_label: 'Cómo funciona',
+    how_title: 'Simple y sin complicaciones',
+    step1_title: 'Elige el área',
+    step1_desc: 'Selecciona el tipo de especialista que necesitas — abogado, contable, inmobiliario y más.',
+    step2_title: 'Rellena tus datos',
+    step2_desc: 'Nombre, ciudad, teléfono y una breve descripción de lo que necesitas. Menos de 1 minuto.',
+    step3_title: 'El especialista te contacta',
+    step3_desc: 'Un profesional verificado por NOVU se pondrá en contacto en las próximas 24 a 48 horas.',
+    footer_home: 'Inicio',
+    footer_copy: '© 2026 NOVU. Información, no asesoramiento jurídico.',
+  }
+};
+
+const CATS = {
+  advogado:    { icon: '⚖️', nameKey: 'cat_advogado_name' },
+  contabilista:{ icon: '🧾', nameKey: 'cat_contabilista_name' },
+  saude:       { icon: '🏥', nameKey: 'cat_saude_name' },
+  imobiliario: { icon: '🏠', nameKey: 'cat_imobiliario_name' },
+  cambio:      { icon: '💱', nameKey: 'cat_cambio_name' },
+  empresa:     { icon: '🏢', nameKey: 'cat_empresa_name' },
+};
+
+let currentLang = localStorage.getItem('novu_lang') || 'pt';
+let selectedCat = null;
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('novu_lang', lang);
+  const t = T[lang];
+  ['pt','en','es'].forEach(l => {
+    document.getElementById('lang-'+l)?.classList.toggle('active', l === lang);
+  });
+  const set = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val; };
+  set('nav-back-link', t.nav_back);
+  set('hero-badge', t.hero_badge);
+  set('hero-title', t.hero_title_1 + ' ' + t.hero_title_2);
+  set('hero-sub', t.hero_sub);
+  set('trust1', t.trust1);
+  set('trust2', t.trust2);
+  set('trust3', t.trust3);
+  set('section-label', t.section_label);
+  set('section-title', t.section_title);
+  set('section-sub', t.section_sub);
+  set('cat-advogado-name', t.cat_advogado_name);
+  set('cat-advogado-desc', t.cat_advogado_desc);
+  set('cat-contabilista-name', t.cat_contabilista_name);
+  set('cat-contabilista-desc', t.cat_contabilista_desc);
+  set('cat-saude-name', t.cat_saude_name);
+  set('cat-saude-desc', t.cat_saude_desc);
+  set('cat-imobiliario-name', t.cat_imobiliario_name);
+  set('cat-imobiliario-desc', t.cat_imobiliario_desc);
+  set('cat-cambio-name', t.cat_cambio_name);
+  set('cat-cambio-desc', t.cat_cambio_desc);
+  set('cat-empresa-name', t.cat_empresa_name);
+  set('cat-empresa-desc', t.cat_empresa_desc);
+  set('form-title', t.form_title);
+  set('form-sub', t.form_sub);
+  set('lbl-nome', t.lbl_nome);
+  set('lbl-cidade', t.lbl_cidade);
+  set('lbl-tel', t.lbl_tel);
+  set('lbl-email', t.lbl_email);
+  set('lbl-descricao', t.lbl_descricao);
+  set('form-privacy', t.form_privacy);
+  set('btn-submit-text', t.btn_submit);
+  set('success-title', t.success_title);
+  set('success-msg', t.success_msg);
+  set('btn-new', t.btn_new);
+  set('how-label', t.how_label);
+  set('how-title', t.how_title);
+  set('step1-title', t.step1_title);
+  set('step1-desc', t.step1_desc);
+  set('step2-title', t.step2_title);
+  set('step2-desc', t.step2_desc);
+  set('step3-title', t.step3_title);
+  set('step3-desc', t.step3_desc);
+  set('footer-home', t.footer_home);
+  set('footer-copy', t.footer_copy);
+  // Actualizar badge da categoria seleccionada (se existir)
+  if (selectedCat) {
+    const cat = CATS[selectedCat];
+    document.getElementById('selectedCatBadge').textContent = cat.icon + ' ' + t[cat.nameKey];
+  }
+}
+
+function selectCat(catKey, el) {
+  // Remover selecção anterior
+  document.querySelectorAll('.cat-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedCat = catKey;
+
+  // Actualizar badge
+  const cat = CATS[catKey];
+  const t = T[currentLang];
+  document.getElementById('selectedCatBadge').textContent = cat.icon + ' ' + t[cat.nameKey];
+
+  // Mostrar formulário
+  const formSection = document.getElementById('formSection');
+  formSection.classList.add('visible');
+
+  // Scroll suave para o form
+  setTimeout(() => {
+    formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+}
+
+// SUBMIT
+document.getElementById('expertForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  if (!selectedCat) return;
+
+  const btn = document.getElementById('btn-submit');
+  const t = T[currentLang];
+  btn.disabled = true;
+  document.getElementById('btn-submit-text').textContent = t.btn_submitting;
+
+  const cat = CATS[selectedCat];
+  const catName = t[cat.nameKey];
+
+  const formData = new FormData();
+  formData.append('_subject', 'NOVU Especialistas — ' + catName);
+  formData.append('categoria', catName);
+  formData.append('nome', document.getElementById('f-nome').value);
+  formData.append('cidade', document.getElementById('f-cidade').value);
+  formData.append('telefone', document.getElementById('f-tel').value);
+  formData.append('email', document.getElementById('f-email').value);
+  formData.append('descricao', document.getElementById('f-descricao').value);
+  formData.append('idioma', currentLang.toUpperCase());
+  formData.append('fonte', 'novuai.pt/especialistas');
+
+  try {
+    const res = await fetch('https://formspree.io/f/xdawgkvq', {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (res.ok) {
+      document.getElementById('formSection').classList.remove('visible');
+      document.getElementById('successBox').classList.add('visible');
+      document.getElementById('successBox').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      throw new Error('Erro');
+    }
+  } catch {
+    btn.disabled = false;
+    document.getElementById('btn-submit-text').textContent = t.btn_submit;
+    alert('Erro ao enviar. Tenta novamente ou contacta geral@novuai.pt');
+  }
+});
+
+function resetForm() {
+  selectedCat = null;
+  document.querySelectorAll('.cat-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('formSection').classList.remove('visible');
+  document.getElementById('successBox').classList.remove('visible');
+  document.getElementById('expertForm').reset();
+  document.getElementById('btn-submit').disabled = false;
+  document.getElementById('btn-submit-text').textContent = T[currentLang].btn_submit;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// INIT
+setLang(currentLang);
+</script>
+</body>
+</html>
