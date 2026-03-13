@@ -250,6 +250,17 @@ nav {
 }
 .form-input:focus { border-color: var(--blue-bright); }
 .modal-privacy { font-size: 0.74rem; color: var(--gray-400); line-height: 1.5; margin: 10px 0 18px; }
+.cv-upload-label {
+  display: flex; align-items: center; gap: 10px;
+  border: 1.5px dashed var(--gray-200); border-radius: 10px;
+  padding: 12px 16px; cursor: pointer; transition: all 0.2s;
+  background: var(--gray-100);
+}
+.cv-upload-label:hover { border-color: var(--blue-bright); background: var(--blue-pale); }
+.cv-upload-label.has-file { border-color: var(--green); background: var(--green-light); }
+.cv-upload-icon { font-size: 1.2rem; flex-shrink: 0; }
+.cv-upload-text { font-size: 0.84rem; color: var(--gray-600); font-weight: 500; }
+.cv-upload-label.has-file .cv-upload-text { color: var(--green); font-weight: 600; }
 .modal-privacy a { color: var(--blue-bright); }
 .btn-modal-submit {
   background: var(--blue-deep); color: white; border: none; width: 100%;
@@ -463,6 +474,14 @@ nav {
       <div class="form-group">
         <label id="lbl-msg">Mensagem curta (opcional)</label>
         <textarea class="form-input" id="cand-msg" rows="3" placeholder="Ex: Tenho experiência em restauração e disponibilidade imediata." style="resize:vertical;border-radius:10px;"></textarea>
+      </div>
+      <div class="form-group">
+        <label id="lbl-cv">Currículo em PDF <span style="font-weight:400;color:var(--gray-400)">(opcional — máx. 5MB)</span></label>
+        <label class="cv-upload-label" id="cvUploadLabel" for="cand-cv">
+          <span class="cv-upload-icon">📎</span>
+          <span class="cv-upload-text" id="cv-upload-text">Clica para anexar o teu CV</span>
+        </label>
+        <input type="file" id="cand-cv" accept=".pdf" style="display:none;" onchange="handleCvUpload(this)">
       </div>
       <p class="modal-privacy" id="modal-privacy-txt">🔒 Os teus dados são partilhados apenas com a empresa desta vaga. Ver <a href="/privacidade.html">Política de Privacidade</a>.</p>
       <button class="btn-modal-submit" onclick="submitCandidatura()" id="btn-candidatar-submit">
@@ -707,6 +726,10 @@ const T = {
     lbl_nome: 'Nome completo *', lbl_tel: 'Telefone / WhatsApp *', lbl_email: 'Email *', lbl_msg: 'Mensagem curta (opcional)',
     modal_privacy: '🔒 Os teus dados são partilhados apenas com a empresa desta vaga.',
     btn_cand_txt: 'Enviar candidatura',
+    lbl_cv: 'Currículum en PDF',
+    cv_placeholder: 'Haz clic para adjuntar tu CV',
+    lbl_cv: 'Currículo em PDF',
+    cv_placeholder: 'Clica para anexar o teu CV',
     cand_success_title: 'Candidatura enviada!',
     cand_success_msg: 'A empresa receberá os teus dados e entrará em contacto nas próximas 48 horas. Boa sorte!',
     modal_emp_title: 'Publicar uma vaga',
@@ -746,6 +769,8 @@ const T = {
     lbl_nome: 'Full name *', lbl_tel: 'Phone / WhatsApp *', lbl_email: 'Email *', lbl_msg: 'Short message (optional)',
     modal_privacy: '🔒 Your data is shared only with this job\'s company.',
     btn_cand_txt: 'Send application',
+    lbl_cv: 'CV / Resume (PDF)',
+    cv_placeholder: 'Click to attach your CV',
     cand_success_title: 'Application sent!',
     cand_success_msg: 'The company will receive your details and contact you within 48 hours. Good luck!',
     modal_emp_title: 'Post a job',
@@ -910,6 +935,9 @@ function openCandidaturaModal(vagaId) {
   document.getElementById('cand-tel').value = '';
   document.getElementById('cand-email').value = '';
   document.getElementById('cand-msg').value = '';
+  document.getElementById('cand-cv').value = '';
+  document.getElementById('cvUploadLabel').classList.remove('has-file');
+  document.getElementById('cv-upload-text').textContent = T[currentLang].cv_placeholder || 'Clica para anexar o teu CV';
   document.getElementById('btn-candidatar-submit').disabled = false;
   document.getElementById('btn-cand-txt').textContent = T[currentLang].btn_cand_txt;
   document.getElementById('candidaturaModal').classList.add('open');
@@ -938,6 +966,8 @@ async function submitCandidatura() {
   fd.append('mensagem', document.getElementById('cand-msg').value);
   fd.append('idioma', currentLang.toUpperCase());
   fd.append('fonte', 'novuai.pt/empregos');
+  const cvFile = document.getElementById('cand-cv').files[0];
+  if (cvFile) fd.append('curriculo', cvFile, cvFile.name);
 
   try {
     const res = await fetch('https://formspree.io/f/xdawgkvq', { method: 'POST', body: fd, headers: { Accept: 'application/json' } });
@@ -1020,6 +1050,26 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 3000);
 }
 
+// ── CV UPLOAD ──
+function handleCvUpload(input) {
+  const label = document.getElementById('cvUploadLabel');
+  const text = document.getElementById('cv-upload-text');
+  const t = T[currentLang];
+  if (input.files && input.files[0]) {
+    const file = input.files[0];
+    if (file.size > 5 * 1024 * 1024) {
+      showToast('⚠️ O ficheiro é muito grande. Máx. 5MB.');
+      input.value = '';
+      return;
+    }
+    label.classList.add('has-file');
+    text.textContent = '✓ ' + file.name;
+  } else {
+    label.classList.remove('has-file');
+    text.textContent = t.cv_placeholder || 'Clica para anexar o teu CV';
+  }
+}
+
 // ── MENU MOBILE ──
 function toggleMenu() {
   const menu = document.getElementById('mobileMenu');
@@ -1060,6 +1110,9 @@ function setLang(lang) {
   s('sb-emp-title', t.sb_emp_title); s('sb-tip-title', t.sb_tip_title); s('sb-tip-text', t.sb_tip_text);
   s('modal-cand-title', t.modal_cand_title); s('modal-cand-sub', t.modal_cand_sub);
   s('lbl-nome', t.lbl_nome); s('lbl-tel', t.lbl_tel); s('lbl-email', t.lbl_email); s('lbl-msg', t.lbl_msg);
+  s('lbl-cv', t.lbl_cv);
+  const cvTxt = document.getElementById('cv-upload-text');
+  if (cvTxt && !document.getElementById('cvUploadLabel').classList.contains('has-file')) cvTxt.textContent = t.cv_placeholder;
   s('btn-cand-txt', t.btn_cand_txt);
   s('modal-emp-title', t.modal_emp_title); s('modal-emp-sub', t.modal_emp_sub);
   s('lbl-empresa', t.lbl_empresa); s('lbl-nif', t.lbl_nif); s('lbl-emp-cidade', t.lbl_emp_cidade); s('lbl-emp-email', t.lbl_emp_email);
