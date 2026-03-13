@@ -497,7 +497,8 @@
   <button class="btn-primary" onclick="document.getElementById('chatbot').scrollIntoView({behavior:'smooth'})">Fazer a minha primeira pergunta</button>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
 const T = {
   pt: {
     nav_cta: 'Experimentar grátis', hero_badge: 'Disponível agora — experimenta grátis',
@@ -897,6 +898,7 @@ function showShareNudge() {
   const successMsg = document.getElementById('successMsg');
   if (successMsg && successMsg.parentNode) successMsg.parentNode.insertBefore(nudge, successMsg.nextSibling);
 }
+function openModal() { document.getElementById('emailModal').classList.add('open'); }
 function closeModal() { document.getElementById('emailModal').classList.remove('open'); }
 document.getElementById('emailModal').addEventListener('click', function(e) { if(e.target===this) closeModal(); });
 
@@ -1001,4 +1003,11 @@ const savedUnlocked = getCookie('novu_unlocked');
 const savedQuestions = getCookie('novu_questions');
 if (savedUnlocked === 'true') {
   isUnlocked = true;
-} else if (savedQuestions
+} else if (savedQuestions) {
+  questionsUsed = parseInt(savedQuestions) || 0;
+}
+updateCounter();
+setLang('pt');
+</script>
+</body>
+</html>
