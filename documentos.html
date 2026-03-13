@@ -32,6 +32,10 @@
   .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--blue-deep); text-decoration: none; }
   .nav-logo span { color: var(--blue-bright); }
   .nav-right { display: flex; align-items: center; gap: 14px; }
+  .lang-selector { display: flex; gap: 4px; }
+  .lang-btn { background: none; border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.7); padding: 3px 9px; border-radius: 4px; font-size: 0.72rem; font-weight: 600; cursor: pointer; letter-spacing: 0.5px; transition: all 0.2s; }
+  .lang-btn:hover { border-color: rgba(255,255,255,0.7); color: #fff; }
+  .lang-btn.active { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.8); color: #fff; }
   .nav-back { background: transparent; border: 1.5px solid var(--gray-200); color: var(--gray-600); padding: 7px 16px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 500; cursor: pointer; text-decoration: none; transition: all 0.2s; }
   .nav-back:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
 
@@ -154,7 +158,12 @@
 <nav>
   <a href="/index.html" class="nav-logo">N<span>O</span>VU</a>
   <div class="nav-right">
-    <a href="/index.html" class="nav-back">← Início</a>
+    <div class="lang-selector">
+      <button id="lang-pt" class="lang-btn active" onclick="setLang('pt')">PT</button>
+      <button id="lang-en" class="lang-btn" onclick="setLang('en')">EN</button>
+      <button id="lang-es" class="lang-btn" onclick="setLang('es')">ES</button>
+    </div>
+    <a href="/index.html" class="nav-back" id="nav-back-link">← Início</a>
   </div>
 </nav>
 
@@ -162,12 +171,12 @@
 <div class="hero">
   <div class="hero-badge">
     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M6 4v2.5l1.5 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-    Ferramenta gratuita
+    <span id="hero-badge">Ferramenta gratuita</span>
   </div>
-  <h1>Documentos essenciais para imigrantes</h1>
-  <p>Cria declarações e cartas administrativas para processos em Portugal — em segundos, sem complicações.</p>
+  <h1 id="hero-title">Documentos essenciais para imigrantes</h1>
+  <p id="hero-sub">Cria declarações e cartas administrativas para processos em Portugal — em segundos, sem complicações.</p>
   <div class="hero-legal">
-    <strong>⚠ Aviso legal:</strong> Os documentos gerados são modelos e minutas informativas, não documentos emitidos por entidades públicas. Algumas entidades podem exigir assinatura presencial, reconhecimento notarial ou documentação adicional.
+    <strong>⚠ <span id="hero-legal-title">Aviso legal:</span></strong> <span id="hero-legal-text">Os documentos gerados são modelos e minutas informativas, não documentos emitidos por entidades públicas. Algumas entidades podem exigir assinatura presencial, reconhecimento notarial ou documentação adicional.</span>
   </div>
 </div>
 
@@ -175,18 +184,18 @@
 <div class="saved-bar hidden" id="savedBar">
   <div class="saved-bar-left">
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm0 1.5a5.5 5.5 0 110 11 5.5 5.5 0 010-11zM8 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 018 5zm0 6a.75.75 0 100 1.5.75.75 0 000-1.5z" fill="currentColor"/></svg>
-    <span>Dados guardados: <strong id="savedName">—</strong> · Os teus campos são preenchidos automaticamente.</span>
+    <span><span id="saved-bar-text">Dados guardados:</span> <strong id="savedName">—</strong> · <span id="saved-bar-sub">Os teus campos são preenchidos automaticamente.</span></span>
   </div>
   <div class="saved-bar-right">
-    <button class="btn-saved btn-edit" onclick="openUserDataModal()">Editar dados</button>
-    <button class="btn-saved btn-clear" onclick="clearSavedData()">Limpar dados</button>
+    <button class="btn-saved btn-edit" onclick="openUserDataModal()" id="btn-edit-data">Editar dados</button>
+    <button class="btn-saved btn-clear" onclick="clearSavedData()" id="btn-clear-data">Limpar dados</button>
   </div>
 </div>
 
 <!-- BARRA CONTADOR -->
 <div class="counter-bar" id="counterBar">
   <p id="counterText2">Tens <strong id="docCountDisplay">2 documentos gratuitos</strong> disponíveis</p>
-  <button class="btn-saved btn-edit" onclick="openLockModal()" style="font-size:0.75rem;">Ver plano Premium</button>
+  <button class="btn-saved btn-edit" onclick="openLockModal()" style="font-size:0.75rem;" id="btn-ver-premium">Ver plano Premium</button>
 </div>
 
 <!-- MAIN -->
@@ -195,7 +204,7 @@
   <!-- INTRO + PROVA DE VALOR -->
   <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:36px;padding-bottom:28px;border-bottom:1.5px solid var(--gray-200);">
     <div>
-      <p style="font-size:1rem;color:var(--gray-600);line-height:1.6;">Escolhe o documento que precisas, preenche os teus dados e descarrega o modelo em PDF — pronto a entregar.</p>
+      <p id="intro-text" style="font-size:1rem;color:var(--gray-600);line-height:1.6;">Escolhe o documento que precisas, preenche os teus dados e descarrega o modelo em PDF — pronto a entregar.</p>
     </div>
     <div style="display:flex;gap:20px;flex-shrink:0;">
       <div style="text-align:center;">
@@ -215,21 +224,20 @@
     </div>
   </div>
 
-  <!-- CATEGORIA: MORADIA -->
   <div class="category">
-    <div class="category-title"><span class="cat-icon">🏠</span> Moradia</div>
+    <div class="category-title"><span class="cat-icon">🏠</span> <span id="cat-moradia">Moradia</span></div>
     <div class="docs-grid">
 
       <div class="doc-card">
         <div class="doc-card-header">
           <div class="doc-icon">📋</div>
           <div class="doc-info">
-            <h3>Atestado de Morada</h3>
-            <p>Confirma que resides num determinado endereço. Necessário para NIF, NISS e outros processos.</p>
+            <h3 id="doc-atestado-title">Atestado de Morada</h3>
+            <p id="doc-atestado-desc">Confirma que resides num determinado endereço. Necessário para NIF, NISS e outros processos.</p>
           </div>
         </div>
         <div class="doc-actions">
-          <button class="btn-generate" onclick="openDocModal('atestado-morada')">📄 Gerar PDF</button>
+          <button class="btn-generate" onclick="openDocModal('atestado-morada')" id="btn-gen-atestado">📄 Gerar PDF</button>
           <a href="https://eportugal.gov.pt/pt/espaco-cidadao/servicos/obter-atestado-de-residencia" target="_blank" class="btn-official">🔗 ePortugal</a>
         </div>
       </div>
@@ -238,12 +246,12 @@
         <div class="doc-card-header">
           <div class="doc-icon">📋</div>
           <div class="doc-info">
-            <h3>Declaração de Residência</h3>
-            <p>Declaração formal de que resides em Portugal. Usada em processos de autorização de residência.</p>
+            <h3 id="doc-residencia-title">Declaração de Residência</h3>
+            <p id="doc-residencia-desc">Declaração formal de que resides em Portugal. Usada em processos de autorização de residência.</p>
           </div>
         </div>
         <div class="doc-actions">
-          <button class="btn-generate" onclick="openDocModal('declaracao-residencia')">📄 Gerar PDF</button>
+          <button class="btn-generate" onclick="openDocModal('declaracao-residencia')" id="btn-gen-residencia">📄 Gerar PDF</button>
           <a href="https://aima.gov.pt/pt/contactos" target="_blank" class="btn-official">🔗 AIMA Contactos</a>
         </div>
       </div>
@@ -252,12 +260,12 @@
         <div class="doc-card-header">
           <div class="doc-icon">📋</div>
           <div class="doc-info">
-            <h3>Declaração de Coabitação</h3>
-            <p>Confirma que partilhas habitação com outra pessoa. Útil para processos de reagrupamento familiar.</p>
+            <h3 id="doc-coabitacao-title">Declaração de Coabitação</h3>
+            <p id="doc-coabitacao-desc">Confirma que partilhas habitação com outra pessoa. Útil para processos de reagrupamento familiar.</p>
           </div>
         </div>
         <div class="doc-actions">
-          <button class="btn-generate" onclick="openDocModal('coabitacao')">📄 Gerar PDF</button>
+          <button class="btn-generate" onclick="openDocModal('coabitacao')" id="btn-gen-coabitacao">📄 Gerar PDF</button>
           <a href="https://eportugal.gov.pt/pt/espaco-cidadao/servicos/reagrupamento-familiar" target="_blank" class="btn-official">🔗 Reagrupamento familiar</a>
         </div>
       </div>
@@ -267,19 +275,19 @@
 
   <!-- CATEGORIA: IMIGRAÇÃO -->
   <div class="category">
-    <div class="category-title"><span class="cat-icon">✈️</span> Imigração</div>
+    <div class="category-title"><span class="cat-icon">✈️</span> <span id="cat-imigracao">Imigração</span></div>
     <div class="docs-grid">
 
       <div class="doc-card">
         <div class="doc-card-header">
           <div class="doc-icon">📮</div>
           <div class="doc-info">
-            <h3>Carta para AIMA</h3>
-            <p>Carta dirigida à Agência para a Integração, Migrações e Asilo para pedidos e solicitações diversas.</p>
+            <h3 id="doc-carta-aima-title">Carta para AIMA</h3>
+            <p id="doc-carta-aima-desc">Carta dirigida à Agência para a Integração, Migrações e Asilo para pedidos e solicitações diversas.</p>
           </div>
         </div>
         <div class="doc-actions">
-          <button class="btn-generate" onclick="openDocModal('carta-aima')">📄 Gerar PDF</button>
+          <button class="btn-generate" onclick="openDocModal('carta-aima')" id="btn-gen-carta-aima">📄 Gerar PDF</button>
           <a href="https://aima.gov.pt/pt/servicos/pedidos-de-autorizacao-de-residencia" target="_blank" class="btn-official">🔗 AIMA — AR</a>
         </div>
       </div>
@@ -288,12 +296,12 @@
         <div class="doc-card-header">
           <div class="doc-icon">📅</div>
           <div class="doc-info">
-            <h3>Pedido de Agendamento</h3>
-            <p>Carta formal a solicitar marcação de atendimento presencial na AIMA ou outros serviços.</p>
+            <h3 id="doc-agendamento-title">Pedido de Agendamento</h3>
+            <p id="doc-agendamento-desc">Carta formal a solicitar marcação de atendimento presencial na AIMA ou outros serviços.</p>
           </div>
         </div>
         <div class="doc-actions">
-          <button class="btn-generate" onclick="openDocModal('agendamento')">📄 Gerar PDF</button>
+          <button class="btn-generate" onclick="openDocModal('agendamento')" id="btn-gen-agendamento">📄 Gerar PDF</button>
           <a href="https://www.siga.aima.gov.pt" target="_blank" class="btn-official">🔗 SIGA (agendamento)</a>
         </div>
       </div>
@@ -302,12 +310,12 @@
         <div class="doc-card-header">
           <div class="doc-icon">📋</div>
           <div class="doc-info">
-            <h3>Declaração de Entrada em Portugal</h3>
-            <p>Confirma a data de entrada e os motivos da permanência em território nacional.</p>
+            <h3 id="doc-entrada-title">Declaração de Entrada em Portugal</h3>
+            <p id="doc-entrada-desc">Confirma a data de entrada e os motivos da permanência em território nacional.</p>
           </div>
         </div>
         <div class="doc-actions">
-          <button class="btn-generate" onclick="openDocModal('entrada-portugal')">📄 Gerar PDF</button>
+          <button class="btn-generate" onclick="openDocModal('entrada-portugal')" id="btn-gen-entrada">📄 Gerar PDF</button>
           <a href="https://aima.gov.pt/pt/servicos" target="_blank" class="btn-official">🔗 AIMA Serviços</a>
         </div>
       </div>
@@ -317,19 +325,19 @@
 
   <!-- CATEGORIA: ARRENDAMENTO -->
   <div class="category">
-    <div class="category-title"><span class="cat-icon">🔑</span> Arrendamento</div>
+    <div class="category-title"><span class="cat-icon">🔑</span> <span id="cat-arrendamento">Arrendamento</span></div>
     <div class="docs-grid">
 
       <div class="doc-card">
         <div class="doc-card-header">
           <div class="doc-icon">✉️</div>
           <div class="doc-info">
-            <h3>Carta de Apresentação para Senhorio</h3>
-            <p>Carta de apresentação pessoal dirigida ao proprietário para aumentar as tuas hipóteses de arrendamento.</p>
+            <h3 id="doc-senhorio-title">Carta de Apresentação para Senhorio</h3>
+            <p id="doc-senhorio-desc">Carta de apresentação pessoal dirigida ao proprietário para aumentar as tuas hipóteses de arrendamento.</p>
           </div>
         </div>
         <div class="doc-actions">
-          <button class="btn-generate" onclick="openDocModal('carta-senhorio')">📄 Gerar PDF</button>
+          <button class="btn-generate" onclick="openDocModal('carta-senhorio')" id="btn-gen-senhorio">📄 Gerar PDF</button>
           <a href="https://eportugal.gov.pt/pt/espaco-cidadao/servicos/registar-contrato-arrendamento" target="_blank" class="btn-official">🔗 Arrendamento</a>
         </div>
       </div>
@@ -339,19 +347,19 @@
 
   <!-- CATEGORIA: TRABALHO -->
   <div class="category">
-    <div class="category-title"><span class="cat-icon">💼</span> Trabalho</div>
+    <div class="category-title"><span class="cat-icon">💼</span> <span id="cat-trabalho">Trabalho</span></div>
     <div class="docs-grid">
 
       <div class="doc-card">
         <div class="doc-card-header">
           <div class="doc-icon">📋</div>
           <div class="doc-info">
-            <h3>Declaração de Experiência Profissional</h3>
-            <p>Documento que certifica a tua experiência e competências profissionais. Usado em candidaturas de emprego.</p>
+            <h3 id="doc-experiencia-title">Declaração de Experiência Profissional</h3>
+            <p id="doc-experiencia-desc">Documento que certifica a tua experiência e competências profissionais. Usado em candidaturas de emprego.</p>
           </div>
         </div>
         <div class="doc-actions">
-          <button class="btn-generate" onclick="openDocModal('experiencia-profissional')">📄 Gerar PDF</button>
+          <button class="btn-generate" onclick="openDocModal('experiencia-profissional')" id="btn-gen-experiencia">📄 Gerar PDF</button>
           <a href="https://www.portaldasfinancas.gov.pt" target="_blank" class="btn-official">🔗 Finanças</a>
         </div>
       </div>
@@ -360,12 +368,12 @@
         <div class="doc-card-header">
           <div class="doc-icon">📋</div>
           <div class="doc-info">
-            <h3>Declaração sob Compromisso de Honra</h3>
-            <p>Declaração solene em que o signatário afirma a veracidade de determinados factos sob responsabilidade pessoal.</p>
+            <h3 id="doc-honra-title">Declaração sob Compromisso de Honra</h3>
+            <p id="doc-honra-desc">Declaração solene em que o signatário afirma a veracidade de determinados factos sob responsabilidade pessoal.</p>
           </div>
         </div>
         <div class="doc-actions">
-          <button class="btn-generate" onclick="openDocModal('compromisso-honra')">📄 Gerar PDF</button>
+          <button class="btn-generate" onclick="openDocModal('compromisso-honra')" id="btn-gen-honra">📄 Gerar PDF</button>
           <a href="https://eportugal.gov.pt/pt/espaco-cidadao" target="_blank" class="btn-official">🔗 ePortugal</a>
         </div>
       </div>
@@ -375,19 +383,19 @@
 
   <!-- CATEGORIA: FAMÍLIA -->
   <div class="category">
-    <div class="category-title"><span class="cat-icon">👨‍👩‍👧</span> Família</div>
+    <div class="category-title"><span class="cat-icon">👨‍👩‍👧</span> <span id="cat-familia">Família</span></div>
     <div class="docs-grid">
 
       <div class="doc-card">
         <div class="doc-card-header">
           <div class="doc-icon">✈️</div>
           <div class="doc-info">
-            <h3>Autorização para Menor Viajar</h3>
-            <p>Autorização de progenitor ou tutor para que um menor viaje acompanhado por terceiros ou sozinho.</p>
+            <h3 id="doc-menor-title">Autorização para Menor Viajar</h3>
+            <p id="doc-menor-desc">Autorização de progenitor ou tutor para que um menor viaje acompanhado por terceiros ou sozinho.</p>
           </div>
         </div>
         <div class="doc-actions">
-          <button class="btn-generate" onclick="openDocModal('menor-viajar')">📄 Gerar PDF</button>
+          <button class="btn-generate" onclick="openDocModal('menor-viajar')" id="btn-gen-menor">📄 Gerar PDF</button>
           <a href="https://eportugal.gov.pt/pt/espaco-cidadao/servicos/requerer-passaporte-para-menor" target="_blank" class="btn-official">🔗 ePortugal — Menor</a>
         </div>
       </div>
@@ -404,36 +412,36 @@
     <div class="modal-title" id="docModalTitle">Gerar Documento</div>
     <div class="modal-sub" id="docModalSub">Preenche os teus dados para gerar o documento em PDF.</div>
     <div class="form-legal">
-      🔒 <strong>Os teus dados são guardados apenas no teu navegador.</strong> A NOVU não tem acesso a esta informação.
+      🔒 <strong id="form-legal-title">Os teus dados são guardados apenas no teu navegador.</strong> <span id="form-legal-sub">A NOVU não tem acesso a esta informação.</span>
     </div>
     <form id="docForm" onsubmit="generatePDF(event)">
       <div class="form-grid">
         <div class="form-group">
-          <label>Nome completo *</label>
+          <label id="lbl-nome">Nome completo *</label>
           <input type="text" id="f-nome" required placeholder="Ex: João da Silva">
         </div>
         <div class="form-group">
-          <label>Nacionalidade *</label>
+          <label id="lbl-nacionalidade">Nacionalidade *</label>
           <input type="text" id="f-nacionalidade" required placeholder="Ex: Brasileira">
         </div>
         <div class="form-group">
-          <label>NIF *</label>
+          <label id="lbl-nif">NIF *</label>
           <input type="text" id="f-nif" required placeholder="Ex: 123456789" maxlength="9">
         </div>
         <div class="form-group">
-          <label>Nº Passaporte / Título</label>
+          <label id="lbl-documento">Nº Passaporte / Título</label>
           <input type="text" id="f-documento" placeholder="Ex: AA123456">
         </div>
         <div class="form-group full">
-          <label>Morada completa *</label>
+          <label id="lbl-morada">Morada completa *</label>
           <input type="text" id="f-morada" required placeholder="Ex: Rua das Flores, 25, 2º Dto">
         </div>
         <div class="form-group">
-          <label>Código Postal *</label>
+          <label id="lbl-cp">Código Postal *</label>
           <input type="text" id="f-cp" required placeholder="Ex: 1200-001">
         </div>
         <div class="form-group">
-          <label>Cidade / Freguesia *</label>
+          <label id="lbl-cidade">Cidade / Freguesia *</label>
           <input type="text" id="f-cidade" required placeholder="Ex: Lisboa">
         </div>
         <div class="form-group" id="extraField1Wrap" style="display:none;">
@@ -445,12 +453,12 @@
           <textarea id="f-extra2" placeholder="Descreve brevemente o motivo do documento..."></textarea>
         </div>
       </div>
-      <button type="submit" class="btn-pdf">
+      <button type="submit" class="btn-pdf" id="btn-submit-pdf">
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1v10M4 7l5 5 5-5M2 14v1a1 1 0 001 1h12a1 1 0 001-1v-1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Gerar e Descarregar PDF
+        <span id="btn-submit-text">Gerar e Descarregar PDF</span>
       </button>
     </form>
-    <div class="storage-note">Os teus dados são guardados localmente para facilitar futuros documentos.</div>
+    <div class="storage-note" id="storage-note">Os teus dados são guardados localmente para facilitar futuros documentos.</div>
   </div>
 </div>
 
@@ -528,7 +536,7 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-links">
-    <span class="footer-text">© 2026 NOVU. Informação, não aconselhamento jurídico.</span>
+    <span class="footer-text" id="footer-text">© 2026 NOVU. Informação, não aconselhamento jurídico.</span>
     <a href="/privacidade.html" class="footer-link">Política de Privacidade</a>
     <a href="/termos.html" class="footer-link">Termos de Serviço</a>
     <a href="/afiliados.html" class="footer-link">Programa de Afiliados</a>
@@ -537,6 +545,247 @@
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+
+// ── TRADUÇÕES ──
+const T = {
+  pt: {
+    nav_back: '← Início',
+    hero_badge: 'Ferramenta gratuita',
+    hero_title: 'Documentos essenciais para imigrantes',
+    hero_sub: 'Cria declarações e cartas administrativas para processos em Portugal — em segundos, sem complicações.',
+    hero_legal_title: 'Aviso legal:',
+    hero_legal_text: 'Os documentos gerados são modelos e minutas informativas, não documentos emitidos por entidades públicas. Algumas entidades podem exigir assinatura presencial, reconhecimento notarial ou documentação adicional.',
+    saved_bar_text: 'Dados guardados:',
+    saved_bar_sub: 'Os teus campos são preenchidos automaticamente.',
+    btn_edit_data: 'Editar dados',
+    btn_clear_data: 'Limpar dados',
+    btn_ver_premium: 'Ver plano Premium',
+    intro_text: 'Escolhe o documento que precisas, preenche os teus dados e descarrega o modelo em PDF — pronto a entregar.',
+    cat_moradia: 'Moradia',
+    cat_imigracao: 'Imigração',
+    cat_arrendamento: 'Arrendamento',
+    cat_trabalho: 'Trabalho',
+    cat_familia: 'Família',
+    doc_atestado_title: 'Atestado de Morada',
+    doc_atestado_desc: 'Confirma que resides num determinado endereço. Necessário para NIF, NISS e outros processos.',
+    doc_residencia_title: 'Declaração de Residência',
+    doc_residencia_desc: 'Declaração formal de que resides em Portugal. Usada em processos de autorização de residência.',
+    doc_coabitacao_title: 'Declaração de Coabitação',
+    doc_coabitacao_desc: 'Confirma que partilhas habitação com outra pessoa. Útil para processos de reagrupamento familiar.',
+    doc_carta_aima_title: 'Carta para AIMA',
+    doc_carta_aima_desc: 'Carta dirigida à Agência para a Integração, Migrações e Asilo para pedidos e solicitações diversas.',
+    doc_agendamento_title: 'Pedido de Agendamento',
+    doc_agendamento_desc: 'Carta formal a solicitar marcação de atendimento presencial na AIMA ou outros serviços.',
+    doc_entrada_title: 'Declaração de Entrada em Portugal',
+    doc_entrada_desc: 'Confirma a data de entrada e os motivos da permanência em território nacional.',
+    doc_senhorio_title: 'Carta de Apresentação para Senhorio',
+    doc_senhorio_desc: 'Carta de apresentação pessoal dirigida ao proprietário para aumentar as tuas hipóteses de arrendamento.',
+    doc_experiencia_title: 'Declaração de Experiência Profissional',
+    doc_experiencia_desc: 'Documento que certifica a tua experiência e competências profissionais. Usado em candidaturas de emprego.',
+    doc_honra_title: 'Declaração sob Compromisso de Honra',
+    doc_honra_desc: 'Declaração solene em que o signatário afirma a veracidade de determinados factos sob responsabilidade pessoal.',
+    doc_menor_title: 'Autorização para Menor Viajar',
+    doc_menor_desc: 'Autorização de progenitor ou tutor para que um menor viaje acompanhado por terceiros ou sozinho.',
+    btn_gen: '📄 Gerar PDF',
+    form_modal_sub: 'Preenche os teus dados para gerar o documento em PDF.',
+    form_legal_title: 'Os teus dados são guardados apenas no teu navegador.',
+    form_legal_sub: 'A NOVU não tem acesso a esta informação.',
+    lbl_nome: 'Nome completo *',
+    lbl_nacionalidade: 'Nacionalidade *',
+    lbl_nif: 'NIF *',
+    lbl_documento: 'Nº Passaporte / Título',
+    lbl_morada: 'Morada completa *',
+    lbl_cp: 'Código Postal *',
+    lbl_cidade: 'Cidade / Freguesia *',
+    btn_submit_text: 'Gerar e Descarregar PDF',
+    storage_note: 'Os teus dados são guardados localmente para facilitar futuros documentos.',
+    toast_success: '✅ PDF gerado e descarregado com sucesso!',
+    counter_prefix: 'Tens',
+    counter_suffix: 'disponíveis',
+    footer_text: '© 2026 NOVU. Informação, não aconselhamento jurídico.',
+  },
+  en: {
+    nav_back: '← Home',
+    hero_badge: 'Free tool',
+    hero_title: 'Essential documents for immigrants',
+    hero_sub: 'Create declarations and administrative letters for processes in Portugal — in seconds, without hassle.',
+    hero_legal_title: 'Legal notice:',
+    hero_legal_text: 'The generated documents are informational templates only, not documents issued by public authorities. Some entities may require in-person signature, notarial recognition, or additional documentation.',
+    saved_bar_text: 'Saved data:',
+    saved_bar_sub: 'Your fields are filled in automatically.',
+    btn_edit_data: 'Edit data',
+    btn_clear_data: 'Clear data',
+    btn_ver_premium: 'View Premium plan',
+    intro_text: 'Choose the document you need, fill in your details and download the PDF template — ready to submit.',
+    cat_moradia: 'Housing',
+    cat_imigracao: 'Immigration',
+    cat_arrendamento: 'Rental',
+    cat_trabalho: 'Work',
+    cat_familia: 'Family',
+    doc_atestado_title: 'Proof of Address',
+    doc_atestado_desc: 'Confirms that you reside at a specific address. Required for NIF, NISS and other processes.',
+    doc_residencia_title: 'Residence Declaration',
+    doc_residencia_desc: 'Formal declaration that you reside in Portugal. Used in residence permit applications.',
+    doc_coabitacao_title: 'Cohabitation Declaration',
+    doc_coabitacao_desc: 'Confirms that you share accommodation with another person. Useful for family reunification processes.',
+    doc_carta_aima_title: 'Letter to AIMA',
+    doc_carta_aima_desc: 'Letter addressed to the Agency for Integration, Migration and Asylum for various requests.',
+    doc_agendamento_title: 'Appointment Request',
+    doc_agendamento_desc: 'Formal letter requesting an in-person appointment at AIMA or other services.',
+    doc_entrada_title: 'Entry into Portugal Declaration',
+    doc_entrada_desc: 'Confirms the date of entry and the reasons for staying in Portugal.',
+    doc_senhorio_title: 'Landlord Introduction Letter',
+    doc_senhorio_desc: 'Personal introduction letter to the landlord to improve your chances of renting.',
+    doc_experiencia_title: 'Professional Experience Declaration',
+    doc_experiencia_desc: 'Document certifying your professional experience and skills. Used in job applications.',
+    doc_honra_title: 'Sworn Statement',
+    doc_honra_desc: 'Solemn declaration in which the signatory affirms the truthfulness of certain facts under personal responsibility.',
+    doc_menor_title: 'Minor Travel Authorization',
+    doc_menor_desc: 'Authorization from a parent or guardian for a minor to travel with third parties or alone.',
+    btn_gen: '📄 Generate PDF',
+    form_modal_sub: 'Fill in your details to generate the document in PDF.',
+    form_legal_title: 'Your data is stored only in your browser.',
+    form_legal_sub: 'NOVU does not have access to this information.',
+    lbl_nome: 'Full name *',
+    lbl_nacionalidade: 'Nationality *',
+    lbl_nif: 'NIF *',
+    lbl_documento: 'Passport / Permit No.',
+    lbl_morada: 'Full address *',
+    lbl_cp: 'Postal Code *',
+    lbl_cidade: 'City / Parish *',
+    btn_submit_text: 'Generate and Download PDF',
+    storage_note: 'Your data is saved locally to make future documents easier.',
+    toast_success: '✅ PDF generated and downloaded successfully!',
+    counter_prefix: 'You have',
+    counter_suffix: 'available',
+    footer_text: '© 2026 NOVU. Information, not legal advice.',
+  },
+  es: {
+    nav_back: '← Inicio',
+    hero_badge: 'Herramienta gratuita',
+    hero_title: 'Documentos esenciales para inmigrantes',
+    hero_sub: 'Crea declaraciones y cartas administrativas para procesos en Portugal — en segundos, sin complicaciones.',
+    hero_legal_title: 'Aviso legal:',
+    hero_legal_text: 'Los documentos generados son plantillas informativas, no documentos emitidos por entidades públicas. Algunas entidades pueden exigir firma presencial, reconocimiento notarial o documentación adicional.',
+    saved_bar_text: 'Datos guardados:',
+    saved_bar_sub: 'Tus campos se rellenan automáticamente.',
+    btn_edit_data: 'Editar datos',
+    btn_clear_data: 'Borrar datos',
+    btn_ver_premium: 'Ver plan Premium',
+    intro_text: 'Elige el documento que necesitas, rellena tus datos y descarga la plantilla en PDF — lista para entregar.',
+    cat_moradia: 'Vivienda',
+    cat_imigracao: 'Inmigración',
+    cat_arrendamento: 'Alquiler',
+    cat_trabalho: 'Trabajo',
+    cat_familia: 'Familia',
+    doc_atestado_title: 'Certificado de Domicilio',
+    doc_atestado_desc: 'Confirma que resides en una determinada dirección. Necesario para NIF, NISS y otros procesos.',
+    doc_residencia_title: 'Declaración de Residencia',
+    doc_residencia_desc: 'Declaración formal de que resides en Portugal. Usada en procesos de autorización de residencia.',
+    doc_coabitacao_title: 'Declaración de Convivencia',
+    doc_coabitacao_desc: 'Confirma que compartes vivienda con otra persona. Útil para procesos de reagrupación familiar.',
+    doc_carta_aima_title: 'Carta para AIMA',
+    doc_carta_aima_desc: 'Carta dirigida a la Agencia para la Integración, Migraciones y Asilo para solicitudes diversas.',
+    doc_agendamento_title: 'Solicitud de Cita',
+    doc_agendamento_desc: 'Carta formal para solicitar cita presencial en la AIMA u otros servicios.',
+    doc_entrada_title: 'Declaración de Entrada en Portugal',
+    doc_entrada_desc: 'Confirma la fecha de entrada y los motivos de la estancia en territorio nacional.',
+    doc_senhorio_title: 'Carta de Presentación para Propietario',
+    doc_senhorio_desc: 'Carta de presentación personal al propietario para aumentar tus posibilidades de alquilar.',
+    doc_experiencia_title: 'Declaración de Experiencia Profesional',
+    doc_experiencia_desc: 'Documento que certifica tu experiencia y competencias profesionales. Usado en candidaturas de empleo.',
+    doc_honra_title: 'Declaración Bajo Juramento',
+    doc_honra_desc: 'Declaración solemne en la que el firmante afirma la veracidad de ciertos hechos bajo responsabilidad personal.',
+    doc_menor_title: 'Autorización para Menor para Viajar',
+    doc_menor_desc: 'Autorización del progenitor o tutor para que un menor viaje acompañado por terceros o solo.',
+    btn_gen: '📄 Generar PDF',
+    form_modal_sub: 'Rellena tus datos para generar el documento en PDF.',
+    form_legal_title: 'Tus datos se guardan solo en tu navegador.',
+    form_legal_sub: 'NOVU no tiene acceso a esta información.',
+    lbl_nome: 'Nombre completo *',
+    lbl_nacionalidade: 'Nacionalidad *',
+    lbl_nif: 'NIF *',
+    lbl_documento: 'Nº Pasaporte / Permiso',
+    lbl_morada: 'Dirección completa *',
+    lbl_cp: 'Código Postal *',
+    lbl_cidade: 'Ciudad / Municipio *',
+    btn_submit_text: 'Generar y Descargar PDF',
+    storage_note: 'Tus datos se guardan localmente para facilitar futuros documentos.',
+    toast_success: '✅ ¡PDF generado y descargado con éxito!',
+    counter_prefix: 'Tienes',
+    counter_suffix: 'disponibles',
+    footer_text: '© 2026 NOVU. Información, no asesoramiento jurídico.',
+  }
+};
+
+let currentLang = localStorage.getItem('novu_lang') || 'pt';
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('novu_lang', lang);
+  const t = T[lang];
+  ['pt','en','es'].forEach(l => {
+    document.getElementById('lang-'+l)?.classList.toggle('active', l === lang);
+  });
+  const set = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val; };
+  set('nav-back-link', t.nav_back);
+  set('hero-badge', t.hero_badge);
+  set('hero-title', t.hero_title);
+  set('hero-sub', t.hero_sub);
+  set('hero-legal-title', t.hero_legal_title);
+  set('hero-legal-text', t.hero_legal_text);
+  set('saved-bar-text', t.saved_bar_text);
+  set('saved-bar-sub', t.saved_bar_sub);
+  set('btn-edit-data', t.btn_edit_data);
+  set('btn-clear-data', t.btn_clear_data);
+  set('btn-ver-premium', t.btn_ver_premium);
+  set('intro-text', t.intro_text);
+  set('cat-moradia', t.cat_moradia);
+  set('cat-imigracao', t.cat_imigracao);
+  set('cat-arrendamento', t.cat_arrendamento);
+  set('cat-trabalho', t.cat_trabalho);
+  set('cat-familia', t.cat_familia);
+  set('doc-atestado-title', t.doc_atestado_title);
+  set('doc-atestado-desc', t.doc_atestado_desc);
+  set('doc-residencia-title', t.doc_residencia_title);
+  set('doc-residencia-desc', t.doc_residencia_desc);
+  set('doc-coabitacao-title', t.doc_coabitacao_title);
+  set('doc-coabitacao-desc', t.doc_coabitacao_desc);
+  set('doc-carta-aima-title', t.doc_carta_aima_title);
+  set('doc-carta-aima-desc', t.doc_carta_aima_desc);
+  set('doc-agendamento-title', t.doc_agendamento_title);
+  set('doc-agendamento-desc', t.doc_agendamento_desc);
+  set('doc-entrada-title', t.doc_entrada_title);
+  set('doc-entrada-desc', t.doc_entrada_desc);
+  set('doc-senhorio-title', t.doc_senhorio_title);
+  set('doc-senhorio-desc', t.doc_senhorio_desc);
+  set('doc-experiencia-title', t.doc_experiencia_title);
+  set('doc-experiencia-desc', t.doc_experiencia_desc);
+  set('doc-honra-title', t.doc_honra_title);
+  set('doc-honra-desc', t.doc_honra_desc);
+  set('doc-menor-title', t.doc_menor_title);
+  set('doc-menor-desc', t.doc_menor_desc);
+  set('form-legal-title', t.form_legal_title);
+  set('form-legal-sub', t.form_legal_sub);
+  set('lbl-nome', t.lbl_nome);
+  set('lbl-nacionalidade', t.lbl_nacionalidade);
+  set('lbl-nif', t.lbl_nif);
+  set('lbl-documento', t.lbl_documento);
+  set('lbl-morada', t.lbl_morada);
+  set('lbl-cp', t.lbl_cp);
+  set('lbl-cidade', t.lbl_cidade);
+  set('btn-submit-text', t.btn_submit_text);
+  set('storage-note', t.storage_note);
+  // Actualizar todos os botões "Gerar PDF"
+  ['btn-gen-atestado','btn-gen-residencia','btn-gen-coabitacao','btn-gen-carta-aima',
+   'btn-gen-agendamento','btn-gen-entrada','btn-gen-senhorio','btn-gen-experiencia',
+   'btn-gen-honra','btn-gen-menor'].forEach(id => set(id, t.btn_gen));
+  // Footer
+  set('footer-text', t.footer_text);
+  // Modal sub (se não estiver aberto com título específico)
+  set('docModalSub', t.form_modal_sub);
+}
+
 // ── CONSTANTES ──
 const MAX_FREE_DOCS = 2;
 const STORAGE_KEY_DOCS = 'novu_docs_count';
@@ -1045,4 +1294,23 @@ function generatePDF(e) {
   const filename = tpl.title.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '') + '_novu.pdf';
   doc.save(filename);
 
-  // Incrementar cont
+  // Incrementar contador
+  docsGenerated++;
+  localStorage.setItem(STORAGE_KEY_DOCS, docsGenerated);
+  updateCounterBar();
+
+  // Fechar modal
+  closeDocModal();
+
+  // Toast de sucesso
+  showToast(T[currentLang].toast_success);
+}
+
+// ── INIT ──
+loadSavedBar();
+updateCounterBar();
+setLang(currentLang);
+
+</script>
+</body>
+</html>
