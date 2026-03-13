@@ -4,324 +4,1310 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NOVU — Do avião à cidadania</title>
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZJLBVGPQT5"></script>
 <script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-ZJLBVGPQT5');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZJLBVGPQT5');
 </script>
-
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-
 <style>
+  :root {
+    --blue-deep: #0A2540;
+    --blue-mid: #1A4A7A;
+    --blue-bright: #2E7FD4;
+    --blue-light: #EBF4FF;
+    --blue-pale: #F5F9FF;
+    --white: #FFFFFF;
+    --gray-100: #F8FAFC;
+    --gray-200: #E8EEF5;
+    --gray-400: #8FA3BC;
+    --gray-600: #4A6580;
+    --text: #0A2540;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; }
 
-:root{
---blue-deep:#0A2540;
---blue-mid:#1A4A7A;
---blue-bright:#2E7FD4;
---blue-light:#EBF4FF;
---blue-pale:#F5F9FF;
---white:#FFFFFF;
---gray-100:#F8FAFC;
---gray-200:#E8EEF5;
---gray-400:#8FA3BC;
---gray-600:#4A6580;
---text:#0A2540;
-}
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 0 5%; height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--blue-deep); }
+  .nav-logo span { color: var(--blue-bright); }
+  .nav-right { display: flex; align-items: center; gap: 14px; }
+  .lang-selector { display: flex; gap: 4px; }
+  .lang-btn { background: transparent; border: 1.5px solid var(--gray-200); color: var(--gray-600); padding: 4px 10px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+  .lang-btn:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
+  .lang-btn.active { background: var(--blue-deep); color: white; border-color: var(--blue-deep); }
+  .nav-cta { background: var(--blue-deep); color: white; border: none; padding: 9px 22px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+  .nav-cta:hover { background: var(--blue-mid); transform: translateY(-1px); }
+  .nav-docs-btn { background: var(--blue-light); color: var(--blue-mid); border: 1.5px solid #C8DEFA; padding: 7px 16px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.84rem; font-weight: 600; text-decoration: none; transition: all 0.2s; white-space: nowrap; }
+  .nav-docs-btn:hover { background: var(--blue-bright); color: white; border-color: var(--blue-bright); }
 
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
+  /* MODAL */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(10,37,64,0.6); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
+  .modal-overlay.open { display: flex; }
+  .modal { background: white; border-radius: 24px; padding: 40px 36px; max-width: 460px; width: 90%; text-align: center; box-shadow: 0 40px 80px rgba(0,0,0,0.2); position: relative; animation: slideUp 0.3s ease; }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .modal-close { position: absolute; top: 14px; right: 18px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--gray-400); }
+  .modal-icon { font-size: 2.2rem; margin-bottom: 12px; }
+  .modal h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--blue-deep); margin-bottom: 8px; }
+  .modal p { color: var(--gray-600); font-size: 0.92rem; line-height: 1.55; margin-bottom: 20px; }
+  .modal-form { display: flex; flex-direction: column; gap: 10px; }
+  .modal-input { border: 1.5px solid var(--gray-200); border-radius: 50px; padding: 12px 18px; font-family: 'DM Sans', sans-serif; font-size: 0.92rem; outline: none; transition: border-color 0.2s; text-align: center; }
+  .modal-input:focus { border-color: var(--blue-bright); }
+  .modal-submit { background: var(--blue-deep); color: white; border: none; padding: 13px 32px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+  .modal-submit:hover { background: var(--blue-mid); }
+  .modal-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+  .modal-note { font-size: 0.75rem; color: var(--gray-400); margin-top: 2px; }
+  .modal-success { display: none; color: #166534; font-size: 1rem; font-weight: 500; padding: 16px; }
 
-body{
-font-family:'DM Sans',sans-serif;
-color:var(--text);
-background:var(--white);
-overflow-x:hidden;
-}
+  /* HERO — mais compacto */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 90px 5% 52px;
+    background: linear-gradient(160deg, #F5F9FF 0%, #EBF3FF 40%, #FAFCFF 100%);
+    position: relative; overflow: hidden;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: white; border: 1px solid var(--gray-200); border-radius: 50px;
+    padding: 6px 16px; font-size: 0.8rem; font-weight: 500; color: var(--gray-600);
+    margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-badge .dot { width: 7px; height: 7px; background: #22C55E; border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(1.3); } }
+  .hero-title {
+    font-family: 'Playfair Display', serif; font-size: clamp(2.6rem, 5.5vw, 4.6rem);
+    font-weight: 700; line-height: 1.1; text-align: center; color: var(--blue-deep);
+    max-width: 760px; margin-bottom: 18px; animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .hero-title em { font-style: normal; color: var(--blue-bright); }
+  .hero-sub {
+    font-size: 1.08rem; color: var(--gray-600); text-align: center;
+    max-width: 520px; line-height: 1.65; margin-bottom: 36px;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .hero-cta-wrap { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; animation: fadeUp 0.6s 0.3s ease both; }
+  .btn-primary { background: var(--blue-deep); color: white; border: none; padding: 14px 34px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.97rem; font-weight: 600; cursor: pointer; transition: all 0.25s; box-shadow: 0 4px 20px rgba(10,37,64,0.2); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(10,37,64,0.28); }
+  .btn-secondary { background: transparent; color: var(--blue-deep); border: 1.5px solid var(--gray-200); padding: 14px 28px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.97rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+  .btn-secondary:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
 
-/* NAV */
+  /* STATS — mais compacto, integrado no hero */
+  .hero-stats {
+    display: flex; gap: 36px; margin-top: 44px; padding-top: 32px;
+    border-top: 1px solid var(--gray-200); animation: fadeUp 0.6s 0.4s ease both;
+    flex-wrap: wrap; justify-content: center;
+  }
+  .stat { text-align: center; }
+  .stat-number { font-family: 'DM Sans', sans-serif; font-size: 1.9rem; font-weight: 700; color: var(--blue-deep); display: block; letter-spacing: -0.5px; }
+  .stat-label { font-size: 0.78rem; color: var(--gray-400); font-weight: 500; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 
-nav{
-position:fixed;
-top:0;
-left:0;
-right:0;
-z-index:100;
-background:rgba(255,255,255,0.92);
-backdrop-filter:blur(12px);
-border-bottom:1px solid var(--gray-200);
-padding:0 5%;
-height:64px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-}
+  /* JOURNEY — fundo branco, padding reduzido */
+  .journey { padding: 60px 5% 56px; background: white; }
+  .section-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--blue-bright); text-align: center; margin-bottom: 10px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.75rem, 3.5vw, 2.6rem); font-weight: 700; text-align: center; color: var(--blue-deep); max-width: 580px; margin: 0 auto 36px; line-height: 1.2; }
 
-.nav-logo{
-font-family:'Playfair Display',serif;
-font-size:1.5rem;
-font-weight:700;
-color:var(--blue-deep);
-}
+  /* PHASES — grid mais compacto */
+  .phases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; max-width: 1060px; margin: 0 auto; }
+  /* HAMBURGER MOBILE */
+  .nav-mobile { display: none; align-items: center; gap: 8px; }
+  .hamburger { background: none; border: none; cursor: pointer; padding: 4px; display: flex; flex-direction: column; gap: 5px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--blue-deep); border-radius: 2px; transition: all 0.3s; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-.nav-logo span{color:var(--blue-bright);}
+  .mobile-menu {
+    display: none;
+    position: fixed; top: 56px; left: 0; right: 0; z-index: 99;
+    background: white; border-bottom: 1px solid var(--gray-200);
+    padding: 16px 20px 24px;
+    flex-direction: column; gap: 4px;
+    box-shadow: 0 8px 24px rgba(10,37,64,0.1);
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu-link {
+    display: flex; align-items: center; gap: 12px;
+    padding: 13px 16px; border-radius: 12px;
+    text-decoration: none; color: var(--blue-deep);
+    font-weight: 600; font-size: 0.95rem;
+    transition: background 0.2s;
+  }
+  .mobile-menu-link:hover { background: var(--blue-pale); }
+  .mobile-menu-divider { height: 1px; background: var(--gray-200); margin: 8px 0; }
+  .mobile-menu-cta {
+    background: var(--blue-deep); color: white; border: none;
+    padding: 14px; border-radius: 50px; font-size: 0.95rem;
+    font-weight: 600; font-family: 'DM Sans', sans-serif;
+    cursor: pointer; margin-top: 4px; transition: all 0.2s;
+  }
+  .mobile-menu-cta:hover { background: var(--blue-mid); }
 
-.nav-right{
-display:flex;
-align-items:center;
-gap:14px;
-}
+  @media (max-width: 820px) {
+    #navDesktop { display: none !important; }
+    .nav-mobile { display: flex; }
+  }
 
-.lang-selector{display:flex;gap:4px;}
+  @media (max-width: 820px) { .phases { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .phases { grid-template-columns: 1fr; } }
+  .phase-card {
+    background: var(--blue-pale); border: 1px solid var(--gray-200); border-radius: 16px;
+    padding: 20px 22px; transition: all 0.3s; position: relative; overflow: hidden;
+  }
+  .phase-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--blue-bright), var(--blue-mid)); opacity: 0; transition: opacity 0.3s; }
+  .phase-card:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(10,37,64,0.09); }
+  .phase-card:hover::before { opacity: 1; }
+  .phase-num { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue-bright); margin-bottom: 6px; }
+  .phase-title { font-family: 'Playfair Display', serif; font-size: 1.08rem; font-weight: 600; color: var(--blue-deep); margin-bottom: 8px; }
+  .phase-desc { font-size: 0.84rem; color: var(--gray-600); line-height: 1.6; }
 
-.lang-btn{
-background:transparent;
-border:1.5px solid var(--gray-200);
-color:var(--gray-600);
-padding:4px 10px;
-border-radius:50px;
-font-family:'DM Sans',sans-serif;
-font-size:0.78rem;
-font-weight:600;
-cursor:pointer;
-transition:all .2s;
-}
+  /* FAQ EXEMPLOS — fundo cinza claro, compacto */
+  .faq-examples { padding: 56px 5%; background: var(--gray-100); }
+  .faq-examples .section-title { margin-bottom: 28px; }
+  .faq-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 880px; margin: 0 auto; }
+  .faq-btn {
+    background: white; border: 1.5px solid var(--gray-200); color: var(--blue-deep);
+    padding: 10px 18px; border-radius: 50px; font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; gap: 7px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .faq-btn:hover { border-color: var(--blue-bright); color: var(--blue-bright); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(46,127,212,0.13); }
+  .faq-btn .faq-icon { font-size: 0.95rem; }
+  .faq-note { text-align: center; margin-top: 18px; font-size: 0.8rem; color: var(--gray-400); }
 
-.lang-btn:hover{
-border-color:var(--blue-bright);
-color:var(--blue-bright);
-}
+  /* CHATBOT — fundo azul escuro */
+  .chatbot-section { padding: 60px 5%; background: linear-gradient(160deg, var(--blue-deep) 0%, #0D2E50 100%); position: relative; overflow: hidden; }
+  .chatbot-section .section-label { color: rgba(255,255,255,0.5); }
+  .chatbot-section .section-title { color: white; }
+  .chat-context-line { text-align: center; color: rgba(255,255,255,0.55); font-size: 0.92rem; margin-top: 6px; margin-bottom: 28px; font-weight: 400; }
+  .chat-container { max-width: 660px; margin: 0 auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 32px 72px rgba(0,0,0,0.28); }
+  .chat-header { background: var(--blue-deep); padding: 16px 22px; display: flex; align-items: center; gap: 12px; }
+  .chat-avatar { width: 38px; height: 38px; background: linear-gradient(135deg, var(--blue-bright), var(--blue-mid)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; color: white; }
+  .chat-header-info h3 { color: white; font-size: 0.92rem; font-weight: 600; }
+  .chat-header-info p { color: rgba(255,255,255,0.5); font-size: 0.75rem; }
+  .chat-status { margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: #22C55E; font-weight: 500; }
+  .chat-status::before { content: ''; width: 7px; height: 7px; background: #22C55E; border-radius: 50%; }
+  .chat-lang-bar { display: flex; align-items: center; justify-content: space-between; padding: 8px 16px; background: var(--gray-100); border-bottom: 1px solid var(--gray-200); }
+  .chat-lang-bar span { font-size: 0.73rem; color: var(--gray-400); font-weight: 500; }
+  .chat-lang-btns { display: flex; gap: 4px; }
+  .chat-lang-btn { background: transparent; border: 1px solid var(--gray-200); color: var(--gray-600); padding: 3px 9px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.7rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+  .chat-lang-btn:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
+  .chat-lang-btn.active { background: var(--blue-deep); color: white; border-color: var(--blue-deep); }
+  .question-counter { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 7px 16px; background: #FFF8E7; border-bottom: 1px solid #FDE68A; font-size: 0.76rem; color: #92400E; font-weight: 500; }
+  .chat-messages { padding: 20px; min-height: 280px; max-height: 380px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; background: #FAFCFF; }
+  .msg { display: flex; gap: 10px; animation: msgIn 0.35s ease both; }
+  @keyframes msgIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .msg-avatar { width: 30px; height: 30px; background: linear-gradient(135deg, var(--blue-bright), var(--blue-mid)); border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 0.72rem; font-weight: 700; color: white; }
+  .msg-bubble { background: white; border: 1px solid var(--gray-200); border-radius: 0 14px 14px 14px; padding: 10px 14px; font-size: 0.88rem; line-height: 1.55; color: var(--text); max-width: 85%; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+  .msg.user { flex-direction: row-reverse; }
+  .msg.user .msg-bubble { background: var(--blue-deep); color: white; border: none; border-radius: 14px 0 14px 14px; }
+  .msg.user .msg-avatar { background: var(--gray-200); color: var(--gray-600); font-family: 'DM Sans', sans-serif; font-size: 0.68rem; font-weight: 600; }
+  .msg-actions { display: flex; gap: 8px; margin-top: 5px; margin-left: 40px; }
+  .whatsapp-btn { display: inline-flex; align-items: center; gap: 5px; background: #25D366; color: white; border: none; padding: 4px 11px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.72rem; font-weight: 600; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+  .whatsapp-btn:hover { background: #1ebe5d; transform: translateY(-1px); }
+  .whatsapp-btn svg { width: 12px; height: 12px; fill: white; }
+  .chat-options { display: flex; flex-wrap: wrap; gap: 7px; padding: 0 20px 14px; background: #FAFCFF; }
+  .chat-opt-btn { background: white; border: 1.5px solid var(--blue-bright); color: var(--blue-bright); padding: 7px 15px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+  .chat-opt-btn:hover { background: var(--blue-bright); color: white; }
+  .chat-input-area { padding: 14px 20px; border-top: 1px solid var(--gray-200); display: flex; gap: 10px; background: white; align-items: center; }
+  .chat-input { flex: 1; border: 1.5px solid var(--gray-200); border-radius: 50px; padding: 10px 16px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; outline: none; transition: border-color 0.2s; color: var(--text); }
+  .chat-input:focus { border-color: var(--blue-bright); }
+  .chat-input::placeholder { color: var(--gray-400); }
+  .chat-send { width: 40px; height: 40px; background: var(--blue-deep); border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; flex-shrink: 0; }
+  .chat-send:hover { background: var(--blue-mid); }
+  .chat-send svg { width: 15px; height: 15px; fill: white; }
+  .email-capture { background: linear-gradient(135deg, #EBF4FF, #F0F7FF); border: 1px solid #C8DFFE; border-radius: 14px; padding: 18px; margin: 14px 20px; animation: msgIn 0.4s ease both; }
+  .email-capture p { font-size: 0.86rem; color: var(--blue-deep); font-weight: 500; margin-bottom: 10px; line-height: 1.5; }
+  .email-form { display: flex; gap: 8px; flex-wrap: wrap; }
+  .email-input { flex: 1; min-width: 130px; border: 1.5px solid var(--gray-200); border-radius: 50px; padding: 9px 14px; font-family: 'DM Sans', sans-serif; font-size: 0.83rem; outline: none; transition: border-color 0.2s; }
+  .email-input:focus { border-color: var(--blue-bright); }
+  .email-submit { background: var(--blue-deep); color: white; border: none; padding: 9px 18px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.83rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
+  .email-submit:hover { background: var(--blue-mid); }
+  .success-msg { display: none; text-align: center; padding: 14px; color: #166534; font-size: 0.88rem; font-weight: 500; }
+  .hidden { display: none !important; }
 
-.lang-btn.active{
-background:var(--blue-deep);
-color:white;
-border-color:var(--blue-deep);
-}
+  /* COMO FUNCIONA — fundo branco, compacto */
+  .how { padding: 60px 5%; background: white; }
+  .how-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 860px; margin: 0 auto; }
+  @media (max-width: 640px) { .how-steps { grid-template-columns: 1fr; gap: 14px; } }
+  .how-step { text-align: center; padding: 28px 20px; background: var(--blue-pale); border-radius: 16px; border: 1px solid var(--gray-200); transition: all 0.3s; }
+  .how-step:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(10,37,64,0.09); }
+  .how-step-num { width: 44px; height: 44px; background: var(--blue-deep); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; margin: 0 auto 16px; }
+  .how-step h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600; color: var(--blue-deep); margin-bottom: 8px; }
+  .how-step p { font-size: 0.86rem; color: var(--gray-600); line-height: 1.6; }
 
-.nav-cta{
-background:var(--blue-deep);
-color:white;
-border:none;
-padding:9px 22px;
-border-radius:50px;
-font-family:'DM Sans',sans-serif;
-font-size:.88rem;
-font-weight:500;
-cursor:pointer;
-transition:all .2s;
-}
+  /* PROVA SOCIAL — fundo cinza claro, integrado com números menores */
+  .proof { padding: 52px 5%; background: var(--gray-100); text-align: center; }
+  .proof .section-title { margin-bottom: 32px; }
+  .proof-numbers { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; }
+  .proof-item .num { font-family: 'DM Sans', sans-serif; font-size: 2.5rem; font-weight: 700; color: var(--blue-deep); display: block; letter-spacing: -1px; }
+  .proof-item .label { font-size: 0.82rem; color: var(--gray-400); font-weight: 500; }
 
-.nav-cta:hover{
-background:var(--blue-mid);
-transform:translateY(-1px);
-}
+  /* CTA FINAL */
+  .final-cta { padding: 72px 5%; background: var(--blue-deep); text-align: center; }
+  .final-cta h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); color: white; margin-bottom: 12px; font-weight: 700; }
+  .final-cta p { color: rgba(255,255,255,0.6); font-size: 1rem; margin-bottom: 32px; max-width: 440px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+  .final-cta .btn-primary { background: white; color: var(--blue-deep); font-size: 1rem; padding: 16px 40px; }
+  .final-cta .btn-primary:hover { background: var(--blue-light); }
 
-.nav-docs-btn{
-background:var(--blue-light);
-color:var(--blue-mid);
-border:1.5px solid #C8DEFA;
-padding:7px 16px;
-border-radius:50px;
-font-family:'DM Sans',sans-serif;
-font-size:.84rem;
-font-weight:600;
-text-decoration:none;
-transition:all .2s;
-white-space:nowrap;
-}
+  footer { padding: 32px 5%; background: #071B30; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  footer .logo { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: white; }
+  footer p { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+  .footer-email { display: inline-flex; align-items: center; gap: 7px; color: rgba(255,255,255,0.75) !important; font-size: 0.88rem !important; font-weight: 500; text-decoration: none; border: 1px solid rgba(255,255,255,0.15); border-radius: 50px; padding: 7px 14px; transition: all 0.2s; }
+  .footer-email:hover { color: white !important; border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.05); }
 
-.nav-docs-btn:hover{
-background:var(--blue-bright);
-color:white;
-border-color:var(--blue-bright);
-}
+  /* COOKIE BANNER */
+  .cookie-banner {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 999;
+    background: #0A2540; border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 14px 5%; display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap;
+    animation: slideFromBottom 0.4s ease both;
+  }
+  @keyframes slideFromBottom { from { transform: translateY(100%); } to { transform: translateY(0); } }
+  .cookie-banner.hidden { display: none; }
+  .cookie-text { font-size: 0.8rem; color: rgba(255,255,255,0.7); line-height: 1.5; max-width: 660px; }
+  .cookie-text a { color: rgba(255,255,255,0.9); text-decoration: underline; }
+  .cookie-btns { display: flex; gap: 10px; flex-shrink: 0; }
+  .cookie-accept { background: white; color: var(--blue-deep); border: none; padding: 9px 22px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.83rem; font-weight: 600; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+  .cookie-accept:hover { background: var(--blue-light); }
+  .cookie-decline { background: transparent; color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.2); padding: 9px 18px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.83rem; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+  .cookie-decline:hover { color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.4); }
 
-/* MOBILE NAV FIX */
+  /* CONSENTIMENTO */
+  .consent-row { display: flex; align-items: flex-start; gap: 8px; margin-top: 4px; }
+  .consent-row input[type="checkbox"] { margin-top: 3px; accent-color: var(--blue-deep); width: 14px; height: 14px; flex-shrink: 0; cursor: pointer; }
+  .consent-label { font-size: 0.73rem; color: var(--gray-600); line-height: 1.4; cursor: pointer; }
+  .consent-label a { color: var(--blue-bright); text-decoration: none; }
+  .consent-label a:hover { text-decoration: underline; }
 
-@media (max-width:600px){
+  /* TYPING */
+  .typing { display: flex; gap: 4px; align-items: center; padding: 10px 14px; }
+  .typing span { width: 6px; height: 6px; background: var(--gray-400); border-radius: 50%; animation: bounce 1.2s infinite; }
+  .typing span:nth-child(2) { animation-delay: 0.2s; }
+  .typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes bounce { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-6px); } }
 
-nav{
-padding:0 16px;
-height:56px;
-}
+  /* FOOTER LINKS */
+  .footer-links { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .footer-link { font-size: 0.75rem; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+  .footer-link:hover { color: rgba(255,255,255,0.65); }
 
-.nav-right{
-display:flex;
-align-items:center;
-gap:8px;
-flex-wrap:nowrap;
-}
-
-.nav-docs-btn{
-display:inline-flex;
-padding:6px 12px;
-font-size:.78rem;
-white-space:nowrap;
-}
-
-.nav-cta{
-display:inline-flex;
-padding:7px 14px;
-font-size:.8rem;
-}
-
-}
-
-@media (max-width:400px){
-
-.lang-btn{
-padding:3px 7px;
-font-size:.7rem;
-}
-
-}
-
-/* RESTO DO SITE */
-
-.hero{
-min-height:100vh;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-padding:90px 5% 52px;
-background:linear-gradient(160deg,#F5F9FF 0%,#EBF3FF 40%,#FAFCFF 100%);
-position:relative;
-overflow:hidden;
-}
-
-.hero-badge{
-display:inline-flex;
-align-items:center;
-gap:8px;
-background:white;
-border:1px solid var(--gray-200);
-border-radius:50px;
-padding:6px 16px;
-font-size:.8rem;
-font-weight:500;
-color:var(--gray-600);
-margin-bottom:24px;
-box-shadow:0 2px 12px rgba(0,0,0,.06);
-}
-
-.hero-title{
-font-family:'Playfair Display',serif;
-font-size:clamp(2.6rem,5.5vw,4.6rem);
-font-weight:700;
-line-height:1.1;
-text-align:center;
-color:var(--blue-deep);
-max-width:760px;
-margin-bottom:18px;
-}
-
-.hero-title em{
-font-style:normal;
-color:var(--blue-bright);
-}
-
-.hero-sub{
-font-size:1.08rem;
-color:var(--gray-600);
-text-align:center;
-max-width:520px;
-line-height:1.65;
-margin-bottom:36px;
-}
-
-.hero-cta-wrap{
-display:flex;
-gap:12px;
-flex-wrap:wrap;
-justify-content:center;
-}
-
-.btn-primary{
-background:var(--blue-deep);
-color:white;
-border:none;
-padding:14px 34px;
-border-radius:50px;
-font-family:'DM Sans',sans-serif;
-font-size:.97rem;
-font-weight:600;
-cursor:pointer;
-transition:all .25s;
-box-shadow:0 4px 20px rgba(10,37,64,.2);
-}
-
-.btn-primary:hover{
-transform:translateY(-2px);
-box-shadow:0 8px 30px rgba(10,37,64,.28);
-}
-
-.btn-secondary{
-background:transparent;
-color:var(--blue-deep);
-border:1.5px solid var(--gray-200);
-padding:14px 28px;
-border-radius:50px;
-font-family:'DM Sans',sans-serif;
-font-size:.97rem;
-font-weight:500;
-cursor:pointer;
-transition:all .2s;
-}
-
-.btn-secondary:hover{
-border-color:var(--blue-bright);
-color:var(--blue-bright);
-}
-
+  /* MOBILE CTA FIXO */
+  .mobile-cta-bar {
+    display: none;
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
+    background: white; border-top: 1px solid var(--gray-200);
+    padding: 10px 20px; box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+  }
+  .mobile-cta-bar .btn-primary { width: 100%; text-align: center; padding: 13px; font-size: 0.95rem; }
+  @media (max-width: 640px) {
+    .mobile-cta-bar { display: block; }
+    body { padding-bottom: 68px; }
+    /* Hero no mobile */
+    .hero { padding: 80px 5% 40px; min-height: auto; }
+    .hero-stats { gap: 24px; margin-top: 28px; padding-top: 24px; }
+    .stat-number { font-size: 1.6rem; }
+    /* Secções mobile */
+    .journey { padding: 44px 5% 40px; }
+    .faq-examples { padding: 40px 5%; }
+    .chatbot-section { padding: 44px 5%; }
+    .how { padding: 44px 5%; }
+    .proof { padding: 40px 5%; }
+    .final-cta { padding: 52px 5%; }
+    /* Phases mobile — 1 coluna, ainda mais compacto */
+    .phase-card { padding: 16px 18px; }
+    /* Proof mobile */
+    .proof-numbers { gap: 28px; }
+    .proof-item .num { font-size: 2rem; }
+  }
+  /* ── DOCS HIGHLIGHT ── */
+  .docs-highlight { background: var(--blue-deep); padding: 60px 5%; position: relative; overflow: hidden; }
+  .docs-highlight::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(46,127,212,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(46,127,212,0.05) 1px, transparent 1px); background-size: 48px 48px; pointer-events: none; }
+  .docs-highlight-inner { max-width: 1060px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; position: relative; z-index: 1; }
+  .docs-hl-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(46,127,212,0.2); border: 1px solid rgba(46,127,212,0.4); border-radius: 50px; padding: 5px 14px; font-size: 0.75rem; font-weight: 600; color: #90C4F5; margin-bottom: 18px; width: fit-content; }
+  .docs-hl-title { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; color: white; line-height: 1.2; margin-bottom: 14px; }
+  .docs-hl-sub { font-size: 0.97rem; color: rgba(255,255,255,0.6); line-height: 1.65; margin-bottom: 24px; max-width: 420px; }
+  .docs-hl-list { display: flex; flex-direction: column; gap: 9px; margin-bottom: 30px; }
+  .docs-hl-item { display: flex; align-items: center; gap: 10px; font-size: 0.88rem; color: rgba(255,255,255,0.8); }
+  .docs-hl-check { color: #4ADE80; font-weight: 700; font-size: 0.95rem; flex-shrink: 0; }
+  .docs-hl-more { color: rgba(255,255,255,0.4); font-size: 0.82rem; padding-left: 24px; cursor: pointer; }
+  .docs-hl-cta { display: inline-block; background: white; color: var(--blue-deep); padding: 13px 28px; border-radius: 50px; font-size: 0.95rem; font-weight: 700; text-decoration: none; transition: all 0.22s; }
+  .docs-hl-cta:hover { background: var(--blue-light); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+  .docs-hl-note { font-size: 0.75rem; color: rgba(255,255,255,0.35); margin-top: 12px; }
+  .docs-highlight-right { position: relative; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+  .docs-preview-card { background: white; border-radius: 16px; padding: 28px 24px 20px; width: 100%; max-width: 360px; box-shadow: 0 20px 60px rgba(0,0,0,0.25); position: relative; }
+  .docs-preview-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  .docs-preview-logo { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; color: var(--blue-deep); }
+  .docs-preview-tag { font-size: 10px; color: var(--gray-400); letter-spacing: 1px; }
+  .docs-preview-title-doc { font-size: 13px; font-weight: 700; color: var(--blue-deep); letter-spacing: 1px; text-align: center; margin-bottom: 3px; }
+  .docs-preview-subtitle { font-size: 9px; color: var(--gray-400); text-align: center; font-style: italic; margin-bottom: 12px; }
+  .docs-preview-line { height: 1px; background: var(--gray-200); margin-bottom: 14px; }
+  .docs-preview-text { font-size: 10.5px; color: var(--gray-600); line-height: 1.7; }
+  .docs-preview-blank { background: var(--blue-light); color: var(--blue-mid); border-radius: 3px; padding: 1px 4px; font-weight: 500; }
+  .docs-preview-footer { margin-top: 20px; padding-top: 12px; border-top: 1px solid var(--gray-200); }
+  .docs-preview-footer-line { width: 80px; height: 1px; background: var(--gray-400); margin-bottom: 5px; }
+  .docs-preview-footer-text { font-size: 9px; color: var(--gray-400); }
+  .docs-preview-badge { position: absolute; top: -12px; right: -10px; background: var(--blue-deep); color: white; border-radius: 50px; padding: 5px 12px; font-size: 11px; font-weight: 600; display: flex; align-items: center; gap: 5px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+  .docs-floating-chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-width: 360px; }
+  .docs-chip { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 50px; padding: 6px 14px; font-size: 0.78rem; color: rgba(255,255,255,0.65); }
+  @media (max-width: 768px) { .docs-highlight-inner { grid-template-columns: 1fr; gap: 40px; } .docs-highlight-right { display: none; } }
+  @media (max-width: 600px) {
+    nav { padding: 0 16px; height: 56px; }
+    .nav-mobile { gap: 6px; }
+  }
+  @media (max-width: 400px) {
+    .lang-btn { padding: 3px 7px; font-size: 0.7rem; }
+  }
 </style>
 </head>
-
 <body>
 
+<!-- BANNER COOKIES RGPD -->
+<div class="cookie-banner hidden" id="cookieBanner">
+  <p class="cookie-text" id="cookie-text">
+    Utilizamos cookies essenciais para o funcionamento do site e para melhorar a tua experiência. Ao continuar, aceitas a nossa <a href="/privacidade.html" target="_blank">Política de Privacidade</a>.
+  </p>
+  <div class="cookie-btns">
+    <button class="cookie-decline" onclick="declineCookies()" id="cookie-decline-btn">Só essenciais</button>
+    <button class="cookie-accept" onclick="acceptCookies()" id="cookie-accept-btn">Aceitar tudo</button>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="emailModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-icon">🇵🇹</div>
+    <h2 id="modal-title">Cria a tua conta grátis</h2>
+    <p id="modal-desc">Regista-te e acede ao assistente NOVU sem limites — o teu guia completo da vida em Portugal.</p>
+    <div class="modal-form" id="modalForm">
+      <input type="text" class="modal-input" id="modalNameInput" placeholder="o teu nome">
+      <input type="email" class="modal-input" id="modalEmailInput" placeholder="o teu email">
+      <button class="modal-submit" id="modal-submit-btn" onclick="submitModalEmail()">Criar conta grátis</button>
+      <div class="consent-row">
+        <input type="checkbox" id="modalConsent">
+        <label class="consent-label" for="modalConsent" id="modal-consent-label">Aceito a <a href="/privacidade.html" target="_blank">Política de Privacidade</a> e os <a href="/termos.html" target="_blank">Termos de Serviço</a></label>
+      </div>
+      <p class="modal-note" id="modal-note">Gratuito. Sem spam. Só boas novidades.</p>
+    </div>
+    <div class="modal-success" id="modalSuccess"></div>
+  </div>
+</div>
+
+<!-- NAV -->
 <nav>
-<div class="nav-logo">N<span>O</span>VU</div>
+  <div class="nav-logo">N<span>O</span>VU</div>
 
-<div class="nav-right">
+  <!-- NAV DESKTOP -->
+  <div class="nav-right" id="navDesktop">
+    <a href="/documentos.html" class="nav-docs-btn" id="nav-docs-link">📄 Documentos</a>
+    <a href="/especialistas.html" class="nav-docs-btn" id="nav-esp-link">🤝 Especialistas</a>
+    <div class="lang-selector">
+      <button class="lang-btn active" onclick="setLang('pt')" id="lang-pt">PT</button>
+      <button class="lang-btn" onclick="setLang('en')" id="lang-en">EN</button>
+      <button class="lang-btn" onclick="setLang('es')" id="lang-es">ES</button>
+    </div>
+    <button class="nav-cta" id="nav-cta-btn" onclick="openModal()">Experimentar grátis</button>
+  </div>
 
-<a href="/documentos.html" class="nav-docs-btn">📄 Documentos</a>
-
-<a href="/especialistas.html" class="nav-docs-btn">🤝 Especialistas</a>
-
-<div class="lang-selector">
-<button class="lang-btn active">PT</button>
-<button class="lang-btn">EN</button>
-<button class="lang-btn">ES</button>
-</div>
-
-<button class="nav-cta">Experimentar grátis</button>
-
-</div>
+  <!-- HAMBURGER MOBILE -->
+  <div class="nav-mobile">
+    <div class="lang-selector">
+      <button class="lang-btn active" onclick="setLang('pt')" id="lang-pt-m">PT</button>
+      <button class="lang-btn" onclick="setLang('en')" id="lang-en-m">EN</button>
+      <button class="lang-btn" onclick="setLang('es')" id="lang-es-m">ES</button>
+    </div>
+    <button class="hamburger" id="hamburgerBtn" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
-<section class="hero">
-
-<div class="hero-badge">
-<span>Disponível agora — experimenta grátis</span>
+<!-- MENU MOBILE OVERLAY -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/documentos.html" class="mobile-menu-link">📄 <span id="mm-docs">Documentos</span></a>
+  <a href="/especialistas.html" class="mobile-menu-link">🤝 <span id="mm-esp">Especialistas</span></a>
+  <a href="/afiliados.html" class="mobile-menu-link">🤝 <span id="mm-afil">Programa de Afiliados</span></a>
+  <div class="mobile-menu-divider"></div>
+  <button class="mobile-menu-cta" onclick="openModal();toggleMenu()" id="mm-cta">Experimentar grátis</button>
 </div>
 
-<h1 class="hero-title">
-A tecnologia que guia<br>
-a sua jornada em <em>Portugal</em>
-</h1>
-
-<p class="hero-sub">
-Do avião à cidadania — a NOVU guia-te por cada passo da tua vida em Portugal, de forma simples, clara e sem complicações.
-</p>
-
-<div class="hero-cta-wrap">
-<button class="btn-primary">Fazer a minha primeira pergunta</button>
-<button class="btn-secondary">Ver como funciona</button>
-</div>
-
+<!-- HERO -->
+<section class="hero" style="background:var(--blue-pale);padding:60px 5%;">
+  <div class="hero-badge"><span class="dot"></span><span id="hero-badge-text">Disponível agora — experimenta grátis</span></div>
+  <h1 class="hero-title" id="hero-title">A tecnologia que guia<br>a sua jornada em <em>Portugal</em></h1>
+  <p class="hero-sub" id="hero-sub">Do avião à cidadania — a NOVU guia-te por cada passo da tua vida em Portugal, de forma simples, clara e sem complicações.</p>
+  <div class="hero-cta-wrap">
+    <button class="btn-primary" onclick="document.getElementById('chatbot').scrollIntoView({behavior:'smooth'})" id="hero-btn-primary">Fazer a minha primeira pergunta</button>
+    <button class="btn-secondary" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})" id="hero-btn-secondary">Ver como funciona</button>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-number">1,5M</span><span class="stat-label" id="stat1">imigrantes em Portugal</span></div>
+    <div class="stat"><span class="stat-number">4,6/5</span><span class="stat-label" id="stat2">dificuldade reportada</span></div>
+    <div class="stat"><span class="stat-number">87%</span><span class="stat-label" id="stat3">usariam a NOVU</span></div>
+  </div>
 </section>
 
+<!-- CHAT — logo a seguir ao hero -->
+<section class="chatbot-section" id="chatbot" style="padding:60px 5%;">
+  <p class="section-label" id="chat-section-label">Experimenta agora</p>
+  <h2 class="section-title" id="chat-section-title" style="margin-bottom:0;">Faz a tua primeira pergunta</h2>
+  <p class="chat-context-line" id="chat-context-line">Vistos · Documentos · Trabalho · Moradia · Bancos · Cidadania</p>
+  <div class="chat-container">
+    <div class="chat-header">
+      <div class="chat-avatar">N</div>
+      <div class="chat-header-info"><h3>Assistente NOVU</h3><p id="chat-subtitle">Especialista em burocracia portuguesa</p></div>
+      <div class="chat-status" id="chat-status-text">Online</div>
+    </div>
+    <div class="chat-lang-bar">
+      <span id="chat-lang-label">Idioma:</span>
+      <div class="chat-lang-btns">
+        <button class="chat-lang-btn active" onclick="setLang('pt')" id="clang-pt">🇵🇹 PT</button>
+        <button class="chat-lang-btn" onclick="setLang('en')" id="clang-en">🇬🇧 EN</button>
+        <button class="chat-lang-btn" onclick="setLang('es')" id="clang-es">🇪🇸 ES</button>
+      </div>
+    </div>
+    <div class="question-counter" id="questionCounter">
+      <span>⚡</span><span id="counterText">Tens 4 perguntas grátis — regista-te para acesso ilimitado</span>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="msg">
+        <div class="msg-avatar">N</div>
+        <div class="msg-bubble">Olá! 👋 Sou a NOVU, o teu guia de burocracia em Portugal.<br><br>Com que podes precisar de ajuda hoje?</div>
+      </div>
+    </div>
+    <div class="chat-options" id="chatOptions">
+      <button class="chat-opt-btn" onclick="selectOption('NIF / NISS')">NIF / NISS</button>
+      <button class="chat-opt-btn" onclick="selectOption('Residência / AIMA')">Residência / AIMA</button>
+      <button class="chat-opt-btn" onclick="selectOption('Reagrupamento familiar')">Reagrupamento familiar</button>
+      <button class="chat-opt-btn" onclick="selectOption('Recibo verde / Empresa')">Recibo verde / Empresa</button>
+      <button class="chat-opt-btn" onclick="selectOption('IRS')">IRS</button>
+      <button class="chat-opt-btn" onclick="selectOption('Cidadania')">Cidadania</button>
+      <button class="chat-opt-btn" onclick="selectOption('Vistos')">Vistos</button>
+      <button class="chat-opt-btn" onclick="selectOption('Site de emprego')">Site de emprego</button>
+      <button class="chat-opt-btn" onclick="selectOption('Moradias')">Moradias</button>
+    </div>
+    <div id="emailCapture" class="email-capture hidden">
+      <p id="email-capture-text">🎁 Regista-te para acesso ilimitado ao assistente NOVU!</p>
+      <div class="email-form">
+        <input type="text" class="email-input" id="inlineNameInput" placeholder="o teu nome" style="margin-bottom:6px;width:100%">
+        <input type="email" class="email-input" id="emailInput" placeholder="o teu email">
+        <button class="email-submit" onclick="submitInlineEmail()">Aceder grátis</button>
+      </div>
+      <div class="consent-row" style="margin-top:8px;">
+        <input type="checkbox" id="inlineConsent">
+        <label class="consent-label" for="inlineConsent" id="inline-consent-label">Aceito a <a href="/privacidade.html" target="_blank">Política de Privacidade</a> e os <a href="/termos.html" target="_blank">Termos de Serviço</a></label>
+      </div>
+    </div>
+    <div id="successMsg" class="success-msg"></div>
+    <div class="chat-input-area">
+      <input type="text" class="chat-input" id="chatInput" placeholder="Escreve a tua dúvida..." onkeypress="if(event.key==='Enter')sendMessage()">
+      <button class="chat-send" onclick="sendMessage()">
+        <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- CTA REPETIDO após chat -->
+<div style="background:var(--white);padding:32px 5%;text-align:center;border-top:1px solid var(--gray-200);">
+  <button class="btn-primary" onclick="document.getElementById('chatbot').scrollIntoView({behavior:'smooth'})" style="font-size:0.95rem;">👉 Fazer a minha primeira pergunta</button>
+</div>
+
+<!-- DOCS HIGHLIGHT — fundo azul escuro -->
+<section class="docs-highlight" id="documentos">
+  <div class="docs-highlight-inner">
+    <div class="docs-highlight-left">
+      <div class="docs-hl-badge">✨ Novo recurso</div>
+      <h2 class="docs-hl-title" id="docs-hl-title">Cria declarações e documentos essenciais em segundos</h2>
+      <p class="docs-hl-sub" id="docs-hl-sub">Atestados, cartas para a AIMA, declarações de morada, autorizações para menores — prontos a imprimir, sem complicações.</p>
+      <div class="docs-hl-list">
+        <div class="docs-hl-item"><span class="docs-hl-check">✓</span> <span>Atestado de morada</span></div>
+        <div class="docs-hl-item"><span class="docs-hl-check">✓</span> <span>Carta para a AIMA</span></div>
+        <div class="docs-hl-item"><span class="docs-hl-check">✓</span> <span>Declaração sob compromisso de honra</span></div>
+        <div class="docs-hl-item"><span class="docs-hl-check">✓</span> <span>Autorização para menor viajar</span></div>
+        <div class="docs-hl-item docs-hl-more" id="docs-hl-more">+ 6 documentos mais →</div>
+      </div>
+      <a href="/documentos.html" class="docs-hl-cta" id="docs-hl-cta">Aceder aos documentos grátis</a>
+      <p class="docs-hl-note" id="docs-hl-note">2 documentos gratuitos · sem conta · sem cartão</p>
+    </div>
+    <div class="docs-highlight-right">
+      <div class="docs-preview-card">
+        <div class="docs-preview-top">
+          <div class="docs-preview-header">
+            <div class="docs-preview-logo">NOVU</div>
+            <div class="docs-preview-tag">novuai.pt</div>
+          </div>
+          <div class="docs-preview-title-doc">ATESTADO DE MORADA</div>
+          <div class="docs-preview-subtitle">Modelo informativo</div>
+          <div class="docs-preview-line"></div>
+          <div class="docs-preview-text">Eu, <span class="docs-preview-blank">João Silva</span>, de nacionalidade <span class="docs-preview-blank">Brasileira</span>, NIF <span class="docs-preview-blank">123 456 789</span>, residente na <span class="docs-preview-blank">Rua das Flores, 25, Lisboa</span>...</div>
+          <div class="docs-preview-text" style="margin-top:10px;">DECLARO, sob compromisso de honra, que a morada acima indicada é a minha residência efectiva em território nacional.</div>
+        </div>
+        <div class="docs-preview-footer">
+          <div class="docs-preview-footer-line"></div>
+          <div class="docs-preview-footer-text">Assinatura do(a) declarante</div>
+        </div>
+        <div class="docs-preview-badge">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v8M3.5 5.5L7 9l3.5-3.5M1.5 11.5h11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          PDF pronto
+        </div>
+      </div>
+      <div class="docs-floating-chips">
+        <div class="docs-chip docs-chip-1">📋 Moradia</div>
+        <div class="docs-chip docs-chip-2">✈️ Imigração</div>
+        <div class="docs-chip docs-chip-3">💼 Trabalho</div>
+        <div class="docs-chip docs-chip-4">🔑 Arrendamento</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA — fundo branco -->
+<section class="how" id="how" style="background:var(--white);padding:60px 5%;">
+  <p class="section-label" id="how-label">Como funciona</p>
+  <h2 class="section-title" id="how-title">Como a NOVU te ajuda em Portugal</h2>
+  <div class="how-steps">
+    <div class="how-step">
+      <div class="how-step-num">1</div>
+      <h3 id="step1-title">Pergunta</h3>
+      <p id="step1-desc">Descreve a tua dúvida ou situação em linguagem normal — sem formulários complicados.</p>
+    </div>
+    <div class="how-step">
+      <div class="how-step-num">2</div>
+      <h3 id="step2-title">Recebe orientação</h3>
+      <p id="step2-desc">A NOVU explica documentos necessários, próximos passos e todas as opções disponíveis.</p>
+    </div>
+    <div class="how-step">
+      <div class="how-step-num">3</div>
+      <h3 id="step3-title">Avança com segurança</h3>
+      <p id="step3-desc">Sabes exactamente o que fazer em Portugal, sem perder tempo nem dinheiro desnecessário.</p>
+    </div>
+  </div>
+</section>
+
+<!-- JORNADA — fundo cinza claro -->
+<section class="journey" id="journey" style="background:var(--gray-100);padding:60px 5%;">
+  <p class="section-label" id="journey-label">A tua jornada</p>
+  <h2 class="section-title" id="journey-title">De cada fase, um guia completo</h2>
+  <div class="phases">
+    <div class="phase-card"><p class="phase-num">Fase 01</p><h3 class="phase-title" id="phase1-title">Antes de chegar</h3><p class="phase-desc" id="phase1-desc">Visto certo para o teu caso, documentos a trazer, checklist de preparação antes de sair do país.</p></div>
+    <div class="phase-card"><p class="phase-num">Fase 02</p><h3 class="phase-title" id="phase2-title">Primeiros passos</h3><p class="phase-desc" id="phase2-desc">NIF, NISS, conta bancária, número de utente SNS e como encontrar casa — tudo na ordem certa.</p></div>
+    <div class="phase-card"><p class="phase-num">Fase 03</p><h3 class="phase-title" id="phase3-title">Residência e AIMA</h3><p class="phase-desc" id="phase3-desc">Autorização de residência, reagrupamento familiar, reconhecimento de diploma, abertura de empresa.</p></div>
+    <div class="phase-card"><p class="phase-num">Fase 04</p><h3 class="phase-title" id="phase4-title">Renovação</h3><p class="phase-desc" id="phase4-desc">Renovação de residência, IRS, atualização de documentos — sem surpresas de última hora.</p></div>
+    <div class="phase-card"><p class="phase-num">Fase 05</p><h3 class="phase-title" id="phase5-title">Integração</h3><p class="phase-desc" id="phase5-desc">Compra de carro, crédito bancário, busca de emprego e currículo europeu. A vida normal começa aqui.</p></div>
+    <div class="phase-card"><p class="phase-num">Fase 06</p><h3 class="phase-title" id="phase6-title">Cidadania</h3><p class="phase-desc" id="phase6-desc">Requisitos, processo completo, teste de língua e o que muda depois. O capítulo final da tua jornada.</p></div>
+  </div>
+</section>
+
+<!-- PROOF — fundo branco -->
+<section class="proof" style="background:var(--white);padding:60px 5%;">
+  <p class="section-label" id="proof-label">Validado pelos dados</p>
+  <h2 class="section-title" id="proof-title">Os números falam por si</h2>
+  <div class="proof-numbers">
+    <div class="proof-item"><span class="num">1,5M</span><span class="label" id="proof1">imigrantes em Portugal</span></div>
+    <div class="proof-item"><span class="num">4,6/5</span><span class="label" id="proof2">nível de dificuldade reportado</span></div>
+    <div class="proof-item"><span class="num">87%</span><span class="label" id="proof3">dispostos a usar a NOVU</span></div>
+    <div class="proof-item"><span class="num">€600+</span><span class="label" id="proof4">gastos em advogados por processo</span></div>
+  </div>
+</section>
+
+<!-- RECURSOS — plataforma completa -->
+<section style="padding:64px 5%;background:var(--white);">
+  <div style="max-width:960px;margin:0 auto;">
+    <p style="font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blue-bright);margin-bottom:10px;" id="recursos-label">Plataforma completa</p>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;color:var(--blue-deep);margin-bottom:10px;" id="recursos-title">Mais do que um assistente</h2>
+    <p style="font-size:0.96rem;color:var(--gray-600);margin-bottom:40px;max-width:520px;line-height:1.6;" id="recursos-sub">A NOVU tem tudo o que precisas para a tua vida em Portugal — num só lugar.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;">
+
+      <a href="/index.html#chat" style="text-decoration:none;" onclick="document.getElementById('chatMessages')?.scrollIntoView({behavior:'smooth'});return false;">
+        <div style="border:1.5px solid var(--gray-200);border-radius:16px;padding:28px 24px;transition:all 0.2s;background:var(--blue-pale);" onmouseover="this.style.borderColor='var(--blue-bright)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--gray-200)';this.style.transform='none'">
+          <div style="font-size:2rem;margin-bottom:14px;">🤖</div>
+          <div style="font-weight:700;font-size:1rem;color:var(--blue-deep);margin-bottom:6px;" id="rec-chat-title">Assistente IA</div>
+          <div style="font-size:0.82rem;color:var(--gray-600);line-height:1.5;" id="rec-chat-desc">Pergunta qualquer coisa sobre vistos, NIF, NISS, trabalho, moradia e muito mais. Resposta imediata.</div>
+        </div>
+      </a>
+
+      <a href="/documentos.html" style="text-decoration:none;">
+        <div style="border:1.5px solid var(--gray-200);border-radius:16px;padding:28px 24px;transition:all 0.2s;background:var(--white);" onmouseover="this.style.borderColor='var(--blue-bright)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--gray-200)';this.style.transform='none'">
+          <div style="font-size:2rem;margin-bottom:14px;">📄</div>
+          <div style="font-weight:700;font-size:1rem;color:var(--blue-deep);margin-bottom:6px;" id="rec-docs-title">Documentos</div>
+          <div style="font-size:0.82rem;color:var(--gray-600);line-height:1.5;" id="rec-docs-desc">Gera declarações, cartas e atestados em PDF em segundos. 15 documentos essenciais para imigrantes.</div>
+          <div style="margin-top:12px;display:inline-block;background:var(--blue-light);color:var(--blue-mid);border-radius:50px;padding:3px 12px;font-size:0.72rem;font-weight:700;" id="rec-docs-badge">15 modelos</div>
+        </div>
+      </a>
+
+      <a href="/especialistas.html" style="text-decoration:none;">
+        <div style="border:1.5px solid var(--gray-200);border-radius:16px;padding:28px 24px;transition:all 0.2s;background:var(--white);" onmouseover="this.style.borderColor='var(--blue-bright)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--gray-200)';this.style.transform='none'">
+          <div style="font-size:2rem;margin-bottom:14px;">🤝</div>
+          <div style="font-weight:700;font-size:1rem;color:var(--blue-deep);margin-bottom:6px;" id="rec-esp-title">Especialistas</div>
+          <div style="font-size:0.82rem;color:var(--gray-600);line-height:1.5;" id="rec-esp-desc">Liga-te a advogados, contabilistas, agentes imobiliários e seguros verificados pela NOVU.</div>
+          <div style="margin-top:12px;display:inline-block;background:#DCFCE7;color:#16A34A;border-radius:50px;padding:3px 12px;font-size:0.72rem;font-weight:700;" id="rec-esp-badge">Novo</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA — fundo azul escuro -->
+<section class="final-cta" style="padding:60px 5%;">
+  <h2 id="cta-title">A tua nova vida<br>começa aqui.</h2>
+  <p id="cta-desc">Junta-te à lista de espera e seja um dos primeiros a experimentar a NOVU gratuitamente.</p>
+  <button class="btn-primary" onclick="openModal()" id="cta-btn">Experimentar grátis agora</button>
+</section>
+
+<footer>
+  <div class="logo">NOVU</div>
+  <div class="footer-links">
+    <p id="footer-text">© 2026 NOVU. Informação, não aconselhamento jurídico.</p>
+    <a href="/privacidade.html" class="footer-link" id="footer-privacy">Política de Privacidade</a>
+    <a href="/termos.html" class="footer-link" id="footer-terms">Termos de Serviço</a>
+    <a href="/afiliados.html" class="footer-link">Programa de Afiliados</a>
+    <a href="/documentos.html" class="footer-link">Documentos</a>
+    <a href="/especialistas.html" class="footer-link">Especialistas</a>
+  </div>
+  <a href="#" class="footer-email" id="footer-email-link" data-u="geral" data-d="novuai.pt">✉ geral&#64;novuai.pt</a>
+  <script>
+    (function(){
+      var el = document.getElementById('footer-email-link');
+      if(el){ el.addEventListener('click', function(e){ e.preventDefault(); window.location = 'mai'+'lto:'+el.getAttribute('data-u')+'@'+el.getAttribute('data-d'); }); }
+    })();
+  </script>
+</footer>
+
+<!-- MOBILE CTA FIXO -->
+<div class="mobile-cta-bar" id="mobileCTABar">
+  <button class="btn-primary" onclick="document.getElementById('chatbot').scrollIntoView({behavior:'smooth'})">Fazer a minha primeira pergunta</button>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
+const T = {
+  pt: {
+    nav_cta: 'Experimentar grátis', hero_badge: 'Disponível agora — experimenta grátis',
+    hero_title: 'A tecnologia que guia<br>a sua jornada em <em>Portugal</em>',
+    hero_sub: 'Do avião à cidadania — a NOVU guia-te por cada passo da tua vida em Portugal, de forma simples, clara e sem complicações.',
+    hero_btn1: 'Fazer a minha primeira pergunta', hero_btn2: 'Ver como funciona',
+    stat1: 'imigrantes em Portugal', stat2: 'dificuldade reportada', stat3: 'usariam a NOVU',
+    journey_label: 'A tua jornada', journey_title: 'De cada fase, um guia completo',
+    faq_label: 'Exemplos reais', faq_title: 'Perguntas que a NOVU responde',
+    faq_note: 'Clica numa pergunta para enviar directamente ao assistente ↓',
+    faq_questions: [
+      { icon: '📋', text: 'Como tirar o NIF em Portugal?' },
+      { icon: '🏥', text: 'Como obter o número de utente SNS?' },
+      { icon: '💼', text: 'Como conseguir contrato de trabalho?' },
+      { icon: '🎓', text: 'Como validar o meu diploma em Portugal?' },
+      { icon: '🌍', text: 'Qual o visto certo para o meu caso?' },
+      { icon: '🏠', text: 'Como encontrar quarto para alugar?' },
+      { icon: '📊', text: 'Como abrir actividade nas Finanças?' },
+      { icon: '🆔', text: 'Como tirar o NISS?' },
+    ],
+    chat_section_label: 'Experimenta agora', chat_section_title: 'Faz a tua primeira pergunta',
+    chat_context_line: 'Vistos · Documentos · Trabalho · Moradia · Bancos · Cidadania',
+    chat_subtitle: 'Especialista em burocracia portuguesa', chat_status: 'Online', chat_lang_label: 'Idioma:',
+    counter: 'Tens {n} perguntas grátis — regista-te para acesso ilimitado',
+    counter_unlimited: '✅ Acesso ilimitado desbloqueado!',
+    welcome: 'Olá! 👋 Sou a NOVU, o teu guia de burocracia em Portugal.<br><br>Com que podes precisar de ajuda hoje?',
+    options: ['NIF / NISS','Residência / AIMA','Reagrupamento familiar','Recibo verde / Empresa','IRS','Cidadania','Vistos','Site de emprego','Moradias','Bancos / Telemóveis'],
+    input_placeholder: 'Escreve a tua dúvida...',
+    email_capture: '🎁 Regista-te para acesso ilimitado ao assistente NOVU!',
+    name_placeholder: 'o teu nome', email_placeholder: 'o teu email', email_btn: 'Aceder grátis',
+    success: '✅ Acesso desbloqueado! Bem-vindo à NOVU 🙌',
+    modal_title: 'Cria a tua conta grátis', modal_desc: 'Regista-te e acede ao assistente NOVU sem limites — o teu guia completo da vida em Portugal.',
+    modal_name_ph: 'o teu nome', modal_email_ph: 'o teu email', modal_btn: 'Criar conta grátis',
+    modal_note: 'Gratuito. Sem spam. Só boas novidades.', modal_success: '✅ Perfeito! Conta criada. Bem-vindo à NOVU 🙌',
+    how_label: 'Como funciona', how_title: 'Como a NOVU te ajuda em Portugal',
+    step1_title: 'Pergunta', step1_desc: 'Descreve a tua dúvida ou situação em linguagem normal — sem formulários complicados.',
+    step2_title: 'Recebe orientação', step2_desc: 'A NOVU explica documentos necessários, próximos passos e todas as opções disponíveis.',
+    step3_title: 'Avança com segurança', step3_desc: 'Sabes exactamente o que fazer em Portugal, sem perder tempo nem dinheiro desnecessário.',
+    proof_label: 'Validado pelos dados', proof_title: 'Os números falam por si',
+    proof1: 'imigrantes em Portugal', proof2: 'nível de dificuldade reportado', proof3: 'dispostos a usar a NOVU', proof4: 'gastos em advogados por processo',
+    recursos_label: 'Plataforma completa',
+    recursos_title: 'Mais do que um assistente',
+    recursos_sub: 'A NOVU tem tudo o que precisas para a tua vida em Portugal — num só lugar.',
+    rec_chat_title: 'Assistente IA',
+    rec_chat_desc: 'Pergunta qualquer coisa sobre vistos, NIF, NISS, trabalho, moradia e muito mais.',
+    rec_docs_title: 'Documentos',
+    rec_docs_desc: 'Gera declarações, cartas e atestados em PDF em segundos. 15 documentos essenciais para imigrantes.',
+    rec_esp_title: 'Especialistas',
+    rec_esp_desc: 'Liga-te a advogados, contabilistas, agentes imobiliários e seguros verificados pela NOVU.',
+    mm_docs: 'Documentos',
+    mm_esp: 'Especialistas',
+    mm_afil: 'Programa de Afiliados',
+    cta_title: 'A tua nova vida<br>começa aqui.', cta_desc: 'Regista-te grátis e começa a usar a NOVU agora mesmo.', cta_btn: 'Experimentar grátis agora',
+    footer: '© 2026 NOVU. Informação, não aconselhamento jurídico.',
+    phase1_title: 'Antes de chegar', phase1_desc: 'Visto certo para o teu caso, documentos a trazer, checklist de preparação.',
+    phase2_title: 'Primeiros passos', phase2_desc: 'NIF, NISS, conta bancária, número SNS e como encontrar casa.',
+    phase3_title: 'Residência e AIMA', phase3_desc: 'Autorização de residência, reagrupamento familiar, reconhecimento de diploma.',
+    phase4_title: 'Renovação', phase4_desc: 'Renovação de residência, IRS, atualização de documentos.',
+    phase5_title: 'Integração', phase5_desc: 'Compra de carro, crédito bancário, busca de emprego e currículo europeu.',
+    phase6_title: 'Cidadania', phase6_desc: 'Requisitos, processo completo, teste de língua e o que muda depois.',
+    whatsapp_share: '💬 Resposta da NOVU:\n\n{text}\n\n👉 Experimenta em novuai.pt',
+    mobile_cta: 'Fazer a minha primeira pergunta',
+    docs_badge: '✨ Novo recurso',
+    docs_title: 'Cria declarações e documentos essenciais em segundos',
+    docs_sub: 'Atestados, cartas para a AIMA, declarações de morada, autorizações para menores — prontos a imprimir, sem complicações.',
+    docs_more: '+ 6 documentos mais →',
+    docs_cta: 'Aceder aos documentos grátis',
+    docs_note: '2 documentos gratuitos · sem conta · sem cartão',
+  },
+  en: {
+    nav_cta: 'Try for free', hero_badge: 'Available now — try it free',
+    hero_title: 'The technology that guides<br>your journey in <em>Portugal</em>',
+    hero_sub: 'From the plane to citizenship — NOVU guides you through every step of your life in Portugal, simply, clearly and without complications.',
+    hero_btn1: 'Ask my first question', hero_btn2: 'See how it works',
+    stat1: 'immigrants in Portugal', stat2: 'reported difficulty', stat3: 'would use NOVU',
+    journey_label: 'Your journey', journey_title: 'A complete guide for every phase',
+    faq_label: 'Real examples', faq_title: 'Questions NOVU can answer',
+    faq_note: 'Click a question to send it directly to the assistant ↓',
+    faq_questions: [
+      { icon: '📋', text: 'How to get a NIF in Portugal?' },
+      { icon: '🏥', text: 'How to get an NHS number in Portugal?' },
+      { icon: '💼', text: 'How to get a work contract in Portugal?' },
+      { icon: '🎓', text: 'How to validate my degree in Portugal?' },
+      { icon: '🌍', text: 'Which visa is right for my situation?' },
+      { icon: '🏠', text: 'How to find a room to rent?' },
+      { icon: '📊', text: 'How to register as a freelancer?' },
+      { icon: '🆔', text: 'How to get a NISS number?' },
+    ],
+    chat_section_label: 'Try it now', chat_section_title: 'Ask your first question',
+    chat_context_line: 'Visas · Documents · Work · Housing · Banking · Citizenship',
+    chat_subtitle: 'Portuguese bureaucracy specialist', chat_status: 'Online', chat_lang_label: 'Language:',
+    counter: 'You have {n} free questions — register for unlimited access',
+    counter_unlimited: '✅ Unlimited access unlocked!',
+    welcome: 'Hi! 👋 I\'m NOVU, your guide to Portuguese bureaucracy.<br><br>What can I help you with today?',
+    options: ['NIF / NISS','Residence / AIMA','Family reunification','Freelance / Company','Tax return','Citizenship','Visas','Job sites','Housing','Banks / Mobile plans'],
+    input_placeholder: 'Type your question...',
+    email_capture: '🎁 Register for unlimited access to the NOVU assistant!',
+    name_placeholder: 'your name', email_placeholder: 'your email', email_btn: 'Get free access',
+    success: '✅ Access unlocked! Welcome to NOVU 🙌',
+    modal_title: 'Create your free account', modal_desc: 'Sign up and get unlimited access to the NOVU assistant — your complete guide to life in Portugal.',
+    modal_name_ph: 'your name', modal_email_ph: 'your email', modal_btn: 'Create free account',
+    modal_note: 'Free. No spam. Only good news.', modal_success: '✅ Perfect! Account created. Welcome to NOVU 🙌',
+    how_label: 'How it works', how_title: 'How NOVU helps you in Portugal',
+    step1_title: 'Ask', step1_desc: 'Describe your question or situation in plain language — no complicated forms.',
+    step2_title: 'Get guidance', step2_desc: 'NOVU explains required documents, next steps and all available options.',
+    step3_title: 'Move forward confidently', step3_desc: 'You know exactly what to do in Portugal, without wasting time or money.',
+    proof_label: 'Backed by data', proof_title: 'The numbers speak for themselves',
+    proof1: 'immigrants in Portugal', proof2: 'reported difficulty level', proof3: 'would use NOVU', proof4: 'spent on lawyers per process',
+    recursos_label: 'Complete platform',
+    recursos_title: 'More than an assistant',
+    recursos_sub: 'NOVU has everything you need for your life in Portugal — in one place.',
+    rec_chat_title: 'AI Assistant',
+    rec_chat_desc: 'Ask anything about visas, NIF, NISS, work, housing and much more.',
+    rec_docs_title: 'Documents',
+    rec_docs_desc: 'Generate declarations, letters and certificates in PDF in seconds. 15 essential documents for immigrants.',
+    rec_esp_title: 'Specialists',
+    rec_esp_desc: 'Connect with NOVU-verified lawyers, accountants, real estate agents and insurance brokers.',
+    mm_docs: 'Documents',
+    mm_esp: 'Specialists',
+    mm_afil: 'Affiliate Programme',
+    cta_title: 'Your new life<br>starts here.', cta_desc: 'Sign up for free and start using NOVU right now.', cta_btn: 'Try it free now',
+    footer: '© 2026 NOVU. Information, not legal advice.',
+    phase1_title: 'Before you arrive', phase1_desc: 'Right visa for your case, documents to bring, preparation checklist.',
+    phase2_title: 'First steps', phase2_desc: 'NIF, NISS, bank account, NHS number and how to find housing.',
+    phase3_title: 'Residence & AIMA', phase3_desc: 'Residence permit, family reunification, diploma recognition.',
+    phase4_title: 'Renewal', phase4_desc: 'Residence renewal, tax returns, document updates.',
+    phase5_title: 'Integration', phase5_desc: 'Buying a car, bank credit, job search and European CV.',
+    phase6_title: 'Citizenship', phase6_desc: 'Requirements, full process, language test and what changes after.',
+    whatsapp_share: '💬 NOVU Answer:\n\n{text}\n\n👉 Try it at novuai.pt',
+    mobile_cta: 'Ask my first question',
+    docs_badge: '✨ New feature',
+    docs_title: 'Create essential documents in seconds',
+    docs_sub: 'Address certificates, AIMA letters, residence declarations, travel authorisations for minors — ready to print, no hassle.',
+    docs_more: '+ 6 more documents →',
+    docs_cta: 'Access documents for free',
+    docs_note: '2 free documents · no account · no card',
+  },
+  es: {
+    nav_cta: 'Probar gratis', hero_badge: 'Disponible ahora — pruébalo gratis',
+    hero_title: 'La tecnología que guía<br>tu viaje en <em>Portugal</em>',
+    hero_sub: 'Del avión a la ciudadanía — NOVU te guía en cada paso de tu vida en Portugal, de forma sencilla, clara y sin complicaciones.',
+    hero_btn1: 'Hacer mi primera pregunta', hero_btn2: 'Ver cómo funciona',
+    stat1: 'inmigrantes en Portugal', stat2: 'dificultad reportada', stat3: 'usarían NOVU',
+    journey_label: 'Tu viaje', journey_title: 'Una guía completa para cada fase',
+    faq_label: 'Ejemplos reales', faq_title: 'Preguntas que NOVU puede responder',
+    faq_note: 'Haz clic en una pregunta para enviarla directamente al asistente ↓',
+    faq_questions: [
+      { icon: '📋', text: '¿Cómo obtener el NIF en Portugal?' },
+      { icon: '🏥', text: '¿Cómo obtener el número de usuario del SNS?' },
+      { icon: '💼', text: '¿Cómo conseguir contrato de trabajo?' },
+      { icon: '🎓', text: '¿Cómo validar mi título en Portugal?' },
+      { icon: '🌍', text: '¿Qué visado es el correcto para mi caso?' },
+      { icon: '🏠', text: '¿Cómo encontrar habitación para alquilar?' },
+      { icon: '📊', text: '¿Cómo abrir actividad en Hacienda?' },
+      { icon: '🆔', text: '¿Cómo obtener el NISS?' },
+    ],
+    chat_section_label: 'Pruébalo ahora', chat_section_title: 'Haz tu primera pregunta',
+    chat_context_line: 'Visados · Documentos · Trabajo · Vivienda · Banca · Ciudadanía',
+    chat_subtitle: 'Especialista en burocracia portuguesa', chat_status: 'En línea', chat_lang_label: 'Idioma:',
+    counter: 'Tienes {n} preguntas gratis — regístrate para acceso ilimitado',
+    counter_unlimited: '✅ ¡Acceso ilimitado desbloqueado!',
+    welcome: '¡Hola! 👋 Soy NOVU, tu guía de burocracia portuguesa.<br><br>¿En qué puedo ayudarte hoy?',
+    options: ['NIF / NISS','Residencia / AIMA','Reagrupación familiar','Autónomo / Empresa','Declaración fiscal','Ciudadanía','Visados','Sitios de empleo','Vivienda','Bancos / Teléfonos'],
+    input_placeholder: 'Escribe tu pregunta...',
+    email_capture: '🎁 ¡Regístrate para acceso ilimitado al asistente NOVU!',
+    name_placeholder: 'tu nombre', email_placeholder: 'tu email', email_btn: 'Acceder gratis',
+    success: '✅ ¡Acceso desbloqueado! Bienvenido a NOVU 🙌',
+    modal_title: 'Crea tu cuenta gratis', modal_desc: 'Regístrate y accede al asistente NOVU sin límites — tu guía completa de vida en Portugal.',
+    modal_name_ph: 'tu nombre', modal_email_ph: 'tu email', modal_btn: 'Crear cuenta gratis',
+    modal_note: 'Gratis. Sin spam. Solo buenas noticias.', modal_success: '✅ ¡Perfecto! Cuenta creada. ¡Bienvenido a NOVU 🙌',
+    how_label: 'Cómo funciona', how_title: 'Cómo NOVU te ayuda en Portugal',
+    step1_title: 'Pregunta', step1_desc: 'Describe tu duda o situación en lenguaje normal — sin formularios complicados.',
+    step2_title: 'Recibe orientación', step2_desc: 'NOVU explica documentos necesarios, próximos pasos y todas las opciones disponibles.',
+    step3_title: 'Avanza con seguridad', step3_desc: 'Sabes exactamente qué hacer en Portugal, sin perder tiempo ni dinero innecesario.',
+    proof_label: 'Respaldado por datos', proof_title: 'Los números hablan por sí solos',
+    proof1: 'inmigrantes en Portugal', proof2: 'nivel de dificultad reportado', proof3: 'usarían NOVU', proof4: 'gastados en abogados por proceso',
+    recursos_label: 'Plataforma completa',
+    recursos_title: 'Más que un asistente',
+    recursos_sub: 'NOVU tiene todo lo que necesitas para tu vida en Portugal — en un solo lugar.',
+    rec_chat_title: 'Asistente IA',
+    rec_chat_desc: 'Pregunta cualquier cosa sobre visados, NIF, NISS, trabajo, vivienda y mucho más.',
+    rec_docs_title: 'Documentos',
+    rec_docs_desc: 'Genera declaraciones, cartas y certificados en PDF en segundos. 15 documentos esenciales para inmigrantes.',
+    rec_esp_title: 'Especialistas',
+    rec_esp_desc: 'Conéctate con abogados, contables, agentes inmobiliarios y seguros verificados por NOVU.',
+    mm_docs: 'Documentos',
+    mm_esp: 'Especialistas',
+    mm_afil: 'Programa de Afiliados',
+    cta_title: 'Tu nueva vida<br>empieza aquí.', cta_desc: 'Regístrate gratis y empieza a usar NOVU ahora mismo.', cta_btn: 'Probar gratis ahora',
+    footer: '© 2026 NOVU. Información, no asesoramiento jurídico.',
+    phase1_title: 'Antes de llegar', phase1_desc: 'Visado correcto para tu caso, documentos a traer, checklist de preparación.',
+    phase2_title: 'Primeros pasos', phase2_desc: 'NIF, NISS, cuenta bancaria, número SNS y cómo encontrar vivienda.',
+    phase3_title: 'Residencia y AIMA', phase3_desc: 'Autorización de residencia, reagrupación familiar, reconocimiento de diploma.',
+    phase4_title: 'Renovación', phase4_desc: 'Renovación de residencia, impuestos, actualización de documentos.',
+    phase5_title: 'Integración', phase5_desc: 'Compra de coche, crédito bancario, búsqueda de empleo y CV europeo.',
+    phase6_title: 'Ciudadanía', phase6_desc: 'Requisitos, proceso completo, examen de idioma y qué cambia después.',
+    whatsapp_share: '💬 Respuesta de NOVU:\n\n{text}\n\n👉 Pruébalo en novuai.pt',
+    mobile_cta: 'Hacer mi primera pregunta',
+    docs_badge: '✨ Nueva función',
+    docs_title: 'Crea declaraciones y documentos esenciales en segundos',
+    docs_sub: 'Certificados de domicilio, cartas para AIMA, declaraciones de residencia, autorizaciones para menores — listos para imprimir.',
+    docs_more: '+ 6 documentos más →',
+    docs_cta: 'Acceder a los documentos gratis',
+    docs_note: '2 documentos gratuitos · sin cuenta · sin tarjeta',
+  }
+};
+
+// RGPD — COOKIES
+function acceptCookies() {
+  setCookie('novu_cookie_consent', 'all', 365 * 24);
+  document.getElementById('cookieBanner').classList.add('hidden');
+}
+function declineCookies() {
+  setCookie('novu_cookie_consent', 'essential', 365 * 24);
+  document.getElementById('cookieBanner').classList.add('hidden');
+}
+function showCookieBanner() {
+  const consent = getCookie('novu_cookie_consent');
+  if (!consent) {
+    setTimeout(() => document.getElementById('cookieBanner').classList.remove('hidden'), 1200);
+  }
+}
+
+// MOBILE CTA BAR — esconder quando está no chatbot
+function handleMobileCTAVisibility() {
+  const chatbot = document.getElementById('chatbot');
+  const bar = document.getElementById('mobileCTABar');
+  const rect = chatbot.getBoundingClientRect();
+  if (rect.top < window.innerHeight && rect.bottom > 0) {
+    bar.style.display = 'none';
+  } else {
+    if (window.innerWidth <= 640) bar.style.display = 'block';
+  }
+}
+window.addEventListener('scroll', handleMobileCTAVisibility);
+
+// COOKIES
+function getCookie(name) {
+  const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+  return match ? match[2] : null;
+}
+function setCookie(name, value, hours) {
+  const expires = new Date(Date.now() + hours * 3600000).toUTCString();
+  document.cookie = name + '=' + value + '; expires=' + expires + '; path=/';
+}
+
+// STATE
+let currentLang = 'pt';
+let conversationHistory = [];
+let questionsUsed = 0;
+const MAX_FREE = 4;
+const MAX_HISTORY = 12;
+let isUnlocked = false;
+const refParam = new URLSearchParams(window.location.search).get('ref') || '';
+
+// LANGUAGE
+function setLang(lang) {
+  currentLang = lang;
+  const t = T[lang];
+  ['pt','en','es'].forEach(l => {
+    document.getElementById('lang-'+l)?.classList.toggle('active', l===lang);
+    document.getElementById('lang-'+l+'-m')?.classList.toggle('active', l===lang);
+    document.getElementById('clang-'+l)?.classList.toggle('active', l===lang);
+  });
+  document.getElementById('nav-cta-btn').textContent = t.nav_cta;
+  document.getElementById('hero-badge-text').textContent = t.hero_badge;
+  document.getElementById('hero-title').innerHTML = t.hero_title;
+  document.getElementById('hero-sub').textContent = t.hero_sub;
+  document.getElementById('hero-btn-primary').textContent = t.hero_btn1;
+  document.getElementById('hero-btn-secondary').textContent = t.hero_btn2;
+  document.getElementById('stat1').textContent = t.stat1;
+  document.getElementById('stat2').textContent = t.stat2;
+  document.getElementById('stat3').textContent = t.stat3;
+  document.getElementById('journey-label').textContent = t.journey_label;
+  document.getElementById('journey-title').textContent = t.journey_title;
+  for(let i=1;i<=6;i++) {
+    document.getElementById('phase'+i+'-title').textContent = t['phase'+i+'_title'];
+    document.getElementById('phase'+i+'-desc').textContent = t['phase'+i+'_desc'];
+  }
+  document.getElementById('faq-label')?.textContent && (document.getElementById('faq-label').textContent = t.faq_label);
+  document.getElementById('faq-title')?.textContent && (document.getElementById('faq-title').textContent = t.faq_title);
+  document.getElementById('faq-note')?.textContent && (document.getElementById('faq-note').textContent = t.faq_note);
+  if (document.getElementById('faqGrid')) renderFAQButtons(t.faq_questions);
+  document.getElementById('chat-section-label').textContent = t.chat_section_label;
+  document.getElementById('chat-section-title').textContent = t.chat_section_title;
+  document.getElementById('chat-context-line').textContent = t.chat_context_line;
+  document.getElementById('chat-subtitle').textContent = t.chat_subtitle;
+  document.getElementById('chat-status-text').textContent = t.chat_status;
+  document.getElementById('chat-lang-label').textContent = t.chat_lang_label;
+  document.getElementById('chatInput').placeholder = t.input_placeholder;
+  updateCounter();
+  const opts = document.getElementById('chatOptions');
+  opts.innerHTML = t.options.map(o => `<button class="chat-opt-btn" onclick="selectOption('${o}')">${o}</button>`).join('');
+  document.getElementById('email-capture-text').textContent = t.email_capture;
+  document.getElementById('inlineNameInput').placeholder = t.name_placeholder;
+  document.getElementById('emailInput').placeholder = t.email_placeholder;
+  document.querySelector('.email-submit').textContent = t.email_btn;
+  document.getElementById('modal-title').textContent = t.modal_title;
+  document.getElementById('modal-desc').textContent = t.modal_desc;
+  document.getElementById('modalNameInput').placeholder = t.modal_name_ph;
+  document.getElementById('modalEmailInput').placeholder = t.modal_email_ph;
+  document.getElementById('modal-submit-btn').textContent = t.modal_btn;
+  document.getElementById('modal-note').textContent = t.modal_note;
+  document.getElementById('how-label').textContent = t.how_label;
+  document.getElementById('how-title').textContent = t.how_title;
+  document.getElementById('step1-title').textContent = t.step1_title;
+  document.getElementById('step1-desc').textContent = t.step1_desc;
+  document.getElementById('step2-title').textContent = t.step2_title;
+  document.getElementById('step2-desc').textContent = t.step2_desc;
+  document.getElementById('step3-title').textContent = t.step3_title;
+  document.getElementById('step3-desc').textContent = t.step3_desc;
+  document.getElementById('proof-label').textContent = t.proof_label;
+  document.getElementById('proof-title').textContent = t.proof_title;
+  for(let i=1;i<=4;i++) document.getElementById('proof'+i).textContent = t['proof'+i];
+  document.getElementById('cta-title').innerHTML = t.cta_title;
+  document.getElementById('cta-desc').textContent = t.cta_desc;
+  document.getElementById('cta-btn').textContent = t.cta_btn;
+  document.getElementById('footer-text').innerHTML = t.footer;
+  // Mobile CTA bar
+  const mobileBar = document.getElementById('mobileCTABar');
+  if (mobileBar) mobileBar.querySelector('.btn-primary').textContent = t.mobile_cta || t.hero_btn1;
+
+  // Secção Documentos
+  const docsTitle = document.getElementById('docs-hl-title');
+  const docsSub   = document.getElementById('docs-hl-sub');
+  const docsCta   = document.getElementById('docs-hl-cta');
+  const docsNote  = document.getElementById('docs-hl-note');
+  const docsMore  = document.getElementById('docs-hl-more');
+  const docsBadge = document.querySelector('.docs-hl-badge');
+  if (docsTitle) docsTitle.textContent = t.docs_title;
+  if (docsSub)   docsSub.textContent   = t.docs_sub;
+  if (docsCta)   docsCta.textContent   = t.docs_cta;
+  if (docsNote)  docsNote.textContent  = t.docs_note;
+  if (docsMore)  docsMore.textContent  = t.docs_more;
+  if (docsBadge) docsBadge.textContent = t.docs_badge;
+  // Secção recursos
+  const setEl = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val; };
+  setEl('recursos-label', t.recursos_label);
+  setEl('recursos-title', t.recursos_title);
+  setEl('recursos-sub', t.recursos_sub);
+  setEl('rec-chat-title', t.rec_chat_title);
+  setEl('rec-chat-desc', t.rec_chat_desc);
+  setEl('rec-docs-title', t.rec_docs_title);
+  setEl('rec-docs-desc', t.rec_docs_desc);
+  setEl('rec-esp-title', t.rec_esp_title);
+  setEl('rec-esp-desc', t.rec_esp_desc);
+  // Menu mobile
+  setEl('mm-docs', t.mm_docs);
+  setEl('mm-esp', t.mm_esp);
+  setEl('mm-afil', t.mm_afil);
+  setEl('nav-docs-link', '📄 ' + t.mm_docs);
+  setEl('nav-esp-link', '🤝 ' + t.mm_esp);
+  conversationHistory = [];
+  const chatMessages = document.getElementById('chatMessages');
+  chatMessages.innerHTML = '';
+  addMessage(t.welcome, 'bot');
+}
+
+function renderFAQButtons(questions) {
+  const grid = document.getElementById('faqGrid');
+  grid.innerHTML = questions.map(q =>
+    `<button class="faq-btn" onclick="sendFAQQuestion('${q.text.replace(/'/g,"\\'")}')">
+      <span class="faq-icon">${q.icon}</span>${q.text}
+    </button>`
+  ).join('');
+}
+
+function sendFAQQuestion(question) {
+  document.getElementById('chatbot').scrollIntoView({ behavior: 'smooth' });
+  setTimeout(() => {
+    document.getElementById('chatOptions').classList.add('hidden');
+    handleUserMessage(question);
+  }, 600);
+}
+
+function updateCounter() {
+  const counter = document.getElementById('questionCounter');
+  const counterText = document.getElementById('counterText');
+  const t = T[currentLang];
+  if(isUnlocked) {
+    counterText.textContent = t.counter_unlimited;
+    counter.style.background = '#F0FDF4';
+    counter.style.borderColor = '#86EFAC';
+    counter.style.color = '#166534';
+  } else {
+    const remaining = MAX_FREE - questionsUsed;
+    counterText.textContent = t.counter.replace('{n}', remaining);
+    counter.style.background = '#FFF8E7';
+    counter.style.borderColor = '#FDE68A';
+    counter.style.color = '#92400E';
+  }
+}
+
+async function callClaude(userMessage) {
+  conversationHistory.push({ role: 'user', content: userMessage });
+  if (conversationHistory.length > MAX_HISTORY) {
+    conversationHistory = conversationHistory.slice(-MAX_HISTORY);
+  }
+  const response = await fetch('/api/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ messages: conversationHistory })
+  });
+  const data = await response.json();
+  const reply = data.reply || 'Erro na resposta.';
+  conversationHistory.push({ role: 'assistant', content: reply });
+  return reply;
+}
+
+async function selectOption(topic) {
+  document.getElementById('chatOptions').classList.add('hidden');
+  await handleUserMessage(topic);
+}
+
+async function sendMessage() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  document.getElementById('chatOptions').classList.add('hidden');
+  await handleUserMessage(text);
+}
+
+async function handleUserMessage(text) {
+  if (!isUnlocked && questionsUsed >= MAX_FREE) { showEmailCapture(); return; }
+  addMessage(text, 'user');
+  showTyping();
+  try {
+    const reply = await callClaude(text);
+    removeTyping();
+    addMessage(reply, 'bot');
+    if (!isUnlocked) {
+      questionsUsed++;
+      setCookie('novu_questions', questionsUsed, 24);
+      updateCounter();
+      if (questionsUsed >= MAX_FREE) setTimeout(() => showEmailCapture(), 800);
+    }
+  } catch(e) {
+    removeTyping();
+    addMessage('Desculpa, ocorreu um erro. Tenta novamente.', 'bot');
+  }
+}
+
+function showEmailCapture() {
+  document.getElementById('emailCapture').classList.remove('hidden');
+  document.getElementById('chatMessages').scrollTop = 99999;
+}
+
+async function submitInlineEmail() {
+  const name = document.getElementById('inlineNameInput').value.trim();
+  const email = document.getElementById('emailInput').value.trim();
+  const consent = document.getElementById('inlineConsent').checked;
+  if (!consent) { document.getElementById('inline-consent-label').style.color = '#EF4444'; return; }
+  if (!email || !email.includes('@')) { document.getElementById('emailInput').style.borderColor = '#EF4444'; return; }
+  await registerUser(name, email);
+  document.getElementById('emailCapture').classList.add('hidden');
+  const successMsg = document.getElementById('successMsg');
+  successMsg.textContent = T[currentLang].success;
+  successMsg.style.display = 'block';
+  isUnlocked = true;
+  setCookie('novu_unlocked', 'true', 720);
+  updateCounter();
+  setTimeout(() => showShareNudge(), 1200);
+}
+
+function showShareNudge() {
+  const nudgeMap = {
+    pt: { text: 'Conheces alguém que também está a planear vir para Portugal? A NOVU pode ajudar.', btn: 'Partilhar no WhatsApp', wa: 'Encontrei uma plataforma que ajuda imenso quem está a viver ou planeia ir para Portugal 🇵🇹\n\nResponde a perguntas sobre vistos, documentos, emprego, bancos e muito mais — em português.\n\n👉 novuai.pt' },
+    en: { text: 'Know someone planning to move to Portugal? NOVU can help them too.', btn: 'Share on WhatsApp', wa: 'Found this platform that helps a lot with living in Portugal 🇵🇹\n\nAnswers questions about visas, documents, jobs, banking and more.\n\n👉 novuai.pt' },
+    es: { text: '¿Conoces a alguien que planea ir a Portugal? La NOVU puede ayudarle.', btn: 'Compartir en WhatsApp', wa: 'Encontré una plataforma que ayuda mucho a vivir en Portugal 🇵🇹\n\nResponde preguntas sobre visados, documentos, trabajo, bancos y más.\n\n👉 novuai.pt' }
+  };
+  const n = nudgeMap[currentLang] || nudgeMap['pt'];
+  const existing = document.getElementById('shareNudge');
+  if (existing) return;
+  const nudge = document.createElement('div');
+  nudge.id = 'shareNudge';
+  nudge.style.cssText = 'margin:12px 0 4px;padding:14px 16px;background:#F5F9FF;border:1px solid #D0E4F7;border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;animation:fadeUp 0.4s ease both';
+  nudge.innerHTML = `<span style="font-size:0.85rem;color:#4A6580;line-height:1.45;flex:1">${n.text}</span>
+    <a href="https://wa.me/?text=${encodeURIComponent(n.wa)}" target="_blank" rel="noopener noreferrer"
+      style="display:inline-flex;align-items:center;gap:6px;background:#25D366;color:white;border-radius:50px;padding:8px 16px;font-size:0.82rem;font-weight:600;text-decoration:none;white-space:nowrap;flex-shrink:0">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      ${n.btn}
+    </a>`;
+  const successMsg = document.getElementById('successMsg');
+  if (successMsg && successMsg.parentNode) successMsg.parentNode.insertBefore(nudge, successMsg.nextSibling);
+}
+function openModal() { document.getElementById('emailModal').classList.add('open'); }
+function closeModal() { document.getElementById('emailModal').classList.remove('open'); }
+document.getElementById('emailModal').addEventListener('click', function(e) { if(e.target===this) closeModal(); });
+
+async function submitModalEmail() {
+  const name = document.getElementById('modalNameInput').value.trim();
+  const email = document.getElementById('modalEmailInput').value.trim();
+  const consent = document.getElementById('modalConsent').checked;
+  if (!consent) { document.getElementById('modal-consent-label').style.color = '#EF4444'; return; }
+  if (!email || !email.includes('@')) { document.getElementById('modalEmailInput').style.borderColor = '#EF4444'; return; }
+  const btn = document.getElementById('modal-submit-btn');
+  btn.textContent = '...'; btn.disabled = true;
+  await registerUser(name, email);
+  document.getElementById('modalForm').style.display = 'none';
+  const s = document.getElementById('modalSuccess');
+  s.textContent = T[currentLang].modal_success;
+  s.style.display = 'block';
+  isUnlocked = true;
+  setCookie('novu_unlocked', 'true', 720);
+  updateCounter();
+  setTimeout(() => closeModal(), 3000);
+}
+
+async function registerUser(name, email) {
+  try {
+    await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'register', name, email, lang: currentLang, ref: refParam })
+    });
+    await fetch('https://formspree.io/f/xdawgkvq', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ name, email, lang: currentLang, ref: refParam, source: 'novu-registration' })
+    });
+  } catch(e) {}
+}
+
+function addMessage(text, type) {
+  const container = document.getElementById('chatMessages');
+  const wrapper = document.createElement('div');
+  const msg = document.createElement('div');
+  msg.className = 'msg ' + type;
+  const avatar = document.createElement('div');
+  avatar.className = 'msg-avatar';
+  avatar.textContent = type === 'bot' ? 'N' : 'Tu';
+  const bubble = document.createElement('div');
+  bubble.className = 'msg-bubble';
+
+  // Disclaimer automático para temas legais
+  const legalKeywords = ['visto','autorização','aima','advogado','lei','legal','contrato','nif','niss','irs','finanças','segurança social','residência','cidadania','renovação','reagrupamento','diploma','trabalho','recibo verde','tribunal','multa','prazo'];
+  const lowerText = text.toLowerCase();
+  const isLegalTopic = type === 'bot' && legalKeywords.some(k => lowerText.includes(k));
+  const disclaimerMap = {
+    pt: '⚠️ <em>Informação de carácter geral. Não constitui aconselhamento jurídico. Para o teu caso específico, consulta um advogado.</em>',
+    en: '⚠️ <em>General information only. This does not constitute legal advice. For your specific situation, consult a lawyer.</em>',
+    es: '⚠️ <em>Información de carácter general. No constituye asesoramiento jurídico. Para tu caso específico, consulta un abogado.</em>'
+  };
+
+  let finalText = text.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  if (isLegalTopic) {
+    finalText += '<br><br><small style="color:#8FA3BC;font-size:0.78rem;line-height:1.4;display:block;margin-top:6px;padding-top:6px;border-top:1px solid #E8EEF5">' + (disclaimerMap[currentLang] || disclaimerMap['pt']) + '</small>';
+  }
+  bubble.innerHTML = finalText;
+  msg.appendChild(avatar);
+  msg.appendChild(bubble);
+  wrapper.appendChild(msg);
+  if (type === 'bot') {
+    const actions = document.createElement('div');
+    actions.className = 'msg-actions';
+    const cleanText = bubble.innerText || text.replace(/<[^>]*>/g, '');
+    const shareTemplate = T[currentLang].whatsapp_share || '💬 Resposta da NOVU:\n\n{text}\n\n👉 novuai.pt';
+    const waText = encodeURIComponent(shareTemplate.replace('{text}', cleanText));
+    const waBtn = document.createElement('a');
+    waBtn.className = 'whatsapp-btn';
+    waBtn.href = 'https://wa.me/?text=' + waText;
+    waBtn.target = '_blank';
+    waBtn.rel = 'noopener noreferrer';
+    waBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Partilhar no WhatsApp';
+    actions.appendChild(waBtn);
+    wrapper.appendChild(actions);
+  }
+  container.appendChild(wrapper);
+  container.scrollTop = container.scrollHeight;
+}
+
+function showTyping() {
+  const container = document.getElementById('chatMessages');
+  const typing = document.createElement('div');
+  typing.className = 'msg'; typing.id = 'typingIndicator';
+  typing.innerHTML = '<div class="msg-avatar">N</div><div class="msg-bubble"><div class="typing"><span></span><span></span><span></span></div></div>';
+  container.appendChild(typing);
+  container.scrollTop = container.scrollHeight;
+}
+
+function removeTyping() {
+  const el = document.getElementById('typingIndicator');
+  if(el) el.remove();
+}
+
+// ── MENU MOBILE ──
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const btn = document.getElementById('hamburgerBtn');
+  menu.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+// Fechar menu ao clicar fora
+document.addEventListener('click', function(e) {
+  const menu = document.getElementById('mobileMenu');
+  const btn = document.getElementById('hamburgerBtn');
+  if (menu && !menu.contains(e.target) && btn && !btn.contains(e.target)) {
+    menu.classList.remove('open');
+    btn.classList.remove('open');
+  }
+});
+
+// INIT
+const savedUnlocked = getCookie('novu_unlocked');
+const savedQuestions = getCookie('novu_questions');
+if (savedUnlocked === 'true') {
+  isUnlocked = true;
+} else if (savedQuestions) {
+  questionsUsed = parseInt(savedQuestions) || 0;
+}
+updateCounter();
+setLang('pt');
+</script>
 </body>
 </html>
