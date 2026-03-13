@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Empregos em Portugal para Imigrantes — NOVU</title>
+<meta name="description" content="Vagas de emprego verificadas para imigrantes em Portugal. Part-time, freelance, restauração, hotelaria. Empresas com perfil verificado e avaliação de confiança.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue-deep: #0A2540;
+  --blue-mid:  #1A4A7A;
+  --blue-bright: #2E7FD4;
+  --blue-light: #EBF4FF;
+  --blue-pale:  #F5F9FF;
+  --white: #FFFFFF;
+  --gray-100: #F8FAFC;
+  --gray-200: #E8EEF5;
+  --gray-400: #8FA3BC;
+  --gray-600: #4A6580;
+  --green: #16A34A;
+  --green-light: #DCFCE7;
+  --amber: #D97706;
+  --amber-light: #FEF3C7;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; color: var(--blue-deep); background: var(--white); }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: rgba(255,255,255,0.95); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--gray-200);
+  padding: 0 5%; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--blue-deep); text-decoration: none; }
+.nav-logo span { color: var(--blue-bright); }
+.nav-right { display: flex; align-items: center; gap: 12px; }
+.nav-back { background: transparent; border: 1.5px solid var(--gray-200); color: var(--gray-600); padding: 7px 16px; border-radius: 50px; font-size: 0.82rem; font-weight: 500; cursor: pointer; text-decoration: none; transition: all 0.2s; white-space: nowrap; }
+.nav-back:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
+.nav-post-btn { background: var(--blue-deep); color: white; border: none; padding: 9px 20px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.86rem; font-weight: 600; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+.nav-post-btn:hover { background: var(--blue-mid); transform: translateY(-1px); }
+.lang-selector { display: flex; gap: 4px; }
+.lang-btn { background: transparent; border: 1.5px solid var(--gray-200); color: var(--gray-600); padding: 4px 10px; border-radius: 50px; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.lang-btn:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
+.lang-btn.active { background: var(--blue-deep); color: white; border-color: var(--blue-deep); }
+/* NAV MOBILE */
+.nav-mobile { display: none; align-items: center; gap: 8px; }
+.hamburger { background: none; border: none; cursor: pointer; padding: 4px; display: flex; flex-direction: column; gap: 5px; }
+.hamburger span { display: block; width: 22px; height: 2px; background: var(--blue-deep); border-radius: 2px; transition: all 0.3s; }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu { display: none; position: fixed; top: 56px; left: 0; right: 0; z-index: 199; background: white; border-bottom: 1px solid var(--gray-200); padding: 16px 20px 24px; flex-direction: column; gap: 4px; box-shadow: 0 8px 24px rgba(10,37,64,0.1); }
+.mobile-menu.open { display: flex; }
+.mobile-menu-link { display: flex; align-items: center; gap: 12px; padding: 13px 16px; border-radius: 12px; text-decoration: none; color: var(--blue-deep); font-weight: 600; font-size: 0.95rem; transition: background 0.2s; }
+.mobile-menu-link:hover { background: var(--blue-pale); }
+.mobile-menu-link.active-page { color: var(--blue-bright); }
+.mobile-menu-divider { height: 1px; background: var(--gray-200); margin: 8px 0; }
+.mobile-menu-post { background: var(--blue-deep); color: white; border: none; padding: 14px; border-radius: 50px; font-size: 0.95rem; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; margin-top: 4px; transition: all 0.2s; }
+.mobile-menu-post:hover { background: var(--blue-mid); }
+@media (max-width: 820px) { #navDesktop { display: none !important; } .nav-mobile { display: flex; } }
+@media (max-width: 600px) { nav { padding: 0 16px; height: 56px; } .mobile-menu { top: 56px; } }
+
+/* ── HERO ── */
+.hero {
+  padding: 100px 5% 52px;
+  background: linear-gradient(160deg, var(--blue-pale) 0%, var(--white) 70%);
+  border-bottom: 1px solid var(--gray-200);
+}
+.hero-inner { max-width: 960px; margin: 0 auto; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--green-light); color: var(--green);
+  border: 1px solid #BBF7D0; border-radius: 50px;
+  padding: 6px 14px; font-size: 0.76rem; font-weight: 700;
+  margin-bottom: 20px; letter-spacing: 0.3px;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  font-weight: 800; line-height: 1.15;
+  color: var(--blue-deep); margin-bottom: 14px;
+}
+.hero h1 span { color: var(--blue-bright); }
+.hero-sub {
+  font-size: 1rem; color: var(--gray-600);
+  max-width: 560px; line-height: 1.65; margin-bottom: 32px;
+}
+.hero-stats {
+  display: flex; gap: 32px; flex-wrap: wrap;
+  padding-top: 24px; border-top: 1px solid var(--gray-200);
+}
+.hero-stat { text-align: left; }
+.hero-stat-num { font-size: 1.6rem; font-weight: 700; color: var(--blue-deep); display: block; }
+.hero-stat-lbl { font-size: 0.78rem; color: var(--gray-400); }
+
+/* ── FILTROS ── */
+.filters-bar {
+  background: white; border-bottom: 1px solid var(--gray-200);
+  padding: 0 5%; position: sticky; top: 64px; z-index: 100;
+}
+.filters-inner {
+  max-width: 960px; margin: 0 auto;
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 0; flex-wrap: wrap;
+}
+.filter-chip {
+  background: var(--gray-100); color: var(--gray-600);
+  border: 1.5px solid var(--gray-200); border-radius: 50px;
+  padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s; white-space: nowrap;
+}
+.filter-chip:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
+.filter-chip.active { background: var(--blue-deep); color: white; border-color: var(--blue-deep); }
+.filter-city {
+  margin-left: auto; border: 1.5px solid var(--gray-200);
+  border-radius: 50px; padding: 7px 16px;
+  font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 500;
+  color: var(--blue-deep); background: white; cursor: pointer;
+  outline: none; transition: border-color 0.2s;
+}
+.filter-city:focus { border-color: var(--blue-bright); }
+@media (max-width: 600px) { .filters-bar { top: 56px; } .filter-city { margin-left: 0; width: 100%; } }
+
+/* ── MAIN LAYOUT ── */
+.main-wrap { max-width: 960px; margin: 0 auto; padding: 32px 5% 64px; display: grid; grid-template-columns: 1fr 300px; gap: 28px; }
+@media (max-width: 768px) { .main-wrap { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+
+/* ── VAGAS ── */
+.vagas-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.vagas-count { font-size: 0.84rem; color: var(--gray-600); }
+.vagas-count strong { color: var(--blue-deep); }
+
+.vaga-card {
+  border: 1.5px solid var(--gray-200); border-radius: 16px;
+  background: white; padding: 22px 24px;
+  margin-bottom: 14px; cursor: pointer;
+  transition: all 0.2s; position: relative; overflow: hidden;
+}
+.vaga-card:hover { border-color: var(--blue-bright); box-shadow: 0 8px 28px rgba(10,37,64,0.08); transform: translateY(-1px); }
+.vaga-card.destaque { border-color: var(--amber); background: linear-gradient(to right, #FFFBEB, white); }
+.destaque-badge {
+  position: absolute; top: 0; right: 20px;
+  background: var(--amber); color: white;
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.5px;
+  padding: 3px 10px; border-radius: 0 0 8px 8px;
+  text-transform: uppercase;
+}
+
+.vaga-top { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px; }
+.empresa-avatar {
+  width: 46px; height: 46px; border-radius: 12px;
+  background: var(--blue-light); display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; flex-shrink: 0; font-weight: 700; color: var(--blue-bright);
+  border: 1.5px solid var(--gray-200);
+}
+.vaga-info { flex: 1; }
+.vaga-titulo { font-weight: 700; font-size: 1rem; color: var(--blue-deep); margin-bottom: 3px; }
+.empresa-nome { font-size: 0.84rem; color: var(--gray-600); display: flex; align-items: center; gap: 6px; }
+.empresa-verificada { color: var(--green); font-size: 0.75rem; font-weight: 700; display: inline-flex; align-items: center; gap: 3px; }
+.empresa-verificada svg { width: 13px; height: 13px; }
+.stars { display: inline-flex; gap: 1px; }
+.star { font-size: 0.7rem; }
+
+.vaga-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+.tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: var(--gray-100); color: var(--gray-600);
+  border-radius: 50px; padding: 4px 12px; font-size: 0.76rem; font-weight: 600;
+}
+.tag-tipo { background: var(--blue-light); color: var(--blue-mid); }
+.tag-salario { background: var(--green-light); color: var(--green); font-weight: 700; }
+
+.vaga-desc { font-size: 0.85rem; color: var(--gray-600); line-height: 1.55; margin-bottom: 16px; }
+
+.vaga-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.vaga-meta { font-size: 0.76rem; color: var(--gray-400); display: flex; gap: 12px; align-items: center; }
+.vaga-meta span { display: flex; align-items: center; gap: 4px; }
+.btn-candidatar {
+  background: var(--blue-deep); color: white; border: none;
+  padding: 9px 20px; border-radius: 50px;
+  font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.btn-candidatar:hover { background: var(--blue-bright); }
+.btn-ver-mais {
+  background: transparent; color: var(--blue-bright);
+  border: 1.5px solid var(--blue-bright);
+  padding: 9px 20px; border-radius: 50px;
+  font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.btn-ver-mais:hover { background: var(--blue-light); }
+
+/* ── SIDEBAR ── */
+.sidebar { }
+.sidebar-box {
+  border: 1.5px solid var(--gray-200); border-radius: 16px;
+  padding: 22px; background: white; margin-bottom: 16px;
+}
+.sidebar-title { font-weight: 700; font-size: 0.92rem; color: var(--blue-deep); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.sidebar-cta {
+  background: var(--blue-deep); border-radius: 16px;
+  padding: 22px; color: white; margin-bottom: 16px;
+}
+.sidebar-cta h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 8px; }
+.sidebar-cta p { font-size: 0.82rem; color: rgba(255,255,255,0.7); line-height: 1.5; margin-bottom: 16px; }
+.btn-sidebar-cta {
+  background: white; color: var(--blue-deep); border: none;
+  width: 100%; padding: 11px; border-radius: 50px;
+  font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 700;
+  cursor: pointer; transition: all 0.2s;
+}
+.btn-sidebar-cta:hover { background: var(--blue-light); }
+
+.empresa-mini { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--gray-200); }
+.empresa-mini:last-child { border-bottom: none; padding-bottom: 0; }
+.emp-avatar { width: 36px; height: 36px; border-radius: 8px; background: var(--blue-light); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+.emp-info { flex: 1; }
+.emp-name { font-size: 0.84rem; font-weight: 700; color: var(--blue-deep); }
+.emp-vagas { font-size: 0.74rem; color: var(--gray-400); }
+.emp-stars { font-size: 0.7rem; color: var(--amber); }
+
+/* ── MODAL CANDIDATURA ── */
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(10,37,64,0.6); z-index: 300; align-items: center; justify-content: center; backdrop-filter: blur(4px); padding: 20px; }
+.modal-overlay.open { display: flex; }
+.modal {
+  background: white; border-radius: 20px; padding: 36px 32px;
+  max-width: 480px; width: 100%; position: relative;
+  animation: slideUp 0.3s ease;
+}
+@keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.modal-close { position: absolute; top: 14px; right: 16px; background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--gray-400); line-height: 1; }
+.modal-close:hover { color: var(--blue-deep); }
+.modal-vaga-info { background: var(--blue-pale); border: 1px solid var(--gray-200); border-radius: 12px; padding: 14px 16px; margin-bottom: 22px; }
+.modal-vaga-titulo { font-weight: 700; font-size: 0.95rem; color: var(--blue-deep); }
+.modal-vaga-empresa { font-size: 0.82rem; color: var(--gray-600); margin-top: 3px; }
+.modal h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--blue-deep); margin-bottom: 6px; }
+.modal-sub { font-size: 0.85rem; color: var(--gray-600); margin-bottom: 22px; line-height: 1.5; }
+.form-group { display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; }
+.form-group label { font-size: 0.8rem; font-weight: 600; color: var(--blue-deep); }
+.form-input {
+  border: 1.5px solid var(--gray-200); border-radius: 10px;
+  padding: 10px 14px; font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem; color: var(--blue-deep); outline: none; transition: border-color 0.2s;
+}
+.form-input:focus { border-color: var(--blue-bright); }
+.modal-privacy { font-size: 0.74rem; color: var(--gray-400); line-height: 1.5; margin: 10px 0 18px; }
+.modal-privacy a { color: var(--blue-bright); }
+.btn-modal-submit {
+  background: var(--blue-deep); color: white; border: none; width: 100%;
+  padding: 13px; border-radius: 50px; font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+}
+.btn-modal-submit:hover { background: var(--blue-mid); }
+.btn-modal-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+.modal-success-box { display: none; text-align: center; padding: 20px 0; }
+.modal-success-box.show { display: block; }
+.modal-success-icon { font-size: 2.5rem; margin-bottom: 12px; }
+.modal-success-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--blue-deep); margin-bottom: 8px; }
+.modal-success-msg { font-size: 0.88rem; color: var(--gray-600); line-height: 1.6; }
+
+/* ── MODAL EMPRESA ── */
+.modal-empresa-form { display: block; }
+
+/* ── EMPTY STATE ── */
+.empty-state { text-align: center; padding: 48px 24px; color: var(--gray-400); }
+.empty-state-icon { font-size: 2.5rem; margin-bottom: 12px; }
+.empty-state p { font-size: 0.9rem; line-height: 1.6; }
+
+/* ── TOAST ── */
+.toast { position: fixed; bottom: 24px; right: 24px; z-index: 500; background: var(--blue-deep); color: white; padding: 12px 20px; border-radius: 50px; font-size: 0.85rem; font-weight: 500; opacity: 0; transform: translateY(10px); transition: all 0.3s; pointer-events: none; }
+.toast.show { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/index.html" class="nav-logo">N<span>O</span>VU</a>
+  <div class="nav-right" id="navDesktop">
+    <a href="/index.html" class="nav-back" id="nav-home-link">🤖 Assistente</a>
+    <a href="/documentos.html" class="nav-back" id="nav-docs-link">📄 Documentos</a>
+    <a href="/especialistas.html" class="nav-back" id="nav-esp-link">🤝 Especialistas</a>
+    <div class="lang-selector">
+      <button id="lang-pt" class="lang-btn active" onclick="setLang('pt')">PT</button>
+      <button id="lang-en" class="lang-btn" onclick="setLang('en')">EN</button>
+      <button id="lang-es" class="lang-btn" onclick="setLang('es')">ES</button>
+    </div>
+    <button class="nav-post-btn" onclick="openEmpresaModal()" id="nav-post-btn">+ Publicar Vaga</button>
+  </div>
+  <div class="nav-mobile">
+    <div class="lang-selector">
+      <button id="lang-pt-m" class="lang-btn active" onclick="setLang('pt')">PT</button>
+      <button id="lang-en-m" class="lang-btn" onclick="setLang('en')">EN</button>
+      <button id="lang-es-m" class="lang-btn" onclick="setLang('es')">ES</button>
+    </div>
+    <button class="hamburger" id="hamburgerBtn" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/index.html" class="mobile-menu-link">🤖 <span id="mm-home">Assistente IA</span></a>
+  <a href="/documentos.html" class="mobile-menu-link">📄 <span id="mm-docs">Documentos</span></a>
+  <a href="/especialistas.html" class="mobile-menu-link">🤝 <span id="mm-esp">Especialistas</span></a>
+  <a href="/empregos.html" class="mobile-menu-link active-page">💼 <span id="mm-emp">Empregos</span></a>
+  <div class="mobile-menu-divider"></div>
+  <button class="mobile-menu-post" onclick="openEmpresaModal();toggleMenu()" id="mm-post">+ Publicar Vaga</button>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge" id="hero-badge">✓ Vagas verificadas · Empresas com perfil</div>
+    <h1 id="hero-title">Empregos em Portugal <span>para imigrantes</span></h1>
+    <p class="hero-sub" id="hero-sub">Part-time, freelance, restauração, hotelaria e muito mais. Todas as vagas com salário visível e empresas verificadas — sem surpresas.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="hero-stat-num" id="stat-vagas">12</span><span class="hero-stat-lbl" id="stat-vagas-lbl">vagas activas</span></div>
+      <div class="hero-stat"><span class="hero-stat-num" id="stat-empresas">7</span><span class="hero-stat-lbl" id="stat-empresas-lbl">empresas verificadas</span></div>
+      <div class="hero-stat"><span class="hero-stat-num">7d</span><span class="hero-stat-lbl" id="stat-expira-lbl">validade máxima</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- FILTROS -->
+<div class="filters-bar">
+  <div class="filters-inner">
+    <button class="filter-chip active" onclick="filterCat('todos', this)" id="fchip-todos">Todos</button>
+    <button class="filter-chip" onclick="filterCat('part-time', this)" id="fchip-parttime">Part-time</button>
+    <button class="filter-chip" onclick="filterCat('freelance', this)" id="fchip-freelance">Freelance</button>
+    <button class="filter-chip" onclick="filterCat('restauracao', this)" id="fchip-restauracao">Restauração</button>
+    <button class="filter-chip" onclick="filterCat('hotelaria', this)" id="fchip-hotelaria">Hotelaria</button>
+    <button class="filter-chip" onclick="filterCat('limpeza', this)" id="fchip-limpeza">Limpeza</button>
+    <button class="filter-chip" onclick="filterCat('remoto', this)" id="fchip-remoto">Remoto</button>
+    <select class="filter-city" id="filterCity" onchange="filterCidade()">
+      <option value="todas" id="opt-todas">Todas as cidades</option>
+      <option value="Lisboa">Lisboa</option>
+      <option value="Porto">Porto</option>
+      <option value="Braga">Braga</option>
+      <option value="Faro">Faro</option>
+      <option value="Coimbra">Coimbra</option>
+      <option value="Setúbal">Setúbal</option>
+    </select>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main-wrap">
+
+  <!-- VAGAS -->
+  <div>
+    <div class="vagas-header">
+      <p class="vagas-count" id="vagas-count"><strong id="vagas-num">12</strong> <span id="vagas-txt">vagas encontradas</span></p>
+    </div>
+    <div id="vagasList"></div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-cta">
+      <h3 id="sb-cta-title">A tua empresa contrata imigrantes?</h3>
+      <p id="sb-cta-desc">Publica a tua vaga gratuitamente e chega a milhares de candidatos qualificados e motivados.</p>
+      <button class="btn-sidebar-cta" onclick="openEmpresaModal()" id="sb-cta-btn">+ Publicar Vaga Grátis</button>
+    </div>
+
+    <div class="sidebar-box">
+      <div class="sidebar-title">🏆 <span id="sb-emp-title">Empresas em destaque</span></div>
+      <div id="empresasDestaque"></div>
+    </div>
+
+    <div class="sidebar-box">
+      <div class="sidebar-title">💡 <span id="sb-tip-title">Dica NOVU</span></div>
+      <p style="font-size:0.82rem;color:var(--gray-600);line-height:1.6;" id="sb-tip-text">Todas as vagas têm salário visível e empresa verificada. Nunca aceites uma vaga que peça dinheiro antecipado — é sempre burla.</p>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CANDIDATURA -->
+<div class="modal-overlay" id="candidaturaModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeCandidaturaModal()">×</button>
+    <div class="modal-vaga-info">
+      <div class="modal-vaga-titulo" id="modal-vaga-titulo">—</div>
+      <div class="modal-vaga-empresa" id="modal-vaga-empresa">—</div>
+    </div>
+    <h2 id="modal-cand-title">Enviar candidatura</h2>
+    <p class="modal-sub" id="modal-cand-sub">A empresa receberá os teus dados e entrará em contacto. Gratuito e sem compromisso.</p>
+    <div id="candidaturaForm">
+      <div class="form-group">
+        <label id="lbl-nome">Nome completo *</label>
+        <input class="form-input" type="text" id="cand-nome" placeholder="Ex: João da Silva" required>
+      </div>
+      <div class="form-group">
+        <label id="lbl-tel">Telefone / WhatsApp *</label>
+        <input class="form-input" type="tel" id="cand-tel" placeholder="Ex: +351 912 345 678" required>
+      </div>
+      <div class="form-group">
+        <label id="lbl-email">Email *</label>
+        <input class="form-input" type="email" id="cand-email" placeholder="Ex: joao@email.com" required>
+      </div>
+      <div class="form-group">
+        <label id="lbl-msg">Mensagem curta (opcional)</label>
+        <textarea class="form-input" id="cand-msg" rows="3" placeholder="Ex: Tenho experiência em restauração e disponibilidade imediata." style="resize:vertical;border-radius:10px;"></textarea>
+      </div>
+      <p class="modal-privacy" id="modal-privacy-txt">🔒 Os teus dados são partilhados apenas com a empresa desta vaga. Ver <a href="/privacidade.html">Política de Privacidade</a>.</p>
+      <button class="btn-modal-submit" onclick="submitCandidatura()" id="btn-candidatar-submit">
+        <span id="btn-cand-txt">Enviar candidatura</span>
+      </button>
+    </div>
+    <div class="modal-success-box" id="candidaturaSuccess">
+      <div class="modal-success-icon">✅</div>
+      <div class="modal-success-title" id="cand-success-title">Candidatura enviada!</div>
+      <p class="modal-success-msg" id="cand-success-msg">A empresa receberá os teus dados e entrará em contacto nas próximas 48 horas. Boa sorte!</p>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL EMPRESA — PUBLICAR VAGA -->
+<div class="modal-overlay" id="empresaModal">
+  <div class="modal" style="max-width:520px;">
+    <button class="modal-close" onclick="closeEmpresaModal()">×</button>
+    <h2 id="modal-emp-title">Publicar uma vaga</h2>
+    <p class="modal-sub" id="modal-emp-sub">Preenche os detalhes da vaga. A tua empresa ficará com perfil verificado na NOVU — com estrelas de avaliação dos candidatos.</p>
+    <div id="empresaForm">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div class="form-group">
+          <label id="lbl-empresa">Nome da empresa *</label>
+          <input class="form-input" type="text" id="emp-nome" placeholder="Ex: Restaurante Solar">
+        </div>
+        <div class="form-group">
+          <label id="lbl-nif">NIF da empresa *</label>
+          <input class="form-input" type="text" id="emp-nif" placeholder="Ex: 509876543">
+        </div>
+        <div class="form-group">
+          <label id="lbl-emp-cidade">Cidade *</label>
+          <input class="form-input" type="text" id="emp-cidade" placeholder="Ex: Lisboa">
+        </div>
+        <div class="form-group">
+          <label id="lbl-emp-email">Email da empresa *</label>
+          <input class="form-input" type="email" id="emp-email" placeholder="rh@empresa.pt">
+        </div>
+      </div>
+      <div class="form-group" style="margin-top:6px;">
+        <label id="lbl-vaga-titulo">Título da vaga *</label>
+        <input class="form-input" type="text" id="emp-vaga-titulo" placeholder="Ex: Empregado de Mesa — Part-time">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div class="form-group">
+          <label id="lbl-categoria">Categoria *</label>
+          <select class="form-input" id="emp-categoria">
+            <option value="">Escolher...</option>
+            <option value="part-time">Part-time</option>
+            <option value="freelance">Freelance</option>
+            <option value="restauracao">Restauração</option>
+            <option value="hotelaria">Hotelaria</option>
+            <option value="limpeza">Limpeza</option>
+            <option value="remoto">Remoto</option>
+            <option value="outros">Outros</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label id="lbl-tipo-rem">Tipo de remuneração *</label>
+          <select class="form-input" id="emp-tipo-rem">
+            <option value="">Escolher...</option>
+            <option value="hora">Por hora (€/h)</option>
+            <option value="mes">Mensal (€/mês)</option>
+            <option value="tarefa">Por tarefa (€/tarefa)</option>
+            <option value="dia">Por dia (€/dia)</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label id="lbl-valor-rem">Valor da remuneração * <span style="font-weight:400;color:var(--gray-400)">(obrigatório — transparência para os candidatos)</span></label>
+        <input class="form-input" type="text" id="emp-valor-rem" placeholder="Ex: 6,50€/h ou 900€/mês">
+      </div>
+      <div class="form-group">
+        <label id="lbl-descricao">Descrição da vaga *</label>
+        <textarea class="form-input" id="emp-descricao" rows="3" placeholder="Descreve as funções, horário, requisitos e qualquer info relevante." style="resize:vertical;border-radius:10px;"></textarea>
+      </div>
+      <p style="font-size:0.74rem;color:var(--gray-400);line-height:1.5;margin:10px 0 16px;">
+        🔒 O NIF é usado apenas para verificar a empresa. A vaga expira automaticamente em 7 dias e pode ser renovada.
+        Ver <a href="/privacidade.html" style="color:var(--blue-bright);">Política de Privacidade</a>.
+      </p>
+      <button class="btn-modal-submit" onclick="submitEmpresa()" id="btn-emp-submit">
+        <span id="btn-emp-txt">Publicar vaga grátis</span>
+      </button>
+    </div>
+    <div class="modal-success-box" id="empresaSuccess">
+      <div class="modal-success-icon">🎉</div>
+      <div class="modal-success-title" id="emp-success-title">Vaga submetida!</div>
+      <p class="modal-success-msg" id="emp-success-msg">A tua vaga será publicada após verificação. Receberás uma confirmação por email. Obrigado por confiares na NOVU.</p>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── DADOS DE DEMONSTRAÇÃO ──
+const VAGAS_DEMO = [
+  {
+    id: 1, destaque: true,
+    empresa: 'Restaurante Solar do Rio', empresaEmoji: '🍽️',
+    verificada: true, estrelas: 4.8, totalAvaliacoes: 23,
+    titulo: 'Empregado/a de Mesa — Part-time',
+    categoria: 'restauracao', tipo: 'part-time',
+    cidade: 'Lisboa', bairro: 'Belém',
+    tipoRem: 'hora', valorRem: '6,80€/h',
+    descricao: 'Procuramos empregado/a de mesa para reforço de fim-de-semana. Experiência preferida mas não obrigatória. Boa disposição essencial.',
+    diasRestantes: 5,
+    publicado: 'Há 2 dias'
+  },
+  {
+    id: 2, destaque: false,
+    empresa: 'Hotel Douro Boutique', empresaEmoji: '🏨',
+    verificada: true, estrelas: 4.5, totalAvaliacoes: 11,
+    titulo: 'Limpeza de Quartos — Full-time',
+    categoria: 'hotelaria', tipo: 'part-time',
+    cidade: 'Porto', bairro: 'Ribeira',
+    tipoRem: 'mes', valorRem: '820€/mês',
+    descricao: 'Hotel boutique no Porto procura colaborador/a para serviço de andares. Contrato de trabalho, refeições incluídas, horário fixo.',
+    diasRestantes: 3,
+    publicado: 'Há 4 dias'
+  },
+  {
+    id: 3, destaque: false,
+    empresa: 'CleanPro Lisboa', empresaEmoji: '🧹',
+    verificada: true, estrelas: 4.2, totalAvaliacoes: 8,
+    titulo: 'Assistente de Limpeza — Flexível',
+    categoria: 'limpeza', tipo: 'freelance',
+    cidade: 'Lisboa', bairro: 'Ajuda',
+    tipoRem: 'hora', valorRem: '7,00€/h',
+    descricao: 'Empresa de limpeza a crescer procura colaboradores para limpezas domésticas e comerciais. Horários flexíveis, pagamento semanal.',
+    diasRestantes: 6,
+    publicado: 'Hoje'
+  },
+  {
+    id: 4, destaque: false,
+    empresa: 'Hostel Fado & Soul', empresaEmoji: '🎵',
+    verificada: true, estrelas: 4.9, totalAvaliacoes: 34,
+    titulo: 'Recepcionista de Hostel — Noturno',
+    categoria: 'hotelaria', tipo: 'part-time',
+    cidade: 'Lisboa', bairro: 'Mouraria',
+    tipoRem: 'mes', valorRem: '750€/mês',
+    descricao: 'Hostel no coração de Lisboa procura recepcionista para turno da noite (23h–7h). Inglês obrigatório, outras línguas valorizadas.',
+    diasRestantes: 7,
+    publicado: 'Hoje'
+  },
+  {
+    id: 5, destaque: false,
+    empresa: 'Tech Remoto PT', empresaEmoji: '💻',
+    verificada: true, estrelas: 4.6, totalAvaliacoes: 5,
+    titulo: 'Apoio ao Cliente — Remoto',
+    categoria: 'remoto', tipo: 'remoto',
+    cidade: 'Remoto', bairro: '',
+    tipoRem: 'mes', valorRem: '900€/mês',
+    descricao: 'Startup portuguesa procura agente de apoio ao cliente para trabalho 100% remoto. Horário parcial, PT/EN/ES. Integração imediata.',
+    diasRestantes: 4,
+    publicado: 'Há 3 dias'
+  },
+  {
+    id: 6, destaque: false,
+    empresa: 'Bar Noite Funda', empresaEmoji: '🍺',
+    verificada: false, estrelas: 0, totalAvaliacoes: 0,
+    titulo: 'Barman / Barmaid — Fins de Semana',
+    categoria: 'restauracao', tipo: 'part-time',
+    cidade: 'Porto', bairro: 'Gaia',
+    tipoRem: 'hora', valorRem: '6,20€/h',
+    descricao: 'Bar em Vila Nova de Gaia procura barman ou barmaid para fins de semana. Experiência mínima de 6 meses. Gorjetas incluídas.',
+    diasRestantes: 2,
+    publicado: 'Há 5 dias'
+  },
+];
+
+const EMPRESAS_DESTAQUE = [
+  { emoji: '🍽️', nome: 'Restaurante Solar do Rio', vagas: 2, estrelas: 4.8 },
+  { emoji: '🏨', nome: 'Hotel Douro Boutique', vagas: 1, estrelas: 4.5 },
+  { emoji: '🎵', nome: 'Hostel Fado & Soul', vagas: 3, estrelas: 4.9 },
+  { emoji: '🧹', nome: 'CleanPro Lisboa', vagas: 2, estrelas: 4.2 },
+];
+
+// ── TRADUÇÕES ──
+const T = {
+  pt: {
+    nav_home: '🤖 Assistente', nav_docs: '📄 Documentos', nav_esp: '🤝 Especialistas',
+    nav_post: '+ Publicar Vaga',
+    mm_home: 'Assistente IA', mm_docs: 'Documentos', mm_esp: 'Especialistas', mm_emp: 'Empregos', mm_post: '+ Publicar Vaga',
+    hero_badge: '✓ Vagas verificadas · Empresas com perfil',
+    hero_title_1: 'Empregos em Portugal', hero_title_2: 'para imigrantes',
+    hero_sub: 'Part-time, freelance, restauração, hotelaria e muito mais. Todas as vagas com salário visível e empresas verificadas — sem surpresas.',
+    stat_vagas_lbl: 'vagas activas', stat_empresas_lbl: 'empresas verificadas', stat_expira_lbl: 'validade máxima',
+    fchip_todos: 'Todos', fchip_parttime: 'Part-time', fchip_freelance: 'Freelance',
+    fchip_restauracao: 'Restauração', fchip_hotelaria: 'Hotelaria', fchip_limpeza: 'Limpeza', fchip_remoto: 'Remoto',
+    opt_todas: 'Todas as cidades',
+    vagas_txt: 'vagas encontradas',
+    tag_verificada: '✓ Verificada', tag_nova: 'Empresa nova',
+    dias: 'dia', dias_plural: 'dias', restantes: 'restante',
+    btn_candidatar: 'Candidatar-me',
+    sb_cta_title: 'A tua empresa contrata imigrantes?',
+    sb_cta_desc: 'Publica a tua vaga gratuitamente e chega a milhares de candidatos qualificados.',
+    sb_cta_btn: '+ Publicar Vaga Grátis',
+    sb_emp_title: 'Empresas em destaque',
+    sb_tip_title: 'Dica NOVU',
+    sb_tip_text: 'Todas as vagas têm salário visível e empresa verificada. Nunca aceites uma vaga que peça dinheiro antecipado — é sempre burla.',
+    modal_cand_title: 'Enviar candidatura',
+    modal_cand_sub: 'A empresa receberá os teus dados e entrará em contacto. Gratuito e sem compromisso.',
+    lbl_nome: 'Nome completo *', lbl_tel: 'Telefone / WhatsApp *', lbl_email: 'Email *', lbl_msg: 'Mensagem curta (opcional)',
+    modal_privacy: '🔒 Os teus dados são partilhados apenas com a empresa desta vaga.',
+    btn_cand_txt: 'Enviar candidatura',
+    cand_success_title: 'Candidatura enviada!',
+    cand_success_msg: 'A empresa receberá os teus dados e entrará em contacto nas próximas 48 horas. Boa sorte!',
+    modal_emp_title: 'Publicar uma vaga',
+    modal_emp_sub: 'Preenche os detalhes da vaga. A tua empresa ficará com perfil verificado na NOVU.',
+    lbl_empresa: 'Nome da empresa *', lbl_nif: 'NIF da empresa *', lbl_emp_cidade: 'Cidade *', lbl_emp_email: 'Email da empresa *',
+    lbl_vaga_titulo: 'Título da vaga *', lbl_categoria: 'Categoria *', lbl_tipo_rem: 'Tipo de remuneração *',
+    lbl_valor_rem: 'Valor da remuneração *',
+    lbl_descricao: 'Descrição da vaga *',
+    btn_emp_txt: 'Publicar vaga grátis',
+    emp_success_title: 'Vaga submetida!',
+    emp_success_msg: 'A tua vaga será publicada após verificação. Receberás uma confirmação por email.',
+    vagas_plural: 'vagas', vaga_singular: 'vaga',
+  },
+  en: {
+    nav_home: '🤖 Assistant', nav_docs: '📄 Documents', nav_esp: '🤝 Specialists',
+    nav_post: '+ Post a Job',
+    mm_home: 'AI Assistant', mm_docs: 'Documents', mm_esp: 'Specialists', mm_emp: 'Jobs', mm_post: '+ Post a Job',
+    hero_badge: '✓ Verified listings · Company profiles',
+    hero_title_1: 'Jobs in Portugal', hero_title_2: 'for immigrants',
+    hero_sub: 'Part-time, freelance, restaurants, hotels and more. All listings with visible salary and verified companies — no surprises.',
+    stat_vagas_lbl: 'active jobs', stat_empresas_lbl: 'verified companies', stat_expira_lbl: 'max validity',
+    fchip_todos: 'All', fchip_parttime: 'Part-time', fchip_freelance: 'Freelance',
+    fchip_restauracao: 'Restaurants', fchip_hotelaria: 'Hotels', fchip_limpeza: 'Cleaning', fchip_remoto: 'Remote',
+    opt_todas: 'All cities',
+    vagas_txt: 'jobs found',
+    tag_verificada: '✓ Verified', tag_nova: 'New company',
+    dias: 'day', dias_plural: 'days', restantes: 'left',
+    btn_candidatar: 'Apply now',
+    sb_cta_title: 'Does your company hire immigrants?',
+    sb_cta_desc: 'Post your job for free and reach thousands of qualified candidates.',
+    sb_cta_btn: '+ Post a Free Job',
+    sb_emp_title: 'Featured companies',
+    sb_tip_title: 'NOVU Tip',
+    sb_tip_text: 'All listings have visible salary and verified companies. Never accept a job that asks for money upfront — it\'s always a scam.',
+    modal_cand_title: 'Send application',
+    modal_cand_sub: 'The company will receive your details and contact you. Free and no commitment.',
+    lbl_nome: 'Full name *', lbl_tel: 'Phone / WhatsApp *', lbl_email: 'Email *', lbl_msg: 'Short message (optional)',
+    modal_privacy: '🔒 Your data is shared only with this job\'s company.',
+    btn_cand_txt: 'Send application',
+    cand_success_title: 'Application sent!',
+    cand_success_msg: 'The company will receive your details and contact you within 48 hours. Good luck!',
+    modal_emp_title: 'Post a job',
+    modal_emp_sub: 'Fill in the job details. Your company will get a verified profile on NOVU.',
+    lbl_empresa: 'Company name *', lbl_nif: 'Company NIF *', lbl_emp_cidade: 'City *', lbl_emp_email: 'Company email *',
+    lbl_vaga_titulo: 'Job title *', lbl_categoria: 'Category *', lbl_tipo_rem: 'Pay type *',
+    lbl_valor_rem: 'Pay amount *',
+    lbl_descricao: 'Job description *',
+    btn_emp_txt: 'Post job for free',
+    emp_success_title: 'Job submitted!',
+    emp_success_msg: 'Your job will be published after verification. You\'ll receive a confirmation by email.',
+    vagas_plural: 'jobs', vaga_singular: 'job',
+  },
+  es: {
+    nav_home: '🤖 Asistente', nav_docs: '📄 Documentos', nav_esp: '🤝 Especialistas',
+    nav_post: '+ Publicar Empleo',
+    mm_home: 'Asistente IA', mm_docs: 'Documentos', mm_esp: 'Especialistas', mm_emp: 'Empleos', mm_post: '+ Publicar Empleo',
+    hero_badge: '✓ Empleos verificados · Empresas con perfil',
+    hero_title_1: 'Empleos en Portugal', hero_title_2: 'para inmigrantes',
+    hero_sub: 'Part-time, freelance, restauración, hostelería y mucho más. Todas las ofertas con salario visible y empresas verificadas — sin sorpresas.',
+    stat_vagas_lbl: 'empleos activos', stat_empresas_lbl: 'empresas verificadas', stat_expira_lbl: 'validez máxima',
+    fchip_todos: 'Todos', fchip_parttime: 'Part-time', fchip_freelance: 'Freelance',
+    fchip_restauracao: 'Restauración', fchip_hotelaria: 'Hostelería', fchip_limpeza: 'Limpieza', fchip_remoto: 'Remoto',
+    opt_todas: 'Todas las ciudades',
+    vagas_txt: 'empleos encontrados',
+    tag_verificada: '✓ Verificada', tag_nova: 'Empresa nueva',
+    dias: 'día', dias_plural: 'días', restantes: 'restante',
+    btn_candidatar: 'Postularme',
+    sb_cta_title: '¿Tu empresa contrata inmigrantes?',
+    sb_cta_desc: 'Publica tu oferta gratis y llega a miles de candidatos calificados.',
+    sb_cta_btn: '+ Publicar Empleo Gratis',
+    sb_emp_title: 'Empresas destacadas',
+    sb_tip_title: 'Consejo NOVU',
+    sb_tip_text: 'Todas las ofertas tienen salario visible y empresa verificada. Nunca aceptes una oferta que pida dinero por adelantado — siempre es estafa.',
+    modal_cand_title: 'Enviar candidatura',
+    modal_cand_sub: 'La empresa recibirá tus datos y te contactará. Gratuito y sin compromiso.',
+    lbl_nome: 'Nombre completo *', lbl_tel: 'Teléfono / WhatsApp *', lbl_email: 'Email *', lbl_msg: 'Mensaje corto (opcional)',
+    modal_privacy: '🔒 Tus datos se comparten solo con la empresa de esta oferta.',
+    btn_cand_txt: 'Enviar candidatura',
+    cand_success_title: '¡Candidatura enviada!',
+    cand_success_msg: 'La empresa recibirá tus datos y te contactará en las próximas 48 horas. ¡Buena suerte!',
+    modal_emp_title: 'Publicar una oferta',
+    modal_emp_sub: 'Rellena los detalles de la oferta. Tu empresa tendrá perfil verificado en NOVU.',
+    lbl_empresa: 'Nombre de la empresa *', lbl_nif: 'NIF de la empresa *', lbl_emp_cidade: 'Ciudad *', lbl_emp_email: 'Email de la empresa *',
+    lbl_vaga_titulo: 'Título del empleo *', lbl_categoria: 'Categoría *', lbl_tipo_rem: 'Tipo de remuneración *',
+    lbl_valor_rem: 'Valor de la remuneración *',
+    lbl_descricao: 'Descripción del empleo *',
+    btn_emp_txt: 'Publicar oferta gratis',
+    emp_success_title: '¡Oferta enviada!',
+    emp_success_msg: 'Tu oferta se publicará tras verificación. Recibirás una confirmación por email.',
+    vagas_plural: 'empleos', vaga_singular: 'empleo',
+  }
+};
+
+// ── ESTADO ──
+let currentLang = localStorage.getItem('novu_lang') || 'pt';
+let currentCat = 'todos';
+let currentCidade = 'todas';
+let vagaSeleccionada = null;
+
+// ── RENDER STARS ──
+function renderStars(n, total) {
+  if (!total) return '<span style="font-size:0.72rem;color:var(--gray-400);">Nova empresa</span>';
+  const full = Math.floor(n);
+  const half = n - full >= 0.5 ? 1 : 0;
+  let s = '';
+  for (let i = 0; i < full; i++) s += '<span class="star" style="color:#F59E0B;">★</span>';
+  if (half) s += '<span class="star" style="color:#F59E0B;">½</span>';
+  for (let i = full + half; i < 5; i++) s += '<span class="star" style="color:#D1D5DB;">★</span>';
+  return `<span class="stars">${s}</span> <span style="font-size:0.72rem;color:var(--gray-400);">${n} (${total})</span>`;
+}
+
+// ── RENDER VAGAS ──
+function renderVagas() {
+  const t = T[currentLang];
+  let lista = VAGAS_DEMO.filter(v => {
+    const catOk = currentCat === 'todos' || v.categoria === currentCat || v.tipo === currentCat;
+    const cidOk = currentCidade === 'todas' || v.cidade === currentCidade;
+    return catOk && cidOk;
+  });
+
+  document.getElementById('vagas-num').textContent = lista.length;
+  document.getElementById('vagas-txt').textContent = t.vagas_txt;
+
+  const container = document.getElementById('vagasList');
+  if (!lista.length) {
+    container.innerHTML = `<div class="empty-state"><div class="empty-state-icon">🔍</div><p>Não encontrámos vagas com estes filtros.<br>Tenta remover algum filtro ou muda de cidade.</p></div>`;
+    return;
+  }
+
+  container.innerHTML = lista.map(v => `
+    <div class="vaga-card${v.destaque ? ' destaque' : ''}">
+      ${v.destaque ? `<div class="destaque-badge">⭐ Destaque</div>` : ''}
+      <div class="vaga-top">
+        <div class="empresa-avatar">${v.empresaEmoji}</div>
+        <div class="vaga-info">
+          <div class="vaga-titulo">${v.titulo}</div>
+          <div class="empresa-nome">
+            ${v.empresa}
+            ${v.verificada ? `
+              <span class="empresa-verificada">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                ${t.tag_verificada}
+              </span>` : `<span style="font-size:0.72rem;color:var(--amber);font-weight:600;">${t.tag_nova}</span>`}
+          </div>
+          <div style="margin-top:5px;">${renderStars(v.estrelas, v.totalAvaliacoes)}</div>
+        </div>
+      </div>
+      <div class="vaga-tags">
+        <span class="tag tag-tipo">${v.tipo === 'part-time' ? 'Part-time' : v.tipo === 'freelance' ? 'Freelance' : v.tipo === 'remoto' ? 'Remoto' : 'Full-time'}</span>
+        <span class="tag">📍 ${v.cidade}${v.bairro ? ', ' + v.bairro : ''}</span>
+        <span class="tag tag-salario">💶 ${v.valorRem}</span>
+      </div>
+      <p class="vaga-desc">${v.descricao}</p>
+      <div class="vaga-footer">
+        <div class="vaga-meta">
+          <span>⏱ ${v.publicado}</span>
+          <span>📅 ${v.diasRestantes} ${v.diasRestantes === 1 ? t.dias : t.dias_plural} ${t.restantes}</span>
+        </div>
+        <button class="btn-candidatar" onclick="openCandidaturaModal(${v.id})">${t.btn_candidatar}</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── RENDER SIDEBAR ──
+function renderSidebar() {
+  const container = document.getElementById('empresasDestaque');
+  container.innerHTML = EMPRESAS_DESTAQUE.map(e => `
+    <div class="empresa-mini">
+      <div class="emp-avatar">${e.emoji}</div>
+      <div class="emp-info">
+        <div class="emp-name">${e.nome}</div>
+        <div class="emp-vagas">${e.vagas} ${e.vagas === 1 ? T[currentLang].vaga_singular : T[currentLang].vagas_plural}</div>
+      </div>
+      <div>${e.estrelas > 0 ? `<span class="emp-stars">★ ${e.estrelas}</span>` : ''}</div>
+    </div>
+  `).join('');
+}
+
+// ── FILTROS ──
+function filterCat(cat, el) {
+  currentCat = cat;
+  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  renderVagas();
+}
+function filterCidade() {
+  currentCidade = document.getElementById('filterCity').value;
+  renderVagas();
+}
+
+// ── MODAL CANDIDATURA ──
+function openCandidaturaModal(vagaId) {
+  vagaSeleccionada = VAGAS_DEMO.find(v => v.id === vagaId);
+  if (!vagaSeleccionada) return;
+  document.getElementById('modal-vaga-titulo').textContent = vagaSeleccionada.titulo;
+  document.getElementById('modal-vaga-empresa').textContent = vagaSeleccionada.empresa + ' · ' + vagaSeleccionada.cidade;
+  document.getElementById('candidaturaForm').style.display = 'block';
+  document.getElementById('candidaturaSuccess').classList.remove('show');
+  document.getElementById('cand-nome').value = '';
+  document.getElementById('cand-tel').value = '';
+  document.getElementById('cand-email').value = '';
+  document.getElementById('cand-msg').value = '';
+  document.getElementById('btn-candidatar-submit').disabled = false;
+  document.getElementById('btn-cand-txt').textContent = T[currentLang].btn_cand_txt;
+  document.getElementById('candidaturaModal').classList.add('open');
+}
+function closeCandidaturaModal() {
+  document.getElementById('candidaturaModal').classList.remove('open');
+}
+
+async function submitCandidatura() {
+  const nome = document.getElementById('cand-nome').value.trim();
+  const tel = document.getElementById('cand-tel').value.trim();
+  const email = document.getElementById('cand-email').value.trim();
+  if (!nome || !tel || !email) { showToast('⚠️ Preenche os campos obrigatórios'); return; }
+
+  const btn = document.getElementById('btn-candidatar-submit');
+  btn.disabled = true;
+  document.getElementById('btn-cand-txt').textContent = '⏳ A enviar...';
+
+  const fd = new FormData();
+  fd.append('_subject', 'NOVU Empregos — Candidatura: ' + vagaSeleccionada.titulo);
+  fd.append('vaga', vagaSeleccionada.titulo);
+  fd.append('empresa', vagaSeleccionada.empresa);
+  fd.append('nome', nome);
+  fd.append('telefone', tel);
+  fd.append('email', email);
+  fd.append('mensagem', document.getElementById('cand-msg').value);
+  fd.append('idioma', currentLang.toUpperCase());
+  fd.append('fonte', 'novuai.pt/empregos');
+
+  try {
+    const res = await fetch('https://formspree.io/f/xdawgkvq', { method: 'POST', body: fd, headers: { Accept: 'application/json' } });
+    if (res.ok) {
+      document.getElementById('candidaturaForm').style.display = 'none';
+      document.getElementById('candidaturaSuccess').classList.add('show');
+      document.getElementById('cand-success-title').textContent = T[currentLang].cand_success_title;
+      document.getElementById('cand-success-msg').textContent = T[currentLang].cand_success_msg;
+    } else throw new Error();
+  } catch {
+    btn.disabled = false;
+    document.getElementById('btn-cand-txt').textContent = T[currentLang].btn_cand_txt;
+    showToast('❌ Erro ao enviar. Tenta novamente.');
+  }
+}
+
+// ── MODAL EMPRESA ──
+function openEmpresaModal() {
+  document.getElementById('empresaForm').style.display = 'block';
+  document.getElementById('empresaSuccess').classList.remove('show');
+  document.getElementById('btn-emp-submit').disabled = false;
+  document.getElementById('btn-emp-txt').textContent = T[currentLang].btn_emp_txt;
+  document.getElementById('empresaModal').classList.add('open');
+}
+function closeEmpresaModal() {
+  document.getElementById('empresaModal').classList.remove('open');
+}
+
+async function submitEmpresa() {
+  const nome = document.getElementById('emp-nome').value.trim();
+  const nif = document.getElementById('emp-nif').value.trim();
+  const cidade = document.getElementById('emp-cidade').value.trim();
+  const email = document.getElementById('emp-email').value.trim();
+  const titulo = document.getElementById('emp-vaga-titulo').value.trim();
+  const cat = document.getElementById('emp-categoria').value;
+  const tipoRem = document.getElementById('emp-tipo-rem').value;
+  const valorRem = document.getElementById('emp-valor-rem').value.trim();
+  const desc = document.getElementById('emp-descricao').value.trim();
+
+  if (!nome || !nif || !cidade || !email || !titulo || !cat || !tipoRem || !valorRem || !desc) {
+    showToast('⚠️ Preenche todos os campos obrigatórios'); return;
+  }
+
+  const btn = document.getElementById('btn-emp-submit');
+  btn.disabled = true;
+  document.getElementById('btn-emp-txt').textContent = '⏳ A enviar...';
+
+  const fd = new FormData();
+  fd.append('_subject', 'NOVU Empregos — Nova Vaga: ' + titulo);
+  fd.append('empresa', nome);
+  fd.append('nif', nif);
+  fd.append('cidade', cidade);
+  fd.append('email_empresa', email);
+  fd.append('titulo_vaga', titulo);
+  fd.append('categoria', cat);
+  fd.append('tipo_remuneracao', tipoRem);
+  fd.append('valor_remuneracao', valorRem);
+  fd.append('descricao', desc);
+  fd.append('idioma', currentLang.toUpperCase());
+  fd.append('fonte', 'novuai.pt/empregos');
+
+  try {
+    const res = await fetch('https://formspree.io/f/xdawgkvq', { method: 'POST', body: fd, headers: { Accept: 'application/json' } });
+    if (res.ok) {
+      document.getElementById('empresaForm').style.display = 'none';
+      document.getElementById('empresaSuccess').classList.add('show');
+    } else throw new Error();
+  } catch {
+    btn.disabled = false;
+    document.getElementById('btn-emp-txt').textContent = T[currentLang].btn_emp_txt;
+    showToast('❌ Erro ao enviar. Tenta novamente.');
+  }
+}
+
+// ── TOAST ──
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ── MENU MOBILE ──
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const btn = document.getElementById('hamburgerBtn');
+  menu.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  const menu = document.getElementById('mobileMenu');
+  const btn = document.getElementById('hamburgerBtn');
+  if (menu && !menu.contains(e.target) && btn && !btn.contains(e.target)) {
+    menu.classList.remove('open');
+    btn.classList.remove('open');
+  }
+});
+
+// ── SETLANG ──
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('novu_lang', lang);
+  const t = T[lang];
+  ['pt','en','es'].forEach(l => {
+    document.getElementById('lang-'+l)?.classList.toggle('active', l === lang);
+    document.getElementById('lang-'+l+'-m')?.classList.toggle('active', l === lang);
+  });
+  const s = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val; };
+  s('nav-home-link', t.nav_home); s('nav-docs-link', t.nav_docs); s('nav-esp-link', t.nav_esp);
+  s('nav-post-btn', t.nav_post);
+  s('mm-home', t.mm_home); s('mm-docs', t.mm_docs); s('mm-esp', t.mm_esp); s('mm-emp', t.mm_emp); s('mm-post', t.mm_post);
+  s('hero-badge', t.hero_badge);
+  document.getElementById('hero-title').innerHTML = t.hero_title_1 + ' <span style="color:var(--blue-bright)">' + t.hero_title_2 + '</span>';
+  s('hero-sub', t.hero_sub);
+  s('stat-vagas-lbl', t.stat_vagas_lbl); s('stat-empresas-lbl', t.stat_empresas_lbl); s('stat-expira-lbl', t.stat_expira_lbl);
+  s('fchip-todos', t.fchip_todos); s('fchip-parttime', t.fchip_parttime); s('fchip-freelance', t.fchip_freelance);
+  s('fchip-restauracao', t.fchip_restauracao); s('fchip-hotelaria', t.fchip_hotelaria); s('fchip-limpeza', t.fchip_limpeza); s('fchip-remoto', t.fchip_remoto);
+  s('opt-todas', t.opt_todas);
+  s('sb-cta-title', t.sb_cta_title); s('sb-cta-desc', t.sb_cta_desc); s('sb-cta-btn', t.sb_cta_btn);
+  s('sb-emp-title', t.sb_emp_title); s('sb-tip-title', t.sb_tip_title); s('sb-tip-text', t.sb_tip_text);
+  s('modal-cand-title', t.modal_cand_title); s('modal-cand-sub', t.modal_cand_sub);
+  s('lbl-nome', t.lbl_nome); s('lbl-tel', t.lbl_tel); s('lbl-email', t.lbl_email); s('lbl-msg', t.lbl_msg);
+  s('btn-cand-txt', t.btn_cand_txt);
+  s('modal-emp-title', t.modal_emp_title); s('modal-emp-sub', t.modal_emp_sub);
+  s('lbl-empresa', t.lbl_empresa); s('lbl-nif', t.lbl_nif); s('lbl-emp-cidade', t.lbl_emp_cidade); s('lbl-emp-email', t.lbl_emp_email);
+  s('lbl-vaga-titulo', t.lbl_vaga_titulo); s('lbl-categoria', t.lbl_categoria); s('lbl-tipo-rem', t.lbl_tipo_rem);
+  s('lbl-valor-rem', t.lbl_valor_rem); s('lbl-descricao', t.lbl_descricao);
+  s('btn-emp-txt', t.btn_emp_txt);
+  renderVagas();
+  renderSidebar();
+}
+
+// ── INIT ──
+setLang(currentLang);
+</script>
+</body>
+</html>
