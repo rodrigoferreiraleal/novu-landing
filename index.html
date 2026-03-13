@@ -158,6 +158,17 @@
     .nav-mobile { display: flex; }
   }
 
+  /* OVERRIDE GLOBAL DE PADDING MOBILE — todas as secções inline */
+  @media (max-width: 640px) {
+    section[style*="padding:60px"],
+    section[style*="padding: 60px"],
+    section[style*="padding:64px"],
+    section[style*="padding: 64px"] {
+      padding-top: 28px !important;
+      padding-bottom: 28px !important;
+    }
+  }
+
   @media (max-width: 820px) { .phases { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 520px) { .phases { grid-template-columns: 1fr; } }
   .phase-card {
@@ -315,22 +326,38 @@
   @media (max-width: 640px) {
     .mobile-cta-bar { display: block; }
     body { padding-bottom: 68px; }
-    /* Hero no mobile */
-    .hero { padding: 80px 5% 40px; min-height: auto; }
-    .hero-stats { gap: 24px; margin-top: 28px; padding-top: 24px; }
-    .stat-number { font-size: 1.6rem; }
-    /* Secções mobile */
-    .journey { padding: 44px 5% 40px; }
-    .faq-examples { padding: 40px 5%; }
-    .chatbot-section { padding: 44px 5%; }
-    .how { padding: 44px 5%; }
-    .proof { padding: 40px 5%; }
-    .final-cta { padding: 52px 5%; }
-    /* Phases mobile — 1 coluna, ainda mais compacto */
-    .phase-card { padding: 16px 18px; }
+    /* Hero no mobile — mais compacto */
+    .hero { padding: 70px 4% 28px; min-height: auto; }
+    .hero-stats { gap: 16px; margin-top: 20px; padding-top: 18px; }
+    .stat-number { font-size: 1.4rem; }
+    .hero-title { font-size: 2rem; margin-bottom: 12px; }
+    .hero-sub { font-size: 0.95rem; margin-bottom: 22px; }
+    /* Secções mobile — padding reduzido */
+    .journey { padding: 28px 4% 24px; }
+    .faq-examples { padding: 24px 4%; }
+    .chatbot-section { padding: 28px 4%; }
+    .how { padding: 28px 4%; }
+    .proof { padding: 24px 4%; }
+    .final-cta { padding: 36px 4%; }
+    .docs-highlight { padding: 36px 4% !important; }
+    /* Títulos de secção mobile */
+    .section-title { font-size: 1.4rem; margin-bottom: 20px; }
+    /* Phases mobile — 1 coluna, compacto */
+    .phase-card { padding: 14px 16px; }
+    .phases { gap: 8px; }
     /* Proof mobile */
-    .proof-numbers { gap: 28px; }
-    .proof-item .num { font-size: 2rem; }
+    .proof-numbers { gap: 20px; }
+    .proof-item .num { font-size: 1.8rem; }
+    /* Recursos mobile — cards mais compactos */
+    .recursos-section { padding: 28px 4% !important; }
+    .recursos-grid { gap: 10px !important; }
+    .recursos-card-inner { padding: 16px 14px !important; }
+    /* How steps mobile */
+    .how-step { padding: 16px 14px !important; }
+    /* Badge hero menor */
+    .hero-badge { padding: 5px 12px; font-size: 0.74rem; margin-bottom: 16px; }
+    /* CTA repetido */
+    .cta-repeat { padding: 24px 4% !important; }
   }
   /* ── DOCS HIGHLIGHT ── */
   .docs-highlight { background: var(--blue-deep); padding: 60px 5%; position: relative; overflow: hidden; }
@@ -627,15 +654,15 @@
 </section>
 
 <!-- RECURSOS — plataforma completa -->
-<section style="padding:64px 5%;background:var(--white);">
+<section class="recursos-section" style="padding:64px 5%;background:var(--white);">
   <div style="max-width:960px;margin:0 auto;">
     <p style="font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blue-bright);margin-bottom:10px;" id="recursos-label">Plataforma completa</p>
     <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;color:var(--blue-deep);margin-bottom:10px;" id="recursos-title">Mais do que um assistente</h2>
     <p style="font-size:0.96rem;color:var(--gray-600);margin-bottom:40px;max-width:520px;line-height:1.6;" id="recursos-sub">A NOVU tem tudo o que precisas para a tua vida em Portugal — num só lugar.</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;">
+    <div class="recursos-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;">
 
       <a href="/index.html#chat" style="text-decoration:none;" onclick="document.getElementById('chatMessages')?.scrollIntoView({behavior:'smooth'});return false;">
-        <div style="border:1.5px solid var(--gray-200);border-radius:16px;padding:28px 24px;transition:all 0.2s;background:var(--blue-pale);" onmouseover="this.style.borderColor='var(--blue-bright)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--gray-200)';this.style.transform='none'">
+        <div class="recursos-card-inner" style="border:1.5px solid var(--gray-200);border-radius:16px;padding:28px 24px;transition:all 0.2s;background:var(--blue-pale);" onmouseover="this.style.borderColor='var(--blue-bright)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--gray-200)';this.style.transform='none'">
           <div style="font-size:2rem;margin-bottom:14px;">🤖</div>
           <div style="font-weight:700;font-size:1rem;color:var(--blue-deep);margin-bottom:6px;" id="rec-chat-title">Assistente IA</div>
           <div style="font-size:0.82rem;color:var(--gray-600);line-height:1.5;" id="rec-chat-desc">Pergunta qualquer coisa sobre vistos, NIF, NISS, trabalho, moradia e muito mais. Resposta imediata.</div>
@@ -643,7 +670,7 @@
       </a>
 
       <a href="/documentos.html" style="text-decoration:none;">
-        <div style="border:1.5px solid var(--gray-200);border-radius:16px;padding:28px 24px;transition:all 0.2s;background:var(--white);" onmouseover="this.style.borderColor='var(--blue-bright)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--gray-200)';this.style.transform='none'">
+        <div class="recursos-card-inner" style="border:1.5px solid var(--gray-200);border-radius:16px;padding:28px 24px;transition:all 0.2s;background:var(--white);" onmouseover="this.style.borderColor='var(--blue-bright)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--gray-200)';this.style.transform='none'">
           <div style="font-size:2rem;margin-bottom:14px;">📄</div>
           <div style="font-weight:700;font-size:1rem;color:var(--blue-deep);margin-bottom:6px;" id="rec-docs-title">Documentos</div>
           <div style="font-size:0.82rem;color:var(--gray-600);line-height:1.5;" id="rec-docs-desc">Gera declarações, cartas e atestados em PDF em segundos. 15 documentos essenciais para imigrantes.</div>
@@ -652,11 +679,20 @@
       </a>
 
       <a href="/especialistas.html" style="text-decoration:none;">
-        <div style="border:1.5px solid var(--gray-200);border-radius:16px;padding:28px 24px;transition:all 0.2s;background:var(--white);" onmouseover="this.style.borderColor='var(--blue-bright)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--gray-200)';this.style.transform='none'">
+        <div class="recursos-card-inner" style="border:1.5px solid var(--gray-200);border-radius:16px;padding:28px 24px;transition:all 0.2s;background:var(--white);" onmouseover="this.style.borderColor='var(--blue-bright)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--gray-200)';this.style.transform='none'">
           <div style="font-size:2rem;margin-bottom:14px;">🤝</div>
           <div style="font-weight:700;font-size:1rem;color:var(--blue-deep);margin-bottom:6px;" id="rec-esp-title">Especialistas</div>
           <div style="font-size:0.82rem;color:var(--gray-600);line-height:1.5;" id="rec-esp-desc">Liga-te a advogados, contabilistas, agentes imobiliários e seguros verificados pela NOVU.</div>
           <div style="margin-top:12px;display:inline-block;background:#DCFCE7;color:#16A34A;border-radius:50px;padding:3px 12px;font-size:0.72rem;font-weight:700;" id="rec-esp-badge">Novo</div>
+        </div>
+      </a>
+
+      <a href="/empregos.html" style="text-decoration:none;">
+        <div class="recursos-card-inner" style="border:1.5px solid var(--gray-200);border-radius:16px;padding:28px 24px;transition:all 0.2s;background:var(--white);" onmouseover="this.style.borderColor='var(--blue-bright)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--gray-200)';this.style.transform='none'">
+          <div style="font-size:2rem;margin-bottom:14px;">💼</div>
+          <div style="font-weight:700;font-size:1rem;color:var(--blue-deep);margin-bottom:6px;" id="rec-emp-title">Empregos</div>
+          <div style="font-size:0.82rem;color:var(--gray-600);line-height:1.5;" id="rec-emp-desc">Vagas verificadas com salário visível. Part-time, freelance, restauração, hotelaria e mais.</div>
+          <div style="margin-top:12px;display:inline-block;background:#DCFCE7;color:#16A34A;border-radius:50px;padding:3px 12px;font-size:0.72rem;font-weight:700;" id="rec-emp-badge">Novo</div>
         </div>
       </a>
 
@@ -747,6 +783,8 @@ const T = {
     rec_docs_desc: 'Gera declarações, cartas e atestados em PDF em segundos. 15 documentos essenciais para imigrantes.',
     rec_esp_title: 'Especialistas',
     rec_esp_desc: 'Liga-te a advogados, contabilistas, agentes imobiliários e seguros verificados pela NOVU.',
+    rec_emp_title: 'Empregos',
+    rec_emp_desc: 'Vagas verificadas com salário visível. Part-time, freelance, restauração, hotelaria e mais.',
     mm_docs: 'Documentos',
     mm_esp: 'Especialistas',
     mm_afil: 'Programa de Afiliados',
@@ -815,6 +853,8 @@ const T = {
     rec_docs_desc: 'Generate declarations, letters and certificates in PDF in seconds. 15 essential documents for immigrants.',
     rec_esp_title: 'Specialists',
     rec_esp_desc: 'Connect with NOVU-verified lawyers, accountants, real estate agents and insurance brokers.',
+    rec_emp_title: 'Jobs',
+    rec_emp_desc: 'Verified jobs with visible salary. Part-time, freelance, restaurants, hotels and more.',
     mm_docs: 'Documents',
     mm_esp: 'Specialists',
     mm_afil: 'Affiliate Programme',
@@ -883,6 +923,8 @@ const T = {
     rec_docs_desc: 'Genera declaraciones, cartas y certificados en PDF en segundos. 15 documentos esenciales para inmigrantes.',
     rec_esp_title: 'Especialistas',
     rec_esp_desc: 'Conéctate con abogados, contables, agentes inmobiliarios y seguros verificados por NOVU.',
+    rec_emp_title: 'Empleos',
+    rec_emp_desc: 'Empleos verificados con salario visible. Part-time, freelance, restauración, hostelería y más.',
     mm_docs: 'Documentos',
     mm_esp: 'Especialistas',
     mm_afil: 'Programa de Afiliados',
@@ -1044,6 +1086,8 @@ function setLang(lang) {
   setEl('rec-docs-desc', t.rec_docs_desc);
   setEl('rec-esp-title', t.rec_esp_title);
   setEl('rec-esp-desc', t.rec_esp_desc);
+  setEl('rec-emp-title', t.rec_emp_title);
+  setEl('rec-emp-desc', t.rec_emp_desc);
   // Menu mobile
   setEl('mm-docs', t.mm_docs);
   setEl('mm-esp', t.mm_esp);
