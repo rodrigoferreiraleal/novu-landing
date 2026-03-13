@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Programa de Afiliados — NOVU</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZJLBVGPQT5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZJLBVGPQT5');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue-deep: #0A2540;
+    --blue-mid: #1A4A7A;
+    --blue-bright: #2E7FD4;
+    --blue-light: #EBF4FF;
+    --blue-pale: #F5F9FF;
+    --white: #FFFFFF;
+    --gray-100: #F8FAFC;
+    --gray-200: #E8EEF5;
+    --gray-400: #8FA3BC;
+    --gray-600: #4A6580;
+    --text: #0A2540;
+    --green: #16A34A;
+    --green-light: #F0FDF4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 0 5%; height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--blue-deep); text-decoration: none; }
+  .nav-logo span { color: var(--blue-bright); }
+  .nav-back { display: flex; align-items: center; gap: 6px; color: var(--gray-600); font-size: 0.88rem; font-weight: 500; text-decoration: none; transition: color 0.2s; }
+  .nav-back:hover { color: var(--blue-bright); }
+
+  /* HERO */
+  .hero {
+    padding: 100px 5% 60px;
+    background: linear-gradient(160deg, #F5F9FF 0%, #EBF3FF 50%, #FAFCFF 100%);
+    text-align: center;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: white; border: 1px solid var(--gray-200); border-radius: 50px;
+    padding: 6px 16px; font-size: 0.8rem; font-weight: 500; color: var(--gray-600);
+    margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .hero-badge .dot { width: 7px; height: 7px; background: #22C55E; border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(1.3); } }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 700; line-height: 1.15; color: var(--blue-deep);
+    max-width: 700px; margin: 0 auto 16px;
+  }
+  .hero h1 em { font-style: normal; color: var(--blue-bright); }
+  .hero p {
+    font-size: 1.08rem; color: var(--gray-600); max-width: 520px;
+    margin: 0 auto 36px; line-height: 1.65;
+  }
+  .hero-cta {
+    background: var(--blue-deep); color: white; border: none;
+    padding: 15px 36px; border-radius: 50px; font-family: 'DM Sans', sans-serif;
+    font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.25s;
+    box-shadow: 0 4px 20px rgba(10,37,64,0.2); text-decoration: none;
+    display: inline-block;
+  }
+  .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(10,37,64,0.28); }
+
+  /* COMO FUNCIONA */
+  .how { padding: 64px 5%; background: white; }
+  .section-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--blue-bright); text-align: center; margin-bottom: 10px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 700; text-align: center; color: var(--blue-deep); max-width: 560px; margin: 0 auto 40px; line-height: 1.2; }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 900px; margin: 0 auto; }
+  @media (max-width: 640px) { .steps { grid-template-columns: 1fr; gap: 14px; } }
+  .step {
+    background: var(--blue-pale); border: 1px solid var(--gray-200);
+    border-radius: 16px; padding: 28px 22px; text-align: center;
+  }
+  .step-num {
+    width: 48px; height: 48px; background: var(--blue-deep); color: white;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700;
+    margin: 0 auto 16px;
+  }
+  .step h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600; color: var(--blue-deep); margin-bottom: 8px; }
+  .step p { font-size: 0.86rem; color: var(--gray-600); line-height: 1.6; }
+
+  /* BENEFÍCIOS */
+  .benefits { padding: 60px 5%; background: var(--gray-100); }
+  .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; max-width: 900px; margin: 0 auto; }
+  .benefit-card {
+    background: white; border: 1px solid var(--gray-200); border-radius: 16px;
+    padding: 24px 20px; display: flex; flex-direction: column; gap: 10px;
+  }
+  .benefit-icon { font-size: 1.8rem; }
+  .benefit-card h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600; color: var(--blue-deep); }
+  .benefit-card p { font-size: 0.85rem; color: var(--gray-600); line-height: 1.6; }
+
+  /* COMISSÃO DESTAQUE */
+  .commission-banner {
+    background: var(--blue-deep); color: white;
+    padding: 48px 5%; text-align: center;
+  }
+  .commission-banner h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 12px; font-weight: 700; }
+  .commission-banner p { color: rgba(255,255,255,0.65); font-size: 1rem; max-width: 480px; margin: 0 auto 32px; line-height: 1.6; }
+  .commission-numbers { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; margin-bottom: 36px; }
+  .comm-num { text-align: center; }
+  .comm-num .num { font-family: 'DM Sans', sans-serif; font-size: 2.8rem; font-weight: 700; display: block; letter-spacing: -1px; color: #7DD3FC; }
+  .comm-num .label { font-size: 0.82rem; color: rgba(255,255,255,0.55); font-weight: 500; }
+
+  /* FORMULÁRIO */
+  .form-section { padding: 64px 5%; background: white; }
+  .form-wrap { max-width: 580px; margin: 0 auto; }
+  .form-wrap .section-title { text-align: left; margin-left: 0; margin-bottom: 8px; }
+  .form-desc { font-size: 0.95rem; color: var(--gray-600); margin-bottom: 32px; line-height: 1.6; }
+  .form { display: flex; flex-direction: column; gap: 14px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 520px) { .form-row { grid-template-columns: 1fr; } }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label { font-size: 0.82rem; font-weight: 600; color: var(--blue-deep); }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    border: 1.5px solid var(--gray-200); border-radius: 12px;
+    padding: 12px 16px; font-family: 'DM Sans', sans-serif;
+    font-size: 0.92rem; outline: none; transition: border-color 0.2s;
+    color: var(--text); background: white;
+    width: 100%;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--blue-bright); }
+  .form-group textarea { resize: vertical; min-height: 100px; border-radius: 12px; }
+  .form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238FA3BC' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+  .consent-row { display: flex; align-items: flex-start; gap: 8px; margin-top: 4px; }
+  .consent-row input[type="checkbox"] { margin-top: 3px; accent-color: var(--blue-deep); width: 14px; height: 14px; flex-shrink: 0; cursor: pointer; }
+  .consent-label { font-size: 0.78rem; color: var(--gray-600); line-height: 1.5; cursor: pointer; }
+  .consent-label a { color: var(--blue-bright); text-decoration: none; }
+  .consent-label a:hover { text-decoration: underline; }
+  .form-submit {
+    background: var(--blue-deep); color: white; border: none;
+    padding: 15px 32px; border-radius: 50px; font-family: 'DM Sans', sans-serif;
+    font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+    margin-top: 6px; width: 100%;
+  }
+  .form-submit:hover { background: var(--blue-mid); transform: translateY(-1px); }
+  .form-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .form-note { font-size: 0.78rem; color: var(--gray-400); text-align: center; margin-top: 8px; }
+  .form-success {
+    display: none; background: var(--green-light); border: 1px solid #86EFAC;
+    border-radius: 16px; padding: 28px; text-align: center; margin-top: 16px;
+  }
+  .form-success h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--green); margin-bottom: 8px; }
+  .form-success p { font-size: 0.92rem; color: #166534; line-height: 1.6; }
+
+  /* FAQ */
+  .faq-section { padding: 60px 5%; background: var(--gray-100); }
+  .faq-list { max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+  .faq-item {
+    background: white; border: 1px solid var(--gray-200); border-radius: 14px;
+    overflow: hidden;
+  }
+  .faq-q {
+    padding: 18px 20px; font-weight: 600; font-size: 0.95rem; color: var(--blue-deep);
+    cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+    gap: 12px; user-select: none;
+  }
+  .faq-q:hover { color: var(--blue-bright); }
+  .faq-chevron { font-size: 0.9rem; color: var(--gray-400); transition: transform 0.25s; flex-shrink: 0; }
+  .faq-item.open .faq-chevron { transform: rotate(180deg); }
+  .faq-a { display: none; padding: 0 20px 18px; font-size: 0.88rem; color: var(--gray-600); line-height: 1.65; }
+  .faq-item.open .faq-a { display: block; }
+
+  /* FOOTER */
+  footer { padding: 32px 5%; background: #071B30; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  footer .logo { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: white; }
+  footer p { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+  .footer-email { display: inline-flex; align-items: center; gap: 7px; color: rgba(255,255,255,0.75) !important; font-size: 0.88rem !important; font-weight: 500; text-decoration: none; border: 1px solid rgba(255,255,255,0.15); border-radius: 50px; padding: 7px 14px; transition: all 0.2s; }
+  .footer-email:hover { color: white !important; border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.05); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .hero > * { animation: fadeUp 0.5s ease both; }
+  .hero > *:nth-child(2) { animation-delay: 0.1s; }
+  .hero > *:nth-child(3) { animation-delay: 0.2s; }
+  .hero > *:nth-child(4) { animation-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">N<span>O</span>VU</a>
+  <a href="/" class="nav-back">← Voltar ao site</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge"><span class="dot"></span> Programa de Afiliados — Aberto a candidaturas</div>
+  <h1>Ganha dinheiro a ajudar<br>imigrantes em <em>Portugal</em></h1>
+  <p>Partilha a NOVU com a tua comunidade e recebe comissão por cada subscritor que trouxeres. Simples, transparente e sem custos.</p>
+  <a href="#formulario" class="hero-cta">Quero ser afiliado</a>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="how">
+  <p class="section-label">Como funciona</p>
+  <h2 class="section-title">3 passos para começar a ganhar</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Candidata-te</h3>
+      <p>Preenche o formulário abaixo. Respondemos em 48 horas com o teu link único de afiliado.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>Partilha</h3>
+      <p>Usa o teu link nos teus vídeos, posts, stories ou grupos. Cada clique é rastreado automaticamente.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Recebe</h3>
+      <p>Ganhas comissão por cada utilizador que se subscreve via o teu link. Pagamento mensal via transferência.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMISSÃO -->
+<section class="commission-banner">
+  <h2>O que ganhas</h2>
+  <p>Comissão recorrente enquanto o utilizador mantiver a subscrição activa — não é um pagamento único.</p>
+  <div class="commission-numbers">
+    <div class="comm-num">
+      <span class="num">20%</span>
+      <span class="label">comissão por subscrição</span>
+    </div>
+    <div class="comm-num">
+      <span class="num">€1,98</span>
+      <span class="label">por subscritor/mês (plano base)</span>
+    </div>
+    <div class="comm-num">
+      <span class="num">∞</span>
+      <span class="label">sem limite de referências</span>
+    </div>
+  </div>
+  <p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin-bottom:0;">Exemplo: 50 subscritores activos = €99/mês recorrentes</p>
+</section>
+
+<!-- BENEFÍCIOS -->
+<section class="benefits">
+  <p class="section-label">Porquê ser afiliado NOVU</p>
+  <h2 class="section-title">Feito para criadores de conteúdo</h2>
+  <div class="benefits-grid">
+    <div class="benefit-card">
+      <div class="benefit-icon">🎯</div>
+      <h3>Nicho muito específico</h3>
+      <p>Imigrantes em Portugal são um público com dor real e alta intenção de compra. Conversão muito acima da média.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">🔗</div>
+      <h3>Link único rastreado</h3>
+      <p>Cada afiliado tem um link próprio. Podes ver em tempo real quantos cliques e conversões geraste.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">💰</div>
+      <h3>Comissão recorrente</h3>
+      <p>Não recebes só uma vez. Enquanto o utilizador pagar, tu recebes. Renda passiva real.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">📦</div>
+      <h3>Kit de conteúdo grátis</h3>
+      <p>Enviamos imagens, textos prontos e sugestões de vídeo para facilitar a criação de conteúdo.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">🤝</div>
+      <h3>Produto útil de verdade</h3>
+      <p>Não estás a vender algo duvidoso. A NOVU resolve problemas reais de quem chegou a Portugal.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">📊</div>
+      <h3>Dashboard de afiliado</h3>
+      <p>Acesso ao teu painel com estatísticas de cliques, conversões e pagamentos pendentes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FORMULÁRIO -->
+<section class="form-section" id="formulario">
+  <div class="form-wrap">
+    <p class="section-label" style="text-align:left;">Candidatura</p>
+    <h2 class="section-title">Quero ser afiliado NOVU</h2>
+    <p class="form-desc">Preenche o formulário abaixo. Respondemos em até 48 horas com o teu link personalizado e kit de conteúdo.</p>
+
+    <div class="form" id="afiliadoForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="nome">Nome completo *</label>
+          <input type="text" id="nome" placeholder="O teu nome" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input type="email" id="email" placeholder="o teu email" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="canal">Principal canal de conteúdo *</label>
+        <select id="canal" required>
+          <option value="" disabled selected>Selecciona o canal principal</option>
+          <option value="youtube">YouTube</option>
+          <option value="tiktok">TikTok</option>
+          <option value="instagram">Instagram</option>
+          <option value="facebook">Facebook / Grupos Facebook</option>
+          <option value="blog">Blog / Website</option>
+          <option value="podcast">Podcast</option>
+          <option value="whatsapp">WhatsApp / Telegram (comunidades)</option>
+          <option value="outro">Outro</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="link">Link do teu canal/perfil *</label>
+          <input type="url" id="link" placeholder="https://">
+        </div>
+        <div class="form-group">
+          <label for="seguidores">Nº aproximado de seguidores</label>
+          <select id="seguidores">
+            <option value="" disabled selected>Selecciona</option>
+            <option value="menos1k">Menos de 1.000</option>
+            <option value="1k5k">1.000 – 5.000</option>
+            <option value="5k20k">5.000 – 20.000</option>
+            <option value="20k100k">20.000 – 100.000</option>
+            <option value="mais100k">Mais de 100.000</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="publico">Descreve o teu público *</label>
+        <textarea id="publico" placeholder="Ex: brasileiros que querem emigrar para Portugal, imigrantes em Portugal à procura de emprego, etc." required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="mensagem">Como planeias promover a NOVU? (opcional)</label>
+        <textarea id="mensagem" placeholder="Ex: vídeos no YouTube sobre burocracia, stories com dicas, posts em grupos de Facebook..." style="min-height:80px;"></textarea>
+      </div>
+
+      <div class="consent-row">
+        <input type="checkbox" id="consentimento">
+        <label class="consent-label" for="consentimento">
+          Aceito a <a href="/privacidade.html" target="_blank">Política de Privacidade</a> e os <a href="/termos.html" target="_blank">Termos de Serviço</a> da NOVU. Entendo que a aprovação da candidatura está sujeita à análise da equipa NOVU.
+        </label>
+      </div>
+
+      <button class="form-submit" id="submitBtn" onclick="submitForm()">Enviar candidatura</button>
+      <p class="form-note">Respondemos em até 48 horas úteis · Sem custos · Sem compromisso</p>
+    </div>
+
+    <div class="form-success" id="formSuccess">
+      <h3>✅ Candidatura recebida!</h3>
+      <p>Obrigado pelo interesse em ser afiliado NOVU. Vamos analisar o teu perfil e responder em até 48 horas com o teu link personalizado e kit de conteúdo.<br><br>Entretanto, podes usar a NOVU normalmente em <a href="/" style="color:var(--green);font-weight:600;">novuai.pt</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <p class="section-label">Dúvidas frequentes</p>
+  <h2 class="section-title">Perguntas e respostas</h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">
+        Preciso de ter muitos seguidores para ser afiliado?
+        <span class="faq-chevron">▾</span>
+      </div>
+      <div class="faq-a">Não. O mais importante é a qualidade e relevância do teu público. Um canal de 2.000 seguidores focado em imigrantes brasileiros em Portugal vale mais do que 50.000 seguidores sem foco. Aceitamos criadores de todos os tamanhos.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">
+        Como e quando recebo o pagamento?
+        <span class="faq-chevron">▾</span>
+      </div>
+      <div class="faq-a">O pagamento é feito mensalmente, via transferência bancária (IBAN). O mínimo para levantamento é €20. Tens acesso ao teu dashboard para acompanhar em tempo real os teus ganhos.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">
+        Posso ser afiliado se não vivo em Portugal?
+        <span class="faq-chevron">▾</span>
+      </div>
+      <div class="faq-a">Sim. O importante é que o teu conteúdo ou comunidade seja relevante para pessoas que querem emigrar para Portugal ou que já vivem lá. Criadores do Brasil, Angola, Cabo Verde e outros países são muito bem-vindos.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">
+        A comissão é só na primeira compra ou é recorrente?
+        <span class="faq-chevron">▾</span>
+      </div>
+      <div class="faq-a">É recorrente. Enquanto o utilizador que vieste a trazer mantiver a subscrição activa, recebes 20% todos os meses. Não é um pagamento único — é uma renda passiva enquanto ele continuar cliente da NOVU.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">
+        O programa é gratuito para afiliados?
+        <span class="faq-chevron">▾</span>
+      </div>
+      <div class="faq-a">Sim, 100% gratuito. Não há taxas, mensalidades ou investimento inicial. Candidatas-te, és aprovado, recebes o teu link, e começas a partilhar.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">
+        Quanto tempo demora a aprovação?
+        <span class="faq-chevron">▾</span>
+      </div>
+      <div class="faq-a">Até 48 horas úteis após o envio da candidatura. Analisamos o teu perfil, canal e público. Se aprovado, enviamos imediatamente o teu link único e o kit de conteúdo.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="logo">NOVU</div>
+  <p>© 2026 NOVU. Informação, não aconselhamento jurídico.</p>
+  <a href="mailto:geral@novuai.pt" class="footer-email">✉ geral@novuai.pt</a>
+</footer>
+
+<script>
+function toggleFAQ(el) {
+  const item = el.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+async function submitForm() {
+  const nome = document.getElementById('nome').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const canal = document.getElementById('canal').value;
+  const link = document.getElementById('link').value.trim();
+  const seguidores = document.getElementById('seguidores').value;
+  const publico = document.getElementById('publico').value.trim();
+  const mensagem = document.getElementById('mensagem').value.trim();
+  const consentimento = document.getElementById('consentimento').checked;
+
+  if (!nome || !email || !canal || !publico) {
+    alert('Por favor preenche todos os campos obrigatórios (*).');
+    return;
+  }
+  if (!email.includes('@')) {
+    alert('Por favor introduz um email válido.');
+    return;
+  }
+  if (!consentimento) {
+    alert('Por favor aceita a Política de Privacidade para continuar.');
+    return;
+  }
+
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = 'A enviar...';
+  btn.disabled = true;
+
+  try {
+    await fetch('https://formspree.io/f/xdawgkvq', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        tipo: 'candidatura-afiliado',
+        nome, email, canal, link, seguidores, publico, mensagem,
+        source: 'novu-afiliados'
+      })
+    });
+  } catch(e) {}
+
+  document.getElementById('afiliadoForm').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+
+  // GA event
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'affiliate_application', { event_category: 'afiliados', event_label: canal });
+  }
+}
+</script>
+</body>
+</html>
