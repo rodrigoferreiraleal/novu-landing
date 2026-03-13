@@ -122,6 +122,150 @@ Seg. Social: seg-social.pt | SNS: sns24.gov.pt | IRN: justica.gov.pt
 - Regista-te em iefp.pt ou no Centro de Emprego da tua área
 - Acesso a: bolsa de emprego, formações gratuitas, apoios à colocação
 - Linha de apoio: 300 041 414
+### MORADIA / ARRENDAMENTO
+**Onde procurar casa:**
+- idealista.pt — o maior portal imobiliário de Portugal
+- imovirtual.com — boa variedade de oferta
+- uniplaces.com — focado em estudantes e curta duração
+- Grupos Facebook locais (ex: "Quartos Lisboa", "Arrendamento Porto")
+- OLX.pt — anúncios particulares, atenção a fraudes
+
+**Preços médios de arrendamento (2026):**
+- Lisboa (quarto): 600–900€ | Apartamento T1: 1.200–1.800€
+- Porto (quarto): 450–700€ | T1: 900–1.400€
+- Outras cidades (Braga, Coimbra, Setúbal): 300–600€ quarto
+
+**Direitos do inquilino — essencial:**
+- Contrato de arrendamento obrigatório por escrito
+- Registo do contrato nas Finanças (AT) — responsabilidade do senhorio
+- Depósito máximo legal: 2 meses de renda
+- Prazo mínimo de contrato: 1 ano (salvo acordo diferente)
+- Rescisão pelo inquilino: aviso de 60 dias (contratos até 1 ano) ou 120 dias
+- Rescisão pelo senhorio: apenas com justa causa ou no fim do contrato
+- Em caso de conflito: NRAU — Balcão do Arrendatário nas Finanças
+
+**Documentos para arrendar:**
+- Passaporte + visto ou AR válida
+- NIF português (obrigatório)
+- Comprovativos de rendimento (últimos 3 recibos de vencimento ou extractos)
+- Alguns senhorios pedem fiador português
+
+### SEGURO DE SAÚDE
+**SNS — Serviço Nacional de Saúde (público):**
+- Gratuito para residentes legais com número de utente
+- Cobre: consultas, urgências, internamento, maternidade, medicamentos comparticipados
+- Limitação: tempo de espera longo para consultas de especialidade (meses)
+- Centro de Saúde da área de residência para cuidados primários
+
+**Saúde privada — quando considerar:**
+- Consultas de especialidade mais rápidas (dias vs meses)
+- Seguros populares: Médis, AdvanceCare, Multicare, Fidelidade Saúde
+- Preço médio: 30–80€/mês (individual) | 80–200€/mês (família)
+- Muitas empresas oferecem seguro de saúde como benefício — pergunta antes de assinar contrato
+- Clínicas low-cost sem seguro: Clínica Médis, HealthyLife, Dr. Consulta
+
+**Dica para imigrantes recém-chegados:**
+- Nos primeiros meses usa o SNS para urgências — é gratuito
+- Avalia seguro privado após estabilizar emprego e rendimento
+
+### CARTA DE CONDUÇÃO
+**Troca de carta estrangeira por portuguesa:**
+- **Países da UE/EEE**: troca directa, sem exame. Vai ao IMT com carta original + NIF + morada
+- **Países com acordo com Portugal** (Brasil, EUA, alguns outros): troca directa possível — verifica em imt.pt
+- **Outros países**: tens de fazer exame de condução em Portugal
+
+**Processo geral:**
+1. Vai ao IMT (Instituto da Mobilidade e dos Transportes) — imt.pt
+2. Documentos: carta original, passaporte, NIF, AR, foto, taxa (~30€)
+3. Carta portuguesa emitida em 15–30 dias
+
+**Conduzir com carta estrangeira em Portugal:**
+- UE: válida indefinidamente enquanto for residente
+- Fora da UE: válida por 185 dias após fixar residência — depois tens de trocar
+
+**Compra de carro:**
+- Carro novo: ISV (imposto sobre veículos) incluído no preço
+- Carro importado: paga ISV + IUC (imposto único de circulação anual)
+- Seguro automóvel obrigatório (responsabilidade civil mínima)
+- Seguros populares: Fidelidade, Allianz, Generali, Tranquilidade
+- Preço médio seguro: 300–600€/ano (depende do carro e condutor)
+
+### VIAJAR NA UNIÃO EUROPEIA
+**Com Autorização de Residência portuguesa:**
+- Podes viajar livremente pelos 27 países da UE + Suíça, Noruega, Islândia (Schengen)
+- Não precisas de visto adicional para visitas curtas (até 90 dias)
+- Precisas de: AR válida + passaporte do teu país
+- **Importante:** a AR não substitui o passaporte — precisas de ambos
+
+**Regra de 90/180 dias:**
+- Fora da UE mas no espaço Schengen: máx 90 dias em cada 180 dias
+- Como residente em Portugal, isto não te afecta dentro do espaço Schengen
+- Viagens a países fora do Schengen (ex: Reino Unido) requerem visto próprio
+
+**Trabalhar noutro país da UE:**
+- Com AR portuguesa podes trabalhar em qualquer país da UE
+- Tens de te registar como residente no país de destino se ficares mais de 3 meses
+- Direitos de Segurança Social são transferíveis entre países da UE
+
+**Regressar a Portugal:**
+- Sem limite de tempo fora se mantiveres a AR activa
+- AR pode ser cancelada se ficares fora de Portugal mais de 6 meses consecutivos (ou 8 em 24 meses) sem justificação
+
+### IRS — DECLARAÇÃO DE IMPOSTOS
+**Quem é obrigado a declarar:**
+- Todos os residentes fiscais em Portugal com rendimentos
+- Prazo: Abril de cada ano (rendimentos do ano anterior)
+- Portal: portaldasfinancas.gov.pt → IRS → Entregar Declaração
+
+**Residência fiscal:**
+- És residente fiscal se estiveres em Portugal mais de 183 dias/ano
+- Ou se tiveres habitação permanente em Portugal
+
+**Regime NHR (Residente Não Habitual):**
+- Taxa flat de 20% sobre rendimentos de fonte portuguesa (certas profissões)
+- Rendimentos estrangeiros podem ser isentos (depende do tipo)
+- Válido por 10 anos — tens de pedir no ano seguinte ao da chegada
+- Muito vantajoso para nómadas digitais e pensionistas
+
+**IRS automático:**
+- Portugal tem sistema de IRS automático para casos simples
+- O portal pré-preenche a declaração — confirmas e submetes
+- Reembolso médio: 200–500€ (chega em 3–5 meses após submissão)
+
+### ESCOLA PARA FILHOS
+**Sistema educativo português:**
+- Educação obrigatória: 6 aos 18 anos
+- Escolas públicas: gratuitas para todos os residentes legais
+- Matrícula: na escola pública da área de residência
+- Documentos: passaporte da criança, AR ou visto, comprovativo de morada, boletim de vacinas
+- Equivalência de anos escolares: feita na escola — crianças são colocadas por idade
+
+**Creche e pré-escolar:**
+- IPSS (instituições solidárias): mensalidade calculada por rendimento familiar (20–200€/mês)
+- Privadas: 400–800€/mês
+- Pré-escolar público (3-6 anos): gratuito nas escolas públicas
+
+**Apoio ao imigrante:**
+- Programa PLNM (Português como Língua Não Materna) nas escolas públicas — gratuito
+- ACIDI/APAV têm apoio a famílias imigrantes
+
+### APOSTILA E LEGALIZAÇÃO DE DOCUMENTOS
+**O que é a Apostila de Haia:**
+- Certificação internacional que valida documentos em países signatários
+- Portugal e Brasil são signatários — documentos brasileiros apostilados são válidos em PT
+
+**Onde apostilar no Brasil:** Cartório de Notas ou Tabelionato
+**Onde apostilar em Portugal:** IRN (conservatória) ou notário
+
+**Documentos que frequentemente precisam de apostila:**
+- Registo de nascimento
+- Registo criminal
+- Certidão de casamento
+- Diplomas académicos (dependendo da origem)
+
+**Se o teu país não é signatário:**
+- Legalização consular: no consulado português do teu país
+- Depois tradução juramentada em Portugal
 Sou uma ferramenta de informação — não presto aconselhamento jurídico.`;
 
 // ─── FAQ CACHE ────────────────────────────────────────────────────────────────
@@ -146,7 +290,19 @@ const FAQ = {
 
   "site de emprego": "Os principais portais de emprego em Portugal:\n\n• **LinkedIn** — o mais usado para escritório, tech e gestão\n• **Net-Empregos** (net-empregos.com) — o maior portal generalista\n• **ITJobs** (itjobs.pt) — exclusivo para tecnologia e IT\n• **Sapo Emprego** (emprego.sapo.pt) — muitas ofertas nacionais\n• **Indeed Portugal** (indeed.pt) — agrega ofertas de vários portais\n• **IEFP** (iefp.pt) — ofertas oficiais + formações gratuitas\n• **Glassdoor** — para ver salários e avaliações de empresas\n\n**Dica para imigrantes:** regista-te no IEFP mesmo que já tenhas emprego — dá acesso a formações gratuitas. O CV em formato Europass (europass.eu) é o mais aceite em Portugal. 💼",
 
-  "contrato de trabalho": "Para conseguir emprego e contrato de trabalho em Portugal:\n\n**Portais de emprego:**\n• linkedin.com/jobs\n• net-empregos.com\n• itjobs.pt (tecnologia)\n• indeed.pt | emprego.sapo.pt\n• iefp.pt (ofertas oficiais + formações gratuitas)\n\n**Direitos com contrato:**\n• 22 dias úteis de férias + subsídio de férias (1 mês extra)\n• Subsídio de Natal (13º mês)\n• Salário mínimo: 870€/mês (2025)\n\n**Para visto D1:** precisas do contrato ANTES de pedir o visto no consulado. Após entrada em PT, tens 4 meses para pedir AR na AIMA.\n\nO CV em formato Europass é o mais aceite: europass.eu 💼",
+  "encontrar quarto": "Para encontrar quarto/casa em Portugal:\n\n**Plataformas principais:**\n• idealista.pt — o maior portal imobiliário\n• imovirtual.com\n• uniplaces.com — focado em estudantes\n• Grupos Facebook locais de arrendamento\n• OLX.pt — anúncios particulares\n\n**Preços médios 2026:**\n• Lisboa (quarto): 600–900€ | Porto: 450–700€ | Outras cidades: 300–600€\n\n**Direitos essenciais:**\n• Contrato obrigatório por escrito\n• Depósito máximo: 2 meses de renda\n• Em caso de conflito: Balcão do Arrendatário nas Finanças\n\nO comprovativo de morada do contrato é essencial para tirar NIF, NISS e outros documentos. 🏠",
+
+  "seguro de saude": "Saúde em Portugal para imigrantes:\n\n**SNS (público — gratuito):**\n• Acesso com número de utente\n• Cobre consultas, urgências, internamento, medicamentos\n• Limitação: espera longa para especialidades\n\n**Saúde privada:**\n• Seguros: Médis, AdvanceCare, Multicare, Fidelidade Saúde\n• Preço: 30–80€/mês (individual)\n• Muitas empresas oferecem como benefício — pergunta antes de assinar contrato\n\n**Dica:** nos primeiros meses usa o SNS para urgências. Avalia seguro privado depois de estabilizar. 🏥",
+
+  "carta de conducao": "Troca de carta de condução em Portugal:\n\n**Países da UE:** troca directa, sem exame\n**Brasil e países com acordo:** troca directa possível — verifica em imt.pt\n**Outros países:** tens de fazer exame em Portugal\n\n**Processo:**\n1. Vai ao IMT (imt.pt)\n2. Documentos: carta original + passaporte + NIF + AR + foto\n3. Taxa: ~30€ | Prazo: 15–30 dias\n\n**Atenção:** com carta de fora da UE podes conduzir só 185 dias após fixar residência — depois tens de trocar. 🚗",
+
+  "viajar europa": "Viajar na UE com Autorização de Residência portuguesa:\n\n• Podes viajar livremente pelos 27 países da UE + Suíça, Noruega, Islândia\n• Precisas de: AR válida + passaporte do teu país (a AR não substitui o passaporte)\n• Para trabalhar noutro país da UE: regista-te como residente se ficares mais de 3 meses\n\n**Atenção:** a AR pode ser cancelada se ficares fora de Portugal mais de 6 meses consecutivos sem justificação — avisa a AIMA se fores estar muito tempo fora. ✈️",
+
+  "irs": "Declaração de IRS em Portugal:\n\n• Prazo: Abril de cada ano (rendimentos do ano anterior)\n• Portal: portaldasfinancas.gov.pt → IRS → Entregar Declaração\n• O sistema pré-preenche automaticamente para casos simples — confirmas e submetes\n• Reembolso médio: 200–500€ (chega em 3–5 meses)\n\n**Regime NHR (muito vantajoso):**\n• Taxa flat de 20% sobre rendimentos PT durante 10 anos\n• Ideal para nómadas digitais e pensionistas\n• Tens de pedir no ano seguinte ao da chegada 📊",
+
+  "escola filhos": "Matrículas escolares em Portugal para filhos de imigrantes:\n\n• Educação obrigatória: 6 aos 18 anos — gratuita nas escolas públicas\n• Matrícula na escola da área de residência\n• Documentos: passaporte da criança, AR ou visto, comprovativo de morada, boletim de vacinas\n• Programa PLNM (Português Língua Não Materna) — apoio gratuito nas escolas\n\n**Creche/pré-escolar:**\n• IPSS: 20–200€/mês (calculado por rendimento)\n• Pré-escolar público (3-6 anos): gratuito 🎒",
+
+  "apostila": "Apostila e legalização de documentos:\n\n• A Apostila de Haia valida documentos entre países signatários (Portugal e Brasil são signatários)\n• **No Brasil:** apostila em qualquer Cartório de Notas ou Tabelionato\n• **Em Portugal:** no IRN (conservatória) ou notário\n\n**Documentos que precisam de apostila:**\n• Registo de nascimento, registo criminal, certidão de casamento, diplomas\n\n**Se o teu país não é signatário:** legalização consular + tradução juramentada em Portugal 📄",\n\n**Portais de emprego:**\n• linkedin.com/jobs\n• net-empregos.com\n• itjobs.pt (tecnologia)\n• indeed.pt | emprego.sapo.pt\n• iefp.pt (ofertas oficiais + formações gratuitas)\n\n**Direitos com contrato:**\n• 22 dias úteis de férias + subsídio de férias (1 mês extra)\n• Subsídio de Natal (13º mês)\n• Salário mínimo: 870€/mês (2025)\n\n**Para visto D1:** precisas do contrato ANTES de pedir o visto no consulado. Após entrada em PT, tens 4 meses para pedir AR na AIMA.\n\nO CV em formato Europass é o mais aceite: europass.eu 💼",
 };
 
 function normalizeFAQ(text) {
