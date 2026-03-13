@@ -320,8 +320,8 @@ nav {
     <h1 id="hero-title">Empregos em Portugal <span>para imigrantes</span></h1>
     <p class="hero-sub" id="hero-sub">Part-time, freelance, restauração, hotelaria e muito mais. Todas as vagas com salário visível e empresas verificadas — sem surpresas.</p>
     <div class="hero-stats">
-      <div class="hero-stat"><span class="hero-stat-num" id="stat-vagas">12</span><span class="hero-stat-lbl" id="stat-vagas-lbl">vagas activas</span></div>
-      <div class="hero-stat"><span class="hero-stat-num" id="stat-empresas">7</span><span class="hero-stat-lbl" id="stat-empresas-lbl">empresas verificadas</span></div>
+      <div class="hero-stat"><span class="hero-stat-num" id="stat-vagas">15</span><span class="hero-stat-lbl" id="stat-vagas-lbl">vagas activas</span></div>
+      <div class="hero-stat"><span class="hero-stat-num" id="stat-empresas">10</span><span class="hero-stat-lbl" id="stat-empresas-lbl">empresas verificadas</span></div>
       <div class="hero-stat"><span class="hero-stat-num">7d</span><span class="hero-stat-lbl" id="stat-expira-lbl">validade máxima</span></div>
     </div>
   </div>
@@ -337,14 +337,71 @@ nav {
     <button class="filter-chip" onclick="filterCat('hotelaria', this)" id="fchip-hotelaria">Hotelaria</button>
     <button class="filter-chip" onclick="filterCat('limpeza', this)" id="fchip-limpeza">Limpeza</button>
     <button class="filter-chip" onclick="filterCat('remoto', this)" id="fchip-remoto">Remoto</button>
+    <button class="filter-chip" onclick="filterCat('ti', this)" id="fchip-ti">TI</button>
+    <button class="filter-chip" onclick="filterCat('industria', this)" id="fchip-industria">Indústria</button>
+    <button class="filter-chip" onclick="filterCat('logistica', this)" id="fchip-logistica">Logística</button>
     <select class="filter-city" id="filterCity" onchange="filterCidade()">
       <option value="todas" id="opt-todas">Todas as cidades</option>
-      <option value="Lisboa">Lisboa</option>
-      <option value="Porto">Porto</option>
-      <option value="Braga">Braga</option>
-      <option value="Faro">Faro</option>
-      <option value="Coimbra">Coimbra</option>
-      <option value="Setúbal">Setúbal</option>
+      <optgroup label="Área Metropolitana de Lisboa">
+        <option value="Lisboa">Lisboa</option>
+        <option value="Setúbal">Setúbal</option>
+        <option value="Almada">Almada</option>
+        <option value="Amadora">Amadora</option>
+        <option value="Cascais">Cascais</option>
+        <option value="Loures">Loures</option>
+        <option value="Odivelas">Odivelas</option>
+        <option value="Sintra">Sintra</option>
+        <option value="Vila Franca de Xira">Vila Franca de Xira</option>
+      </optgroup>
+      <optgroup label="Área Metropolitana do Porto">
+        <option value="Porto">Porto</option>
+        <option value="Gaia">Vila Nova de Gaia</option>
+        <option value="Matosinhos">Matosinhos</option>
+        <option value="Braga">Braga</option>
+        <option value="Guimarães">Guimarães</option>
+        <option value="Maia">Maia</option>
+        <option value="Gondomar">Gondomar</option>
+        <option value="Valongo">Valongo</option>
+      </optgroup>
+      <optgroup label="Centro">
+        <option value="Coimbra">Coimbra</option>
+        <option value="Aveiro">Aveiro</option>
+        <option value="Leiria">Leiria</option>
+        <option value="Viseu">Viseu</option>
+        <option value="Castelo Branco">Castelo Branco</option>
+        <option value="Guarda">Guarda</option>
+        <option value="Covilhã">Covilhã</option>
+      </optgroup>
+      <optgroup label="Alentejo">
+        <option value="Évora">Évora</option>
+        <option value="Beja">Beja</option>
+        <option value="Portalegre">Portalegre</option>
+        <option value="Elvas">Elvas</option>
+        <option value="Santiago do Cacém">Santiago do Cacém</option>
+      </optgroup>
+      <optgroup label="Algarve">
+        <option value="Faro">Faro</option>
+        <option value="Portimão">Portimão</option>
+        <option value="Lagos">Lagos</option>
+        <option value="Albufeira">Albufeira</option>
+        <option value="Loulé">Loulé</option>
+        <option value="Tavira">Tavira</option>
+        <option value="Olhão">Olhão</option>
+      </optgroup>
+      <optgroup label="Norte Interior">
+        <option value="Viana do Castelo">Viana do Castelo</option>
+        <option value="Bragança">Bragança</option>
+        <option value="Vila Real">Vila Real</option>
+        <option value="Chaves">Chaves</option>
+        <option value="Lamego">Lamego</option>
+      </optgroup>
+      <optgroup label="Ilhas">
+        <option value="Funchal">Funchal (Madeira)</option>
+        <option value="Ponta Delgada">Ponta Delgada (Açores)</option>
+      </optgroup>
+      <optgroup label="Remoto">
+        <option value="Remoto">Remoto / Online</option>
+      </optgroup>
     </select>
   </div>
 </div>
@@ -575,6 +632,42 @@ const VAGAS_DEMO = [
     diasRestantes: 2,
     publicado: 'Há 5 dias'
   },
+  {
+    id: 7, destaque: false,
+    empresa: 'WebSoft Portugal', empresaEmoji: '💻',
+    verificada: true, estrelas: 4.7, totalAvaliacoes: 9,
+    titulo: 'Programador Front-end — React',
+    categoria: 'ti', tipo: 'remoto',
+    cidade: 'Lisboa', bairro: 'Parque das Nações',
+    tipoRem: 'mes', valorRem: '1.400€/mês',
+    descricao: 'Empresa de software portuguesa procura programador front-end com experiência em React. Trabalho híbrido (3 dias remoto). Inglês valorizado.',
+    diasRestantes: 7,
+    publicado: 'Hoje'
+  },
+  {
+    id: 8, destaque: false,
+    empresa: 'Indústrias Sousa & Filhos', empresaEmoji: '🏭',
+    verificada: true, estrelas: 4.1, totalAvaliacoes: 6,
+    titulo: 'Operário de Produção — Turno',
+    categoria: 'industria', tipo: 'part-time',
+    cidade: 'Braga', bairro: 'Celeirós',
+    tipoRem: 'mes', valorRem: '870€/mês',
+    descricao: 'Fábrica de componentes metálicos procura operário para linha de produção. Trabalho por turnos (6h-14h / 14h-22h). Formação dada na empresa.',
+    diasRestantes: 5,
+    publicado: 'Há 2 dias'
+  },
+  {
+    id: 9, destaque: false,
+    empresa: 'TransLog Iberia', empresaEmoji: '🚛',
+    verificada: true, estrelas: 4.3, totalAvaliacoes: 14,
+    titulo: 'Motorista de Distribuição — Lisboa',
+    categoria: 'logistica', tipo: 'part-time',
+    cidade: 'Lisboa', bairro: 'Moscavide',
+    tipoRem: 'mes', valorRem: '1.050€/mês',
+    descricao: 'Empresa de logística e distribuição procura motorista com carta C. Carta de condução portuguesa ou reconhecida. Rota diária definida, sem pernoites.',
+    diasRestantes: 6,
+    publicado: 'Há 1 dia'
+  },
 ];
 
 const EMPRESAS_DESTAQUE = [
@@ -582,6 +675,8 @@ const EMPRESAS_DESTAQUE = [
   { emoji: '🏨', nome: 'Hotel Douro Boutique', vagas: 1, estrelas: 4.5 },
   { emoji: '🎵', nome: 'Hostel Fado & Soul', vagas: 3, estrelas: 4.9 },
   { emoji: '🧹', nome: 'CleanPro Lisboa', vagas: 2, estrelas: 4.2 },
+  { emoji: '💻', nome: 'WebSoft Portugal', vagas: 1, estrelas: 4.7 },
+  { emoji: '🚛', nome: 'TransLog Iberia', vagas: 2, estrelas: 4.3 },
 ];
 
 // ── TRADUÇÕES ──
