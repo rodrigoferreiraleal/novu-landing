@@ -311,12 +311,12 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal()">×</button>
     <div class="modal-icon">🇵🇹</div>
-    <h2 id="modal-title">Acesso antecipado gratuito</h2>
-    <p id="modal-desc">Junta-te à lista de espera e seja um dos primeiros a experimentar a NOVU — o teu guia completo da vida em Portugal.</p>
+    <h2 id="modal-title">Cria a tua conta grátis</h2>
+    <p id="modal-desc">Regista-te e acede ao assistente NOVU sem limites — o teu guia completo da vida em Portugal.</p>
     <div class="modal-form" id="modalForm">
       <input type="text" class="modal-input" id="modalNameInput" placeholder="o teu nome">
       <input type="email" class="modal-input" id="modalEmailInput" placeholder="o teu email">
-      <button class="modal-submit" id="modal-submit-btn" onclick="submitModalEmail()">Garantir o meu lugar</button>
+      <button class="modal-submit" id="modal-submit-btn" onclick="submitModalEmail()">Criar conta grátis</button>
       <div class="consent-row">
         <input type="checkbox" id="modalConsent">
         <label class="consent-label" for="modalConsent" id="modal-consent-label">Aceito a <a href="/privacidade.html" target="_blank">Política de Privacidade</a> e os <a href="/termos.html" target="_blank">Termos de Serviço</a></label>
@@ -342,7 +342,7 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-badge"><span class="dot"></span><span id="hero-badge-text">Agora em fase de acesso antecipado</span></div>
+  <div class="hero-badge"><span class="dot"></span><span id="hero-badge-text">Disponível agora — experimenta grátis</span></div>
   <h1 class="hero-title" id="hero-title">A tecnologia que guia<br>a sua jornada em <em>Portugal</em></h1>
   <p class="hero-sub" id="hero-sub">Do avião à cidadania — a NOVU guia-te por cada passo da tua vida em Portugal, de forma simples, clara e sem complicações.</p>
   <div class="hero-cta-wrap">
@@ -478,7 +478,7 @@
 <section class="final-cta">
   <h2 id="cta-title">A tua nova vida<br>começa aqui.</h2>
   <p id="cta-desc">Junta-te à lista de espera e seja um dos primeiros a experimentar a NOVU gratuitamente.</p>
-  <button class="btn-primary" onclick="openModal()" id="cta-btn">Quero acesso antecipado</button>
+  <button class="btn-primary" onclick="openModal()" id="cta-btn">Experimentar grátis agora</button>
 </section>
 
 <footer>
@@ -487,8 +487,9 @@
     <p id="footer-text">© 2026 NOVU. Informação, não aconselhamento jurídico.</p>
     <a href="/privacidade.html" class="footer-link" id="footer-privacy">Política de Privacidade</a>
     <a href="/termos.html" class="footer-link" id="footer-terms">Termos de Serviço</a>
+    <a href="/afiliados.html" class="footer-link">Programa de Afiliados</a>
   </div>
-  <a href="mailto:geral@novuai.pt" class="footer-email" id="footer-email-link">✉ geral@novuai.pt</a>
+  <a href="/cdn-cgi/l/email-protection#086f6d7a69644866677e7d696126787c" class="footer-email" id="footer-email-link">✉ <span class="__cf_email__" data-cfemail="73141601121f331d1c0506121a5d0307">[email&#160;protected]</span></a>
 </footer>
 
 <!-- MOBILE CTA FIXO -->
@@ -496,10 +497,10 @@
   <button class="btn-primary" onclick="document.getElementById('chatbot').scrollIntoView({behavior:'smooth'})">Fazer a minha primeira pergunta</button>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const T = {
   pt: {
-    nav_cta: 'Experimentar grátis', hero_badge: 'Agora em fase de acesso antecipado',
+    nav_cta: 'Experimentar grátis', hero_badge: 'Disponível agora — experimenta grátis',
     hero_title: 'A tecnologia que guia<br>a sua jornada em <em>Portugal</em>',
     hero_sub: 'Do avião à cidadania — a NOVU guia-te por cada passo da tua vida em Portugal, de forma simples, clara e sem complicações.',
     hero_btn1: 'Fazer a minha primeira pergunta', hero_btn2: 'Ver como funciona',
@@ -528,16 +529,16 @@ const T = {
     email_capture: '🎁 Regista-te para acesso ilimitado ao assistente NOVU!',
     name_placeholder: 'o teu nome', email_placeholder: 'o teu email', email_btn: 'Aceder grátis',
     success: '✅ Acesso desbloqueado! Bem-vindo à NOVU 🙌',
-    modal_title: 'Acesso antecipado gratuito', modal_desc: 'Junta-te à lista de espera e seja um dos primeiros a experimentar a NOVU.',
-    modal_name_ph: 'o teu nome', modal_email_ph: 'o teu email', modal_btn: 'Garantir o meu lugar',
-    modal_note: 'Gratuito. Sem spam. Só boas novidades.', modal_success: '✅ Perfeito! Estás na lista. Vamos avisar-te em primeiro lugar! 🙌',
+    modal_title: 'Cria a tua conta grátis', modal_desc: 'Regista-te e acede ao assistente NOVU sem limites — o teu guia completo da vida em Portugal.',
+    modal_name_ph: 'o teu nome', modal_email_ph: 'o teu email', modal_btn: 'Criar conta grátis',
+    modal_note: 'Gratuito. Sem spam. Só boas novidades.', modal_success: '✅ Perfeito! Conta criada. Bem-vindo à NOVU 🙌',
     how_label: 'Como funciona', how_title: 'Como a NOVU te ajuda em Portugal',
     step1_title: 'Pergunta', step1_desc: 'Descreve a tua dúvida ou situação em linguagem normal — sem formulários complicados.',
     step2_title: 'Recebe orientação', step2_desc: 'A NOVU explica documentos necessários, próximos passos e todas as opções disponíveis.',
     step3_title: 'Avança com segurança', step3_desc: 'Sabes exactamente o que fazer em Portugal, sem perder tempo nem dinheiro desnecessário.',
     proof_label: 'Validado pelos dados', proof_title: 'Os números falam por si',
     proof1: 'imigrantes em Portugal', proof2: 'nível de dificuldade reportado', proof3: 'dispostos a usar a NOVU', proof4: 'gastos em advogados por processo',
-    cta_title: 'A tua nova vida<br>começa aqui.', cta_desc: 'Junta-te à lista e seja um dos primeiros a experimentar a NOVU gratuitamente.', cta_btn: 'Quero acesso antecipado',
+    cta_title: 'A tua nova vida<br>começa aqui.', cta_desc: 'Regista-te grátis e começa a usar a NOVU agora mesmo.', cta_btn: 'Experimentar grátis agora',
     footer: '© 2026 NOVU. Informação, não aconselhamento jurídico.',
     phase1_title: 'Antes de chegar', phase1_desc: 'Visto certo para o teu caso, documentos a trazer, checklist de preparação.',
     phase2_title: 'Primeiros passos', phase2_desc: 'NIF, NISS, conta bancária, número SNS e como encontrar casa.',
@@ -549,7 +550,7 @@ const T = {
     mobile_cta: 'Fazer a minha primeira pergunta',
   },
   en: {
-    nav_cta: 'Try for free', hero_badge: 'Now in early access phase',
+    nav_cta: 'Try for free', hero_badge: 'Available now — try it free',
     hero_title: 'The technology that guides<br>your journey in <em>Portugal</em>',
     hero_sub: 'From the plane to citizenship — NOVU guides you through every step of your life in Portugal, simply, clearly and without complications.',
     hero_btn1: 'Ask my first question', hero_btn2: 'See how it works',
@@ -578,16 +579,16 @@ const T = {
     email_capture: '🎁 Register for unlimited access to the NOVU assistant!',
     name_placeholder: 'your name', email_placeholder: 'your email', email_btn: 'Get free access',
     success: '✅ Access unlocked! Welcome to NOVU 🙌',
-    modal_title: 'Free early access', modal_desc: 'Join the waitlist and be one of the first to try NOVU.',
-    modal_name_ph: 'your name', modal_email_ph: 'your email', modal_btn: 'Reserve my spot',
-    modal_note: 'Free. No spam. Only good news.', modal_success: '✅ Perfect! You\'re on the list. We\'ll notify you first! 🙌',
+    modal_title: 'Create your free account', modal_desc: 'Sign up and get unlimited access to the NOVU assistant — your complete guide to life in Portugal.',
+    modal_name_ph: 'your name', modal_email_ph: 'your email', modal_btn: 'Create free account',
+    modal_note: 'Free. No spam. Only good news.', modal_success: '✅ Perfect! Account created. Welcome to NOVU 🙌',
     how_label: 'How it works', how_title: 'How NOVU helps you in Portugal',
     step1_title: 'Ask', step1_desc: 'Describe your question or situation in plain language — no complicated forms.',
     step2_title: 'Get guidance', step2_desc: 'NOVU explains required documents, next steps and all available options.',
     step3_title: 'Move forward confidently', step3_desc: 'You know exactly what to do in Portugal, without wasting time or money.',
     proof_label: 'Backed by data', proof_title: 'The numbers speak for themselves',
     proof1: 'immigrants in Portugal', proof2: 'reported difficulty level', proof3: 'would use NOVU', proof4: 'spent on lawyers per process',
-    cta_title: 'Your new life<br>starts here.', cta_desc: 'Join the waitlist and be one of the first to try NOVU for free.', cta_btn: 'Get early access',
+    cta_title: 'Your new life<br>starts here.', cta_desc: 'Sign up for free and start using NOVU right now.', cta_btn: 'Try it free now',
     footer: '© 2026 NOVU. Information, not legal advice.',
     phase1_title: 'Before you arrive', phase1_desc: 'Right visa for your case, documents to bring, preparation checklist.',
     phase2_title: 'First steps', phase2_desc: 'NIF, NISS, bank account, NHS number and how to find housing.',
@@ -599,7 +600,7 @@ const T = {
     mobile_cta: 'Ask my first question',
   },
   es: {
-    nav_cta: 'Probar gratis', hero_badge: 'Ahora en fase de acceso anticipado',
+    nav_cta: 'Probar gratis', hero_badge: 'Disponible ahora — pruébalo gratis',
     hero_title: 'La tecnología que guía<br>tu viaje en <em>Portugal</em>',
     hero_sub: 'Del avión a la ciudadanía — NOVU te guía en cada paso de tu vida en Portugal, de forma sencilla, clara y sin complicaciones.',
     hero_btn1: 'Hacer mi primera pregunta', hero_btn2: 'Ver cómo funciona',
@@ -628,16 +629,16 @@ const T = {
     email_capture: '🎁 ¡Regístrate para acceso ilimitado al asistente NOVU!',
     name_placeholder: 'tu nombre', email_placeholder: 'tu email', email_btn: 'Acceder gratis',
     success: '✅ ¡Acceso desbloqueado! Bienvenido a NOVU 🙌',
-    modal_title: 'Acceso anticipado gratuito', modal_desc: 'Únete a la lista de espera y sea uno de los primeros en probar NOVU.',
-    modal_name_ph: 'tu nombre', modal_email_ph: 'tu email', modal_btn: 'Reservar mi lugar',
-    modal_note: 'Gratis. Sin spam. Solo buenas noticias.', modal_success: '✅ ¡Perfecto! Estás en la lista. ¡Te avisaremos primero! 🙌',
+    modal_title: 'Crea tu cuenta gratis', modal_desc: 'Regístrate y accede al asistente NOVU sin límites — tu guía completa de vida en Portugal.',
+    modal_name_ph: 'tu nombre', modal_email_ph: 'tu email', modal_btn: 'Crear cuenta gratis',
+    modal_note: 'Gratis. Sin spam. Solo buenas noticias.', modal_success: '✅ ¡Perfecto! Cuenta creada. ¡Bienvenido a NOVU 🙌',
     how_label: 'Cómo funciona', how_title: 'Cómo NOVU te ayuda en Portugal',
     step1_title: 'Pregunta', step1_desc: 'Describe tu duda o situación en lenguaje normal — sin formularios complicados.',
     step2_title: 'Recibe orientación', step2_desc: 'NOVU explica documentos necesarios, próximos pasos y todas las opciones disponibles.',
     step3_title: 'Avanza con seguridad', step3_desc: 'Sabes exactamente qué hacer en Portugal, sin perder tiempo ni dinero innecesario.',
     proof_label: 'Respaldado por datos', proof_title: 'Los números hablan por sí solos',
     proof1: 'inmigrantes en Portugal', proof2: 'nivel de dificultad reportado', proof3: 'usarían NOVU', proof4: 'gastados en abogados por proceso',
-    cta_title: 'Tu nueva vida<br>empieza aquí.', cta_desc: 'Únete a la lista y sea uno de los primeros en probar NOVU gratis.', cta_btn: 'Quiero acceso anticipado',
+    cta_title: 'Tu nueva vida<br>empieza aquí.', cta_desc: 'Regístrate gratis y empieza a usar NOVU ahora mismo.', cta_btn: 'Probar gratis ahora',
     footer: '© 2026 NOVU. Información, no asesoramiento jurídico.',
     phase1_title: 'Antes de llegar', phase1_desc: 'Visado correcto para tu caso, documentos a traer, checklist de preparación.',
     phase2_title: 'Primeros pasos', phase2_desc: 'NIF, NISS, cuenta bancaria, número SNS y cómo encontrar vivienda.',
@@ -872,9 +873,30 @@ async function submitInlineEmail() {
   isUnlocked = true;
   setCookie('novu_unlocked', 'true', 720);
   updateCounter();
+  setTimeout(() => showShareNudge(), 1200);
 }
 
-function openModal() { document.getElementById('emailModal').classList.add('open'); }
+function showShareNudge() {
+  const nudgeMap = {
+    pt: { text: 'Conheces alguém que também está a planear vir para Portugal? A NOVU pode ajudar.', btn: 'Partilhar no WhatsApp', wa: 'Encontrei uma plataforma que ajuda imenso quem está a viver ou planeia ir para Portugal 🇵🇹\n\nResponde a perguntas sobre vistos, documentos, emprego, bancos e muito mais — em português.\n\n👉 novuai.pt' },
+    en: { text: 'Know someone planning to move to Portugal? NOVU can help them too.', btn: 'Share on WhatsApp', wa: 'Found this platform that helps a lot with living in Portugal 🇵🇹\n\nAnswers questions about visas, documents, jobs, banking and more.\n\n👉 novuai.pt' },
+    es: { text: '¿Conoces a alguien que planea ir a Portugal? La NOVU puede ayudarle.', btn: 'Compartir en WhatsApp', wa: 'Encontré una plataforma que ayuda mucho a vivir en Portugal 🇵🇹\n\nResponde preguntas sobre visados, documentos, trabajo, bancos y más.\n\n👉 novuai.pt' }
+  };
+  const n = nudgeMap[currentLang] || nudgeMap['pt'];
+  const existing = document.getElementById('shareNudge');
+  if (existing) return;
+  const nudge = document.createElement('div');
+  nudge.id = 'shareNudge';
+  nudge.style.cssText = 'margin:12px 0 4px;padding:14px 16px;background:#F5F9FF;border:1px solid #D0E4F7;border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;animation:fadeUp 0.4s ease both';
+  nudge.innerHTML = `<span style="font-size:0.85rem;color:#4A6580;line-height:1.45;flex:1">${n.text}</span>
+    <a href="https://wa.me/?text=${encodeURIComponent(n.wa)}" target="_blank" rel="noopener noreferrer"
+      style="display:inline-flex;align-items:center;gap:6px;background:#25D366;color:white;border-radius:50px;padding:8px 16px;font-size:0.82rem;font-weight:600;text-decoration:none;white-space:nowrap;flex-shrink:0">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      ${n.btn}
+    </a>`;
+  const successMsg = document.getElementById('successMsg');
+  if (successMsg && successMsg.parentNode) successMsg.parentNode.insertBefore(nudge, successMsg.nextSibling);
+}
 function closeModal() { document.getElementById('emailModal').classList.remove('open'); }
 document.getElementById('emailModal').addEventListener('click', function(e) { if(e.target===this) closeModal(); });
 
@@ -922,7 +944,22 @@ function addMessage(text, type) {
   avatar.textContent = type === 'bot' ? 'N' : 'Tu';
   const bubble = document.createElement('div');
   bubble.className = 'msg-bubble';
-  bubble.innerHTML = text.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+  // Disclaimer automático para temas legais
+  const legalKeywords = ['visto','autorização','aima','advogado','lei','legal','contrato','nif','niss','irs','finanças','segurança social','residência','cidadania','renovação','reagrupamento','diploma','trabalho','recibo verde','tribunal','multa','prazo'];
+  const lowerText = text.toLowerCase();
+  const isLegalTopic = type === 'bot' && legalKeywords.some(k => lowerText.includes(k));
+  const disclaimerMap = {
+    pt: '⚠️ <em>Informação de carácter geral. Não constitui aconselhamento jurídico. Para o teu caso específico, consulta um advogado.</em>',
+    en: '⚠️ <em>General information only. This does not constitute legal advice. For your specific situation, consult a lawyer.</em>',
+    es: '⚠️ <em>Información de carácter general. No constituye asesoramiento jurídico. Para tu caso específico, consulta un abogado.</em>'
+  };
+
+  let finalText = text.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  if (isLegalTopic) {
+    finalText += '<br><br><small style="color:#8FA3BC;font-size:0.78rem;line-height:1.4;display:block;margin-top:6px;padding-top:6px;border-top:1px solid #E8EEF5">' + (disclaimerMap[currentLang] || disclaimerMap['pt']) + '</small>';
+  }
+  bubble.innerHTML = finalText;
   msg.appendChild(avatar);
   msg.appendChild(bubble);
   wrapper.appendChild(msg);
@@ -964,13 +1001,4 @@ const savedUnlocked = getCookie('novu_unlocked');
 const savedQuestions = getCookie('novu_questions');
 if (savedUnlocked === 'true') {
   isUnlocked = true;
-} else if (savedQuestions) {
-  questionsUsed = parseInt(savedQuestions) || 0;
-  if (questionsUsed >= MAX_FREE) setTimeout(() => showEmailCapture(), 500);
-}
-updateCounter();
-renderFAQButtons(T['pt'].faq_questions);
-showCookieBanner();
-</script>
-</body>
-</html>
+} else if (savedQuestions
