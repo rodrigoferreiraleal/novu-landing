@@ -324,6 +324,15 @@
   .docs-floating-chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-width: 360px; }
   .docs-chip { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 50px; padding: 6px 14px; font-size: 0.78rem; color: rgba(255,255,255,0.65); }
   @media (max-width: 768px) { .docs-highlight-inner { grid-template-columns: 1fr; gap: 40px; } .docs-highlight-right { display: none; } }
+  @media (max-width: 600px) {
+    nav { padding: 0 16px; height: 56px; }
+    .nav-right { gap: 6px; }
+    .nav-docs-btn { display: none; }
+    .nav-cta { display: none; }
+  }
+  @media (max-width: 400px) {
+    .lang-btn { padding: 3px 7px; font-size: 0.7rem; }
+  }
 </style>
 </head>
 <body>
@@ -569,7 +578,13 @@
     <a href="/afiliados.html" class="footer-link">Programa de Afiliados</a>
     <a href="/documentos.html" class="footer-link">Documentos</a>
   </div>
-  <a href="#" class="footer-email" id="footer-email-link" onclick="this.href='mai'+'lto:'+'geral'+'@'+'novuai.pt';return true;">✉ <span class="__cf_email__" data-cfemail="07606275666b4769687172666e297773">[email&#160;protected]</span></a>
+  <a href="#" class="footer-email" id="footer-email-link" data-u="geral" data-d="novuai.pt">✉ geral&#64;novuai.pt</a>
+  <script>
+    (function(){
+      var el = document.getElementById('footer-email-link');
+      if(el){ el.addEventListener('click', function(e){ e.preventDefault(); window.location = 'mai'+'lto:'+el.getAttribute('data-u')+'@'+el.getAttribute('data-d'); }); }
+    })();
+  </script>
 </footer>
 
 <!-- MOBILE CTA FIXO -->
