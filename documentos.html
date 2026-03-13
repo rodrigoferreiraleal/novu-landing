@@ -273,6 +273,78 @@
     </div>
   </div>
 
+  <!-- CATEGORIA: ALOJAMENTO & RESPONSABILIDADE -->
+  <div class="category">
+    <div class="category-title"><span class="cat-icon">🏠</span> <span id="cat-alojamento">Alojamento & Responsabilidade</span></div>
+    <div class="docs-grid">
+
+      <div class="doc-card">
+        <div class="doc-card-header">
+          <div class="doc-icon">🔑</div>
+          <div class="doc-info">
+            <h3 id="doc-decl-alojamento-title">Declaração de Alojamento</h3>
+            <p id="doc-decl-alojamento-desc">Declaração do proprietário a autorizar o imigrante a residir no imóvel. Aceite pela AIMA em substituição de contrato de arrendamento.</p>
+          </div>
+        </div>
+        <div class="doc-actions">
+          <button class="btn-generate" onclick="openDocModal('declaracao-alojamento')" id="btn-gen-decl-alojamento">📄 Gerar PDF</button>
+          <a href="https://aima.gov.pt/pt/servicos/pedidos-de-autorizacao-de-residencia" target="_blank" class="btn-official">🔗 AIMA — AR</a>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-card-header">
+          <div class="doc-icon">📝</div>
+          <div class="doc-info">
+            <h3 id="doc-termo-resp-title">Termo de Responsabilidade</h3>
+            <p id="doc-termo-resp-desc">Declaração de assunção de responsabilidade pela permanência de outra pessoa em Portugal. Usado em reagrupamento familiar e convites.</p>
+          </div>
+        </div>
+        <div class="doc-actions">
+          <button class="btn-generate" onclick="openDocModal('termo-responsabilidade')" id="btn-gen-termo-resp">📄 Gerar PDF</button>
+          <a href="https://aima.gov.pt/pt/servicos" target="_blank" class="btn-official">🔗 AIMA Serviços</a>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-card-header">
+          <div class="doc-icon">✉️</div>
+          <div class="doc-info">
+            <h3 id="doc-carta-convite-title">Carta de Convite</h3>
+            <p id="doc-carta-convite-desc">Carta formal de convite para visita ou estadia em Portugal. Usada em processos de visto e justificativa de hospedagem.</p>
+          </div>
+        </div>
+        <div class="doc-actions">
+          <button class="btn-generate" onclick="openDocModal('carta-convite')" id="btn-gen-carta-convite">📄 Gerar PDF</button>
+          <a href="https://vistos.mne.gov.pt" target="_blank" class="btn-official">🔗 Vistos MNE</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CATEGORIA: FINANCEIRO -->
+  <div class="category">
+    <div class="category-title"><span class="cat-icon">💰</span> <span id="cat-financeiro">Financeiro</span></div>
+    <div class="docs-grid">
+
+      <div class="doc-card">
+        <div class="doc-card-header">
+          <div class="doc-icon">💳</div>
+          <div class="doc-info">
+            <h3 id="doc-meios-subs-title">Declaração de Meios de Subsistência</h3>
+            <p id="doc-meios-subs-desc">Declaração de que possui meios financeiros suficientes para a permanência em Portugal. Exigida em processos de visto e AR.</p>
+          </div>
+        </div>
+        <div class="doc-actions">
+          <button class="btn-generate" onclick="openDocModal('meios-subsistencia')" id="btn-gen-meios-subs">📄 Gerar PDF</button>
+          <a href="https://aima.gov.pt/pt/servicos" target="_blank" class="btn-official">🔗 AIMA Serviços</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- CATEGORIA: IMIGRAÇÃO -->
   <div class="category">
     <div class="category-title"><span class="cat-icon">✈️</span> <span id="cat-imigracao">Imigração</span></div>
@@ -375,6 +447,20 @@
         <div class="doc-actions">
           <button class="btn-generate" onclick="openDocModal('compromisso-honra')" id="btn-gen-honra">📄 Gerar PDF</button>
           <a href="https://eportugal.gov.pt/pt/espaco-cidadao" target="_blank" class="btn-official">🔗 ePortugal</a>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-card-header">
+          <div class="doc-icon">💼</div>
+          <div class="doc-info">
+            <h3 id="doc-intencao-trabalho-title">Carta de Intenção de Trabalho</h3>
+            <p id="doc-intencao-trabalho-desc">Carta que expressa a intenção profissional do requerente em Portugal. Útil para pedidos de visto de trabalho.</p>
+          </div>
+        </div>
+        <div class="doc-actions">
+          <button class="btn-generate" onclick="openDocModal('carta-intencao-trabalho')" id="btn-gen-intencao-trabalho">📄 Gerar PDF</button>
+          <a href="https://vistos.mne.gov.pt" target="_blank" class="btn-official">🔗 Vistos MNE</a>
         </div>
       </div>
 
@@ -586,6 +672,18 @@ const T = {
     doc_honra_desc: 'Declaração solene em que o signatário afirma a veracidade de determinados factos sob responsabilidade pessoal.',
     doc_menor_title: 'Autorização para Menor Viajar',
     doc_menor_desc: 'Autorização de progenitor ou tutor para que um menor viaje acompanhado por terceiros ou sozinho.',
+    cat_alojamento: 'Alojamento & Responsabilidade',
+    cat_financeiro: 'Financeiro',
+    doc_decl_alojamento_title: 'Declaração de Alojamento',
+    doc_decl_alojamento_desc: 'Declaração do proprietário a autorizar o imigrante a residir no imóvel. Aceite pela AIMA.',
+    doc_termo_resp_title: 'Termo de Responsabilidade',
+    doc_termo_resp_desc: 'Declaração de assunção de responsabilidade pela permanência de outra pessoa em Portugal.',
+    doc_carta_convite_title: 'Carta de Convite',
+    doc_carta_convite_desc: 'Carta formal de convite para visita ou estadia em Portugal. Usada em processos de visto.',
+    doc_meios_subs_title: 'Declaração de Meios de Subsistência',
+    doc_meios_subs_desc: 'Declaração de que possui meios financeiros suficientes para a permanência em Portugal.',
+    doc_intencao_trabalho_title: 'Carta de Intenção de Trabalho',
+    doc_intencao_trabalho_desc: 'Carta que expressa a intenção profissional do requerente em Portugal.',
     btn_gen: '📄 Gerar PDF',
     form_modal_sub: 'Preenche os teus dados para gerar o documento em PDF.',
     form_legal_title: 'Os teus dados são guardados apenas no teu navegador.',
@@ -642,6 +740,18 @@ const T = {
     doc_honra_desc: 'Solemn declaration in which the signatory affirms the truthfulness of certain facts under personal responsibility.',
     doc_menor_title: 'Minor Travel Authorization',
     doc_menor_desc: 'Authorization from a parent or guardian for a minor to travel with third parties or alone.',
+    cat_alojamento: 'Accommodation & Responsibility',
+    cat_financeiro: 'Financial',
+    doc_decl_alojamento_title: 'Accommodation Declaration',
+    doc_decl_alojamento_desc: 'Declaration by the property owner authorising the immigrant to reside in the property. Accepted by AIMA.',
+    doc_termo_resp_title: 'Responsibility Statement',
+    doc_termo_resp_desc: 'Declaration assuming responsibility for another person\'s stay in Portugal.',
+    doc_carta_convite_title: 'Letter of Invitation',
+    doc_carta_convite_desc: 'Formal invitation letter for a visit or stay in Portugal. Used in visa applications.',
+    doc_meios_subs_title: 'Declaration of Means of Subsistence',
+    doc_meios_subs_desc: 'Declaration stating sufficient financial means for staying in Portugal.',
+    doc_intencao_trabalho_title: 'Letter of Intent to Work',
+    doc_intencao_trabalho_desc: 'Letter expressing professional intention in Portugal. Useful for work visa applications.',
     btn_gen: '📄 Generate PDF',
     form_modal_sub: 'Fill in your details to generate the document in PDF.',
     form_legal_title: 'Your data is stored only in your browser.',
@@ -698,6 +808,18 @@ const T = {
     doc_honra_desc: 'Declaración solemne en la que el firmante afirma la veracidad de ciertos hechos bajo responsabilidad personal.',
     doc_menor_title: 'Autorización para Menor para Viajar',
     doc_menor_desc: 'Autorización del progenitor o tutor para que un menor viaje acompañado por terceros o solo.',
+    cat_alojamento: 'Alojamiento & Responsabilidad',
+    cat_financeiro: 'Financiero',
+    doc_decl_alojamento_title: 'Declaración de Alojamiento',
+    doc_decl_alojamento_desc: 'Declaración del propietario autorizando al inmigrante a residir en el inmueble. Aceptada por la AIMA.',
+    doc_termo_resp_title: 'Término de Responsabilidad',
+    doc_termo_resp_desc: 'Declaración de asunción de responsabilidad por la estancia de otra persona en Portugal.',
+    doc_carta_convite_title: 'Carta de Invitación',
+    doc_carta_convite_desc: 'Carta formal de invitación para visita o estancia en Portugal. Usada en procesos de visado.',
+    doc_meios_subs_title: 'Declaración de Medios de Subsistencia',
+    doc_meios_subs_desc: 'Declaración de que se dispone de medios financieros suficientes para la estancia en Portugal.',
+    doc_intencao_trabalho_title: 'Carta de Intención de Trabajo',
+    doc_intencao_trabalho_desc: 'Carta que expresa la intención profesional del solicitante en Portugal. Útil para visados de trabajo.',
     btn_gen: '📄 Generar PDF',
     form_modal_sub: 'Rellena tus datos para generar el documento en PDF.',
     form_legal_title: 'Tus datos se guardan solo en tu navegador.',
@@ -776,10 +898,24 @@ function setLang(lang) {
   set('lbl-cidade', t.lbl_cidade);
   set('btn-submit-text', t.btn_submit_text);
   set('storage-note', t.storage_note);
+  // Novos docs
+  set('cat-alojamento', t.cat_alojamento);
+  set('cat-financeiro', t.cat_financeiro);
+  set('doc-decl-alojamento-title', t.doc_decl_alojamento_title);
+  set('doc-decl-alojamento-desc', t.doc_decl_alojamento_desc);
+  set('doc-termo-resp-title', t.doc_termo_resp_title);
+  set('doc-termo-resp-desc', t.doc_termo_resp_desc);
+  set('doc-carta-convite-title', t.doc_carta_convite_title);
+  set('doc-carta-convite-desc', t.doc_carta_convite_desc);
+  set('doc-meios-subs-title', t.doc_meios_subs_title);
+  set('doc-meios-subs-desc', t.doc_meios_subs_desc);
+  set('doc-intencao-trabalho-title', t.doc_intencao_trabalho_title);
+  set('doc-intencao-trabalho-desc', t.doc_intencao_trabalho_desc);
   // Actualizar todos os botões "Gerar PDF"
   ['btn-gen-atestado','btn-gen-residencia','btn-gen-coabitacao','btn-gen-carta-aima',
    'btn-gen-agendamento','btn-gen-entrada','btn-gen-senhorio','btn-gen-experiencia',
-   'btn-gen-honra','btn-gen-menor'].forEach(id => set(id, t.btn_gen));
+   'btn-gen-honra','btn-gen-menor','btn-gen-decl-alojamento','btn-gen-termo-resp',
+   'btn-gen-carta-convite','btn-gen-meios-subs','btn-gen-intencao-trabalho'].forEach(id => set(id, t.btn_gen));
   // Footer
   set('footer-text', t.footer_text);
   // Modal sub (se não estiver aberto com título específico)
@@ -962,6 +1098,106 @@ const DOC_TEMPLATES = {
       { type: 'footer', text: d.cidade },
     ]
   },
+  'declaracao-alojamento': {
+    title: 'Declaração de Alojamento',
+    sub: 'Declaração do proprietário a autorizar o imigrante a residir no imóvel.',
+    extraField1: { label: 'Nome do proprietário', placeholder: 'Ex: Maria dos Santos' },
+    extraField2: { label: 'NIF do proprietário', placeholder: 'Ex: 987654321' },
+    generate: (d) => [
+      { type: 'title', text: 'DECLARAÇÃO DE ALOJAMENTO' },
+      { type: 'subtitle', text: '(Modelo informativo — não substitui documentos oficiais)' },
+      { type: 'spacer' },
+      { type: 'body', text: `Eu, ${d.extra1 || '[nome do proprietário]'}, contribuinte fiscal nº ${d.extra2 || '[NIF do proprietário]'}, na qualidade de proprietário(a) do imóvel sito em ${d.morada}, ${d.cp} ${d.cidade},` },
+      { type: 'spacer' },
+      { type: 'body', text: `DECLARO que autorizo ${d.nome}, de nacionalidade ${d.nacionalidade}, portador(a) do documento nº ${d.documento || 'N/A'} e NIF ${d.nif}, a residir no referido imóvel, a título de cedência de habitação.` },
+      { type: 'spacer' },
+      { type: 'body', text: 'Declaro ainda que a informação prestada é verdadeira e assumo total responsabilidade pela veracidade desta declaração.' },
+      { type: 'spacer' },
+      { type: 'body', text: '⚠ Nota: A AIMA pode solicitar reconhecimento notarial desta declaração. Verifique os requisitos específicos do seu processo.' },
+      { type: 'footer', text: d.cidade },
+      { type: 'signature', text: d.extra1 || '[proprietário]' },
+    ]
+  },
+  'termo-responsabilidade': {
+    title: 'Termo de Responsabilidade',
+    sub: 'Declaração de assunção de responsabilidade pela permanência de outra pessoa em Portugal.',
+    extraField1: { label: 'Nome da pessoa acolhida', placeholder: 'Ex: João da Silva' },
+    extraField2: { label: 'Grau de parentesco / relação', placeholder: 'Ex: filho(a), familiar, amigo(a)' },
+    generate: (d) => [
+      { type: 'title', text: 'TERMO DE RESPONSABILIDADE' },
+      { type: 'subtitle', text: '(Modelo informativo — consulte as autoridades competentes)' },
+      { type: 'spacer' },
+      { type: 'body', text: `Eu, ${d.nome}, de nacionalidade ${d.nacionalidade}, portador(a) do documento nº ${d.documento || 'N/A'} e NIF ${d.nif}, residente em ${d.morada}, ${d.cp} ${d.cidade},` },
+      { type: 'spacer' },
+      { type: 'body', text: `DECLARO, sob compromisso de honra, que assumo total responsabilidade pela permanência em Portugal de ${d.extra1 || '[nome da pessoa]'}, com quem mantenho relação de ${d.extra2 || '[relação]'}.` },
+      { type: 'spacer' },
+      { type: 'body', text: 'Comprometo-me a assegurar as condições de alojamento, sustento e regresso ao país de origem, caso aplicável, durante o período de permanência em território nacional.' },
+      { type: 'spacer' },
+      { type: 'body', text: 'Estou ciente de que a prestação de falsas declarações é punida por lei.' },
+      { type: 'footer', text: d.cidade },
+      { type: 'signature', text: d.nome },
+    ]
+  },
+  'carta-convite': {
+    title: 'Carta de Convite',
+    sub: 'Carta formal de convite para visita ou estadia em Portugal. Usada em processos de visto.',
+    extraField1: { label: 'Nome do convidado', placeholder: 'Ex: Ana Oliveira' },
+    extraField2: { label: 'Período e motivo da visita', placeholder: 'Ex: 30 dias, visita familiar / turismo' },
+    generate: (d) => [
+      { type: 'title', text: 'CARTA DE CONVITE' },
+      { type: 'subtitle', text: '(Modelo informativo — para fins de processo de visto)' },
+      { type: 'spacer' },
+      { type: 'body', text: `Eu, ${d.nome}, de nacionalidade ${d.nacionalidade}, portador(a) do documento nº ${d.documento || 'N/A'} e NIF ${d.nif}, residente em ${d.morada}, ${d.cp} ${d.cidade}, Portugal,` },
+      { type: 'spacer' },
+      { type: 'body', text: `CONVIDO formalmente ${d.extra1 || '[nome do convidado]'} a visitar Portugal pelo período de ${d.extra2 || '[período e motivo]'}.` },
+      { type: 'spacer' },
+      { type: 'body', text: 'Durante a estadia, o(a) convidado(a) ficará alojado(a) na minha residência, acima indicada, ficando os custos de alojamento por minha conta.' },
+      { type: 'spacer' },
+      { type: 'body', text: 'Declaro que a informação prestada é verdadeira e comprometo-me a comunicar às autoridades qualquer alteração relevante.' },
+      { type: 'footer', text: d.cidade },
+      { type: 'signature', text: d.nome },
+    ]
+  },
+  'meios-subsistencia': {
+    title: 'Declaração de Meios de Subsistência',
+    sub: 'Declaração de que o requerente possui meios financeiros suficientes para a sua permanência em Portugal.',
+    extraField1: { label: 'Fonte de rendimento', placeholder: 'Ex: trabalho por conta própria, pensão, poupanças' },
+    extraField2: { label: 'Valor mensal aproximado (€)', placeholder: 'Ex: 1.200€ mensais' },
+    generate: (d) => [
+      { type: 'title', text: 'DECLARAÇÃO DE MEIOS DE SUBSISTÊNCIA' },
+      { type: 'subtitle', text: '(Modelo informativo — não substitui comprovativo bancário)' },
+      { type: 'spacer' },
+      { type: 'body', text: `Eu, ${d.nome}, de nacionalidade ${d.nacionalidade}, portador(a) do documento nº ${d.documento || 'N/A'} e NIF ${d.nif}, residente em ${d.morada}, ${d.cp} ${d.cidade},` },
+      { type: 'spacer' },
+      { type: 'body', text: `DECLARO, sob compromisso de honra, que disponho de meios de subsistência suficientes para garantir a minha permanência em território nacional, provenientes de ${d.extra1 || '[fonte de rendimento]'}, no valor aproximado de ${d.extra2 || '[valor]'} mensais.` },
+      { type: 'spacer' },
+      { type: 'body', text: 'Declaro ainda que não serei um encargo para o sistema de segurança social português e que posso apresentar comprovativos sempre que solicitado pelas autoridades competentes.' },
+      { type: 'spacer' },
+      { type: 'body', text: '⚠ Nota: Este documento deve ser acompanhado de extratos bancários ou outros comprovativos financeiros.' },
+      { type: 'footer', text: d.cidade },
+      { type: 'signature', text: d.nome },
+    ]
+  },
+  'carta-intencao-trabalho': {
+    title: 'Carta de Intenção de Trabalho',
+    sub: 'Carta que expressa a intenção profissional do requerente em Portugal. Útil para pedidos de visto.',
+    extraField1: { label: 'Área profissional / cargo pretendido', placeholder: 'Ex: Desenvolvedor de Software, Enfermeiro' },
+    extraField2: { label: 'Empresa ou sector alvo (opcional)', placeholder: 'Ex: sector tecnológico, empresa XYZ' },
+    generate: (d) => [
+      { type: 'title', text: 'CARTA DE INTENÇÃO DE TRABALHO' },
+      { type: 'subtitle', text: '(Modelo informativo — para fins de processo de visto)' },
+      { type: 'spacer' },
+      { type: 'body', text: `Eu, ${d.nome}, de nacionalidade ${d.nacionalidade}, portador(a) do documento nº ${d.documento || 'N/A'} e NIF ${d.nif}, residente em ${d.morada}, ${d.cp} ${d.cidade},` },
+      { type: 'spacer' },
+      { type: 'body', text: `DECLARO que é minha intenção exercer actividade profissional em Portugal na área de ${d.extra1 || '[área profissional]'}${d.extra2 ? ', designadamente em ' + d.extra2 : ''}.` },
+      { type: 'spacer' },
+      { type: 'body', text: 'Possuo as qualificações e experiência necessárias para exercer a referida actividade e comprometo-me a cumprir todas as obrigações fiscais e legais aplicáveis em Portugal.' },
+      { type: 'spacer' },
+      { type: 'body', text: 'Esta carta é emitida para os devidos fins junto das autoridades competentes.' },
+      { type: 'footer', text: d.cidade },
+      { type: 'signature', text: d.nome },
+    ]
+  },
   'menor-viajar': {
     title: 'Autorização para Menor Viajar',
     sub: 'Autorização de progenitor ou tutor para menor viajar.',
@@ -1051,10 +1287,6 @@ function clearSavedData() {
 
 // ── MODAL DOCUMENTO ──
 function openDocModal(docType) {
-  if (docsGenerated >= MAX_FREE_DOCS) {
-    openLockModal();
-    return;
-  }
   currentDocType = docType;
   const tpl = DOC_TEMPLATES[docType];
   document.getElementById('docModalTitle').textContent = tpl.title;
@@ -1179,11 +1411,14 @@ function generatePDF(e) {
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(13);
   doc.setTextColor(255, 255, 255);
-  doc.text('NOVU', 15, 12);
+  doc.text('NOVU', 15, 11);
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(8);
+  doc.setFontSize(7.5);
   doc.setTextColor(144, 196, 245);
-  doc.text('novuai.pt — Your new life in Portugal', 15, 16.5);
+  doc.text('Ferramenta digital para imigrantes em Portugal', 15, 15);
+  doc.setFontSize(7);
+  doc.setTextColor(100, 160, 220);
+  doc.text('novuai.pt', 15, 18.5);
 
   y = 32;
 
