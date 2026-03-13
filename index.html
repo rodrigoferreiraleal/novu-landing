@@ -698,6 +698,7 @@ let questionsUsed = 0;
 const MAX_FREE = 4;
 const MAX_HISTORY = 12;
 let isUnlocked = false;
+const refParam = new URLSearchParams(window.location.search).get('ref') || '';
 
 // LANGUAGE
 function setLang(lang) {
@@ -926,12 +927,12 @@ async function registerUser(name, email) {
     await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'register', name, email, lang: currentLang })
+      body: JSON.stringify({ action: 'register', name, email, lang: currentLang, ref: refParam })
     });
     await fetch('https://formspree.io/f/xdawgkvq', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({ name, email, lang: currentLang, source: 'novu-registration' })
+      body: JSON.stringify({ name, email, lang: currentLang, ref: refParam, source: 'novu-registration' })
     });
   } catch(e) {}
 }
