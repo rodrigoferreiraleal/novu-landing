@@ -33,9 +33,9 @@
   .nav-logo span { color: var(--blue-bright); }
   .nav-right { display: flex; align-items: center; gap: 14px; }
   .lang-selector { display: flex; gap: 4px; }
-  .lang-btn { background: none; border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.7); padding: 3px 9px; border-radius: 4px; font-size: 0.72rem; font-weight: 600; cursor: pointer; letter-spacing: 0.5px; transition: all 0.2s; }
-  .lang-btn:hover { border-color: rgba(255,255,255,0.7); color: #fff; }
-  .lang-btn.active { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.8); color: #fff; }
+  .lang-btn { background: none; border: 1px solid var(--gray-200); color: var(--gray-400); padding: 3px 9px; border-radius: 4px; font-size: 0.72rem; font-weight: 600; cursor: pointer; letter-spacing: 0.5px; transition: all 0.2s; }
+  .lang-btn:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
+  .lang-btn.active { background: var(--blue-deep); border-color: var(--blue-deep); color: #fff; }
   .nav-back { background: transparent; border: 1.5px solid var(--gray-200); color: var(--gray-600); padding: 7px 16px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 500; cursor: pointer; text-decoration: none; transition: all 0.2s; }
   .nav-back:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
 
@@ -986,11 +986,7 @@ const DOC_TEMPLATES = {
   },
 };
 
-// ── INIT ──
-window.addEventListener('load', () => {
-  updateCounterBar();
-  loadSavedBar();
-});
+// (init movido para o fim do script)
 
 function updateCounterBar() {
   const bar = document.getElementById('counterBar');
