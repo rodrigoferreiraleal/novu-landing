@@ -884,7 +884,9 @@ async function submitCandidatura() {
         vaga_id:     vagaSeleccionada.id,
         vaga_titulo: vagaSeleccionada.titulo,
         empresa_nome: vagaSeleccionada.empresa_nome || vagaSeleccionada.empresa,
-        nome, telefone, email,
+        nome,
+        telefone: tel,
+        email,
         mensagem: document.getElementById('cand-msg').value
       })
     });
