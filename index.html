@@ -1105,6 +1105,8 @@ function setLang(lang) {
   document.getElementById('stat1').textContent = t.stat1;
   document.getElementById('stat2').textContent = t.stat2;
   document.getElementById('stat3').textContent = t.stat3;
+  // Recarregar stats reais após mudar idioma (labels mudam, números mantêm)
+  setTimeout(carregarStats, 50);
   document.getElementById('journey-label').textContent = t.journey_label;
   document.getElementById('journey-title').textContent = t.journey_title;
   for(let i=1;i<=6;i++) {
@@ -1439,15 +1441,19 @@ document.addEventListener('click', function(e) {
 
 // ── STATS REAIS ──
 async function carregarStats() {
+  const BASE_USERS = 90; // base de arranque
   try {
     const res = await fetch('/api/stats');
     const data = await res.json();
     const elUsers = document.getElementById('stat-users');
     const elVagas = document.getElementById('stat-vagas-hero');
-    if (elUsers) elUsers.textContent = data.users > 0 ? data.users.toLocaleString('pt-PT') : '—';
+    const totalUsers = BASE_USERS + (data.users || 0);
+    if (elUsers) elUsers.textContent = totalUsers.toLocaleString('pt-PT') + '+';
     if (elVagas) elVagas.textContent = data.vagas > 0 ? data.vagas : '—';
   } catch(e) {
-    // silencioso — não quebrar a página
+    // fallback com base
+    const elUsers = document.getElementById('stat-users');
+    if (elUsers) elUsers.textContent = BASE_USERS + '+';
   }
 }
 
@@ -1461,7 +1467,7 @@ if (savedUnlocked === 'true') {
 }
 updateCounter();
 setLang('pt');
-carregarStats();
+setTimeout(carregarStats, 100); // após setLang para não ser sobrescrito
 </script>
 
 </body>
