@@ -1,4 +1,5 @@
 const { createClient } = require("@supabase/supabase-js");
+
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_ANON_KEY
@@ -83,6 +84,107 @@ AIMA: aima.gov.pt | Finanças: portaldasfinancas.gov.pt | Seg. Social: seg-socia
 
 Sou uma ferramenta de informação — não presto aconselhamento jurídico.`;
 
+// ─── EMAIL DE BOAS-VINDAS ────────────────────────────────────────────────────
+const WELCOME_EMAILS = {
+  pt: {
+    subject: "Bem-vindo/a à NOVU 🇵🇹",
+    html: (name) => `
+<!DOCTYPE html><html><body style="font-family:'DM Sans',Arial,sans-serif;background:#F5F9FF;margin:0;padding:24px;">
+<div style="max-width:560px;margin:0 auto;background:white;border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(10,37,64,0.08);">
+  <div style="background:#0A2540;padding:32px 36px;text-align:center;">
+    <h1 style="color:white;font-size:2rem;margin:0;font-family:Georgia,serif;">N<span style="color:#2E7FD4">O</span>VU</h1>
+    <p style="color:rgba(255,255,255,0.7);margin:8px 0 0;font-size:0.9rem;">Do avião à cidadania</p>
+  </div>
+  <div style="padding:32px 36px;">
+    <h2 style="color:#0A2540;font-size:1.3rem;margin:0 0 16px;">Olá${name ? ', ' + name : ''}! 👋</h2>
+    <p style="color:#4A6580;line-height:1.7;margin:0 0 20px;">A tua conta NOVU está activa. Tens acesso ilimitado ao assistente de IA e a todas as funcionalidades da plataforma.</p>
+    <p style="color:#4A6580;font-weight:600;margin:0 0 16px;">O que podes fazer agora:</p>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <a href="https://novuai.pt" style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:#F5F9FF;border-radius:10px;text-decoration:none;border:1px solid #E8EEF5;">
+        <span style="font-size:1.4rem;">🤖</span>
+        <div><div style="color:#0A2540;font-weight:700;font-size:0.92rem;">Assistente IA</div><div style="color:#8FA3BC;font-size:0.8rem;">Perguntas ilimitadas sobre burocracia portuguesa</div></div>
+      </a>
+      <a href="https://novuai.pt/documentos.html" style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:#F5F9FF;border-radius:10px;text-decoration:none;border:1px solid #E8EEF5;">
+        <span style="font-size:1.4rem;">📄</span>
+        <div><div style="color:#0A2540;font-weight:700;font-size:0.92rem;">Documentos PDF</div><div style="color:#8FA3BC;font-size:0.8rem;">15 modelos essenciais — declarações, cartas AIMA e mais</div></div>
+      </a>
+      <a href="https://novuai.pt/empregos.html" style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:#F5F9FF;border-radius:10px;text-decoration:none;border:1px solid #E8EEF5;">
+        <span style="font-size:1.4rem;">💼</span>
+        <div><div style="color:#0A2540;font-weight:700;font-size:0.92rem;">Empregos</div><div style="color:#8FA3BC;font-size:0.8rem;">Vagas verificadas com salário visível</div></div>
+      </a>
+      <a href="https://novuai.pt/curriculo.html" style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:#F5F9FF;border-radius:10px;text-decoration:none;border:1px solid #E8EEF5;">
+        <span style="font-size:1.4rem;">📝</span>
+        <div><div style="color:#0A2540;font-weight:700;font-size:0.92rem;">Currículo Europeu</div><div style="color:#8FA3BC;font-size:0.8rem;">Gera o teu CV em formato Europass</div></div>
+      </a>
+    </div>
+    <div style="margin-top:28px;padding:16px;background:#EBF4FF;border-radius:10px;border-left:4px solid #2E7FD4;">
+      <p style="color:#1A4A7A;font-size:0.85rem;margin:0;line-height:1.6;">💡 <strong>Dica:</strong> Guarda este email para voltares à NOVU quando precisares. Estamos sempre aqui.</p>
+    </div>
+  </div>
+  <div style="padding:20px 36px;border-top:1px solid #E8EEF5;text-align:center;">
+    <p style="color:#8FA3BC;font-size:0.78rem;margin:0;">© 2026 NOVU · <a href="https://novuai.pt/privacidade.html" style="color:#2E7FD4;">Privacidade</a> · <a href="https://novuai.pt" style="color:#2E7FD4;">novuai.pt</a></p>
+  </div>
+</div>
+</body></html>`,
+  },
+  en: {
+    subject: "Welcome to NOVU 🇵🇹",
+    html: (name) => `
+<!DOCTYPE html><html><body style="font-family:Arial,sans-serif;background:#F5F9FF;margin:0;padding:24px;">
+<div style="max-width:560px;margin:0 auto;background:white;border-radius:16px;overflow:hidden;">
+  <div style="background:#0A2540;padding:32px 36px;text-align:center;">
+    <h1 style="color:white;font-size:2rem;margin:0;">N<span style="color:#2E7FD4">O</span>VU</h1>
+  </div>
+  <div style="padding:32px 36px;">
+    <h2 style="color:#0A2540;">Hello${name ? ', ' + name : ''}! 👋</h2>
+    <p style="color:#4A6580;line-height:1.7;">Your NOVU account is active. You have unlimited access to the AI assistant and all platform features.</p>
+    <p><a href="https://novuai.pt" style="background:#0A2540;color:white;padding:12px 28px;border-radius:50px;text-decoration:none;font-weight:700;">Go to NOVU →</a></p>
+  </div>
+</div></body></html>`,
+  },
+  es: {
+    subject: "Bienvenido/a a NOVU 🇵🇹",
+    html: (name) => `
+<!DOCTYPE html><html><body style="font-family:Arial,sans-serif;background:#F5F9FF;margin:0;padding:24px;">
+<div style="max-width:560px;margin:0 auto;background:white;border-radius:16px;overflow:hidden;">
+  <div style="background:#0A2540;padding:32px 36px;text-align:center;">
+    <h1 style="color:white;font-size:2rem;margin:0;">N<span style="color:#2E7FD4">O</span>VU</h1>
+  </div>
+  <div style="padding:32px 36px;">
+    <h2 style="color:#0A2540;">¡Hola${name ? ', ' + name : ''}! 👋</h2>
+    <p style="color:#4A6580;line-height:1.7;">Tu cuenta NOVU está activa. Tienes acceso ilimitado al asistente de IA y a todas las funcionalidades.</p>
+    <p><a href="https://novuai.pt" style="background:#0A2540;color:white;padding:12px 28px;border-radius:50px;text-decoration:none;font-weight:700;">Ir a NOVU →</a></p>
+  </div>
+</div></body></html>`,
+  },
+};
+
+// Enviar email via Brevo
+async function sendWelcomeEmail(name, email, lang) {
+  const BREVO_KEY = process.env.BREVO_API_KEY;
+  if (!BREVO_KEY) return; // sem Brevo configurado, skip silencioso
+
+  const tpl = WELCOME_EMAILS[lang] || WELCOME_EMAILS.pt;
+  try {
+    await fetch("https://api.brevo.com/v3/smtp/email", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "api-key": BREVO_KEY,
+      },
+      body: JSON.stringify({
+        sender: { name: "NOVU", email: "noreply@novuai.pt" },
+        to: [{ email, name: name || email }],
+        subject: tpl.subject,
+        htmlContent: tpl.html(name),
+      }),
+    });
+    console.log("Welcome email sent to", email);
+  } catch (err) {
+    console.warn("Brevo email failed (non-critical):", err.message);
+  }
+}
+
 // ─── FAQ CACHE ───────────────────────────────────────────────────────────────
 const FAQ = {
   "como tirar nif": "Para obter o NIF em Portugal:\n\n• **Online** (mais rápido): portaldasfinancas.gov.pt → registo de contribuinte\n• **Presencialmente**: qualquer Serviço de Finanças com passaporte e comprovativo de morada\n• Gratuito, feito no mesmo dia\n• Se ainda não resides em Portugal, precisas de um representante fiscal residente\n\nO NIF é o primeiro passo — precisas dele para abrir conta bancária, assinar contratos e quase tudo em Portugal. 🇵🇹",
@@ -101,7 +203,6 @@ const FAQ = {
 function normalizeFAQ(text) {
   return text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9 ]/g, "").trim();
 }
-
 function checkFAQ(userMessage) {
   const normalized = normalizeFAQ(userMessage);
   for (const [key, answer] of Object.entries(FAQ)) {
@@ -130,14 +231,17 @@ module.exports = async function handler(req, res) {
     if (!email) return res.status(400).json({ error: "Email obrigatório" });
     try {
       const upsertData = { name, email, lang, unlocked: true };
-      // Guardar ref do afiliado se existir
-      if (ref && ref.trim()) {
-        upsertData.ref = ref.trim().toLowerCase();
-      }
+      if (ref && ref.trim()) upsertData.ref = ref.trim().toLowerCase();
+
       const { error } = await supabase
         .from("waitlist")
         .upsert(upsertData, { onConflict: "email" });
+
       if (error) throw error;
+
+      // Enviar email de boas-vindas (não bloqueia a resposta)
+      sendWelcomeEmail(name, email, lang || "pt").catch(() => {});
+
       return res.status(200).json({ success: true, unlocked: true });
     } catch (err) {
       console.error("Supabase error:", err);
@@ -166,10 +270,7 @@ module.exports = async function handler(req, res) {
     rateLimitMap.set(key, { count: 0, resetAt: now + windowMs });
   }
   const rateData = rateLimitMap.get(key);
-  if (now > rateData.resetAt) {
-    rateData.count = 0;
-    rateData.resetAt = now + windowMs;
-  }
+  if (now > rateData.resetAt) { rateData.count = 0; rateData.resetAt = now + windowMs; }
   if (rateData.count >= limit) {
     return res.status(429).json({ error: "Limite de perguntas atingido", requiresEmail: !isRegistered });
   }
@@ -209,6 +310,7 @@ module.exports = async function handler(req, res) {
     const data = await response.json();
     const reply = data.content?.[0]?.text || "Não consegui obter uma resposta. Tenta novamente.";
     return res.status(200).json({ reply });
+
   } catch (err) {
     console.error("Handler error:", err);
     return res.status(500).json({ error: "Erro interno. Tenta novamente." });
