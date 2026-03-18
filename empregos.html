@@ -834,7 +834,7 @@ function openCandidaturaModal(vagaId) {
   vagaSeleccionada = vagasData.find(v => String(v.id) === String(vagaId));
   if (!vagaSeleccionada) return;
   document.getElementById('modal-vaga-titulo').textContent = vagaSeleccionada.titulo;
-  document.getElementById('modal-vaga-empresa').textContent = vagaSeleccionada.empresa + ' · ' + vagaSeleccionada.cidade;
+  document.getElementById('modal-vaga-empresa').textContent = (vagaSeleccionada.empresa_nome || vagaSeleccionada.empresa || '—') + ' · ' + vagaSeleccionada.cidade;
   document.getElementById('candidaturaForm').style.display = 'block';
   document.getElementById('candidaturaSuccess').classList.remove('show');
   document.getElementById('cand-nome').value = '';
