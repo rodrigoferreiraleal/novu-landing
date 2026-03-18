@@ -577,126 +577,9 @@ nav {
 <div class="toast" id="toast"></div>
 
 <script>
-// ── DADOS DE DEMONSTRAÇÃO ──
-const VAGAS_DEMO = [
-  {
-    id: 1, destaque: true,
-    empresa: 'Restaurante Solar do Rio', empresaEmoji: '🍽️',
-    verificada: true, estrelas: 4.8, totalAvaliacoes: 23,
-    titulo: 'Empregado/a de Mesa — Part-time',
-    categoria: 'restauracao', tipo: 'part-time',
-    cidade: 'Lisboa', bairro: 'Belém',
-    tipoRem: 'hora', valorRem: '6,80€/h',
-    descricao: 'Procuramos empregado/a de mesa para reforço de fim-de-semana. Experiência preferida mas não obrigatória. Boa disposição essencial.',
-    diasRestantes: 5,
-    publicado: 'Há 2 dias'
-  },
-  {
-    id: 2, destaque: false,
-    empresa: 'Hotel Douro Boutique', empresaEmoji: '🏨',
-    verificada: true, estrelas: 4.5, totalAvaliacoes: 11,
-    titulo: 'Limpeza de Quartos — Full-time',
-    categoria: 'hotelaria', tipo: 'part-time',
-    cidade: 'Porto', bairro: 'Ribeira',
-    tipoRem: 'mes', valorRem: '820€/mês',
-    descricao: 'Hotel boutique no Porto procura colaborador/a para serviço de andares. Contrato de trabalho, refeições incluídas, horário fixo.',
-    diasRestantes: 3,
-    publicado: 'Há 4 dias'
-  },
-  {
-    id: 3, destaque: false,
-    empresa: 'CleanPro Lisboa', empresaEmoji: '🧹',
-    verificada: true, estrelas: 4.2, totalAvaliacoes: 8,
-    titulo: 'Assistente de Limpeza — Flexível',
-    categoria: 'limpeza', tipo: 'freelance',
-    cidade: 'Lisboa', bairro: 'Ajuda',
-    tipoRem: 'hora', valorRem: '7,00€/h',
-    descricao: 'Empresa de limpeza a crescer procura colaboradores para limpezas domésticas e comerciais. Horários flexíveis, pagamento semanal.',
-    diasRestantes: 6,
-    publicado: 'Hoje'
-  },
-  {
-    id: 4, destaque: false,
-    empresa: 'Hostel Fado & Soul', empresaEmoji: '🎵',
-    verificada: true, estrelas: 4.9, totalAvaliacoes: 34,
-    titulo: 'Recepcionista de Hostel — Noturno',
-    categoria: 'hotelaria', tipo: 'part-time',
-    cidade: 'Lisboa', bairro: 'Mouraria',
-    tipoRem: 'mes', valorRem: '750€/mês',
-    descricao: 'Hostel no coração de Lisboa procura recepcionista para turno da noite (23h–7h). Inglês obrigatório, outras línguas valorizadas.',
-    diasRestantes: 7,
-    publicado: 'Hoje'
-  },
-  {
-    id: 5, destaque: false,
-    empresa: 'Tech Remoto PT', empresaEmoji: '💻',
-    verificada: true, estrelas: 4.6, totalAvaliacoes: 5,
-    titulo: 'Apoio ao Cliente — Remoto',
-    categoria: 'remoto', tipo: 'remoto',
-    cidade: 'Remoto', bairro: '',
-    tipoRem: 'mes', valorRem: '900€/mês',
-    descricao: 'Startup portuguesa procura agente de apoio ao cliente para trabalho 100% remoto. Horário parcial, PT/EN/ES. Integração imediata.',
-    diasRestantes: 4,
-    publicado: 'Há 3 dias'
-  },
-  {
-    id: 6, destaque: false,
-    empresa: 'Bar Noite Funda', empresaEmoji: '🍺',
-    verificada: false, estrelas: 0, totalAvaliacoes: 0,
-    titulo: 'Barman / Barmaid — Fins de Semana',
-    categoria: 'restauracao', tipo: 'part-time',
-    cidade: 'Porto', bairro: 'Gaia',
-    tipoRem: 'hora', valorRem: '6,20€/h',
-    descricao: 'Bar em Vila Nova de Gaia procura barman ou barmaid para fins de semana. Experiência mínima de 6 meses. Gorjetas incluídas.',
-    diasRestantes: 2,
-    publicado: 'Há 5 dias'
-  },
-  {
-    id: 7, destaque: false,
-    empresa: 'WebSoft Portugal', empresaEmoji: '💻',
-    verificada: true, estrelas: 4.7, totalAvaliacoes: 9,
-    titulo: 'Programador Front-end — React',
-    categoria: 'ti', tipo: 'remoto',
-    cidade: 'Lisboa', bairro: 'Parque das Nações',
-    tipoRem: 'mes', valorRem: '1.400€/mês',
-    descricao: 'Empresa de software portuguesa procura programador front-end com experiência em React. Trabalho híbrido (3 dias remoto). Inglês valorizado.',
-    diasRestantes: 7,
-    publicado: 'Hoje'
-  },
-  {
-    id: 8, destaque: false,
-    empresa: 'Indústrias Sousa & Filhos', empresaEmoji: '🏭',
-    verificada: true, estrelas: 4.1, totalAvaliacoes: 6,
-    titulo: 'Operário de Produção — Turno',
-    categoria: 'industria', tipo: 'part-time',
-    cidade: 'Braga', bairro: 'Celeirós',
-    tipoRem: 'mes', valorRem: '870€/mês',
-    descricao: 'Fábrica de componentes metálicos procura operário para linha de produção. Trabalho por turnos (6h-14h / 14h-22h). Formação dada na empresa.',
-    diasRestantes: 5,
-    publicado: 'Há 2 dias'
-  },
-  {
-    id: 9, destaque: false,
-    empresa: 'TransLog Iberia', empresaEmoji: '🚛',
-    verificada: true, estrelas: 4.3, totalAvaliacoes: 14,
-    titulo: 'Motorista de Distribuição — Lisboa',
-    categoria: 'logistica', tipo: 'part-time',
-    cidade: 'Lisboa', bairro: 'Moscavide',
-    tipoRem: 'mes', valorRem: '1.050€/mês',
-    descricao: 'Empresa de logística e distribuição procura motorista com carta C. Carta de condução portuguesa ou reconhecida. Rota diária definida, sem pernoites.',
-    diasRestantes: 6,
-    publicado: 'Há 1 dia'
-  },
-];
-
-const EMPRESAS_DESTAQUE = [
-  { emoji: '🍽️', nome: 'Restaurante Solar do Rio', vagas: 2, estrelas: 4.8 },
-  { emoji: '🏨', nome: 'Hotel Douro Boutique', vagas: 1, estrelas: 4.5 },
-  { emoji: '🎵', nome: 'Hostel Fado & Soul', vagas: 3, estrelas: 4.9 },
-  { emoji: '🧹', nome: 'CleanPro Lisboa', vagas: 2, estrelas: 4.2 },
-  { emoji: '💻', nome: 'WebSoft Portugal', vagas: 1, estrelas: 4.7 },
-  { emoji: '🚛', nome: 'TransLog Iberia', vagas: 2, estrelas: 4.3 },
-];
+// ── ESTADO ──
+let vagasData = [];       // carregadas da API
+let empresasData = [];    // para sidebar
 
 // ── TRADUÇÕES ──
 const T = {
@@ -844,9 +727,10 @@ function renderStars(n, total) {
 }
 
 // ── RENDER VAGAS ──
-function renderVagas() {
+function renderVagas(dados) {
   const t = T[currentLang];
-  let lista = VAGAS_DEMO.filter(v => {
+  const fonte = dados !== undefined ? dados : vagasData;
+  let lista = fonte.filter(v => {
     const catOk = currentCat === 'todos' || v.categoria === currentCat || v.tipo === currentCat;
     const cidOk = currentCidade === 'todas' || v.cidade === currentCidade;
     return catOk && cidOk;
@@ -861,49 +745,81 @@ function renderVagas() {
     return;
   }
 
-  container.innerHTML = lista.map(v => `
+  container.innerHTML = lista.map(v => {
+    // Compatível com dados da API (snake_case) e dados demo (camelCase)
+    const empNome    = v.empresa_nome  || v.empresa || '—';
+    const empEmoji   = v.empresa_emoji || v.empresaEmoji || '🏢';
+    const salario    = v.valor_rem     || v.valorRem || '—';
+    const emp        = v.empresas || {};
+    const verificada = emp.verificada  ?? v.verificada ?? false;
+    const estrelas   = emp.estrelas    ?? v.estrelas ?? 0;
+    const avaliacoes = emp.avaliacoes  ?? v.totalAvaliacoes ?? 0;
+    // Dias restantes
+    let diasRestantes = v.diasRestantes || 7;
+    if (v.expira_em) {
+      const diff = Math.ceil((new Date(v.expira_em) - new Date()) / 86400000);
+      diasRestantes = Math.max(0, diff);
+    }
+    const publicado = v.publicado || (v.created_at ? calcPublicado(v.created_at) : 'Recente');
+    return `
     <div class="vaga-card${v.destaque ? ' destaque' : ''}">
       ${v.destaque ? `<div class="destaque-badge">⭐ Destaque</div>` : ''}
       <div class="vaga-top">
-        <div class="empresa-avatar">${v.empresaEmoji}</div>
+        <div class="empresa-avatar">${empEmoji}</div>
         <div class="vaga-info">
           <div class="vaga-titulo">${v.titulo}</div>
           <div class="empresa-nome">
-            ${v.empresa}
-            ${v.verificada ? `
+            ${empNome}
+            ${verificada ? `
               <span class="empresa-verificada">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                 ${t.tag_verificada}
               </span>` : `<span style="font-size:0.72rem;color:var(--amber);font-weight:600;">${t.tag_nova}</span>`}
           </div>
-          <div style="margin-top:5px;">${renderStars(v.estrelas, v.totalAvaliacoes)}</div>
+          <div style="margin-top:5px;">${renderStars(estrelas, avaliacoes)}</div>
         </div>
       </div>
       <div class="vaga-tags">
         <span class="tag tag-tipo">${v.tipo === 'part-time' ? 'Part-time' : v.tipo === 'freelance' ? 'Freelance' : v.tipo === 'remoto' ? 'Remoto' : 'Full-time'}</span>
         <span class="tag">📍 ${v.cidade}${v.bairro ? ', ' + v.bairro : ''}</span>
-        <span class="tag tag-salario">💶 ${v.valorRem}</span>
+        <span class="tag tag-salario">💶 ${salario}</span>
       </div>
       <p class="vaga-desc">${v.descricao}</p>
       <div class="vaga-footer">
         <div class="vaga-meta">
-          <span>⏱ ${v.publicado}</span>
-          <span>📅 ${v.diasRestantes} ${v.diasRestantes === 1 ? t.dias : t.dias_plural} ${t.restantes}</span>
+          <span>⏱ ${publicado}</span>
+          <span>📅 ${diasRestantes} ${diasRestantes === 1 ? t.dias : t.dias_plural} ${t.restantes}</span>
         </div>
-        <button class="btn-candidatar" onclick="openCandidaturaModal(${v.id})">${t.btn_candidatar}</button>
+        <button class="btn-candidatar" onclick="openCandidaturaModal('${v.id}')">${t.btn_candidatar}</button>
       </div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
 }
 
 // ── RENDER SIDEBAR ──
 function renderSidebar() {
   const container = document.getElementById('empresasDestaque');
-  container.innerHTML = EMPRESAS_DESTAQUE.map(e => `
+  // Agrupar vagas por empresa e calcular média de estrelas
+  const empMap = {};
+  vagasData.forEach(v => {
+    const nome = v.empresa_nome || v.empresa || '—';
+    const emoji = v.empresa_emoji || v.empresaEmoji || '🏢';
+    const estrelas = (v.empresas && v.empresas.estrelas) || v.estrelas || 0;
+    if (!empMap[nome]) empMap[nome] = { emoji, vagas: 0, estrelas };
+    empMap[nome].vagas++;
+  });
+  const lista = Object.entries(empMap)
+    .sort((a,b) => b[1].estrelas - a[1].estrelas)
+    .slice(0, 4);
+  if (!lista.length) {
+    container.innerHTML = '<p style="font-size:0.82rem;color:var(--gray-400);">Nenhuma empresa ainda.</p>';
+    return;
+  }
+  container.innerHTML = lista.map(([nome, e]) => `
     <div class="empresa-mini">
       <div class="emp-avatar">${e.emoji}</div>
       <div class="emp-info">
-        <div class="emp-name">${e.nome}</div>
+        <div class="emp-name">${nome}</div>
         <div class="emp-vagas">${e.vagas} ${e.vagas === 1 ? T[currentLang].vaga_singular : T[currentLang].vagas_plural}</div>
       </div>
       <div>${e.estrelas > 0 ? `<span class="emp-stars">★ ${e.estrelas}</span>` : ''}</div>
@@ -911,21 +827,11 @@ function renderSidebar() {
   `).join('');
 }
 
-// ── FILTROS ──
-function filterCat(cat, el) {
-  currentCat = cat;
-  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-  el.classList.add('active');
-  renderVagas();
-}
-function filterCidade() {
-  currentCidade = document.getElementById('filterCity').value;
-  renderVagas();
-}
+// ── FILTROS — ver carregarVagas acima ──
 
 // ── MODAL CANDIDATURA ──
 function openCandidaturaModal(vagaId) {
-  vagaSeleccionada = VAGAS_DEMO.find(v => v.id === vagaId);
+  vagaSeleccionada = vagasData.find(v => String(v.id) === String(vagaId));
   if (!vagaSeleccionada) return;
   document.getElementById('modal-vaga-titulo').textContent = vagaSeleccionada.titulo;
   document.getElementById('modal-vaga-empresa').textContent = vagaSeleccionada.empresa + ' · ' + vagaSeleccionada.cidade;
@@ -970,17 +876,42 @@ async function submitCandidatura() {
   if (cvFile) fd.append('curriculo', cvFile, cvFile.name);
 
   try {
-    const res = await fetch('https://formspree.io/f/xdawgkvq', { method: 'POST', body: fd, headers: { Accept: 'application/json' } });
-    if (res.ok) {
+    // Guardar no Supabase via API
+    const apiRes = await fetch('/api/candidaturas', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        vaga_id:     vagaSeleccionada.id,
+        vaga_titulo: vagaSeleccionada.titulo,
+        empresa_nome: vagaSeleccionada.empresa_nome || vagaSeleccionada.empresa,
+        nome, telefone, email,
+        mensagem: document.getElementById('cand-msg').value
+      })
+    });
+
+    // Se CV foi anexado, enviar também via Formspree (suporta ficheiros)
+    const cvFile = document.getElementById('cand-cv').files[0];
+    if (cvFile) {
+      const fd2 = new FormData();
+      fd2.append('_subject', 'CV — ' + (vagaSeleccionada.titulo || ''));
+      fd2.append('nome', nome); fd2.append('email', email);
+      fd2.append('curriculo', cvFile, cvFile.name);
+      fetch('https://formspree.io/f/xdawgkvq', { method: 'POST', body: fd2, headers: { Accept: 'application/json' } });
+    }
+
+    const data = await apiRes.json();
+    if (apiRes.ok && data.success) {
       document.getElementById('candidaturaForm').style.display = 'none';
       document.getElementById('candidaturaSuccess').classList.add('show');
       document.getElementById('cand-success-title').textContent = T[currentLang].cand_success_title;
       document.getElementById('cand-success-msg').textContent = T[currentLang].cand_success_msg;
-    } else throw new Error();
-  } catch {
+    } else {
+      throw new Error(data.error || 'Erro');
+    }
+  } catch (err) {
     btn.disabled = false;
     document.getElementById('btn-cand-txt').textContent = T[currentLang].btn_cand_txt;
-    showToast('❌ Erro ao enviar. Tenta novamente.');
+    showToast('❌ ' + (err.message || 'Erro ao enviar. Tenta novamente.'));
   }
 }
 
@@ -1030,16 +961,38 @@ async function submitEmpresa() {
   fd.append('fonte', 'novuai.pt/empregos');
 
   try {
-    const res = await fetch('https://formspree.io/f/xdawgkvq', { method: 'POST', body: fd, headers: { Accept: 'application/json' } });
-    if (res.ok) {
+    const res = await fetch('/api/vagas', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        empresa_nome:  nome,
+        empresa_nif:   nif,
+        empresa_cidade: cidade,
+        empresa_email:  email,
+        empresa_emoji:  getEmpresaEmoji(cat),
+        titulo, categoria: cat, tipo: cat,
+        cidade, tipo_rem: tipoRem, valor_rem: valorRem, descricao: desc
+      })
+    });
+    const data = await res.json();
+    if (res.ok && data.success) {
       document.getElementById('empresaForm').style.display = 'none';
       document.getElementById('empresaSuccess').classList.add('show');
-    } else throw new Error();
-  } catch {
+      // Recarregar vagas para mostrar a nova imediatamente
+      await carregarVagas();
+    } else {
+      throw new Error(data.error || 'Erro');
+    }
+  } catch (err) {
     btn.disabled = false;
     document.getElementById('btn-emp-txt').textContent = T[currentLang].btn_emp_txt;
-    showToast('❌ Erro ao enviar. Tenta novamente.');
+    showToast('❌ ' + (err.message || 'Erro ao publicar. Tenta novamente.'));
   }
+}
+
+function getEmpresaEmoji(cat) {
+  const map = { restauracao:'🍽️', hotelaria:'🏨', limpeza:'🧹', ti:'💻', industria:'🏭', logistica:'🚛', remoto:'💻', freelance:'🎯', 'part-time':'💼' };
+  return map[cat] || '🏢';
 }
 
 // ── TOAST ──
@@ -1123,8 +1076,49 @@ function setLang(lang) {
   renderSidebar();
 }
 
+// ── CARREGAR VAGAS DA API ──
+async function carregarVagas() {
+  const container = document.getElementById('vagasList');
+  container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">⏳</div><p>A carregar vagas...</p></div>';
+  try {
+    const params = new URLSearchParams();
+    if (currentCat !== 'todos') params.set('categoria', currentCat);
+    if (currentCidade !== 'todas') params.set('cidade', currentCidade);
+    const res = await fetch('/api/vagas?' + params.toString());
+    const data = await res.json();
+    vagasData = data.vagas || [];
+    // Stats
+    document.getElementById('stat-vagas').textContent = vagasData.length;
+    renderVagas();
+    renderSidebar();
+  } catch (err) {
+    container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">⚠️</div><p>Erro ao carregar vagas. Recarrega a página.</p></div>';
+  }
+}
+
+function calcPublicado(dateStr) {
+  const diff = Math.floor((new Date() - new Date(dateStr)) / 60000);
+  if (diff < 60) return 'Há ' + diff + ' min';
+  if (diff < 1440) return 'Há ' + Math.floor(diff/60) + 'h';
+  const dias = Math.floor(diff/1440);
+  return dias === 0 ? 'Hoje' : dias === 1 ? 'Há 1 dia' : 'Há ' + dias + ' dias';
+}
+
+// Filtros chamam carregarVagas para refiltrar no servidor
+function filterCat(cat, el) {
+  currentCat = cat;
+  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  carregarVagas();
+}
+function filterCidade() {
+  currentCidade = document.getElementById('filterCity').value;
+  carregarVagas();
+}
+
 // ── INIT ──
 setLang(currentLang);
+carregarVagas();
 </script>
 </body>
 </html>
