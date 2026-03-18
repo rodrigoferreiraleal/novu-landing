@@ -513,6 +513,7 @@ gtag('config', 'G-ZJLBVGPQT5');
     <a href="/documentos.html" class="nav-docs-btn" id="nav-docs-link">📄 Documentos</a>
     <a href="/especialistas.html" class="nav-docs-btn" id="nav-esp-link">🤝 Especialistas</a>
     <a href="/empregos.html" class="nav-docs-btn" id="nav-emp-link">💼 Empregos</a>
+    <a href="/curriculo.html" class="nav-docs-btn" id="nav-cv-link">📝 Currículo</a>
     <div class="lang-selector">
       <button class="lang-btn active" onclick="setLang('pt')" id="lang-pt">PT</button>
       <button class="lang-btn" onclick="setLang('en')" id="lang-en">EN</button>
@@ -539,6 +540,7 @@ gtag('config', 'G-ZJLBVGPQT5');
   <a href="/documentos.html" class="mobile-menu-link">📄 <span id="mm-docs">Documentos</span></a>
   <a href="/especialistas.html" class="mobile-menu-link">🤝 <span id="mm-esp">Especialistas</span></a>
   <a href="/empregos.html" class="mobile-menu-link">💼 <span id="mm-emp">Empregos</span></a>
+  <a href="/curriculo.html" class="mobile-menu-link">📝 <span id="mm-cv">Currículo</span></a>
   <a href="/afiliados.html" class="mobile-menu-link">🤝 <span id="mm-afil">Programa de Afiliados</span></a>
   <div class="mobile-menu-divider"></div>
   <button class="mobile-menu-cta" onclick="openModal();toggleMenu()" id="mm-cta">Experimentar grátis</button>
@@ -669,7 +671,16 @@ gtag('config', 'G-ZJLBVGPQT5');
         </div>
       </a>
 
-      <a href="#chatbot" onclick="document.getElementById('chatbot').scrollIntoView({behavior:'smooth'});return false;" style="text-decoration:none;">
+      <a href="/curriculo.html" style="text-decoration:none;">
+        <div class="recursos-card-inner" style="border:1.5px solid var(--gray-200);border-radius:14px;padding:22px 18px;transition:all 0.2s;background:var(--white);" onmouseover="this.style.borderColor='var(--blue-bright)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--gray-200)';this.style.transform='none'">
+          <div style="font-size:1.7rem;margin-bottom:10px;">📝</div>
+          <div style="font-weight:700;font-size:0.96rem;color:var(--blue-deep);margin-bottom:5px;" id="rec-cv-title">Currículo Europeu</div>
+          <div style="font-size:0.8rem;color:var(--gray-600);line-height:1.5;" id="rec-cv-desc">Gera o teu CV no formato Europass em PDF. Reconhecido em toda a UE.</div>
+          <div style="margin-top:10px;display:inline-block;background:var(--blue-light);color:var(--blue-mid);border-radius:50px;padding:2px 10px;font-size:0.7rem;font-weight:700;">PDF grátis</div>
+        </div>
+      </a>
+
+            <a href="#chatbot" onclick="document.getElementById('chatbot').scrollIntoView({behavior:'smooth'});return false;" style="text-decoration:none;">
         <div class="recursos-card-inner" style="border:1.5px solid var(--blue-bright);border-radius:14px;padding:22px 18px;transition:all 0.2s;background:var(--blue-pale);" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
           <div style="font-size:1.7rem;margin-bottom:10px;">🤖</div>
           <div style="font-weight:700;font-size:0.96rem;color:var(--blue-deep);margin-bottom:5px;" id="rec-chat-title">Assistente IA</div>
@@ -775,6 +786,7 @@ gtag('config', 'G-ZJLBVGPQT5');
     <a href="/documentos.html" class="footer-link">Documentos</a>
     <a href="/especialistas.html" class="footer-link">Especialistas</a>
     <a href="/empregos.html" class="footer-link">Empregos</a>
+    <a href="/curriculo.html" class="footer-link">Currículo</a>
   </div>
   <a href="#" class="footer-email" id="footer-email-link" data-u="geral" data-d="novuai.pt">✉ geral&#64;novuai.pt</a>
   <script>
