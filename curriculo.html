@@ -184,8 +184,12 @@ select.form-input{cursor:pointer;}
       <span id="sec5-title">Competências</span>
     </div>
     <div class="form-grid">
-      <div class="form-group full"><label id="lbl-comp-dig">Competências digitais <span>(separadas por vírgula)</span></label><input class="form-input" type="text" id="cv-comp-dig" placeholder="Microsoft Office, Excel, Google Workspace"></div>
-      <div class="form-group full"><label id="lbl-comp-out">Outras competências</label><input class="form-input" type="text" id="cv-comp-out" placeholder="Carta de condução B, Certificado de Higiene e Segurança Alimentar"></div>
+      <div class="form-group full"><label id="lbl-comp-dig">Competências digitais <span>(separadas por vírgula)</span></label><input class="form-input" type="text" id="cv-comp-dig" placeholder="Microsoft Office, Excel, Google Workspace, Photoshop"></div>
+      <div class="form-group full"><label id="lbl-comp-out">Outras competências</label><input class="form-input" type="text" id="cv-comp-out" placeholder="Certificado de Higiene Alimentar, Primeiros Socorros, HACCP"></div>
+      <div class="form-grid" style="margin-top:0;">
+        <div class="form-group"><label id="lbl-carta">Carta de condução</label><input class="form-input" type="text" id="cv-carta" placeholder="Ex: B — Portugal (2019)"></div>
+        <div class="form-group"><label id="lbl-portfolio">Website / Portfólio <span>(opcional)</span></label><input class="form-input" type="text" id="cv-portfolio" placeholder="Ex: github.com/joaosilva"></div>
+      </div>
     </div>
   </div>
 
@@ -195,6 +199,21 @@ select.form-input{cursor:pointer;}
   </button>
   <p style="text-align:center;font-size:0.76rem;color:var(--gray-400);margin-top:12px;" id="gerar-note">O PDF é gerado localmente no teu browser — os teus dados não são enviados para nenhum servidor.</p>
 </div>
+
+<!-- PAYWALL MODAL -->
+<div class="modal-overlay" id="paywallModal" style="display:none;position:fixed;inset:0;background:rgba(10,37,64,0.7);z-index:300;align-items:center;justify-content:center;backdrop-filter:blur(6px);" onclick="if(event.target===this)closePaywall()">
+  <div style="background:white;border-radius:20px;padding:40px 32px;max-width:420px;width:90%;text-align:center;box-shadow:0 40px 80px rgba(0,0,0,0.2);animation:slideUp 0.3s ease;">
+    <div style="font-size:2.5rem;margin-bottom:12px;">🔒</div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--blue-deep);margin-bottom:10px;" id="pw-title">Funcionalidade Premium</h2>
+    <p style="font-size:0.9rem;color:var(--gray-600);line-height:1.6;margin-bottom:24px;" id="pw-desc">O download do Currículo Europeu está disponível para utilizadores registados. Regista-te gratuitamente em segundos.</p>
+    <a href="/index.html" style="display:block;background:var(--blue-deep);color:white;border-radius:50px;padding:13px 24px;font-family:'DM Sans',sans-serif;font-size:0.95rem;font-weight:700;text-decoration:none;margin-bottom:10px;transition:all .2s;" id="pw-btn">Registar gratuitamente</a>
+    <button onclick="closePaywall()" style="background:none;border:none;color:var(--gray-400);font-size:0.84rem;cursor:pointer;padding:6px;">Fechar</button>
+  </div>
+</div>
+<style>
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+#paywallModal.open{display:flex!important;}
+</style>
 
 <div class="toast" id="toast"></div>
 
@@ -212,13 +231,15 @@ const T = {
     lbl_grau:'Grau / Curso *',lbl_inst:'Instituição *',
     lbl_lingua:'Língua *',lbl_nivel:'Nível',
     lbl_cdig:'Competências digitais',lbl_cout:'Outras competências',
+    lbl_result:'Realizações e resultados',lbl_carta:'Carta de condução',lbl_portfolio:'Website / Portfólio',
     btn_gerar:'Gerar e Descarregar PDF',
     gerar_note:'O PDF é gerado localmente no teu browser — os teus dados não são enviados para nenhum servidor.',
     pdf_exp:'EXPERIÊNCIA PROFISSIONAL',pdf_edu:'EDUCAÇÃO E FORMAÇÃO',pdf_lang:'LÍNGUAS',pdf_comp:'COMPETÊNCIAS',
     pdf_cdig:'Competências digitais',pdf_cout:'Outras competências',
     pdf_footer:'Gerado com NOVU — novuai.pt',
     err:'Preenche pelo menos o nome e o email.',toast_ok:'✅ CV gerado com sucesso!',
-    n_nativo:'Nativo',n_avancado:'Avançado (C1/C2)',n_intermedio:'Intermédio (B1/B2)',n_basico:'Básico (A1/A2)',
+    n_nativo:'Nativo',
+    pw_title:'Funcionalidade Premium',pw_desc:'O download do Currículo Europeu está disponível para utilizadores registados. Regista-te gratuitamente em segundos.',pw_btn:'Registar gratuitamente',n_avancado:'Avançado (C1/C2)',n_intermedio:'Intermédio (B1/B2)',n_basico:'Básico (A1/A2)',
     nav_home:'🤖 Assistente',nav_docs:'📄 Documentos',nav_emp:'💼 Empregos',
     mm_home:'Assistente IA',mm_docs:'Documentos',mm_esp:'Especialistas',mm_emp:'Empregos',mm_cv:'Currículo',
   },
@@ -234,13 +255,15 @@ const T = {
     lbl_grau:'Degree / Course *',lbl_inst:'Institution *',
     lbl_lingua:'Language *',lbl_nivel:'Level',
     lbl_cdig:'Digital skills',lbl_cout:'Other skills',
+    lbl_result:'Achievements and results',lbl_carta:'Driving licence',lbl_portfolio:'Website / Portfolio',
     btn_gerar:'Generate & Download PDF',
     gerar_note:'The PDF is generated locally in your browser — your data is not sent to any server.',
     pdf_exp:'WORK EXPERIENCE',pdf_edu:'EDUCATION AND TRAINING',pdf_lang:'LANGUAGES',pdf_comp:'SKILLS',
     pdf_cdig:'Digital skills',pdf_cout:'Other skills',
     pdf_footer:'Generated with NOVU — novuai.pt',
     err:'Please fill in at least your name and email.',toast_ok:'✅ CV generated successfully!',
-    n_nativo:'Native',n_avancado:'Advanced (C1/C2)',n_intermedio:'Intermediate (B1/B2)',n_basico:'Basic (A1/A2)',
+    n_nativo:'Native',
+    pw_title:'Premium Feature',pw_desc:'The European CV download is available for registered users. Sign up for free in seconds.',pw_btn:'Register for free',n_avancado:'Advanced (C1/C2)',n_intermedio:'Intermediate (B1/B2)',n_basico:'Basic (A1/A2)',
     nav_home:'🤖 Assistant',nav_docs:'📄 Documents',nav_emp:'💼 Jobs',
     mm_home:'AI Assistant',mm_docs:'Documents',mm_esp:'Specialists',mm_emp:'Jobs',mm_cv:'CV Builder',
   },
@@ -256,13 +279,15 @@ const T = {
     lbl_grau:'Titulación / Curso *',lbl_inst:'Institución *',
     lbl_lingua:'Idioma *',lbl_nivel:'Nivel',
     lbl_cdig:'Competencias digitales',lbl_cout:'Otras competencias',
+    lbl_result:'Logros y resultados',lbl_carta:'Permiso de conducir',lbl_portfolio:'Sitio web / Portfolio',
     btn_gerar:'Generar y Descargar PDF',
     gerar_note:'El PDF se genera localmente en tu navegador — tus datos no se envían a ningún servidor.',
     pdf_exp:'EXPERIENCIA LABORAL',pdf_edu:'EDUCACIÓN Y FORMACIÓN',pdf_lang:'IDIOMAS',pdf_comp:'COMPETENCIAS',
     pdf_cdig:'Competencias digitales',pdf_cout:'Otras competencias',
     pdf_footer:'Generado con NOVU — novuai.pt',
     err:'Por favor rellena al menos el nombre y el email.',toast_ok:'✅ CV generado con éxito!',
-    n_nativo:'Nativo',n_avancado:'Avanzado (C1/C2)',n_intermedio:'Intermedio (B1/B2)',n_basico:'Básico (A1/A2)',
+    n_nativo:'Nativo',
+    pw_title:'Función Premium',pw_desc:'La descarga del CV Europeo está disponible para usuarios registrados. Regístrate gratis en segundos.',pw_btn:'Registrarse gratis',n_avancado:'Avanzado (C1/C2)',n_intermedio:'Intermedio (B1/B2)',n_basico:'Básico (A1/A2)',
     nav_home:'🤖 Asistente',nav_docs:'📄 Documentos',nav_emp:'💼 Empleos',
     mm_home:'Asistente IA',mm_docs:'Documentos',mm_esp:'Especialistas',mm_emp:'Empleos',mm_cv:'Currículum',
   }
@@ -286,8 +311,10 @@ function setLang(lang){
   s('lbl-morada',t.lbl_morada);s('lbl-nasc',t.lbl_nasc);s('lbl-nacional',t.lbl_nacional);
   s('lbl-linkedin',t.lbl_linkedin);s('lbl-perfil',t.lbl_perfil);
   s('btn-add-exp-txt',t.btn_exp);s('btn-add-edu-txt',t.btn_edu);s('btn-add-lang-txt',t.btn_lang);
-  s('lbl-comp-dig',t.lbl_cdig);s('lbl-comp-out',t.lbl_cout);
+  s('lbl-comp-dig',t.lbl_cdig);s('lbl-comp-out',t.lbl_cout);s('lbl-carta',t.lbl_carta);s('lbl-portfolio',t.lbl_portfolio);
   s('btn-gerar-txt',t.btn_gerar);s('gerar-note',t.gerar_note);
+  s('pw-title',t.pw_title);s('pw-desc',t.pw_desc);
+  const pwBtn=document.getElementById('pw-btn');if(pwBtn)pwBtn.textContent=t.pw_btn;
   s('nav-home-link',t.nav_home);s('nav-docs-link',t.nav_docs);s('nav-emp-link',t.nav_emp);
   s('mm-home',t.mm_home);s('mm-docs',t.mm_docs);s('mm-esp',t.mm_esp);s('mm-emp',t.mm_emp);s('mm-cv',t.mm_cv);
 }
@@ -302,7 +329,8 @@ function addExp(){
     <div class="form-group"><label>${t.lbl_empresa}</label><input class="form-input" type="text" id="ee-${id}" placeholder="Restaurante XYZ"></div>
     <div class="form-group"><label>${t.lbl_periodo}</label><input class="form-input" type="text" id="ep-${id}" placeholder="Jan 2022 – Dez 2023"></div>
     <div class="form-group"><label>${t.lbl_local}</label><input class="form-input" type="text" id="el-${id}" placeholder="Lisboa, Portugal"></div>
-    <div class="form-group full"><label>${t.lbl_ativ}</label><textarea class="form-input" id="ea-${id}" rows="2" placeholder="Atendimento ao cliente, gestão de mesas..."></textarea></div>
+    <div class="form-group full"><label>${t.lbl_ativ}</label><textarea class="form-input" id="ea-${id}" rows="2" placeholder="Atendimento ao cliente, gestão de mesas, apoio ao supervisor..."></textarea></div>
+    <div class="form-group full"><label>${t.lbl_result} <span style="font-weight:400;color:var(--gray-400)">(opcional)</span></label><textarea class="form-input" id="er-${id}" rows="2" placeholder="Ex: Aumentei as avaliações do restaurante de 4.1 para 4.7 ⭐ — Formei 3 novos colaboradores"></textarea></div>
   </div>`;
   document.getElementById('expList').appendChild(d);
 }
@@ -331,9 +359,12 @@ function addLang(){
     <div class="form-group"><label>${t.lbl_nivel}</label>
       <div class="nivel-select" id="nv-${id}">
         <button class="nivel-btn active" onclick="setNivel(${id},'nativo',this)">${t.n_nativo}</button>
-        <button class="nivel-btn" onclick="setNivel(${id},'avancado',this)">${t.n_avancado}</button>
-        <button class="nivel-btn" onclick="setNivel(${id},'intermedio',this)">${t.n_intermedio}</button>
-        <button class="nivel-btn" onclick="setNivel(${id},'basico',this)">${t.n_basico}</button>
+        <button class="nivel-btn" onclick="setNivel(${id},'c2',this)">C2</button>
+        <button class="nivel-btn" onclick="setNivel(${id},'c1',this)">C1</button>
+        <button class="nivel-btn" onclick="setNivel(${id},'b2',this)">B2</button>
+        <button class="nivel-btn" onclick="setNivel(${id},'b1',this)">B1</button>
+        <button class="nivel-btn" onclick="setNivel(${id},'a2',this)">A2</button>
+        <button class="nivel-btn" onclick="setNivel(${id},'a1',this)">A1</button>
       </div>
       <input type="hidden" id="lv-${id}" value="nativo">
     </div>
@@ -349,8 +380,18 @@ function setNivel(id,nivel,btn){
 
 function removeEntry(id){ const el=document.getElementById(id); if(el)el.remove(); }
 
+function getCookie(n){const m=document.cookie.match(new RegExp('(^| )'+n+'=([^;]+)'));return m?m[2]:null;}
+
 function gerarPDF(){
   const t=T[currentLang];
+
+  // Verificar subscrição
+  const unlocked = getCookie('novu_unlocked') === 'true';
+  if(!unlocked){
+    showPaywall();
+    return;
+  }
+
   const nome=document.getElementById('cv-nome').value.trim();
   const apelido=document.getElementById('cv-apelido').value.trim();
   const email=document.getElementById('cv-email').value.trim();
@@ -426,6 +467,13 @@ function gerarPDF(){
         const loc=document.getElementById('el-'+id)?.value.trim();
         if(emp)entSub(emp+(loc?' · '+loc:''));
         bodyTxt(document.getElementById('ea-'+id)?.value.trim());
+        const result=document.getElementById('er-'+id)?.value.trim();
+        if(result){
+          doc.setFont('helvetica','bolditalic');doc.setFontSize(8.5);doc.setTextColor(46,127,212);
+          doc.text('✦ '+t.lbl_result+':',M+2,y);y+=4.5;
+          doc.setFont('helvetica','normal');doc.setTextColor(60,80,100);
+          doc.splitTextToSize(result,CW-4).forEach(l=>{if(y>272){doc.addPage();y=20;}doc.text('   '+l,M+2,y);y+=4.5;});
+        }
         y+=2;
       });
     }
@@ -450,7 +498,7 @@ function gerarPDF(){
     const langs=document.querySelectorAll('[id^="lng-"]');
     if(langs.length){
       secTitle(t.pdf_lang);
-      const nl={nativo:t.n_nativo,avancado:t.n_avancado,intermedio:t.n_intermedio,basico:t.n_basico};
+      const nl={nativo:t.n_nativo,c2:'C2 — Proficiente',c1:'C1 — Proficiente',b2:'B2 — Independente',b1:'B1 — Independente',a2:'A2 — Elementar',a1:'A1 — Iniciante'};
       langs.forEach(b=>{
         const id=b.id.replace('lng-','');
         const lingua=document.getElementById('ln-'+id)?.value.trim();
@@ -466,7 +514,9 @@ function gerarPDF(){
     // Competências
     const cdig=document.getElementById('cv-comp-dig').value.trim();
     const cout=document.getElementById('cv-comp-out').value.trim();
-    if(cdig||cout){
+    const carta=document.getElementById('cv-carta').value.trim();
+    const portfolio=document.getElementById('cv-portfolio').value.trim();
+    if(cdig||cout||carta||portfolio){
       secTitle(t.pdf_comp);
       if(cdig){
         doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(10,37,64);doc.text(t.pdf_cdig+':',M,y);y+=4.5;
@@ -478,6 +528,15 @@ function gerarPDF(){
         doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(10,37,64);doc.text(t.pdf_cout+':',M,y);y+=4.5;
         doc.setFont('helvetica','normal');doc.setTextColor(60,80,100);
         doc.splitTextToSize(cout,CW).forEach(l=>{doc.text(l,M+2,y);y+=4.5;});
+        y+=2;
+      }
+      if(carta){
+        doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(10,37,64);doc.text(t.lbl_carta+':',M,y);y+=4.5;
+        doc.setFont('helvetica','normal');doc.setTextColor(60,80,100);doc.text(carta,M+2,y);y+=5;
+      }
+      if(portfolio){
+        doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(10,37,64);doc.text(t.lbl_portfolio+':',M,y);y+=4.5;
+        doc.setFont('helvetica','normal');doc.setTextColor(46,127,212);doc.text(portfolio,M+2,y);y+=5;
       }
     }
 
@@ -506,6 +565,14 @@ function showToast(msg){
   const t=document.getElementById('toast');
   t.textContent=msg; t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// ── PAYWALL ──
+function showPaywall(){
+  document.getElementById('paywallModal').classList.add('open');
+}
+function closePaywall(){
+  document.getElementById('paywallModal').classList.remove('open');
 }
 
 function toggleMenu(){
