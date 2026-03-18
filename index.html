@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NOVU — Do avião à cidadania</title>
-<meta name="description" content="A plataforma que guia imigrantes em Portugal — vistos, documentos, trabalho, moradia, bancos e cidadania.">
+<title>NOVU — Do avião à cidadania | Guia para Imigrantes em Portugal</title>
+<meta name="description" content="A plataforma de IA que guia imigrantes em Portugal — vistos, NIF, NISS, documentos, emprego, moradia e cidadania. Gratuito. PT/EN/ES.">
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZJLBVGPQT5"></script>
 <script>
@@ -467,6 +467,26 @@ gtag('config', 'G-ZJLBVGPQT5');
 }
 </style>
 
+<meta name="robots" content="index, follow">
+<meta name="author" content="NOVU">
+<meta name="keywords" content="imigrantes portugal, visto portugal, nif portugal, niss portugal, emprego imigrante, documentos portugal, aima, moradia portugal">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NOVU">
+<meta property="og:title" content="NOVU — Do avião à cidadania | Guia para Imigrantes em Portugal">
+<meta property="og:description" content="A plataforma de IA que guia imigrantes em Portugal — vistos, NIF, NISS, documentos, emprego, moradia e cidadania. Gratuito. PT/EN/ES.">
+<meta property="og:url" content="https://novuai.pt/">
+<meta property="og:image" content="https://novuai.pt/og-image.png">
+<meta property="og:locale" content="pt_PT">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="NOVU — Do avião à cidadania | Guia para Imigrantes em Portugal">
+<meta name="twitter:description" content="A plataforma de IA que guia imigrantes em Portugal — vistos, NIF, NISS, documentos, emprego, moradia e cidadania. Gratuito. PT/EN/ES.">
+<meta name="twitter:image" content="https://novuai.pt/og-image.png">
+<!-- Canonical -->
+<link rel="canonical" href="https://novuai.pt/">
 </head>
 <body>
 
@@ -558,8 +578,8 @@ gtag('config', 'G-ZJLBVGPQT5');
     <button class="btn-secondary" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})" id="hero-btn-secondary">Ver como funciona</button>
   </div>
   <div class="hero-stats">
-    <div class="stat"><span class="stat-number">1,5M</span><span class="stat-label" id="stat1">imigrantes em Portugal</span></div>
-    <div class="stat"><span class="stat-number">4,6/5</span><span class="stat-label" id="stat2">dificuldade reportada</span></div>
+    <div class="stat"><span class="stat-number" id="stat-users">—</span><span class="stat-label" id="stat1">imigrantes já registados</span></div>
+    <div class="stat"><span class="stat-number" id="stat-vagas-hero">—</span><span class="stat-label" id="stat2">vagas activas agora</span></div>
     <div class="stat"><span class="stat-number">87%</span><span class="stat-label" id="stat3">usariam a NOVU</span></div>
   </div>
 </section>
@@ -812,7 +832,7 @@ const T = {
     hero_title: 'A tecnologia que guia<br>a sua jornada em <em>Portugal</em>',
     hero_sub: 'Do avião à cidadania — a NOVU guia-te por cada passo da tua vida em Portugal, de forma simples, clara e sem complicações.',
     hero_btn1: 'Fazer a minha primeira pergunta', hero_btn2: 'Ver como funciona',
-    stat1: 'imigrantes em Portugal', stat2: 'dificuldade reportada', stat3: 'usariam a NOVU',
+    stat1: 'imigrantes já registados', stat2: 'vagas activas agora', stat3: 'usariam a NOVU',
     journey_label: 'A tua jornada', journey_title: 'De cada fase, um guia completo',
     faq_label: 'Exemplos reais', faq_title: 'Perguntas que a NOVU responde',
     faq_note: 'Clica numa pergunta para enviar directamente ao assistente ↓',
@@ -882,7 +902,7 @@ const T = {
     hero_title: 'The technology that guides<br>your journey in <em>Portugal</em>',
     hero_sub: 'From the plane to citizenship — NOVU guides you through every step of your life in Portugal, simply, clearly and without complications.',
     hero_btn1: 'Ask my first question', hero_btn2: 'See how it works',
-    stat1: 'immigrants in Portugal', stat2: 'reported difficulty', stat3: 'would use NOVU',
+    stat1: 'immigrants already registered', stat2: 'active jobs now', stat3: 'would use NOVU',
     journey_label: 'Your journey', journey_title: 'A complete guide for every phase',
     faq_label: 'Real examples', faq_title: 'Questions NOVU can answer',
     faq_note: 'Click a question to send it directly to the assistant ↓',
@@ -952,7 +972,7 @@ const T = {
     hero_title: 'La tecnología que guía<br>tu viaje en <em>Portugal</em>',
     hero_sub: 'Del avión a la ciudadanía — NOVU te guía en cada paso de tu vida en Portugal, de forma sencilla, clara y sin complicaciones.',
     hero_btn1: 'Hacer mi primera pregunta', hero_btn2: 'Ver cómo funciona',
-    stat1: 'inmigrantes en Portugal', stat2: 'dificultad reportada', stat3: 'usarían NOVU',
+    stat1: 'inmigrantes ya registrados', stat2: 'empleos activos ahora', stat3: 'usarían NOVU',
     journey_label: 'Tu viaje', journey_title: 'Una guía completa para cada fase',
     faq_label: 'Ejemplos reales', faq_title: 'Preguntas que NOVU puede responder',
     faq_note: 'Haz clic en una pregunta para enviarla directamente al asistente ↓',
@@ -1417,6 +1437,20 @@ document.addEventListener('click', function(e) {
   }
 });
 
+// ── STATS REAIS ──
+async function carregarStats() {
+  try {
+    const res = await fetch('/api/stats');
+    const data = await res.json();
+    const elUsers = document.getElementById('stat-users');
+    const elVagas = document.getElementById('stat-vagas-hero');
+    if (elUsers) elUsers.textContent = data.users > 0 ? data.users.toLocaleString('pt-PT') : '—';
+    if (elVagas) elVagas.textContent = data.vagas > 0 ? data.vagas : '—';
+  } catch(e) {
+    // silencioso — não quebrar a página
+  }
+}
+
 // INIT
 const savedUnlocked = getCookie('novu_unlocked');
 const savedQuestions = getCookie('novu_questions');
@@ -1427,6 +1461,7 @@ if (savedUnlocked === 'true') {
 }
 updateCounter();
 setLang('pt');
+carregarStats();
 </script>
 
 </body>
