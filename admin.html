@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — NOVU Empregos</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue-deep: #0A2540; --blue-mid: #1A4A7A; --blue-bright: #2E7FD4;
+  --blue-light: #EBF4FF; --blue-pale: #F5F9FF;
+  --white: #FFFFFF; --gray-100: #F8FAFC; --gray-200: #E8EEF5;
+  --gray-400: #8FA3BC; --gray-600: #4A6580;
+  --green: #16A34A; --green-light: #DCFCE7;
+  --amber: #D97706; --amber-light: #FEF3C7;
+  --red: #DC2626; --red-light: #FEE2E2;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; background: var(--gray-100); color: var(--blue-deep); min-height: 100vh; }
+
+/* LOGIN */
+.login-wrap {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px;
+  background: linear-gradient(160deg, var(--blue-pale) 0%, var(--white) 100%);
+}
+.login-box {
+  background: white; border-radius: 20px; padding: 40px 36px;
+  max-width: 380px; width: 100%; text-align: center;
+  box-shadow: 0 20px 60px rgba(10,37,64,0.1);
+}
+.login-logo { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--blue-deep); margin-bottom: 6px; }
+.login-logo span { color: var(--blue-bright); }
+.login-sub { font-size: 0.85rem; color: var(--gray-600); margin-bottom: 28px; }
+.login-input {
+  width: 100%; padding: 12px 16px; border: 1.5px solid var(--gray-200);
+  border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+  outline: none; text-align: center; margin-bottom: 12px; transition: border-color 0.2s;
+}
+.login-input:focus { border-color: var(--blue-bright); }
+.login-btn {
+  width: 100%; background: var(--blue-deep); color: white; border: none;
+  padding: 13px; border-radius: 50px; font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+}
+.login-btn:hover { background: var(--blue-mid); }
+.login-error { color: var(--red); font-size: 0.82rem; margin-top: 8px; display: none; }
+
+/* ADMIN PANEL */
+.admin-wrap { display: none; }
+.admin-nav {
+  background: var(--blue-deep); color: white; padding: 0 5%; height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+}
+.admin-nav-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; }
+.admin-nav-logo span { color: var(--blue-bright); }
+.admin-nav-right { display: flex; align-items: center; gap: 12px; }
+.admin-nav-info { font-size: 0.8rem; color: rgba(255,255,255,0.6); }
+.btn-logout { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 50px; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; }
+.btn-logout:hover { background: rgba(255,255,255,0.2); }
+
+.admin-main { max-width: 1100px; margin: 0 auto; padding: 28px 5% 64px; }
+
+/* STATS BAR */
+.stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 28px; }
+.stat-card { background: white; border: 1.5px solid var(--gray-200); border-radius: 14px; padding: 18px 20px; }
+.stat-card-num { font-size: 1.8rem; font-weight: 700; color: var(--blue-deep); }
+.stat-card-lbl { font-size: 0.78rem; color: var(--gray-400); margin-top: 2px; }
+.stat-card.pendente .stat-card-num { color: var(--amber); }
+.stat-card.aprovada .stat-card-num { color: var(--green); }
+.stat-card.candidaturas .stat-card-num { color: var(--blue-bright); }
+@media (max-width: 640px) { .stats-bar { grid-template-columns: repeat(2, 1fr); } }
+
+/* TABS */
+.tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.tab-btn {
+  padding: 8px 18px; border-radius: 50px; font-size: 0.84rem; font-weight: 600;
+  cursor: pointer; border: 1.5px solid var(--gray-200); background: white;
+  color: var(--gray-600); transition: all 0.2s;
+}
+.tab-btn.active { background: var(--blue-deep); color: white; border-color: var(--blue-deep); }
+.tab-btn .count {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.2); border-radius: 50px;
+  width: 20px; height: 20px; font-size: 0.72rem; margin-left: 6px;
+}
+.tab-btn:not(.active) .count { background: var(--gray-200); color: var(--blue-deep); }
+
+/* VAGAS LIST */
+.vaga-admin-card {
+  background: white; border: 1.5px solid var(--gray-200); border-radius: 14px;
+  padding: 18px 20px; margin-bottom: 12px; transition: all 0.2s;
+}
+.vaga-admin-card.pendente { border-left: 4px solid var(--amber); }
+.vaga-admin-card.aprovada { border-left: 4px solid var(--green); }
+.vaga-admin-card.removida { border-left: 4px solid var(--red); opacity: 0.6; }
+.vaga-admin-top { display: flex; align-items: flex-start; gap: 14px; }
+.vaga-admin-info { flex: 1; }
+.vaga-admin-titulo { font-weight: 700; font-size: 0.98rem; color: var(--blue-deep); margin-bottom: 4px; }
+.vaga-admin-meta { font-size: 0.8rem; color: var(--gray-600); display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 8px; }
+.vaga-admin-meta span { display: flex; align-items: center; gap: 4px; }
+.vaga-admin-desc { font-size: 0.82rem; color: var(--gray-400); line-height: 1.5; margin-bottom: 14px; border-left: 2px solid var(--gray-200); padding-left: 10px; }
+.vaga-admin-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.btn-aprovar { background: var(--green-light); color: var(--green); border: 1.5px solid #BBF7D0; padding: 7px 16px; border-radius: 50px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.btn-aprovar:hover { background: var(--green); color: white; }
+.btn-pendente { background: var(--amber-light); color: var(--amber); border: 1.5px solid #FDE68A; padding: 7px 16px; border-radius: 50px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.btn-pendente:hover { background: var(--amber); color: white; }
+.btn-remover { background: var(--red-light); color: var(--red); border: 1.5px solid #FECACA; padding: 7px 16px; border-radius: 50px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.btn-remover:hover { background: var(--red); color: white; }
+.status-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 12px; border-radius: 50px; font-size: 0.72rem; font-weight: 700;
+}
+.status-badge.pendente { background: var(--amber-light); color: var(--amber); }
+.status-badge.aprovada { background: var(--green-light); color: var(--green); }
+.status-badge.removida { background: var(--red-light); color: var(--red); }
+
+/* CANDIDATURAS */
+.cand-card {
+  background: white; border: 1.5px solid var(--gray-200); border-radius: 14px;
+  padding: 16px 20px; margin-bottom: 10px;
+}
+.cand-vaga { font-size: 0.72rem; color: var(--blue-bright); font-weight: 700; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+.cand-nome { font-weight: 700; font-size: 0.96rem; margin-bottom: 6px; }
+.cand-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.82rem; color: var(--gray-600); margin-bottom: 8px; }
+.cand-msg { font-size: 0.82rem; color: var(--gray-400); line-height: 1.5; border-left: 2px solid var(--gray-200); padding-left: 10px; }
+
+/* EMPTY STATE */
+.empty-admin { text-align: center; padding: 48px; color: var(--gray-400); }
+.empty-admin-icon { font-size: 2.5rem; margin-bottom: 12px; }
+
+/* TOAST */
+.toast { position: fixed; bottom: 24px; right: 24px; z-index: 500; background: var(--blue-deep); color: white; padding: 12px 20px; border-radius: 50px; font-size: 0.85rem; opacity: 0; transform: translateY(8px); transition: all 0.3s; pointer-events: none; }
+.toast.show { opacity: 1; transform: translateY(0); }
+
+/* LOADING */
+.loading { text-align: center; padding: 32px; color: var(--gray-400); font-size: 0.9rem; }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="loginWrap">
+  <div class="login-box">
+    <div class="login-logo">N<span>O</span>VU</div>
+    <p class="login-sub">Painel de administração</p>
+    <input type="password" class="login-input" id="loginInput" placeholder="Password de acesso" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-btn" onclick="doLogin()">Entrar</button>
+    <p class="login-error" id="loginError">Password incorrecta.</p>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-wrap" id="adminWrap">
+
+  <nav class="admin-nav">
+    <div class="admin-nav-logo">N<span>O</span>VU <span style="font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:500;opacity:0.6;margin-left:6px;">Admin</span></div>
+    <div class="admin-nav-right">
+      <span class="admin-nav-info" id="adminNavInfo">—</span>
+      <button class="btn-logout" onclick="doLogout()">Sair</button>
+    </div>
+  </nav>
+
+  <div class="admin-main">
+
+    <!-- STATS -->
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-card-num" id="stat-total">—</div>
+        <div class="stat-card-lbl">Total de vagas</div>
+      </div>
+      <div class="stat-card pendente">
+        <div class="stat-card-num" id="stat-pendentes">—</div>
+        <div class="stat-card-lbl">Pendentes</div>
+      </div>
+      <div class="stat-card aprovada">
+        <div class="stat-card-num" id="stat-aprovadas">—</div>
+        <div class="stat-card-lbl">Aprovadas</div>
+      </div>
+      <div class="stat-card candidaturas">
+        <div class="stat-card-num" id="stat-candidaturas">—</div>
+        <div class="stat-card-lbl">Candidaturas</div>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('todas', this)" id="tab-todas">
+        Todas <span class="count" id="count-todas">0</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('pendente', this)" id="tab-pendente">
+        ⏳ Pendentes <span class="count" id="count-pendente">0</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('aprovada', this)" id="tab-aprovada">
+        ✅ Aprovadas <span class="count" id="count-aprovada">0</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('removida', this)" id="tab-removida">
+        🗑 Removidas <span class="count" id="count-removida">0</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('candidaturas', this)" id="tab-candidaturas">
+        📨 Candidaturas <span class="count" id="count-cand">0</span>
+      </button>
+    </div>
+
+    <!-- LISTA -->
+    <div id="adminList"></div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── CONFIG ──
+// A password é validada no servidor (ADMIN_SECRET no .env do Vercel)
+// Aqui guardamos localmente para o header das chamadas
+let adminSecret = '';
+let todasVagas = [];
+let candidaturas = [];
+let tabActual = 'todas';
+
+// ── LOGIN ──
+function doLogin() {
+  const pwd = document.getElementById('loginInput').value.trim();
+  if (!pwd) return;
+  adminSecret = pwd;
+  // Testar com chamada à API
+  fetch('/api/vagas?admin=' + encodeURIComponent(pwd) + '&_t=' + Date.now())
+    .then(r => r.json())
+    .then(data => {
+      if (data.vagas !== undefined) {
+        // Login OK
+        document.getElementById('loginWrap').style.display = 'none';
+        document.getElementById('adminWrap').style.display = 'block';
+        sessionStorage.setItem('novu_admin', pwd);
+        iniciarAdmin();
+      } else {
+        document.getElementById('loginError').style.display = 'block';
+      }
+    })
+    .catch(() => {
+      document.getElementById('loginError').style.display = 'block';
+    });
+}
+
+function doLogout() {
+  sessionStorage.removeItem('novu_admin');
+  adminSecret = '';
+  document.getElementById('adminWrap').style.display = 'none';
+  document.getElementById('loginWrap').style.display = 'flex';
+  document.getElementById('loginInput').value = '';
+}
+
+// Recuperar sessão
+const savedAdmin = sessionStorage.getItem('novu_admin');
+if (savedAdmin) {
+  adminSecret = savedAdmin;
+  document.getElementById('loginInput').value = savedAdmin;
+  doLogin();
+}
+
+// ── INICIAR ADMIN ──
+async function iniciarAdmin() {
+  const now = new Date();
+  document.getElementById('adminNavInfo').textContent =
+    now.toLocaleDateString('pt-PT') + ' ' + now.toLocaleTimeString('pt-PT', {hour:'2-digit',minute:'2-digit'});
+  await carregarTudo();
+}
+
+async function carregarTudo() {
+  document.getElementById('adminList').innerHTML = '<div class="loading">⏳ A carregar...</div>';
+  try {
+    // Carregar vagas (todas — admin vê tudo)
+    const res = await fetch('/api/vagas?admin=' + encodeURIComponent(adminSecret) + '&_t=' + Date.now());
+    const data = await res.json();
+    todasVagas = data.vagas || [];
+
+    // Carregar candidaturas
+    try {
+      const res2 = await fetch('/api/candidaturas?admin=' + encodeURIComponent(adminSecret) + '&_t=' + Date.now());
+      const data2 = await res2.json();
+      candidaturas = data2.candidaturas || [];
+    } catch { candidaturas = []; }
+
+    actualizarStats();
+    renderTab(tabActual);
+  } catch (err) {
+    document.getElementById('adminList').innerHTML =
+      '<div class="empty-admin"><div class="empty-admin-icon">⚠️</div><p>Erro ao carregar. Verifica a ligação.</p></div>';
+  }
+}
+
+function actualizarStats() {
+  const pendentes = todasVagas.filter(v => v.status === 'pendente').length;
+  const aprovadas = todasVagas.filter(v => v.status === 'aprovada').length;
+  const removidas = todasVagas.filter(v => v.status === 'removida').length;
+  document.getElementById('stat-total').textContent = todasVagas.length;
+  document.getElementById('stat-pendentes').textContent = pendentes;
+  document.getElementById('stat-aprovadas').textContent = aprovadas;
+  document.getElementById('stat-candidaturas').textContent = candidaturas.length;
+  document.getElementById('count-todas').textContent = todasVagas.length;
+  document.getElementById('count-pendente').textContent = pendentes;
+  document.getElementById('count-aprovada').textContent = aprovadas;
+  document.getElementById('count-removida').textContent = removidas;
+  document.getElementById('count-cand').textContent = candidaturas.length;
+}
+
+// ── TABS ──
+function switchTab(tab, el) {
+  tabActual = tab;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  renderTab(tab);
+}
+
+function renderTab(tab) {
+  if (tab === 'candidaturas') {
+    renderCandidaturas();
+    return;
+  }
+  let lista = tab === 'todas' ? todasVagas : todasVagas.filter(v => v.status === tab);
+  renderVagasAdmin(lista);
+}
+
+// ── RENDER VAGAS ADMIN ──
+function renderVagasAdmin(lista) {
+  const container = document.getElementById('adminList');
+  if (!lista.length) {
+    container.innerHTML = '<div class="empty-admin"><div class="empty-admin-icon">📭</div><p>Nenhuma vaga aqui.</p></div>';
+    return;
+  }
+  container.innerHTML = lista.map(v => {
+    const criada = v.created_at ? new Date(v.created_at).toLocaleDateString('pt-PT') + ' ' + new Date(v.created_at).toLocaleTimeString('pt-PT', {hour:'2-digit',minute:'2-digit'}) : '—';
+    const expira = v.expira_em ? new Date(v.expira_em).toLocaleDateString('pt-PT') : '—';
+    const numCand = candidaturas.filter(c => c.vaga_id === v.id).length;
+    return `
+    <div class="vaga-admin-card ${v.status}" id="card-${v.id}">
+      <div class="vaga-admin-top">
+        <div style="font-size:1.8rem;">${v.empresa_emoji || '🏢'}</div>
+        <div class="vaga-admin-info">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px;">
+            <div class="vaga-admin-titulo">${v.titulo}</div>
+            <span class="status-badge ${v.status}">${v.status === 'pendente' ? '⏳ Pendente' : v.status === 'aprovada' ? '✅ Aprovada' : '🗑 Removida'}</span>
+            ${numCand > 0 ? `<span style="font-size:0.74rem;background:var(--blue-light);color:var(--blue-mid);padding:3px 10px;border-radius:50px;font-weight:700;">📨 ${numCand} candidatura${numCand > 1 ? 's' : ''}</span>` : ''}
+          </div>
+          <div class="vaga-admin-meta">
+            <span>🏢 ${v.empresa_nome}</span>
+            <span>📍 ${v.cidade}</span>
+            <span>💶 ${v.valor_rem}</span>
+            <span>📅 Publicada: ${criada}</span>
+            <span>⏱ Expira: ${expira}</span>
+          </div>
+          <div class="vaga-admin-desc">${v.descricao}</div>
+          <div class="vaga-admin-actions">
+            ${v.status !== 'aprovada' ? `<button class="btn-aprovar" onclick="mudarStatus('${v.id}', 'aprovada')">✅ Aprovar</button>` : ''}
+            ${v.status !== 'pendente' ? `<button class="btn-pendente" onclick="mudarStatus('${v.id}', 'pendente')">⏳ Pendente</button>` : ''}
+            ${v.status !== 'removida' ? `<button class="btn-remover" onclick="mudarStatus('${v.id}', 'removida')">🗑 Remover</button>` : ''}
+            ${numCand > 0 ? `<button style="background:var(--blue-light);color:var(--blue-mid);border:1.5px solid #C8DEFA;padding:7px 16px;border-radius:50px;font-size:0.8rem;font-weight:600;cursor:pointer;" onclick="verCandidaturas('${v.id}', this.dataset.titulo)" data-titulo="${v.titulo.replace(/"/g,'&quot;')}">📨 Ver candidaturas</button>` : ''}
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── RENDER CANDIDATURAS ──
+function renderCandidaturas(vagaIdFiltro, vagaTitulo) {
+  const container = document.getElementById('adminList');
+  let lista = vagaIdFiltro ? candidaturas.filter(c => c.vaga_id === vagaIdFiltro) : candidaturas;
+
+  if (vagaTitulo) {
+    container.innerHTML = `
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+        <button onclick="renderCandidaturas()" style="background:none;border:none;color:var(--blue-bright);cursor:pointer;font-size:0.9rem;">← Voltar</button>
+        <span style="font-size:0.9rem;font-weight:600;color:var(--blue-deep);">Candidaturas: ${vagaTitulo}</span>
+      </div>` + renderCandidaturasList(lista);
+  } else {
+    container.innerHTML = renderCandidaturasList(lista);
+  }
+}
+
+function renderCandidaturasList(lista) {
+  if (!lista.length) return '<div class="empty-admin"><div class="empty-admin-icon">📭</div><p>Nenhuma candidatura ainda.</p></div>';
+  return lista.map(c => {
+    const vaga = todasVagas.find(v => v.id === c.vaga_id);
+    const data = c.created_at ? new Date(c.created_at).toLocaleDateString('pt-PT') : '—';
+    return `
+    <div class="cand-card">
+      <div class="cand-vaga">${vaga ? vaga.titulo + ' · ' + (vaga.empresa_nome || '') : 'Vaga não encontrada'}</div>
+      <div class="cand-nome">${c.nome}</div>
+      <div class="cand-meta">
+        <span>📞 <a href="tel:${c.telefone}" style="color:var(--blue-bright);">${c.telefone}</a></span>
+        <span>✉ <a href="mailto:${c.email}" style="color:var(--blue-bright);">${c.email}</a></span>
+        <span>📅 ${data}</span>
+      </div>
+      ${c.mensagem ? `<div class="cand-msg">${c.mensagem}</div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+function verCandidaturas(vagaId, vagaTitulo) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-candidaturas').classList.add('active');
+  tabActual = 'candidaturas';
+  renderCandidaturas(vagaId, vagaTitulo);
+}
+
+// ── MUDAR STATUS ──
+async function mudarStatus(vagaId, novoStatus) {
+  try {
+    const res = await fetch('/api/vagas', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: vagaId, status: novoStatus, admin: adminSecret })
+    });
+    const data = await res.json();
+    if (data.success) {
+      // Actualizar localmente sem recarregar tudo
+      const v = todasVagas.find(v => v.id === vagaId);
+      if (v) v.status = novoStatus;
+      actualizarStats();
+      renderTab(tabActual);
+      showToast(novoStatus === 'aprovada' ? '✅ Vaga aprovada e publicada' : novoStatus === 'removida' ? '🗑 Vaga removida' : '⏳ Vaga marcada como pendente');
+    } else {
+      showToast('❌ Erro: ' + (data.error || 'Tenta novamente'));
+    }
+  } catch {
+    showToast('❌ Erro de ligação. Tenta novamente.');
+  }
+}
+
+// ── TOAST ──
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ── AUTO-REFRESH a cada 60s ──
+setInterval(() => {
+  if (adminSecret) carregarTudo();
+}, 60000);
+</script>
+</body>
+</html>
