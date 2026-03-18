@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Currículo Europeu — NOVU</title>
+<meta name="description" content="Gera o teu currículo no formato europeu (Europass) em PDF gratuitamente. Para imigrantes em Portugal.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+:root {
+  --blue-deep:#0A2540;--blue-mid:#1A4A7A;--blue-bright:#2E7FD4;
+  --blue-light:#EBF4FF;--blue-pale:#F5F9FF;
+  --white:#FFFFFF;--gray-100:#F8FAFC;--gray-200:#E8EEF5;
+  --gray-400:#8FA3BC;--gray-600:#4A6580;
+  --green:#16A34A;--green-light:#DCFCE7;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;color:var(--blue-deep);background:var(--gray-100);}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-200);padding:0 5%;height:64px;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--blue-deep);text-decoration:none;}
+.nav-logo span{color:var(--blue-bright);}
+.nav-right{display:flex;align-items:center;gap:12px;}
+.nav-back{background:transparent;border:1.5px solid var(--gray-200);color:var(--gray-600);padding:7px 16px;border-radius:50px;font-size:0.82rem;font-weight:500;cursor:pointer;text-decoration:none;transition:all .2s;white-space:nowrap;}
+.nav-back:hover{border-color:var(--blue-bright);color:var(--blue-bright);}
+.lang-selector{display:flex;gap:4px;}
+.lang-btn{background:transparent;border:1.5px solid var(--gray-200);color:var(--gray-600);padding:4px 10px;border-radius:50px;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all .2s;}
+.lang-btn:hover{border-color:var(--blue-bright);color:var(--blue-bright);}
+.lang-btn.active{background:var(--blue-deep);color:white;border-color:var(--blue-deep);}
+.nav-mobile{display:none;align-items:center;gap:8px;}
+.hamburger{background:none;border:none;cursor:pointer;padding:4px;display:flex;flex-direction:column;gap:5px;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--blue-deep);border-radius:2px;transition:all .3s;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-menu{display:none;position:fixed;top:56px;left:0;right:0;z-index:199;background:white;border-bottom:1px solid var(--gray-200);padding:16px 20px 24px;flex-direction:column;gap:4px;box-shadow:0 8px 24px rgba(10,37,64,0.1);}
+.mobile-menu.open{display:flex;}
+.mobile-menu-link{display:flex;align-items:center;gap:12px;padding:13px 16px;border-radius:12px;text-decoration:none;color:var(--blue-deep);font-weight:600;font-size:0.95rem;transition:background .2s;}
+.mobile-menu-link:hover{background:var(--blue-pale);}
+.mobile-menu-link.active-page{color:var(--blue-bright);}
+.mobile-menu-divider{height:1px;background:var(--gray-200);margin:8px 0;}
+@media(max-width:820px){#navDesktop{display:none!important;}.nav-mobile{display:flex;}}
+@media(max-width:600px){nav{padding:0 16px;height:56px;}.mobile-menu{top:56px;}}
+.hero{padding:88px 5% 40px;background:linear-gradient(160deg,var(--blue-pale) 0%,var(--white) 70%);border-bottom:1px solid var(--gray-200);text-align:center;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--green-light);color:var(--green);border:1px solid #BBF7D0;border-radius:50px;padding:5px 14px;font-size:0.76rem;font-weight:700;margin-bottom:18px;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;line-height:1.2;margin-bottom:12px;}
+.hero h1 span{color:var(--blue-bright);}
+.hero p{font-size:0.96rem;color:var(--gray-600);max-width:520px;margin:0 auto;line-height:1.6;}
+.main-wrap{max-width:860px;margin:0 auto;padding:32px 5% 64px;}
+.form-section{background:white;border:1.5px solid var(--gray-200);border-radius:16px;padding:28px 28px 24px;margin-bottom:16px;}
+.form-section-title{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--blue-deep);margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--gray-200);}
+.form-section-title .icon{font-size:1.3rem;}
+.form-section-num{width:26px;height:26px;border-radius:50%;background:var(--blue-deep);color:white;display:flex;align-items:center;justify-content:center;font-size:0.76rem;font-weight:700;flex-shrink:0;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.form-group{display:flex;flex-direction:column;gap:5px;}
+.form-group.full{grid-column:1/-1;}
+.form-group label{font-size:0.79rem;font-weight:600;color:var(--blue-deep);}
+.form-group label span{font-weight:400;color:var(--gray-400);}
+.form-input{border:1.5px solid var(--gray-200);border-radius:10px;padding:10px 13px;font-family:'DM Sans',sans-serif;font-size:0.9rem;color:var(--blue-deep);outline:none;transition:border-color .2s;background:white;}
+.form-input:focus{border-color:var(--blue-bright);}
+.form-input::placeholder{color:var(--gray-400);}
+textarea.form-input{resize:vertical;min-height:80px;}
+select.form-input{cursor:pointer;}
+.entry-block{border:1.5px solid var(--gray-200);border-radius:12px;padding:18px;margin-bottom:12px;position:relative;background:var(--gray-100);}
+.entry-remove{position:absolute;top:12px;right:12px;background:none;border:none;color:var(--gray-400);cursor:pointer;font-size:1.1rem;line-height:1;transition:color .2s;}
+.entry-remove:hover{color:#DC2626;}
+.btn-add-entry{display:flex;align-items:center;gap:8px;background:none;border:1.5px dashed var(--gray-200);border-radius:10px;padding:10px 16px;width:100%;font-family:'DM Sans',sans-serif;font-size:0.84rem;font-weight:600;color:var(--blue-bright);cursor:pointer;transition:all .2s;margin-top:4px;}
+.btn-add-entry:hover{border-color:var(--blue-bright);background:var(--blue-pale);}
+.lang-entry{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.nivel-select{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px;}
+.nivel-btn{padding:4px 12px;border-radius:50px;font-size:0.76rem;font-weight:600;border:1.5px solid var(--gray-200);background:white;color:var(--gray-600);cursor:pointer;transition:all .2s;}
+.nivel-btn.active{background:var(--blue-deep);color:white;border-color:var(--blue-deep);}
+.btn-gerar{width:100%;background:var(--blue-deep);color:white;border:none;padding:16px;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:10px;margin-top:8px;box-shadow:0 4px 20px rgba(10,37,64,0.2);}
+.btn-gerar:hover{background:var(--blue-mid);transform:translateY(-1px);}
+.btn-gerar:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
+.btn-gerar svg{width:20px;height:20px;}
+.toast{position:fixed;bottom:24px;right:24px;z-index:500;background:var(--blue-deep);color:white;padding:12px 20px;border-radius:50px;font-size:0.85rem;opacity:0;transform:translateY(8px);transition:all .3s;pointer-events:none;}
+.toast.show{opacity:1;transform:translateY(0);}
+@media(max-width:640px){
+  .form-grid{grid-template-columns:1fr;}
+  .lang-entry{grid-template-columns:1fr;}
+  .form-section{padding:20px 16px;}
+  .main-wrap{padding:24px 4% 48px;}
+  .hero{padding:76px 4% 28px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/index.html" class="nav-logo">N<span>O</span>VU</a>
+  <div class="nav-right" id="navDesktop">
+    <a href="/index.html" class="nav-back" id="nav-home-link">🤖 Assistente</a>
+    <a href="/documentos.html" class="nav-back" id="nav-docs-link">📄 Documentos</a>
+    <a href="/empregos.html" class="nav-back" id="nav-emp-link">💼 Empregos</a>
+    <div class="lang-selector">
+      <button id="lang-pt" class="lang-btn active" onclick="setLang('pt')">PT</button>
+      <button id="lang-en" class="lang-btn" onclick="setLang('en')">EN</button>
+      <button id="lang-es" class="lang-btn" onclick="setLang('es')">ES</button>
+    </div>
+  </div>
+  <div class="nav-mobile">
+    <div class="lang-selector">
+      <button id="lang-pt-m" class="lang-btn active" onclick="setLang('pt')">PT</button>
+      <button id="lang-en-m" class="lang-btn" onclick="setLang('en')">EN</button>
+      <button id="lang-es-m" class="lang-btn" onclick="setLang('es')">ES</button>
+    </div>
+    <button class="hamburger" id="hamburgerBtn" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/index.html" class="mobile-menu-link">🤖 <span id="mm-home">Assistente IA</span></a>
+  <a href="/documentos.html" class="mobile-menu-link">📄 <span id="mm-docs">Documentos</span></a>
+  <a href="/especialistas.html" class="mobile-menu-link">🤝 <span id="mm-esp">Especialistas</span></a>
+  <a href="/empregos.html" class="mobile-menu-link">💼 <span id="mm-emp">Empregos</span></a>
+  <a href="/curriculo.html" class="mobile-menu-link active-page">📝 <span id="mm-cv">Currículo</span></a>
+</div>
+
+<div class="hero">
+  <div class="hero-badge">📝 Formato Europeu · PDF gratuito</div>
+  <h1 id="hero-title">O teu currículo <span>no formato europeu</span></h1>
+  <p id="hero-sub">Preenche os teus dados, clica em "Gerar PDF" e faz download imediatamente. Formato Europass reconhecido em toda a UE.</p>
+</div>
+
+<div class="main-wrap">
+
+  <div class="form-section">
+    <div class="form-section-title">
+      <div class="form-section-num">1</div>
+      <span class="icon">👤</span>
+      <span id="sec1-title">Dados Pessoais</span>
+    </div>
+    <div class="form-grid">
+      <div class="form-group"><label id="lbl-nome">Nome próprio *</label><input class="form-input" type="text" id="cv-nome" placeholder="João"></div>
+      <div class="form-group"><label id="lbl-apelido">Apelido *</label><input class="form-input" type="text" id="cv-apelido" placeholder="Silva"></div>
+      <div class="form-group"><label id="lbl-email">Email *</label><input class="form-input" type="email" id="cv-email" placeholder="joao.silva@email.com"></div>
+      <div class="form-group"><label id="lbl-tel">Telefone</label><input class="form-input" type="tel" id="cv-tel" placeholder="+351 912 345 678"></div>
+      <div class="form-group"><label id="lbl-morada">Morada</label><input class="form-input" type="text" id="cv-morada" placeholder="Rua das Flores, 25, Lisboa"></div>
+      <div class="form-group"><label id="lbl-nasc">Data de nascimento</label><input class="form-input" type="text" id="cv-nasc" placeholder="01/01/1990"></div>
+      <div class="form-group"><label id="lbl-nacional">Nacionalidade</label><input class="form-input" type="text" id="cv-nacional" placeholder="Brasileira"></div>
+      <div class="form-group"><label id="lbl-linkedin">LinkedIn <span>(opcional)</span></label><input class="form-input" type="text" id="cv-linkedin" placeholder="linkedin.com/in/joao-silva"></div>
+      <div class="form-group full"><label id="lbl-perfil">Perfil profissional <span>(2-3 linhas)</span></label><textarea class="form-input" id="cv-perfil" rows="3" placeholder="Profissional com 5 anos de experiência em restauração..."></textarea></div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="form-section-title">
+      <div class="form-section-num">2</div>
+      <span class="icon">💼</span>
+      <span id="sec2-title">Experiência Profissional</span>
+    </div>
+    <div id="expList"></div>
+    <button class="btn-add-entry" onclick="addExp()">+ <span id="btn-add-exp-txt">Adicionar experiência</span></button>
+  </div>
+
+  <div class="form-section">
+    <div class="form-section-title">
+      <div class="form-section-num">3</div>
+      <span class="icon">🎓</span>
+      <span id="sec3-title">Educação e Formação</span>
+    </div>
+    <div id="eduList"></div>
+    <button class="btn-add-entry" onclick="addEdu()">+ <span id="btn-add-edu-txt">Adicionar formação</span></button>
+  </div>
+
+  <div class="form-section">
+    <div class="form-section-title">
+      <div class="form-section-num">4</div>
+      <span class="icon">🌍</span>
+      <span id="sec4-title">Línguas</span>
+    </div>
+    <div id="langList"></div>
+    <button class="btn-add-entry" onclick="addLang()">+ <span id="btn-add-lang-txt">Adicionar língua</span></button>
+  </div>
+
+  <div class="form-section">
+    <div class="form-section-title">
+      <div class="form-section-num">5</div>
+      <span class="icon">⚡</span>
+      <span id="sec5-title">Competências</span>
+    </div>
+    <div class="form-grid">
+      <div class="form-group full"><label id="lbl-comp-dig">Competências digitais <span>(separadas por vírgula)</span></label><input class="form-input" type="text" id="cv-comp-dig" placeholder="Microsoft Office, Excel, Google Workspace"></div>
+      <div class="form-group full"><label id="lbl-comp-out">Outras competências</label><input class="form-input" type="text" id="cv-comp-out" placeholder="Carta de condução B, Certificado de Higiene e Segurança Alimentar"></div>
+    </div>
+  </div>
+
+  <button class="btn-gerar" onclick="gerarPDF()" id="btn-gerar">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+    <span id="btn-gerar-txt">Gerar e Descarregar PDF</span>
+  </button>
+  <p style="text-align:center;font-size:0.76rem;color:var(--gray-400);margin-top:12px;" id="gerar-note">O PDF é gerado localmente no teu browser — os teus dados não são enviados para nenhum servidor.</p>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const T = {
+  pt: {
+    h1a:'O teu currículo',h1b:'no formato europeu',
+    hero_sub:'Preenche os teus dados, clica em "Gerar PDF" e faz download imediatamente. Formato Europass reconhecido em toda a UE.',
+    sec1:'Dados Pessoais',sec2:'Experiência Profissional',sec3:'Educação e Formação',sec4:'Línguas',sec5:'Competências',
+    lbl_nome:'Nome próprio *',lbl_apelido:'Apelido *',lbl_email:'Email *',lbl_tel:'Telefone',
+    lbl_morada:'Morada',lbl_nasc:'Data de nascimento',lbl_nacional:'Nacionalidade',
+    lbl_linkedin:'LinkedIn',lbl_perfil:'Perfil profissional',
+    btn_exp:'Adicionar experiência',btn_edu:'Adicionar formação',btn_lang:'Adicionar língua',
+    lbl_cargo:'Cargo / Função *',lbl_empresa:'Empresa *',lbl_periodo:'Período',lbl_local:'Local',lbl_ativ:'Actividades e responsabilidades',
+    lbl_grau:'Grau / Curso *',lbl_inst:'Instituição *',
+    lbl_lingua:'Língua *',lbl_nivel:'Nível',
+    lbl_cdig:'Competências digitais',lbl_cout:'Outras competências',
+    btn_gerar:'Gerar e Descarregar PDF',
+    gerar_note:'O PDF é gerado localmente no teu browser — os teus dados não são enviados para nenhum servidor.',
+    pdf_exp:'EXPERIÊNCIA PROFISSIONAL',pdf_edu:'EDUCAÇÃO E FORMAÇÃO',pdf_lang:'LÍNGUAS',pdf_comp:'COMPETÊNCIAS',
+    pdf_cdig:'Competências digitais',pdf_cout:'Outras competências',
+    pdf_footer:'Gerado com NOVU — novuai.pt',
+    err:'Preenche pelo menos o nome e o email.',toast_ok:'✅ CV gerado com sucesso!',
+    n_nativo:'Nativo',n_avancado:'Avançado (C1/C2)',n_intermedio:'Intermédio (B1/B2)',n_basico:'Básico (A1/A2)',
+    nav_home:'🤖 Assistente',nav_docs:'📄 Documentos',nav_emp:'💼 Empregos',
+    mm_home:'Assistente IA',mm_docs:'Documentos',mm_esp:'Especialistas',mm_emp:'Empregos',mm_cv:'Currículo',
+  },
+  en: {
+    h1a:'Your CV',h1b:'in European format',
+    hero_sub:'Fill in your details, click "Generate PDF" and download immediately. Europass format recognised across the EU.',
+    sec1:'Personal Details',sec2:'Work Experience',sec3:'Education & Training',sec4:'Languages',sec5:'Skills',
+    lbl_nome:'First name *',lbl_apelido:'Surname *',lbl_email:'Email *',lbl_tel:'Phone',
+    lbl_morada:'Address',lbl_nasc:'Date of birth',lbl_nacional:'Nationality',
+    lbl_linkedin:'LinkedIn',lbl_perfil:'Professional profile',
+    btn_exp:'Add experience',btn_edu:'Add education',btn_lang:'Add language',
+    lbl_cargo:'Job title *',lbl_empresa:'Employer *',lbl_periodo:'Period',lbl_local:'Location',lbl_ativ:'Activities and responsibilities',
+    lbl_grau:'Degree / Course *',lbl_inst:'Institution *',
+    lbl_lingua:'Language *',lbl_nivel:'Level',
+    lbl_cdig:'Digital skills',lbl_cout:'Other skills',
+    btn_gerar:'Generate & Download PDF',
+    gerar_note:'The PDF is generated locally in your browser — your data is not sent to any server.',
+    pdf_exp:'WORK EXPERIENCE',pdf_edu:'EDUCATION AND TRAINING',pdf_lang:'LANGUAGES',pdf_comp:'SKILLS',
+    pdf_cdig:'Digital skills',pdf_cout:'Other skills',
+    pdf_footer:'Generated with NOVU — novuai.pt',
+    err:'Please fill in at least your name and email.',toast_ok:'✅ CV generated successfully!',
+    n_nativo:'Native',n_avancado:'Advanced (C1/C2)',n_intermedio:'Intermediate (B1/B2)',n_basico:'Basic (A1/A2)',
+    nav_home:'🤖 Assistant',nav_docs:'📄 Documents',nav_emp:'💼 Jobs',
+    mm_home:'AI Assistant',mm_docs:'Documents',mm_esp:'Specialists',mm_emp:'Jobs',mm_cv:'CV Builder',
+  },
+  es: {
+    h1a:'Tu currículum',h1b:'en formato europeo',
+    hero_sub:'Rellena tus datos, haz clic en "Generar PDF" y descarga de inmediato. Formato Europass reconocido en toda la UE.',
+    sec1:'Datos Personales',sec2:'Experiencia Laboral',sec3:'Educación y Formación',sec4:'Idiomas',sec5:'Competencias',
+    lbl_nome:'Nombre *',lbl_apelido:'Apellido *',lbl_email:'Email *',lbl_tel:'Teléfono',
+    lbl_morada:'Dirección',lbl_nasc:'Fecha de nacimiento',lbl_nacional:'Nacionalidad',
+    lbl_linkedin:'LinkedIn',lbl_perfil:'Perfil profesional',
+    btn_exp:'Añadir experiencia',btn_edu:'Añadir formación',btn_lang:'Añadir idioma',
+    lbl_cargo:'Cargo / Puesto *',lbl_empresa:'Empresa *',lbl_periodo:'Período',lbl_local:'Lugar',lbl_ativ:'Actividades y responsabilidades',
+    lbl_grau:'Titulación / Curso *',lbl_inst:'Institución *',
+    lbl_lingua:'Idioma *',lbl_nivel:'Nivel',
+    lbl_cdig:'Competencias digitales',lbl_cout:'Otras competencias',
+    btn_gerar:'Generar y Descargar PDF',
+    gerar_note:'El PDF se genera localmente en tu navegador — tus datos no se envían a ningún servidor.',
+    pdf_exp:'EXPERIENCIA LABORAL',pdf_edu:'EDUCACIÓN Y FORMACIÓN',pdf_lang:'IDIOMAS',pdf_comp:'COMPETENCIAS',
+    pdf_cdig:'Competencias digitales',pdf_cout:'Otras competencias',
+    pdf_footer:'Generado con NOVU — novuai.pt',
+    err:'Por favor rellena al menos el nombre y el email.',toast_ok:'✅ CV generado con éxito!',
+    n_nativo:'Nativo',n_avancado:'Avanzado (C1/C2)',n_intermedio:'Intermedio (B1/B2)',n_basico:'Básico (A1/A2)',
+    nav_home:'🤖 Asistente',nav_docs:'📄 Documentos',nav_emp:'💼 Empleos',
+    mm_home:'Asistente IA',mm_docs:'Documentos',mm_esp:'Especialistas',mm_emp:'Empleos',mm_cv:'Currículum',
+  }
+};
+
+let currentLang = localStorage.getItem('novu_lang')||'pt';
+let expC=0,eduC=0,langC=0;
+
+function setLang(lang){
+  currentLang=lang; localStorage.setItem('novu_lang',lang);
+  const t=T[lang];
+  ['pt','en','es'].forEach(l=>{
+    document.getElementById('lang-'+l)?.classList.toggle('active',l===lang);
+    document.getElementById('lang-'+l+'-m')?.classList.toggle('active',l===lang);
+  });
+  const s=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+  document.getElementById('hero-title').innerHTML=t.h1a+' <span style="color:var(--blue-bright)">'+t.h1b+'</span>';
+  s('hero-sub',t.hero_sub);
+  s('sec1-title',t.sec1);s('sec2-title',t.sec2);s('sec3-title',t.sec3);s('sec4-title',t.sec4);s('sec5-title',t.sec5);
+  s('lbl-nome',t.lbl_nome);s('lbl-apelido',t.lbl_apelido);s('lbl-email',t.lbl_email);s('lbl-tel',t.lbl_tel);
+  s('lbl-morada',t.lbl_morada);s('lbl-nasc',t.lbl_nasc);s('lbl-nacional',t.lbl_nacional);
+  s('lbl-linkedin',t.lbl_linkedin);s('lbl-perfil',t.lbl_perfil);
+  s('btn-add-exp-txt',t.btn_exp);s('btn-add-edu-txt',t.btn_edu);s('btn-add-lang-txt',t.btn_lang);
+  s('lbl-comp-dig',t.lbl_cdig);s('lbl-comp-out',t.lbl_cout);
+  s('btn-gerar-txt',t.btn_gerar);s('gerar-note',t.gerar_note);
+  s('nav-home-link',t.nav_home);s('nav-docs-link',t.nav_docs);s('nav-emp-link',t.nav_emp);
+  s('mm-home',t.mm_home);s('mm-docs',t.mm_docs);s('mm-esp',t.mm_esp);s('mm-emp',t.mm_emp);s('mm-cv',t.mm_cv);
+}
+
+function addExp(){
+  const t=T[currentLang],id=++expC;
+  const d=document.createElement('div');
+  d.className='entry-block';d.id='exp-'+id;
+  d.innerHTML=`<button class="entry-remove" onclick="removeEntry('exp-${id}')">×</button>
+  <div class="form-grid">
+    <div class="form-group"><label>${t.lbl_cargo}</label><input class="form-input" type="text" id="ec-${id}" placeholder="Empregado de Mesa"></div>
+    <div class="form-group"><label>${t.lbl_empresa}</label><input class="form-input" type="text" id="ee-${id}" placeholder="Restaurante XYZ"></div>
+    <div class="form-group"><label>${t.lbl_periodo}</label><input class="form-input" type="text" id="ep-${id}" placeholder="Jan 2022 – Dez 2023"></div>
+    <div class="form-group"><label>${t.lbl_local}</label><input class="form-input" type="text" id="el-${id}" placeholder="Lisboa, Portugal"></div>
+    <div class="form-group full"><label>${t.lbl_ativ}</label><textarea class="form-input" id="ea-${id}" rows="2" placeholder="Atendimento ao cliente, gestão de mesas..."></textarea></div>
+  </div>`;
+  document.getElementById('expList').appendChild(d);
+}
+
+function addEdu(){
+  const t=T[currentLang],id=++eduC;
+  const d=document.createElement('div');
+  d.className='entry-block';d.id='edu-'+id;
+  d.innerHTML=`<button class="entry-remove" onclick="removeEntry('edu-${id}')">×</button>
+  <div class="form-grid">
+    <div class="form-group"><label>${t.lbl_grau}</label><input class="form-input" type="text" id="dg-${id}" placeholder="Licenciatura em Gestão Hoteleira"></div>
+    <div class="form-group"><label>${t.lbl_inst}</label><input class="form-input" type="text" id="di-${id}" placeholder="Universidade de Lisboa"></div>
+    <div class="form-group"><label>${t.lbl_periodo}</label><input class="form-input" type="text" id="dp-${id}" placeholder="2018 – 2022"></div>
+    <div class="form-group"><label>${t.lbl_local}</label><input class="form-input" type="text" id="dl-${id}" placeholder="Lisboa, Portugal"></div>
+  </div>`;
+  document.getElementById('eduList').appendChild(d);
+}
+
+function addLang(){
+  const t=T[currentLang],id=++langC;
+  const d=document.createElement('div');
+  d.className='entry-block';d.id='lng-'+id;
+  d.innerHTML=`<button class="entry-remove" onclick="removeEntry('lng-${id}')">×</button>
+  <div class="lang-entry">
+    <div class="form-group"><label>${t.lbl_lingua}</label><input class="form-input" type="text" id="ln-${id}" placeholder="Português"></div>
+    <div class="form-group"><label>${t.lbl_nivel}</label>
+      <div class="nivel-select" id="nv-${id}">
+        <button class="nivel-btn active" onclick="setNivel(${id},'nativo',this)">${t.n_nativo}</button>
+        <button class="nivel-btn" onclick="setNivel(${id},'avancado',this)">${t.n_avancado}</button>
+        <button class="nivel-btn" onclick="setNivel(${id},'intermedio',this)">${t.n_intermedio}</button>
+        <button class="nivel-btn" onclick="setNivel(${id},'basico',this)">${t.n_basico}</button>
+      </div>
+      <input type="hidden" id="lv-${id}" value="nativo">
+    </div>
+  </div>`;
+  document.getElementById('langList').appendChild(d);
+}
+
+function setNivel(id,nivel,btn){
+  document.getElementById('lv-'+id).value=nivel;
+  document.querySelectorAll('#nv-'+id+' .nivel-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function removeEntry(id){ const el=document.getElementById(id); if(el)el.remove(); }
+
+function gerarPDF(){
+  const t=T[currentLang];
+  const nome=document.getElementById('cv-nome').value.trim();
+  const apelido=document.getElementById('cv-apelido').value.trim();
+  const email=document.getElementById('cv-email').value.trim();
+  if(!nome||!email){showToast(t.err);return;}
+
+  const btn=document.getElementById('btn-gerar');
+  btn.disabled=true;
+  document.getElementById('btn-gerar-txt').textContent='⏳ A gerar...';
+
+  try{
+    const {jsPDF}=window.jspdf;
+    const doc=new jsPDF({format:'a4',unit:'mm'});
+    const W=210,M=20,CW=W-2*M;
+    let y=0;
+
+    // Cabeçalho
+    doc.setFillColor(10,37,64); doc.rect(0,0,W,50,'F');
+    doc.setFillColor(46,127,212); doc.rect(0,0,6,50,'F');
+    doc.setTextColor(255,255,255);
+    doc.setFont('helvetica','bold'); doc.setFontSize(20);
+    doc.text((nome+' '+apelido).toUpperCase(),M+2,18);
+
+    const perfil=document.getElementById('cv-perfil').value.trim();
+    if(perfil){
+      doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(180,200,220);
+      const pl=doc.splitTextToSize(perfil,CW-10);
+      doc.text(pl.slice(0,2),M+2,27);
+    }
+
+    doc.setFontSize(8); doc.setTextColor(200,220,240);
+    const tel=document.getElementById('cv-tel').value.trim();
+    const morada=document.getElementById('cv-morada').value.trim();
+    const linkedin=document.getElementById('cv-linkedin').value.trim();
+    const nasc=document.getElementById('cv-nasc').value.trim();
+    const nac=document.getElementById('cv-nacional').value.trim();
+    let c1=email; if(tel)c1+='  |  '+tel; if(morada)c1+='  |  '+morada;
+    doc.text(c1,M+2,40);
+    let c2=''; if(nasc)c2+=nasc; if(nac)c2+=(c2?'  |  ':'')+nac; if(linkedin)c2+=(c2?'  |  ':'')+linkedin;
+    if(c2)doc.text(c2,M+2,46);
+    y=60;
+
+    const secTitle=(title)=>{
+      if(y>265){doc.addPage();y=20;}
+      doc.setFillColor(46,127,212); doc.rect(M,y,CW,0.5,'F'); y+=4;
+      doc.setFont('helvetica','bold'); doc.setFontSize(9); doc.setTextColor(10,37,64);
+      doc.text(title,M,y); y+=6;
+    };
+    const entTitle=(l,r)=>{
+      if(y>270){doc.addPage();y=20;}
+      doc.setFont('helvetica','bold'); doc.setFontSize(10); doc.setTextColor(10,37,64);
+      doc.text(l,M,y);
+      if(r){doc.setFont('helvetica','normal');doc.setFontSize(8.5);doc.setTextColor(100,130,160);doc.text(r,W-M,y,{align:'right'});}
+      y+=5;
+    };
+    const entSub=(t)=>{doc.setFont('helvetica','italic');doc.setFontSize(9);doc.setTextColor(46,127,212);doc.text(t,M,y);y+=5;};
+    const bodyTxt=(txt)=>{
+      if(!txt)return;
+      doc.setFont('helvetica','normal');doc.setFontSize(9);doc.setTextColor(60,80,100);
+      doc.splitTextToSize(txt,CW).forEach(l=>{if(y>272){doc.addPage();y=20;}doc.text('•  '+l,M+2,y);y+=4.5;});
+      y+=2;
+    };
+
+    // Experiência
+    const exps=document.querySelectorAll('[id^="exp-"]');
+    if(exps.length){
+      secTitle(t.pdf_exp);
+      exps.forEach(b=>{
+        const id=b.id.replace('exp-','');
+        const cargo=document.getElementById('ec-'+id)?.value.trim();
+        if(!cargo)return;
+        entTitle(cargo,document.getElementById('ep-'+id)?.value.trim()||'');
+        const emp=document.getElementById('ee-'+id)?.value.trim();
+        const loc=document.getElementById('el-'+id)?.value.trim();
+        if(emp)entSub(emp+(loc?' · '+loc:''));
+        bodyTxt(document.getElementById('ea-'+id)?.value.trim());
+        y+=2;
+      });
+    }
+
+    // Educação
+    const edus=document.querySelectorAll('[id^="edu-"]');
+    if(edus.length){
+      secTitle(t.pdf_edu);
+      edus.forEach(b=>{
+        const id=b.id.replace('edu-','');
+        const grau=document.getElementById('dg-'+id)?.value.trim();
+        if(!grau)return;
+        entTitle(grau,document.getElementById('dp-'+id)?.value.trim()||'');
+        const inst=document.getElementById('di-'+id)?.value.trim();
+        const loc=document.getElementById('dl-'+id)?.value.trim();
+        if(inst)entSub(inst+(loc?' · '+loc:''));
+        y+=3;
+      });
+    }
+
+    // Línguas
+    const langs=document.querySelectorAll('[id^="lng-"]');
+    if(langs.length){
+      secTitle(t.pdf_lang);
+      const nl={nativo:t.n_nativo,avancado:t.n_avancado,intermedio:t.n_intermedio,basico:t.n_basico};
+      langs.forEach(b=>{
+        const id=b.id.replace('lng-','');
+        const lingua=document.getElementById('ln-'+id)?.value.trim();
+        if(!lingua)return;
+        const nivel=document.getElementById('lv-'+id)?.value||'nativo';
+        doc.setFont('helvetica','bold');doc.setFontSize(9.5);doc.setTextColor(10,37,64);doc.text(lingua,M,y);
+        doc.setFont('helvetica','normal');doc.setFontSize(9);doc.setTextColor(100,130,160);doc.text(nl[nivel]||nivel,M+45,y);
+        y+=5;
+      });
+      y+=2;
+    }
+
+    // Competências
+    const cdig=document.getElementById('cv-comp-dig').value.trim();
+    const cout=document.getElementById('cv-comp-out').value.trim();
+    if(cdig||cout){
+      secTitle(t.pdf_comp);
+      if(cdig){
+        doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(10,37,64);doc.text(t.pdf_cdig+':',M,y);y+=4.5;
+        doc.setFont('helvetica','normal');doc.setTextColor(60,80,100);
+        doc.splitTextToSize(cdig,CW).forEach(l=>{doc.text(l,M+2,y);y+=4.5;});
+        y+=2;
+      }
+      if(cout){
+        doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(10,37,64);doc.text(t.pdf_cout+':',M,y);y+=4.5;
+        doc.setFont('helvetica','normal');doc.setTextColor(60,80,100);
+        doc.splitTextToSize(cout,CW).forEach(l=>{doc.text(l,M+2,y);y+=4.5;});
+      }
+    }
+
+    // Rodapé
+    const total=doc.getNumberOfPages();
+    for(let p=1;p<=total;p++){
+      doc.setPage(p);
+      doc.setFillColor(245,249,255);doc.rect(0,285,W,12,'F');
+      doc.setFont('helvetica','normal');doc.setFontSize(7.5);doc.setTextColor(140,160,180);
+      doc.text(t.pdf_footer,M,291);
+      doc.text(p+'/'+total,W-M,291,{align:'right'});
+    }
+
+    doc.save('CV_'+(nome+'_'+apelido).replace(/\s+/g,'_')+'_Europass.pdf');
+    showToast(t.toast_ok);
+  }catch(err){
+    console.error(err);
+    showToast('❌ Erro ao gerar PDF. Tenta novamente.');
+  }finally{
+    btn.disabled=false;
+    document.getElementById('btn-gerar-txt').textContent=T[currentLang].btn_gerar;
+  }
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+function toggleMenu(){
+  const menu=document.getElementById('mobileMenu');
+  const btn=document.getElementById('hamburgerBtn');
+  menu.classList.toggle('open'); btn.classList.toggle('open');
+}
+document.addEventListener('click',function(e){
+  const menu=document.getElementById('mobileMenu');
+  const btn=document.getElementById('hamburgerBtn');
+  if(menu&&!menu.contains(e.target)&&btn&&!btn.contains(e.target)){
+    menu.classList.remove('open'); btn.classList.remove('open');
+  }
+});
+
+setLang(currentLang);
+addExp(); addEdu(); addLang();
+</script>
+</body>
+</html>
