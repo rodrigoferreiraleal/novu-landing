@@ -574,6 +574,18 @@ nav {
   </div>
 </div>
 
+<!-- PAYWALL CANDIDATURA -->
+<div class="modal-overlay" id="empPaywallModal" style="display:none;position:fixed;inset:0;background:rgba(10,37,64,0.7);z-index:400;align-items:center;justify-content:center;backdrop-filter:blur(6px);" onclick="if(event.target===this)closeEmpPaywall()">
+  <div style="background:white;border-radius:20px;padding:40px 32px;max-width:420px;width:90%;text-align:center;box-shadow:0 40px 80px rgba(0,0,0,0.2);">
+    <div style="font-size:2.5rem;margin-bottom:12px;">🔒</div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:#0A2540;margin-bottom:10px;">Registo necessário</h2>
+    <p style="font-size:0.9rem;color:#4A6580;line-height:1.6;margin-bottom:24px;">Já usaste a tua candidatura gratuita. Regista-te gratuitamente para te candidatares a todas as vagas sem limite.</p>
+    <a href="/index.html" style="display:block;background:#0A2540;color:white;border-radius:50px;padding:13px 24px;font-family:'DM Sans',sans-serif;font-size:0.95rem;font-weight:700;text-decoration:none;margin-bottom:10px;">Registar gratuitamente</a>
+    <button onclick="closeEmpPaywall()" style="background:none;border:none;color:#8FA3BC;font-size:0.84rem;cursor:pointer;padding:6px;">Fechar</button>
+  </div>
+</div>
+<style>#empPaywallModal.open{display:flex!important;}</style>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -830,9 +842,20 @@ function renderSidebar() {
 // ── FILTROS — ver carregarVagas acima ──
 
 // ── MODAL CANDIDATURA ──
+function getCookieEmp(n){const m=document.cookie.match(new RegExp('(^| )'+n+'=([^;]+)'));return m?m[2]:null;}
+function setCookieEmp(n,v,h){const e=new Date(Date.now()+h*3600000).toUTCString();document.cookie=n+'='+v+';expires='+e+';path=/';}
+
 function openCandidaturaModal(vagaId) {
   vagaSeleccionada = vagasData.find(v => String(v.id) === String(vagaId));
   if (!vagaSeleccionada) return;
+
+  // Verificar limite: 1 candidatura grátis, depois precisa de registo
+  const unlocked = getCookieEmp('novu_unlocked') === 'true';
+  const candidaturasFeitas = parseInt(getCookieEmp('novu_cand') || '0');
+  if (!unlocked && candidaturasFeitas >= 1) {
+    showEmpPaywall();
+    return;
+  }
   document.getElementById('modal-vaga-titulo').textContent = vagaSeleccionada.titulo;
   document.getElementById('modal-vaga-empresa').textContent = (vagaSeleccionada.empresa_nome || vagaSeleccionada.empresa || '—') + ' · ' + vagaSeleccionada.cidade;
   document.getElementById('candidaturaForm').style.display = 'block';
@@ -907,6 +930,9 @@ async function submitCandidatura() {
       document.getElementById('candidaturaSuccess').classList.add('show');
       document.getElementById('cand-success-title').textContent = T[currentLang].cand_success_title;
       document.getElementById('cand-success-msg').textContent = T[currentLang].cand_success_msg;
+      // Incrementar contador de candidaturas
+      const jaFeitas = parseInt(getCookieEmp('novu_cand') || '0');
+      setCookieEmp('novu_cand', jaFeitas + 1, 24 * 30);
     } else {
       throw new Error(data.error || 'Erro');
     }
@@ -1023,6 +1049,14 @@ function handleCvUpload(input) {
     label.classList.remove('has-file');
     text.textContent = t.cv_placeholder || 'Clica para anexar o teu CV';
   }
+}
+
+// ── PAYWALL ──
+function showEmpPaywall() {
+  document.getElementById('empPaywallModal').classList.add('open');
+}
+function closeEmpPaywall() {
+  document.getElementById('empPaywallModal').classList.remove('open');
 }
 
 // ── MENU MOBILE ──
