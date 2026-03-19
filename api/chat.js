@@ -230,8 +230,11 @@ module.exports = async function handler(req, res) {
   if (action === "register") {
     if (!email) return res.status(400).json({ error: "Email obrigatório" });
     try {
+      const { cidade, pais } = body;
       const upsertData = { name, email, lang, unlocked: true };
       if (ref && ref.trim()) upsertData.ref = ref.trim().toLowerCase();
+      if (cidade && cidade.trim()) upsertData.cidade = cidade.trim();
+      if (pais && pais.trim()) upsertData.pais_origem = pais.trim();
 
       const { error } = await supabase
         .from("waitlist")
