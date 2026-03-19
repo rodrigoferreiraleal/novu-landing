@@ -512,6 +512,8 @@ gtag('config', 'G-ZJLBVGPQT5');
     <div class="modal-form" id="modalForm">
       <input type="text" class="modal-input" id="modalNameInput" placeholder="o teu nome">
       <input type="email" class="modal-input" id="modalEmailInput" placeholder="o teu email">
+      <input type="text" class="modal-input" id="modalCidadeInput" placeholder="cidade onde moras em Portugal">
+      <input type="text" class="modal-input" id="modalPaisInput" placeholder="país de origem">
       <button class="modal-submit" id="modal-submit-btn" onclick="submitModalEmail()">Criar conta grátis</button>
       <div class="consent-row">
         <input type="checkbox" id="modalConsent">
@@ -636,7 +638,9 @@ gtag('config', 'G-ZJLBVGPQT5');
       <p id="email-capture-text">🎁 Regista-te para acesso ilimitado ao assistente NOVU!</p>
       <div class="email-form">
         <input type="text" class="email-input" id="inlineNameInput" placeholder="o teu nome" style="margin-bottom:6px;width:100%">
-        <input type="email" class="email-input" id="emailInput" placeholder="o teu email">
+        <input type="email" class="email-input" id="emailInput" placeholder="o teu email" style="margin-bottom:6px">
+        <input type="text" class="email-input" id="inlineCidadeInput" placeholder="cidade onde moras em Portugal" style="margin-bottom:6px;width:100%">
+        <input type="text" class="email-input" id="inlinePaisInput" placeholder="país de origem" style="margin-bottom:6px;width:100%">
         <button class="email-submit" onclick="submitInlineEmail()">Aceder grátis</button>
       </div>
       <div class="consent-row" style="margin-top:8px;">
@@ -858,7 +862,7 @@ const T = {
     name_placeholder: 'o teu nome', email_placeholder: 'o teu email', email_btn: 'Aceder grátis',
     success: '✅ Acesso desbloqueado! Bem-vindo à NOVU 🙌',
     modal_title: 'Cria a tua conta grátis', modal_desc: 'Regista-te e acede ao assistente NOVU sem limites — o teu guia completo da vida em Portugal.',
-    modal_name_ph: 'o teu nome', modal_email_ph: 'o teu email', modal_btn: 'Criar conta grátis',
+    modal_name_ph: 'o teu nome', modal_email_ph: 'o teu email', modal_cidade_ph: 'cidade onde moras em Portugal', modal_pais_ph: 'país de origem', modal_btn: 'Criar conta grátis',
     modal_note: 'Gratuito. Sem spam. Só boas novidades.', modal_success: '✅ Perfeito! Conta criada. Bem-vindo à NOVU 🙌',
     how_label: 'Como funciona', how_title: 'Como a NOVU te ajuda em Portugal',
     step1_title: 'Pergunta', step1_desc: 'Descreve a tua dúvida ou situação em linguagem normal — sem formulários complicados.',
@@ -928,7 +932,7 @@ const T = {
     name_placeholder: 'your name', email_placeholder: 'your email', email_btn: 'Get free access',
     success: '✅ Access unlocked! Welcome to NOVU 🙌',
     modal_title: 'Create your free account', modal_desc: 'Sign up and get unlimited access to the NOVU assistant — your complete guide to life in Portugal.',
-    modal_name_ph: 'your name', modal_email_ph: 'your email', modal_btn: 'Create free account',
+    modal_name_ph: 'your name', modal_email_ph: 'your email', modal_cidade_ph: 'city where you live in Portugal', modal_pais_ph: 'country of origin', modal_btn: 'Create free account',
     modal_note: 'Free. No spam. Only good news.', modal_success: '✅ Perfect! Account created. Welcome to NOVU 🙌',
     how_label: 'How it works', how_title: 'How NOVU helps you in Portugal',
     step1_title: 'Ask', step1_desc: 'Describe your question or situation in plain language — no complicated forms.',
@@ -998,7 +1002,7 @@ const T = {
     name_placeholder: 'tu nombre', email_placeholder: 'tu email', email_btn: 'Acceder gratis',
     success: '✅ ¡Acceso desbloqueado! Bienvenido a NOVU 🙌',
     modal_title: 'Crea tu cuenta gratis', modal_desc: 'Regístrate y accede al asistente NOVU sin límites — tu guía completa de vida en Portugal.',
-    modal_name_ph: 'tu nombre', modal_email_ph: 'tu email', modal_btn: 'Crear cuenta gratis',
+    modal_name_ph: 'tu nombre', modal_email_ph: 'tu email', modal_cidade_ph: 'ciudad donde vives en Portugal', modal_pais_ph: 'país de origen', modal_btn: 'Crear cuenta gratis',
     modal_note: 'Gratis. Sin spam. Solo buenas noticias.', modal_success: '✅ ¡Perfecto! Cuenta creada. ¡Bienvenido a NOVU 🙌',
     how_label: 'Cómo funciona', how_title: 'Cómo NOVU te ayuda en Portugal',
     step1_title: 'Pregunta', step1_desc: 'Describe tu duda o situación en lenguaje normal — sin formularios complicados.',
@@ -1135,6 +1139,8 @@ function setLang(lang) {
   document.getElementById('modal-desc').textContent = t.modal_desc;
   document.getElementById('modalNameInput').placeholder = t.modal_name_ph;
   document.getElementById('modalEmailInput').placeholder = t.modal_email_ph;
+  document.getElementById('modalCidadeInput').placeholder = t.modal_cidade_ph;
+  document.getElementById('modalPaisInput').placeholder = t.modal_pais_ph;
   document.getElementById('modal-submit-btn').textContent = t.modal_btn;
   document.getElementById('modal-note').textContent = t.modal_note;
   document.getElementById('how-label').textContent = t.how_label;
@@ -1287,10 +1293,12 @@ function showEmailCapture() {
 async function submitInlineEmail() {
   const name = document.getElementById('inlineNameInput').value.trim();
   const email = document.getElementById('emailInput').value.trim();
+  const cidade = document.getElementById('inlineCidadeInput')?.value.trim() || '';
+  const pais = document.getElementById('inlinePaisInput')?.value.trim() || '';
   const consent = document.getElementById('inlineConsent').checked;
   if (!consent) { document.getElementById('inline-consent-label').style.color = '#EF4444'; return; }
   if (!email || !email.includes('@')) { document.getElementById('emailInput').style.borderColor = '#EF4444'; return; }
-  await registerUser(name, email);
+  await registerUser(name, email, cidade, pais);
   document.getElementById('emailCapture').classList.add('hidden');
   const successMsg = document.getElementById('successMsg');
   successMsg.textContent = T[currentLang].success;
@@ -1329,12 +1337,14 @@ document.getElementById('emailModal').addEventListener('click', function(e) { if
 async function submitModalEmail() {
   const name = document.getElementById('modalNameInput').value.trim();
   const email = document.getElementById('modalEmailInput').value.trim();
+  const cidade = document.getElementById('modalCidadeInput').value.trim();
+  const pais = document.getElementById('modalPaisInput').value.trim();
   const consent = document.getElementById('modalConsent').checked;
   if (!consent) { document.getElementById('modal-consent-label').style.color = '#EF4444'; return; }
   if (!email || !email.includes('@')) { document.getElementById('modalEmailInput').style.borderColor = '#EF4444'; return; }
   const btn = document.getElementById('modal-submit-btn');
   btn.textContent = '...'; btn.disabled = true;
-  await registerUser(name, email);
+  await registerUser(name, email, cidade, pais);
   document.getElementById('modalForm').style.display = 'none';
   const s = document.getElementById('modalSuccess');
   s.textContent = T[currentLang].modal_success;
@@ -1345,17 +1355,17 @@ async function submitModalEmail() {
   setTimeout(() => closeModal(), 3000);
 }
 
-async function registerUser(name, email) {
+async function registerUser(name, email, cidade, pais) {
   try {
     await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'register', name, email, lang: currentLang, ref: refParam })
+      body: JSON.stringify({ action: 'register', name, email, cidade: cidade||'', pais: pais||'', lang: currentLang, ref: refParam })
     });
     await fetch('https://formspree.io/f/xdawgkvq', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({ name, email, lang: currentLang, ref: refParam, source: 'novu-registration' })
+      body: JSON.stringify({ name, email, cidade: cidade||'', pais: pais||'', lang: currentLang, ref: refParam, source: 'novu-registration' })
     });
   } catch(e) {}
 }
