@@ -307,6 +307,49 @@ gtag('config', 'G-ZJLBVGPQT5');
   .consent-label a { color: var(--blue-bright); text-decoration: none; }
   .consent-label a:hover { text-decoration: underline; }
 
+  /* MODAL LEADS */
+  .lead-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(10,37,64,0.65); z-index: 1001; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
+  .lead-modal-overlay.open { display: flex; }
+  .lead-modal { background: white; border-radius: 24px; padding: 36px 32px; max-width: 480px; width: 92%; text-align: left; box-shadow: 0 40px 80px rgba(0,0,0,0.22); position: relative; animation: slideUp 0.3s ease; }
+  .lead-modal-close { position: absolute; top: 14px; right: 18px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--gray-400); line-height: 1; }
+  .lead-modal-icon { font-size: 2rem; margin-bottom: 10px; }
+  .lead-modal h2 { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; color: var(--blue-deep); margin-bottom: 6px; }
+  .lead-modal-desc { color: var(--gray-600); font-size: 0.88rem; line-height: 1.5; margin-bottom: 20px; }
+  .lead-field { margin-bottom: 11px; }
+  .lead-field label { font-size: 0.78rem; font-weight: 600; color: var(--gray-600); display: block; margin-bottom: 4px; letter-spacing: 0.3px; }
+  .lead-field select, .lead-field input, .lead-field textarea {
+    width: 100%; border: 1.5px solid var(--gray-200); border-radius: 12px;
+    padding: 10px 14px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem;
+    outline: none; transition: border-color 0.2s; color: var(--text);
+    background: white;
+  }
+  .lead-field select:focus, .lead-field input:focus, .lead-field textarea:focus { border-color: var(--blue-bright); }
+  .lead-field textarea { resize: vertical; min-height: 80px; border-radius: 12px; }
+  .lead-urgencia-row { display: flex; gap: 8px; }
+  .lead-urgencia-btn {
+    flex: 1; padding: 8px 6px; border: 1.5px solid var(--gray-200); border-radius: 50px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 600; cursor: pointer;
+    transition: all 0.2s; background: white; color: var(--gray-600); text-align: center;
+  }
+  .lead-urgencia-btn.selected-baixa { background: #F0FDF4; border-color: #22C55E; color: #166534; }
+  .lead-urgencia-btn.selected-media { background: #FFFBEB; border-color: #F59E0B; color: #92400E; }
+  .lead-urgencia-btn.selected-alta  { background: #FEF2F2; border-color: #EF4444; color: #991B1B; }
+  .lead-submit-btn {
+    width: 100%; background: var(--blue-deep); color: white; border: none;
+    padding: 13px; border-radius: 50px; font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+    margin-top: 4px;
+  }
+  .lead-submit-btn:hover { background: var(--blue-mid); }
+  .lead-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+  .lead-success { display: none; text-align: center; padding: 20px 10px; }
+  .lead-success-icon { font-size: 2.5rem; margin-bottom: 10px; }
+  .lead-success h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--blue-deep); margin-bottom: 8px; }
+  .lead-success p { font-size: 0.88rem; color: var(--gray-600); line-height: 1.5; }
+  .lead-error { color: #EF4444; font-size: 0.78rem; margin-top: 6px; display: none; }
+  /* Campo honeypot — invisível */
+  .lead-hp { position: absolute; left: -9999px; opacity: 0; pointer-events: none; tabindex: -1; }
+
   /* TYPING */
   .typing { display: flex; gap: 4px; align-items: center; padding: 10px 14px; }
   .typing span { width: 6px; height: 6px; background: var(--gray-400); border-radius: 50%; animation: bounce 1.2s infinite; }
@@ -502,6 +545,81 @@ gtag('config', 'G-ZJLBVGPQT5');
 </div>
 
 
+<!-- MODAL LEADS — Preciso de ajuda -->
+<div class="lead-modal-overlay" id="leadModal">
+  <div class="lead-modal">
+    <button class="lead-modal-close" onclick="closeLeadModal()" aria-label="Fechar">×</button>
+
+    <!-- FORMULÁRIO -->
+    <div id="leadForm">
+      <div class="lead-modal-icon">🙋</div>
+      <h2 id="lead-modal-title">Preciso de ajuda</h2>
+      <p class="lead-modal-desc" id="lead-modal-desc">Descreve o teu pedido e entraremos em contacto para te orientar.</p>
+
+      <!-- Honeypot anti-spam — invisível para humanos -->
+      <div class="lead-hp" aria-hidden="true">
+        <input type="text" name="website" id="leadHpWebsite" autocomplete="off" tabindex="-1">
+      </div>
+
+      <div class="lead-field">
+        <label for="leadEmail" id="lead-email-label">O teu email *</label>
+        <input type="email" id="leadEmail" autocomplete="email" maxlength="254">
+      </div>
+
+      <div class="lead-field">
+        <label for="leadCategoria" id="lead-cat-label">Tipo de ajuda *</label>
+        <select id="leadCategoria">
+          <option value="" id="lead-cat-placeholder">Selecciona uma categoria</option>
+          <option value="juridico"     id="lcat-jur">⚖️ Jurídico / Imigração</option>
+          <option value="habitacao"    id="lcat-hab">🏠 Habitação / Arrendamento</option>
+          <option value="trabalho"     id="lcat-trab">💼 Emprego / Trabalho</option>
+          <option value="bancario"     id="lcat-banc">🏦 Banco / Finanças</option>
+          <option value="documentacao" id="lcat-doc">📋 Documentação / NIF / NISS</option>
+          <option value="saude"        id="lcat-sau">🏥 Saúde / Seguro</option>
+          <option value="educacao"     id="lcat-edu">🎓 Educação / Escola</option>
+          <option value="outro"        id="lcat-out">💬 Outro</option>
+        </select>
+      </div>
+
+      <div class="lead-field">
+        <label for="leadLocalizacao" id="lead-loc-label">Cidade em Portugal *</label>
+        <input type="text" id="leadLocalizacao" maxlength="100" autocomplete="address-level2">
+      </div>
+
+      <div class="lead-field">
+        <label for="leadDescricao" id="lead-desc-label">Descreve o teu pedido *</label>
+        <textarea id="leadDescricao" maxlength="800" rows="3"></textarea>
+      </div>
+
+      <div class="lead-field">
+        <label id="lead-urg-label">Urgência</label>
+        <div class="lead-urgencia-row">
+          <button type="button" class="lead-urgencia-btn" id="urg-baixa" onclick="selectUrgencia('baixa')">🟢 <span id="urg-baixa-txt">Baixa</span></button>
+          <button type="button" class="lead-urgencia-btn" id="urg-media" onclick="selectUrgencia('media')">🟡 <span id="urg-media-txt">Média</span></button>
+          <button type="button" class="lead-urgencia-btn" id="urg-alta"  onclick="selectUrgencia('alta')">🔴 <span id="urg-alta-txt">Alta</span></button>
+        </div>
+      </div>
+
+      <div class="consent-row" style="margin-bottom:14px;">
+        <input type="checkbox" id="leadConsent">
+        <label class="consent-label" for="leadConsent" id="lead-consent-label">Aceito a <a href="/privacidade.html" target="_blank">Política de Privacidade</a> e o tratamento dos meus dados para receber orientação.</label>
+      </div>
+
+      <p class="lead-error" id="leadError"></p>
+      <button class="lead-submit-btn" id="leadSubmitBtn" onclick="submitLead()">Enviar pedido</button>
+      <p style="font-size:0.72rem;color:var(--gray-400);text-align:center;margin-top:8px;" id="lead-modal-note">Sem spam. Respondemos em menos de 48 horas.</p>
+    </div>
+
+    <!-- SUCESSO -->
+    <div class="lead-success" id="leadSuccess">
+      <div class="lead-success-icon">✅</div>
+      <h3 id="lead-success-title">Pedido recebido!</h3>
+      <p id="lead-success-desc">Recebemos o teu pedido e entraremos em contacto em breve para te ajudar.</p>
+    </div>
+  </div>
+</div>
+
+
 <!-- MODAL -->
 <div class="modal-overlay" id="emailModal">
   <div class="modal">
@@ -542,6 +660,7 @@ gtag('config', 'G-ZJLBVGPQT5');
       <button class="lang-btn" onclick="setLang('es')" id="lang-es">ES</button>
     </div>
     <button class="nav-cta" id="nav-cta-btn" onclick="openModal()">Experimentar grátis</button>
+    <button class="nav-docs-btn" id="nav-help-btn" onclick="openLeadModal()">🙋 <span id="nav-help-txt">Preciso de ajuda</span></button>
   </div>
 
   <!-- HAMBURGER MOBILE -->
@@ -565,6 +684,7 @@ gtag('config', 'G-ZJLBVGPQT5');
   <a href="/curriculo.html" class="mobile-menu-link">📝 <span id="mm-cv">Currículo</span></a>
   <a href="/afiliados.html" class="mobile-menu-link">🤝 <span id="mm-afil">Programa de Afiliados</span></a>
   <div class="mobile-menu-divider"></div>
+  <button class="mobile-menu-link" onclick="openLeadModal();toggleMenu()" id="mm-help" style="background:none;border:none;cursor:pointer;text-align:left;">🙋 <span id="mm-help-txt">Preciso de ajuda</span></button>
   <button class="mobile-menu-cta" onclick="openModal();toggleMenu()" id="mm-cta">Experimentar grátis</button>
 </div>
 
@@ -900,6 +1020,32 @@ const T = {
     docs_more: '+ 6 documentos mais →',
     docs_cta: 'Aceder aos documentos grátis',
     docs_note: '2 documentos gratuitos · sem conta · sem cartão',
+    // Modal leads
+    lead_modal_title: 'Preciso de ajuda',
+    lead_modal_desc: 'Descreve o teu pedido e entraremos em contacto para te orientar.',
+    lead_email_label: 'O teu email *',
+    lead_cat_label: 'Tipo de ajuda *',
+    lead_cat_ph: 'Selecciona uma categoria',
+    lead_loc_label: 'Cidade em Portugal *',
+    lead_desc_label: 'Descreve o teu pedido *',
+    lead_urg_label: 'Urgência',
+    lead_urg_baixa: 'Baixa', lead_urg_media: 'Média', lead_urg_alta: 'Alta',
+    lead_consent: 'Aceito a <a href="/privacidade.html" target="_blank">Política de Privacidade</a> e o tratamento dos meus dados para receber orientação.',
+    lead_submit: 'Enviar pedido',
+    lead_note: 'Sem spam. Respondemos em menos de 48 horas.',
+    lead_success_title: 'Pedido recebido!',
+    lead_success_desc: 'Recebemos o teu pedido e entraremos em contacto em breve para te ajudar.',
+    lead_err_email: 'Email inválido.',
+    lead_err_cat: 'Selecciona uma categoria.',
+    lead_err_loc: 'Indica a tua cidade.',
+    lead_err_desc: 'Descreve o teu pedido (mínimo 10 caracteres).',
+    lead_err_consent: 'Consentimento obrigatório.',
+    lead_err_server: 'Erro ao enviar. Tenta novamente.',
+    nav_help: 'Preciso de ajuda',
+    lcat_jur: '⚖️ Jurídico / Imigração', lcat_hab: '🏠 Habitação / Arrendamento',
+    lcat_trab: '💼 Emprego / Trabalho', lcat_banc: '🏦 Banco / Finanças',
+    lcat_doc: '📋 Documentação / NIF / NISS', lcat_sau: '🏥 Saúde / Seguro',
+    lcat_edu: '🎓 Educação / Escola', lcat_out: '💬 Outro',
   },
   en: {
     nav_cta: 'Try for free', hero_badge: 'Available now — try it free',
@@ -970,6 +1116,32 @@ const T = {
     docs_more: '+ 6 more documents →',
     docs_cta: 'Access documents for free',
     docs_note: '2 free documents · no account · no card',
+    // Lead modal
+    lead_modal_title: 'I need help',
+    lead_modal_desc: 'Describe your request and we will get in touch to guide you.',
+    lead_email_label: 'Your email *',
+    lead_cat_label: 'Type of help *',
+    lead_cat_ph: 'Select a category',
+    lead_loc_label: 'City in Portugal *',
+    lead_desc_label: 'Describe your request *',
+    lead_urg_label: 'Urgency',
+    lead_urg_baixa: 'Low', lead_urg_media: 'Medium', lead_urg_alta: 'High',
+    lead_consent: 'I accept the <a href="/privacidade.html" target="_blank">Privacy Policy</a> and the processing of my data to receive guidance.',
+    lead_submit: 'Send request',
+    lead_note: 'No spam. We reply within 48 hours.',
+    lead_success_title: 'Request received!',
+    lead_success_desc: 'We received your request and will be in touch shortly to help you.',
+    lead_err_email: 'Invalid email.',
+    lead_err_cat: 'Please select a category.',
+    lead_err_loc: 'Please enter your city.',
+    lead_err_desc: 'Please describe your request (minimum 10 characters).',
+    lead_err_consent: 'Consent is required.',
+    lead_err_server: 'Error sending. Please try again.',
+    nav_help: 'I need help',
+    lcat_jur: '⚖️ Legal / Immigration', lcat_hab: '🏠 Housing / Rental',
+    lcat_trab: '💼 Employment / Work', lcat_banc: '🏦 Banking / Finance',
+    lcat_doc: '📋 Documentation / NIF / NISS', lcat_sau: '🏥 Health / Insurance',
+    lcat_edu: '🎓 Education / School', lcat_out: '💬 Other',
   },
   es: {
     nav_cta: 'Probar gratis', hero_badge: 'Disponible ahora — pruébalo gratis',
@@ -1040,6 +1212,32 @@ const T = {
     docs_more: '+ 6 documentos más →',
     docs_cta: 'Acceder a los documentos gratis',
     docs_note: '2 documentos gratuitos · sin cuenta · sin tarjeta',
+    // Modal leads
+    lead_modal_title: 'Necesito ayuda',
+    lead_modal_desc: 'Describe tu solicitud y nos pondremos en contacto para orientarte.',
+    lead_email_label: 'Tu email *',
+    lead_cat_label: 'Tipo de ayuda *',
+    lead_cat_ph: 'Selecciona una categoría',
+    lead_loc_label: 'Ciudad en Portugal *',
+    lead_desc_label: 'Describe tu solicitud *',
+    lead_urg_label: 'Urgencia',
+    lead_urg_baixa: 'Baja', lead_urg_media: 'Media', lead_urg_alta: 'Alta',
+    lead_consent: 'Acepto la <a href="/privacidade.html" target="_blank">Política de Privacidad</a> y el tratamiento de mis datos para recibir orientación.',
+    lead_submit: 'Enviar solicitud',
+    lead_note: 'Sin spam. Respondemos en menos de 48 horas.',
+    lead_success_title: '¡Solicitud recibida!',
+    lead_success_desc: 'Recibimos tu solicitud y nos pondremos en contacto pronto para ayudarte.',
+    lead_err_email: 'Email inválido.',
+    lead_err_cat: 'Selecciona una categoría.',
+    lead_err_loc: 'Indica tu ciudad.',
+    lead_err_desc: 'Describe tu solicitud (mínimo 10 caracteres).',
+    lead_err_consent: 'El consentimiento es obligatorio.',
+    lead_err_server: 'Error al enviar. Inténtalo de nuevo.',
+    nav_help: 'Necesito ayuda',
+    lcat_jur: '⚖️ Jurídico / Inmigración', lcat_hab: '🏠 Vivienda / Alquiler',
+    lcat_trab: '💼 Empleo / Trabajo', lcat_banc: '🏦 Banco / Finanzas',
+    lcat_doc: '📋 Documentación / NIF / NISS', lcat_sau: '🏥 Salud / Seguro',
+    lcat_edu: '🎓 Educación / Escuela', lcat_out: '💬 Otro',
   }
 };
 
@@ -1198,6 +1396,8 @@ function setLang(lang) {
   const chatMessages = document.getElementById('chatMessages');
   chatMessages.innerHTML = '';
   addMessage(t.welcome, 'bot');
+  // Actualizar modal de leads
+  updateLeadModalLang(t);
 }
 
 function renderFAQButtons(questions) {
@@ -1465,6 +1665,129 @@ async function carregarStats() {
     const elUsers = document.getElementById('stat-users');
     if (elUsers) elUsers.textContent = BASE_USERS + '+';
   }
+}
+
+// ── MODAL LEADS ──────────────────────────────────────────────────────────
+let leadUrgencia = 'media'; // default
+
+function openLeadModal() {
+  document.getElementById('leadForm').style.display = 'block';
+  document.getElementById('leadSuccess').style.display = 'none';
+  document.getElementById('leadError').style.display = 'none';
+  document.getElementById('leadModal').classList.add('open');
+  selectUrgencia('media');
+}
+function closeLeadModal() {
+  document.getElementById('leadModal').classList.remove('open');
+}
+document.getElementById('leadModal').addEventListener('click', function(e) {
+  if (e.target === this) closeLeadModal();
+});
+
+function selectUrgencia(val) {
+  leadUrgencia = val;
+  ['baixa','media','alta'].forEach(u => {
+    const btn = document.getElementById('urg-' + u);
+    if (!btn) return;
+    btn.className = 'lead-urgencia-btn';
+    if (u === val) btn.classList.add('selected-' + u);
+  });
+}
+
+async function submitLead() {
+  const t = T[currentLang];
+  const errEl = document.getElementById('leadError');
+  const btn = document.getElementById('leadSubmitBtn');
+  errEl.style.display = 'none';
+
+  const email      = document.getElementById('leadEmail').value.trim();
+  const categoria  = document.getElementById('leadCategoria').value;
+  const localizacao = document.getElementById('leadLocalizacao').value.trim();
+  const descricao  = document.getElementById('leadDescricao').value.trim();
+  const consent    = document.getElementById('leadConsent').checked;
+  const hp         = document.getElementById('leadHpWebsite').value; // honeypot
+
+  // Validação no frontend
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+    errEl.textContent = t.lead_err_email; errEl.style.display = 'block'; return;
+  }
+  if (!categoria) {
+    errEl.textContent = t.lead_err_cat; errEl.style.display = 'block'; return;
+  }
+  if (!localizacao) {
+    errEl.textContent = t.lead_err_loc; errEl.style.display = 'block'; return;
+  }
+  if (!descricao || descricao.length < 10) {
+    errEl.textContent = t.lead_err_desc; errEl.style.display = 'block'; return;
+  }
+  if (!consent) {
+    errEl.textContent = t.lead_err_consent; errEl.style.display = 'block'; return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = '...';
+
+  try {
+    const res = await fetch('/api/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email, categoria, localizacao, descricao,
+        urgencia: leadUrgencia, lang: currentLang,
+        consent: true,
+        website: hp, // honeypot field
+      }),
+    });
+    const data = await res.json();
+    if (data.success) {
+      document.getElementById('leadForm').style.display = 'none';
+      document.getElementById('leadSuccess').style.display = 'block';
+      setTimeout(() => closeLeadModal(), 4000);
+    } else {
+      errEl.textContent = data.error || t.lead_err_server;
+      errEl.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = t.lead_submit;
+    }
+  } catch(e) {
+    errEl.textContent = t.lead_err_server;
+    errEl.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = t.lead_submit;
+  }
+}
+
+// Actualizar textos do modal de leads ao mudar idioma
+function updateLeadModalLang(t) {
+  const s = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val; };
+  const sh = (id, val) => { const el = document.getElementById(id); if(el) el.innerHTML = val; };
+  s('lead-modal-title', t.lead_modal_title);
+  s('lead-modal-desc', t.lead_modal_desc);
+  s('lead-email-label', t.lead_email_label);
+  s('lead-cat-label', t.lead_cat_label);
+  const catPh = document.getElementById('lead-cat-placeholder');
+  if (catPh) catPh.textContent = t.lead_cat_ph;
+  s('lcat-jur', t.lcat_jur); s('lcat-hab', t.lcat_hab);
+  s('lcat-trab', t.lcat_trab); s('lcat-banc', t.lcat_banc);
+  s('lcat-doc', t.lcat_doc); s('lcat-sau', t.lcat_sau);
+  s('lcat-edu', t.lcat_edu); s('lcat-out', t.lcat_out);
+  s('lead-loc-label', t.lead_loc_label);
+  s('lead-desc-label', t.lead_desc_label);
+  s('lead-urg-label', t.lead_urg_label);
+  s('urg-baixa-txt', t.lead_urg_baixa);
+  s('urg-media-txt', t.lead_urg_media);
+  s('urg-alta-txt', t.lead_urg_alta);
+  sh('lead-consent-label', t.lead_consent);
+  const submitBtn = document.getElementById('leadSubmitBtn');
+  if (submitBtn && !submitBtn.disabled) submitBtn.textContent = t.lead_submit;
+  s('lead-modal-note', t.lead_note);
+  s('lead-success-title', t.lead_success_title);
+  s('lead-success-desc', t.lead_success_desc);
+  // Nav
+  const navHelp = document.getElementById('nav-help-txt');
+  if (navHelp) navHelp.textContent = t.nav_help;
+  const mmHelp = document.getElementById('mm-help-txt');
+  if (mmHelp) mmHelp.textContent = t.nav_help;
 }
 
 // INIT
