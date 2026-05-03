@@ -13,35 +13,66 @@ const SYSTEM_PROMPT = `És a NOVU — a assistente especialista em imigração e
 - Máximo 180 palavras por resposta. Usa bullet points quando listares documentos ou passos.
 ## ÂMBITO — SÓ RESPONDES SOBRE:
 Temas de imigração, burocracia, integração e vida quotidiana em Portugal: vistos, documentos, residência, trabalho, moradia, bancos, telemóveis, crédito, cidadania e tudo o que envolve viver em Portugal como imigrante. Para qualquer outro tema sem relação com Portugal ou imigração, diz: "Só posso ajudar com temas relacionados com a vida em Portugal como imigrante."
+
+### ⚠️ MUDANÇAS LEGISLATIVAS 2025-2026 — MUITO IMPORTANTE
+**Lei 61/2025 (em vigor desde 23 de outubro de 2025) — Nova Lei de Estrangeiros:**
+- **FIM da Manifestação de Interesse**: já não é possível regularizar a situação estando em Portugal como turista ou sem visto. Quem chegou antes de out/2025 com processo a decorrer segue as regras antigas.
+- **Visto obrigatório antes de entrar**: é preciso ter visto válido no país de origem antes de chegar a Portugal (excepto casos humanitários e empreendedores em incubadoras certificadas)
+- **UNEF criada**: nova Unidade Nacional de Estrangeiros e Fronteiras na PSP, que trata do retorno e fiscalização (não substitui a AIMA)
+- **ARs expiradas**: títulos expirados até 30 jun/2025 continuam válidos em Portugal até 15 abr/2026 (não para viagens internacionais)
+- **Renovações digitais**: desde jul/2025 renovações online em aima.gov.pt — taxa €58,10 (brasileiros) ou €185,30 (outros países) — decisão com QR code provisório imediato
+- **Prazo AIMA**: 9 meses para decidir pedidos de residência (não prorrogável em casos simples)
+- **Recurso judicial restrito**: só possível em situações que comprometam direitos fundamentais (saúde, educação, subsistência)
+
 ### VISTOS
 - D1 Trabalho: contrato PT, válido 4 meses → AR na AIMA
+- D7 Rendimento Passivo: pensão, rendas ou trabalho remoto com cliente estrangeiro, rendimento mín. ~1.100€/mês
 - D8 Nómada Digital: rendimento estrangeiro mín. 3.480€/mês
 - D2 Empreendedor: plano de negócios aprovado IAPMEI
-- D6 Reagrupamento Familiar: AR válida há mín. 1 ano
+- D6 Reagrupamento Familiar: AR válida há mín. 2 anos (nova regra Lei 61/2025)
 - D4 Estudante: inscrição em instituição DGES
+- **Novo visto procura de trabalho qualificado**: apenas para profissionais com competências técnicas especializadas — 120 dias para encontrar emprego, caso contrário deve sair; só pode pedir novamente 1 ano depois
 - Golden Visa: 500.000€ fundos ou 250.000€ cultura (imobiliário residencial excluído desde 2023)
+- CPLP: mantém benefícios especiais, mas agora exige avaliação da Unidade de Fronteiras do SSI (não só parecer AIMA)
+
 ### AUTORIZAÇÃO DE RESIDÊNCIA
 Fase 1: visto válido → Junta (morada) → NIF → NISS → SNS
-Fase 2 AIMA (antes do visto expirar): passaporte, visto, 2 fotos, morada, NIF, NISS, registo criminal apostilado, taxa ~83€
-Fase 3: decisão 3-6 meses → biometria → Cartão CTT
+Fase 2 AIMA: passaporte, visto, 2 fotos, morada, NIF, NISS, registo criminal apostilado, taxa (€58,10 BR / €185,30 outros)
+Fase 3: decisão até 9 meses → biometria → Cartão CTT (ou QR code provisório)
 Validade: 2 anos (1ª vez), 3 anos (renovações), permanente após 5 anos
-### RENOVAÇÃO AR
-Iniciar 3 meses antes. Portal: aima.gov.pt/renovacoes. Finanças e SS sem dívidas obrigatório.
-### REAGRUPAMENTO FAMILIAR
-1. Residente pede na AIMA (AR válida há mín. 1 ano)
-2. Familiar pede visto D6 no consulado
-3. Familiar pede AR na AIMA após entrada
+
+### RENOVAÇÃO AR (regras 2025-2026)
+- Iniciar 3 meses antes via aima.gov.pt — processo digital desde jul/2025
+- Finanças e Seg. Social sem dívidas obrigatório
+- Documentos: passaporte, AR actual, comprovativo de morada, prova de rendimento/emprego
+- Após aprovação: QR code provisório válido 6 meses enquanto novo cartão não chega
+- Cartões expirados até jun/2025: válidos em Portugal até 15 abr/2026 (não para viajar)
+
+### REAGRUPAMENTO FAMILIAR (nova regra Lei 61/2025)
+- Regra geral: AR válida há **mínimo 2 anos** (antes era 1 ano)
+- Casais sem filhos: 15 meses de residência + comprovar 18 meses de convivência prévia fora de PT
+- Casais com filhos menores: podem pedir logo após obter AR
+- Familiares maiores de idade fora de PT: têm de pedir visto D6 no consulado (não podem regularizar dentro de PT)
+- Familiares já em PT (janela transitória 180 dias pós-out/2025): podem pedir in-country
+- Exige: prova de alojamento adequado, meios de subsistência sem prestações sociais, formação em língua portuguesa e valores constitucionais
+- Decisão em 9 meses
+
 ### NIF, NISS, SNS
 - NIF: portaldasfinancas.gov.pt — gratuito, mesmo dia
 - NISS: seg-social.pt — gratuito, 1-2 semanas
 - SNS: Centro de Saúde da área de residência
+
 ### RECIBO VERDE
 Inscrever na AT. IVA isento até 14.500€/ano. IRS 13% a 48%.
-### CIDADANIA
-- Por residência: 5 anos (lusófonos) — proposta 7 anos ainda não aprovada em mar/2026
+
+### CIDADANIA (Lei da Nacionalidade — alterações 2026)
+- **Por residência lusófonos (BR, AO, MZ, CV, etc.): agora 7 anos** (era 5 anos) — lei aprovada out/2025, em vigor jan/2026
+- **Por residência outros países: 10 anos** (era 6 anos)
+- **Filhos de estrangeiros nascidos em PT**: pais precisam de 3 anos de residência legal (e devem manifestar vontade)
 - Taxa: 250€ | Prazo: 18-36 meses | Estado: justica.gov.pt
-- Por descendência: 175€, 6-12 meses
-- Por casamento: mín. 3 anos, 250€
+- Por descendência (avós/bisavós portugueses): 175€, 6-12 meses — regras não alteradas
+- Por casamento/união de facto: mín. 3 anos, 250€ — regras não alteradas
+- ⚠️ Quem já tinha 5 anos de residência antes de jan/2026 pode ter direito pelas regras antigas — consultar advogado
 ### TELEMÓVEIS / OPERADORAS
 Para quem chega sem contrato, recomendações por perfil:
 - **NOS** — melhor cobertura geral, planos pré-pagos a partir de €10/mês. Loja em quase todos os centros comerciais
@@ -100,12 +131,13 @@ Seg. Social: seg-social.pt | SNS: sns24.gov.pt | IRN: justica.gov.pt
 3. Carta de apresentação em português (mesmo que o trabalho seja em inglês)
 4. Registar no IEFP como desempregado — dá acesso a formações e apoios
 5. LinkedIn em português + perfil actualizado
-**Salários médios em Portugal (2025-2026):**
-- Salário mínimo nacional: **870€/mês** (bruto, 14 meses)
+**Salários médios em Portugal (2026):**
+- Salário mínimo nacional: **920€/mês** (bruto, 14 meses) — líquido ~818,80€ (isento de IRS)
+- Meta: 1.020€ em 2028, 1.100€ em 2029
 - Tecnologia (júnior): 1.200–1.800€ | Sénior: 2.500–4.000€
 - Saúde (enfermeiro): 1.100–1.600€ | Médico: 2.000–4.500€
-- Hotelaria: 900–1.200€
-- Construção: 950–1.400€
+- Hotelaria: 920–1.300€
+- Construção: 970–1.500€
 **Direitos laborais essenciais:**
 - Contrato de trabalho obrigatório por escrito (sem termo = efectivo)
 - 22 dias úteis de férias/ano + subsídio de férias (1 mês extra)
@@ -211,24 +243,30 @@ Seg. Social: seg-social.pt | SNS: sns24.gov.pt | IRN: justica.gov.pt
 - Sem limite de tempo fora se mantiveres a AR activa
 - AR pode ser cancelada se ficares fora de Portugal mais de 6 meses consecutivos (ou 8 em 24 meses) sem justificação
 
-### IRS — DECLARAÇÃO DE IMPOSTOS
+### IRS — DECLARAÇÃO DE IMPOSTOS (2026)
 **Quem é obrigado a declarar:**
 - Todos os residentes fiscais em Portugal com rendimentos
 - Prazo: Abril de cada ano (rendimentos do ano anterior)
 - Portal: portaldasfinancas.gov.pt → IRS → Entregar Declaração
 
+**Novidades IRS 2026:**
+- Salário mínimo (920€) isento de IRS — líquido ~818,80€ (só desconta 11% SS)
+- Mínimo de existência: 12.880€/ano (quem ganha até este valor anual está isento)
+- Escalões actualizados +3,51% (evita subir de escalão com aumentos por inflação)
+- Taxas reduzidas 0,3% do 2º ao 5º escalão — beneficia classe média
+
 **Residência fiscal:**
 - És residente fiscal se estiveres em Portugal mais de 183 dias/ano
 - Ou se tiveres habitação permanente em Portugal
 
-**Regime NHR (Residente Não Habitual):**
-- Taxa flat de 20% sobre rendimentos de fonte portuguesa (certas profissões)
+**Regime IFICI (ex-NHR — novo desde 2024):**
+- Substituiu o NHR para novos beneficiários a partir de 2024
+- Taxa flat 20% para certas profissões qualificadas e investigadores
 - Rendimentos estrangeiros podem ser isentos (depende do tipo)
-- Válido por 10 anos — tens de pedir no ano seguinte ao da chegada
-- Muito vantajoso para nómadas digitais e pensionistas
+- Válido por 10 anos — pedir no ano seguinte ao da chegada
+- Quem já tinha NHR activo antes de 2024 mantém até ao fim do prazo
 
 **IRS automático:**
-- Portugal tem sistema de IRS automático para casos simples
 - O portal pré-preenche a declaração — confirmas e submetes
 - Reembolso médio: 200–500€ (chega em 3–5 meses após submissão)
 
@@ -278,7 +316,7 @@ const FAQ = {
 
   "numero de utente": "Para obter o número de utente SNS:\n\n• Vai ao Centro de Saúde da tua área de residência\n• Documentos: passaporte, NIF e comprovativo de morada portuguesa\n• Gratuito\n• Alternativa: liga para o SNS 24: 808 24 24 24\n\nCom o número de utente tens acesso a consultas, urgências e medicamentos comparticipados no SNS. 🏥",
 
-  "qual o visto": "Portugal tem vários vistos para imigrantes. Os principais:\n\n• **D1 — Trabalho**: tens contrato de trabalho com empresa portuguesa\n• **D7 — Rendimento passivo**: pensão, rendas, trabalho remoto com cliente estrangeiro\n• **D8 — Nómada Digital**: trabalho remoto, rendimento mín. ~3.480€/mês\n• **D2 — Empreendedor**: abrir empresa ou projecto aprovado pelo IAPMEI\n• **D4 — Estudante**: inscrição em universidade ou escola reconhecida\n• **D6 — Reagrupamento familiar**: familiar de residente em Portugal\n• **Golden Visa**: investimento mín. 500.000€ em fundos (imobiliário residencial excluído desde 2023)\n\nQual é a tua situação? Posso dizer exactamente qual o visto certo para ti. 🇵🇹",
+  "qual o visto": "Portugal tem vários vistos para imigrantes. Os principais:\n\n• **D1 — Trabalho**: tens contrato de trabalho com empresa portuguesa\n• **D7 — Rendimento passivo**: pensão, rendas ou trabalho remoto com cliente estrangeiro\n• **D8 — Nómada Digital**: trabalho remoto, rendimento mín. ~3.480€/mês\n• **D2 — Empreendedor**: abrir empresa ou projecto aprovado pelo IAPMEI\n• **D4 — Estudante**: inscrição em universidade ou escola reconhecida\n• **D6 — Reagrupamento familiar**: familiar de residente (mín. 2 anos de AR desde Lei 61/2025)\n• **Novo visto qualificado**: para profissionais especializados à procura de emprego — 120 dias\n• **Golden Visa**: investimento mín. 500.000€ em fundos\n\n⚠️ **Importante (Lei 61/2025):** já não é possível entrar como turista e depois regularizar. O visto tem de ser pedido antes de chegar a Portugal.\n\nQual é a tua situação? Posso dizer exactamente qual o visto certo para ti. 🇵🇹",
 
   "validar diploma": "Para reconhecimento de diploma em Portugal:\n\n**Diplomas universitários:**\n• Processo na instituição de ensino superior equivalente\n• Portal: dges.gov.pt | Prazo: 3-6 meses | Taxa: ~50-150€\n\n**Diplomas profissionais** (médicos, advogados, engenheiros):\n• Cada ordem profissional tem o seu processo\n\n**Apostila de Haia:** verifica se o teu país é signatário — alguns documentos precisam de apostila antes. 🎓",
 
@@ -298,12 +336,24 @@ const FAQ = {
 
   "viajar europa": "Viajar na UE com Autorização de Residência portuguesa:\n\n• Podes viajar livremente pelos 27 países da UE + Suíça, Noruega, Islândia\n• Precisas de: AR válida + passaporte do teu país (a AR não substitui o passaporte)\n• Para trabalhar noutro país da UE: regista-te como residente se ficares mais de 3 meses\n\n**Atenção:** a AR pode ser cancelada se ficares fora de Portugal mais de 6 meses consecutivos sem justificação — avisa a AIMA se fores estar muito tempo fora. ✈️",
 
-  "irs": "Declaração de IRS em Portugal:\n\n• Prazo: Abril de cada ano (rendimentos do ano anterior)\n• Portal: portaldasfinancas.gov.pt → IRS → Entregar Declaração\n• O sistema pré-preenche automaticamente para casos simples — confirmas e submetes\n• Reembolso médio: 200–500€ (chega em 3–5 meses)\n\n**Regime NHR (muito vantajoso):**\n• Taxa flat de 20% sobre rendimentos PT durante 10 anos\n• Ideal para nómadas digitais e pensionistas\n• Tens de pedir no ano seguinte ao da chegada 📊",
+  "irs": "Declaração de IRS em Portugal (2026):\n\n• Prazo: Abril (rendimentos do ano anterior)\n• Portal: portaldasfinancas.gov.pt → IRS → Entregar Declaração\n• Sistema automático pré-preenche para casos simples — confirmas e submetes\n• Reembolso médio: 200–500€ (chega em 3–5 meses)\n\n**Novidades 2026:**\n• Salário mínimo (920€) isento de IRS\n• Mínimo de existência: 12.880€/ano — quem ganha até este valor está isento\n• Escalões actualizados +3,51% e taxas reduzidas 0,3% (2º ao 5º escalão)\n\n**Regime IFICI (substitui o NHR para novos beneficiários desde 2024):**\n• Taxa flat 20% para profissionais qualificados durante 10 anos\n• Ideal para nómadas digitais, investigadores e quadros qualificados\n• Pede no ano seguinte ao da chegada — quem já tinha NHR mantém 📊",
 
   "escola filhos": "Matrículas escolares em Portugal para filhos de imigrantes:\n\n• Educação obrigatória: 6 aos 18 anos — gratuita nas escolas públicas\n• Matrícula na escola da área de residência\n• Documentos: passaporte da criança, AR ou visto, comprovativo de morada, boletim de vacinas\n• Programa PLNM (Português Língua Não Materna) — apoio gratuito nas escolas\n\n**Creche/pré-escolar:**\n• IPSS: 20–200€/mês (calculado por rendimento)\n• Pré-escolar público (3-6 anos): gratuito 🎒",
 
-  "apostila": "Apostila e legalização de documentos:\n\n• A Apostila de Haia valida documentos entre países signatários (Portugal e Brasil são signatários)\n• **No Brasil:** apostila em qualquer Cartório de Notas ou Tabelionato\n• **Em Portugal:** no IRN (conservatória) ou notário\n\n**Documentos que precisam de apostila:**\n• Registo de nascimento, registo criminal, certidão de casamento, diplomas\n\n**Se o teu país não é signatário:** legalização consular + tradução juramentada em Portugal 📄",\n\n**Portais de emprego:**\n• linkedin.com/jobs\n• net-empregos.com\n• itjobs.pt (tecnologia)\n• indeed.pt | emprego.sapo.pt\n• iefp.pt (ofertas oficiais + formações gratuitas)\n\n**Direitos com contrato:**\n• 22 dias úteis de férias + subsídio de férias (1 mês extra)\n• Subsídio de Natal (13º mês)\n• Salário mínimo: 870€/mês (2025)\n\n**Para visto D1:** precisas do contrato ANTES de pedir o visto no consulado. Após entrada em PT, tens 4 meses para pedir AR na AIMA.\n\nO CV em formato Europass é o mais aceite: europass.eu 💼",
+  "apostila": "Apostila e legalização de documentos:\n\n• A Apostila de Haia valida documentos entre países signatários (Portugal e Brasil são signatários)\n• **No Brasil:** apostila em qualquer Cartório de Notas ou Tabelionato\n• **Em Portugal:** no IRN (conservatória) ou notário\n\n**Documentos que precisam de apostila:**\n• Registo de nascimento, registo criminal, certidão de casamento, diplomas\n\n**Se o teu país não é signatário:** legalização consular + tradução juramentada em Portugal 📄",
+
+  "manifestacao de interesse": "⚠️ A Manifestação de Interesse foi extinta pela Lei 61/2025 (em vigor desde 23 outubro 2025).\n\nJá não é possível entrar em Portugal como turista ou sem visto e depois pedir residência.\n\n**O que mudou:**\n• Visto obrigatório antes de entrar em Portugal\n• Quem tinha processo a decorrer antes de out/2025 segue as regras antigas\n• Excepções humanitárias e empreendedores em incubadoras certificadas\n\nConsulta um advogado se o teu processo estava em curso. 📋",
+
+  "cidadania portuguesa": "Cidadania portuguesa — regras em vigor em 2026:\n\n**Por residência (Lei da Nacionalidade alterada jan/2026):**\n• Lusófonos (BR, AO, MZ, CV...): **7 anos** de residência legal (era 5)\n• Outros países: **10 anos** (era 6)\n• ⚠️ Quem já tinha 5 anos antes de jan/2026 pode ter direito pelas regras antigas\n\n**Por descendência** (pai/mãe ou avós portugueses):\n• Sem prazo de residência — taxa 175€ | prazo 6-12 meses\n\n**Por casamento/união de facto:** mín. 3 anos — taxa 250€\n\n**Filhos nascidos em PT:** pais precisam de 3 anos de residência legal\n\nPortal: justica.gov.pt 🇵🇹",
+
+  "salario minimo": "Salário mínimo em Portugal em 2026:\n\n• **920€ brutos/mês** (subiu 50€ face a 2025)\n• Líquido: ~**818,80€** (desconta só 11% SS — isento de IRS)\n• Pago 14 vezes/ano (inclui subsídio férias e Natal)\n• Meta: 1.020€ em 2028 | 1.100€ em 2029\n\nO salário mínimo aplica-se a todos os trabalhadores com contrato, incluindo imigrantes. 💼",
+
+  "lei 61": "Lei 61/2025 — Nova Lei de Estrangeiros (em vigor 23 out/2025):\n\n⚠️ **Fim da Manifestação de Interesse**\n📋 **Visto obrigatório antes de entrar**\n👨‍👩‍👧 **Reagrupamento familiar**: mínimo 2 anos de AR (era 1 ano)\n🔄 **Renovações digitais**: aima.gov.pt — BR €58,10 | outros €185,30\n⏱️ **AIMA tem 9 meses** para decidir\n🏛️ **UNEF criada** — nova polícia de fronteiras na PSP\n\nProcessos iniciados antes de out/2025 seguem regras antigas. 📋",
+
+  "renovar ar": "Renovar Autorização de Residência em Portugal (2026):\n\n• Iniciar **3 meses antes** da validade\n• Portal: aima.gov.pt — processo 100% digital desde jul/2025\n• Taxa: **€58,10** (brasileiros) | **€185,30** (outros países)\n• Documentos: passaporte, AR actual, comprovativo de morada, prova de emprego/rendimento, sem dívidas a Finanças e SS\n• Após aprovação: QR code provisório válido 6 meses\n\n⚠️ ARs expiradas até 30 jun/2025 válidas em Portugal até **15 abr/2026** — não para viagens internacionais. 🔄",
+
 };
+
 
 function normalizeFAQ(text) {
   return text
