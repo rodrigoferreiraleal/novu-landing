@@ -65,14 +65,39 @@ Validade: 2 anos (1ª vez), 3 anos (renovações), permanente após 5 anos
 ### RECIBO VERDE
 Inscrever na AT. IVA isento até 14.500€/ano. IRS 13% a 48%.
 
-### CIDADANIA (Lei da Nacionalidade — alterações 2026)
-- **Por residência lusófonos (BR, AO, MZ, CV, etc.): agora 7 anos** (era 5 anos) — lei aprovada out/2025, em vigor jan/2026
-- **Por residência outros países: 10 anos** (era 6 anos)
-- **Filhos de estrangeiros nascidos em PT**: pais precisam de 3 anos de residência legal (e devem manifestar vontade)
-- Taxa: 250€ | Prazo: 18-36 meses | Estado: justica.gov.pt
-- Por descendência (avós/bisavós portugueses): 175€, 6-12 meses — regras não alteradas
-- Por casamento/união de facto: mín. 3 anos, 250€ — regras não alteradas
-- ⚠️ Quem já tinha 5 anos de residência antes de jan/2026 pode ter direito pelas regras antigas — consultar advogado
+### CIDADANIA (Lei da Nacionalidade — promulgada 3 de maio de 2026)
+
+**⚠️ ATENÇÃO — dois regimes distintos:**
+
+**A) Naturalização (Art. 6.º) — via mais comum:**
+- Prazo base: **5 anos** de residência legal para todos (lusófonos e não lusófonos)
+- Lusófonos (BR, AO, MZ, CV, etc.): **dispensados de prova de conhecimento de português** (Art. 6.º n.º 10)
+- Requisitos cumulativos: maior de idade, 5 anos residência legal, português suficiente (dispensado para lusófonos), sem condenação ≥3 anos prisão, sem ameaça à segurança nacional
+- Processo: requerimento ao Ministro da Justiça | Portal: justica.gov.pt | Taxa: 250€
+
+**B) Nova lei promulgada 3 mai/2026 — aquisição por residência (via vontade):**
+- Lusófonos (BR, AO, MZ, CV...): **7 anos** (era 5 anos)
+- Outros países: **10 anos** (era 6 anos)
+- ✅ **Processos pendentes protegidos** — quem já tem processo em curso não é afectado
+- ✅ **Morosidade do Estado não penaliza** — atrasos administrativos não contam contra o requerente
+- ⚠️ Quem já completou os anos exigidos antes de 3 mai/2026 — consulta advogado
+
+**Contagem de prazos (Art. 15.º) — importante:**
+- Períodos de residência **não têm de ser contínuos** — somam-se desde que dentro de um intervalo de 15 anos
+- O tempo desde o **pedido de AR conta** para o prazo, mesmo antes da decisão, se vier a ser deferida
+
+**Outras vias:**
+- Por casamento/união de facto: mín. **3 anos** de relação com português/a — taxa 250€ (Art. 3.º)
+- Por descendência (pai/mãe ou avós/bisavós portugueses): sem prazo de residência — taxa 175€
+- Por adoção: automático ao ser adoptado por cidadão português (Art. 5.º)
+- Descendentes sefarditas: mín. **3 anos** de residência legal + prova de ligação a comunidade sefardita portuguesa (Art. 6.º n.º 7)
+- Menores nascidos em PT: se pai/mãe com 5 anos de residência (qualquer título), ou residência legal, ou menor frequentou 1 ano de escola em PT (Art. 6.º n.º 2)
+
+**Suspensão do processo (Art. 13.º):**
+- Condenação a mais de 1 ano de prisão → processo suspenso por 5 anos após trânsito em julgado
+
+**Filhos de estrangeiros nascidos em PT (Art. 1.º al. f):**
+- Nacionalidade originária se um dos pais residir legalmente em PT há ≥1 ano no momento do nascimento
 ### TELEMÓVEIS / OPERADORAS
 Para quem chega sem contrato, recomendações por perfil:
 - **NOS** — melhor cobertura geral, planos pré-pagos a partir de €10/mês. Loja em quase todos os centros comerciais
@@ -334,7 +359,7 @@ const FAQ = {
 
   "manifestacao de interesse": "⚠️ A Manifestação de Interesse foi extinta pela Lei 61/2025 (em vigor desde 23 outubro 2025).\n\nJá não é possível entrar em Portugal como turista ou sem visto e depois pedir residência.\n\n**O que mudou:**\n• Visto obrigatório antes de entrar em Portugal\n• Quem tinha processo a decorrer antes de out/2025 segue as regras antigas\n• Excepções humanitárias e empreendedores em incubadoras certificadas\n\nConsulta um advogado se o teu processo estava em curso. 📋",
 
-  "cidadania portuguesa": "Cidadania portuguesa — regras em vigor em 2026:\n\n**Por residência (Lei da Nacionalidade alterada jan/2026):**\n• Lusófonos (BR, AO, MZ, CV...): **7 anos** de residência legal (era 5)\n• Outros países: **10 anos** (era 6)\n• ⚠️ Quem já tinha 5 anos antes de jan/2026 pode ter direito pelas regras antigas\n\n**Por descendência** (pai/mãe ou avós portugueses):\n• Sem prazo de residência — taxa 175€ | prazo 6-12 meses\n\n**Por casamento/união de facto:** mín. 3 anos — taxa 250€\n\n**Filhos nascidos em PT:** pais precisam de 3 anos de residência legal\n\nPortal: justica.gov.pt 🇵🇹",
+  "cidadania portuguesa": "Cidadania portuguesa — lei promulgada 3 mai/2026:\n\n**Naturalização (via mais comum) — Art. 6.º:**\n• **5 anos** de residência legal para todos\n• Lusófonos (BR, AO, MZ, CV...): **dispensados de provar português**\n• Sem condenação ≥3 anos prisão | sem ameaça à segurança nacional\n• Períodos de residência podem ser **interpolados** (somam-se se dentro de 15 anos)\n• O tempo desde o **pedido de AR conta** para o prazo\n\n**Nova lei (aquisição por residência):**\n• Lusófonos: **7 anos** | Outros países: **10 anos**\n• ✅ Processos pendentes protegidos\n• ✅ Morosidade do Estado não penaliza\n\n**Outras vias:**\n• Casamento/união de facto com português/a: 3 anos — taxa 250€\n• Descendência (pai/mãe ou avós portugueses): sem prazo — taxa 175€\n• Adoção por português/a: automático\n• Descendentes sefarditas: 3 anos residência + prova de ligação\n• Menores nascidos em PT: pai/mãe com 5 anos residência ou menor com 1 ano de escola em PT\n\nPortal: justica.gov.pt 🇵🇹",
 
   "salario minimo": "Salário mínimo em Portugal em 2026:\n\n• **920€ brutos/mês** (subiu 50€ face a 2025)\n• Líquido: ~**818,80€** (desconta só 11% SS — isento de IRS)\n• Pago 14 vezes/ano (inclui subsídio férias e Natal)\n• Meta: 1.020€ em 2028 | 1.100€ em 2029\n\nO salário mínimo aplica-se a todos os trabalhadores com contrato, incluindo imigrantes. 💼",
 
