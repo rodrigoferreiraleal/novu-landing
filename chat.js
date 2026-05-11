@@ -19,7 +19,9 @@ Temas de imigração, burocracia, integração e vida quotidiana em Portugal: vi
 - **FIM da Manifestação de Interesse**: já não é possível regularizar a situação estando em Portugal como turista ou sem visto. Quem chegou antes de out/2025 com processo a decorrer segue as regras antigas.
 - **Visto obrigatório antes de entrar**: é preciso ter visto válido no país de origem antes de chegar a Portugal (excepto casos humanitários e empreendedores em incubadoras certificadas)
 - **UNEF criada**: nova Unidade Nacional de Estrangeiros e Fronteiras na PSP, que trata do retorno e fiscalização (não substitui a AIMA)
-- **ARs expiradas**: títulos expirados até 30 jun/2025 continuam válidos em Portugal até 15 abr/2026 (não para viagens internacionais)
+- **ARs expiradas após 30 jun/2025**: válidas por **6 meses a partir da data de vencimento** (regra geral Art. 63.º n.º 14)
+- **ARs expiradas até 30 jun/2025**: o prazo especial de 15 abr/2026 já terminou — quem ainda não renovou está irregular e deve agir urgentemente
+- **UNEF em fiscalização activa**: batidas em empresas e ruas exigindo ARs válidas — mais de 83 mil pessoas abordadas em 2025
 - **Renovações digitais**: desde jul/2025 renovações online em aima.gov.pt — taxa €58,10 (brasileiros) ou €185,30 (outros países) — decisão com QR code provisório imediato
 - **Prazo AIMA**: 9 meses para decidir pedidos de residência (não prorrogável em casos simples)
 - **Recurso judicial restrito**: só possível em situações que comprometam direitos fundamentais (saúde, educação, subsistência)
@@ -46,7 +48,10 @@ Validade: 2 anos (1ª vez), 3 anos (renovações), permanente após 5 anos
 - Finanças e Seg. Social sem dívidas obrigatório
 - Documentos: passaporte, AR actual, comprovativo de morada, prova de rendimento/emprego
 - Após aprovação: QR code provisório válido 6 meses enquanto novo cartão não chega
-- Cartões expirados até jun/2025: válidos em Portugal até 15 abr/2026 (não para viajar)
+- Cartões expirados após jun/2025: válidos **6 meses** a partir da data de vencimento
+- ⚠️ Cartões expirados até 30 jun/2025: prazo especial (15 abr/2026) já terminou — quem não renovou está irregular
+- **AIMA antecipou renovações**: quem tem AR a vencer em jul/ago 2026 já pode iniciar em portal-renovacoes.aima.gov.pt
+- **UNEF activa**: polícia de fronteiras faz fiscalização em empresas e ruas — ter sempre documento válido ou comprovativo AIMA
 
 ### REAGRUPAMENTO FAMILIAR (nova regra Lei 61/2025)
 - Regra geral: AR válida há **mínimo 2 anos** (antes era 1 ano)
@@ -365,7 +370,13 @@ const FAQ = {
 
   "lei 61": "Lei 61/2025 — Nova Lei de Estrangeiros (em vigor 23 out/2025):\n\n⚠️ **Fim da Manifestação de Interesse**\n📋 **Visto obrigatório antes de entrar**\n👨‍👩‍👧 **Reagrupamento familiar**: mínimo 2 anos de AR (era 1 ano)\n🔄 **Renovações digitais**: aima.gov.pt — BR €58,10 | outros €185,30\n⏱️ **AIMA tem 9 meses** para decidir\n🏛️ **UNEF criada** — nova polícia de fronteiras na PSP\n\nProcessos iniciados antes de out/2025 seguem regras antigas. 📋",
 
-  "renovar ar": "Renovar Autorização de Residência em Portugal (2026):\n\n• Iniciar **3 meses antes** da validade\n• Portal: aima.gov.pt — processo 100% digital desde jul/2025\n• Taxa: **€58,10** (brasileiros) | **€185,30** (outros países)\n• Documentos: passaporte, AR actual, comprovativo de morada, prova de emprego/rendimento, sem dívidas a Finanças e SS\n• Após aprovação: QR code provisório válido 6 meses\n\n⚠️ ARs expiradas até 30 jun/2025 válidas em Portugal até **15 abr/2026** — não para viagens internacionais. 🔄",
+  "renovar ar": "Renovar Autorização de Residência em Portugal (2026):\n\n• Iniciar **3 meses antes** da validade\n• Portal: portal-renovacoes.aima.gov.pt — processo digital\n• Taxa: **€58,10** (brasileiros) | **€185,30** (outros países)\n• Documentos: passaporte, AR actual, comprovativo de morada, prova de emprego/rendimento, sem dívidas a Finanças e SS\n• Após aprovação: QR code provisório válido enquanto aguardas o cartão\n\n**Situação dos cartões expirados:**\n• Expirados **após** 30 jun/2025: válidos por 6 meses a partir da data de vencimento\n• Expirados **até** 30 jun/2025: prazo especial já terminou (15 abr/2026) — se não renovaste, estás irregular, age agora\n\n**🆕 AIMA antecipou:** quem tem AR a vencer em jul/ago 2026 já pode renovar agora em portal-renovacoes.aima.gov.pt\n\n⚠️ **UNEF activa:** polícia faz fiscalização em empresas e ruas — tem sempre documento válido ou comprovativo AIMA contigo. 🔄",
+
+  "unef": "A UNEF (Unidade Nacional de Estrangeiros e Fronteiras) é a polícia de fronteiras criada pela Lei 61/2025.\n\n⚠️ **Está em fiscalização activa:**\n• Batidas em empresas e ruas exigindo documentos válidos\n• Mais de 83 mil pessoas abordadas em 2025\n• Pede AR válida, comprovativo AIMA ou QR code de renovação\n\n**O que tens de ter sempre contigo:**\n• AR válida (dentro do prazo), ou\n• Comprovativo digital da AIMA (portal-renovacoes.aima.gov.pt), ou\n• QR code provisório emitido após aprovação da renovação\n\nSe fores abordado sem documentos: descarrega o comprovante no portal antes de sair. 🪪",
+
+  "curso profissionalizante": "⚠️ **Nova restrição proposta (7 mai/2026 — ainda não em vigor):**\n\nO Governo aprovou proposta de lei que exige **visto consular prévio** para quem quiser entrar como turista e depois matricular-se em cursos profissionalizantes para pedir AR.\n\n**O que muda quando entrar em vigor:**\n• Já não será possível entrar como turista → matricular → pedir AR\n• Terás de pedir o visto no consulado português do teu país antes de vir\n\n**Por agora:** a regra actual ainda permite a matrícula com visto de turista enquanto a proposta não for aprovada na Assembleia da República.\n\nSe planeias vir estudar em curso profissionalizante, age antes desta lei entrar em vigor. 📋",
+
+  "comprovativo aima": "O comprovativo digital da AIMA prova a tua situação migratória enquanto aguardas o cartão.\n\n**Onde obter:** portal-renovacoes.aima.gov.pt após submeter pedido\n• Tem QR code verificável em tempo real\n• Mostra: identificação, fase do processo, data do pedido\n\n**Para que serve:**\n• Mostrar à UNEF em fiscalizações\n• Serviços públicos (atenção: SNS e Seg. Social por vezes não aceitam)\n• Bancos (alguns aceitam, outros não)\n\n⚠️ Não substitui o cartão de residência — é temporário. Se entidades recusarem, contacta a AIMA ou um advogado. 📄",
 
 };
 
@@ -390,6 +401,20 @@ function checkFAQ(userMessage) {
   return null;
 }
 // ─────────────────────────────────────────────────────────────────────────────
+
+// ── TÓPICOS QUE ACTIVAM SUGESTÃO DE AJUDA PERSONALIZADA ─────────────
+const LEAD_TRIGGER_TOPICS = [
+  'renovar', 'renovação', 'ar expirada', 'ar vencida', 'cartão expirou',
+  'cartão venceu', 'não consigo renovar', 'erro no portal', 'portal aima',
+  'unef', 'fiscalização', 'irregular', 'situação irregular',
+  'manifestação de interesse', 'reagrupamento', 'visto recusado',
+  'indeferido', 'processo parado', 'aima demora', 'aima não responde'
+];
+
+function checkLeadTrigger(message) {
+  const msg = (message || '').toLowerCase();
+  return LEAD_TRIGGER_TOPICS.some(t => msg.includes(t));
+}
 
 const rateLimitMap = new Map();
 
@@ -455,9 +480,10 @@ module.exports = async function handler(req, res) {
   // ── FAQ CACHE ─────────────────────────────────────────────────────────────
   const lastUserMessage = messages?.[messages.length - 1]?.content || "";
   const faqAnswer = checkFAQ(lastUserMessage);
+  const suggestHelp = checkLeadTrigger(lastUserMessage);
   if (faqAnswer) {
     console.log("FAQ cache hit:", lastUserMessage);
-    return res.status(200).json({ reply: faqAnswer, fromCache: true });
+    return res.status(200).json({ reply: faqAnswer, fromCache: true, suggestHelp });
   }
 
   // ── API ANTHROPIC ─────────────────────────────────────────────────────────
@@ -485,7 +511,7 @@ module.exports = async function handler(req, res) {
 
     const data = await response.json();
     const reply = data.content?.[0]?.text || "Não consegui obter uma resposta. Tenta novamente.";
-    return res.status(200).json({ reply });
+    return res.status(200).json({ reply, suggestHelp });
   } catch (err) {
     console.error("Handler error:", err);
     return res.status(500).json({ error: "Erro interno. Tenta novamente." });
