@@ -351,8 +351,34 @@ gtag('config', 'G-ZJLBVGPQT5');
   /* Campo honeypot — invisível */
   .lead-hp { position: absolute; left: -9999px; opacity: 0; pointer-events: none; tabindex: -1; }
 
-  /* TYPING */
-  .typing { display: flex; gap: 4px; align-items: center; padding: 10px 14px; }
+  /* CARD SUGESTÃO DE AJUDA NO CHAT */
+.help-suggestion-card {
+  background: linear-gradient(135deg, #FFFBEB, #FFF7ED);
+  border: 1.5px solid #F59E0B;
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin: 8px 0 4px;
+  max-width: 88%;
+}
+.help-suggestion-card p {
+  font-size: 0.82rem;
+  color: #92400E;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+.help-suggestion-btn {
+  background: linear-gradient(135deg, #F59E0B, #EF7C00);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 7px 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.help-suggestion-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(245,158,11,0.35); }
   .typing span { width: 6px; height: 6px; background: var(--gray-400); border-radius: 50%; animation: bounce 1.2s infinite; }
   .typing span:nth-child(2) { animation-delay: 0.2s; }
   .typing span:nth-child(3) { animation-delay: 0.4s; }
@@ -1206,6 +1232,8 @@ const T = {
     lead_err_consent: 'Consentimento obrigatório.',
     lead_err_server: 'Erro ao enviar. Tenta novamente.',
     nav_help: 'Ajuda',
+    help_suggest_text: 'O teu caso parece complexo. Queres ajuda personalizada? Respondemos em 48h.',
+    help_suggest_btn: '📩 Pedir ajuda directa',
     lcat_jur: '⚖️ Jurídico / Imigração', lcat_hab: '🏠 Habitação / Arrendamento',
     lcat_trab: '💼 Emprego / Trabalho', lcat_banc: '🏦 Banco / Finanças',
     lcat_doc: '📋 Documentação / NIF / NISS', lcat_sau: '🏥 Saúde / Seguro',
@@ -1304,6 +1332,8 @@ const T = {
     lead_err_consent: 'Consent is required.',
     lead_err_server: 'Error sending. Please try again.',
     nav_help: 'Help',
+    help_suggest_text: 'Your case seems complex. Would you like personalised help? We reply within 48h.',
+    help_suggest_btn: '📩 Request direct help',
     lcat_jur: '⚖️ Legal / Immigration', lcat_hab: '🏠 Housing / Rental',
     lcat_trab: '💼 Employment / Work', lcat_banc: '🏦 Banking / Finance',
     lcat_doc: '📋 Documentation / NIF / NISS', lcat_sau: '🏥 Health / Insurance',
@@ -1402,6 +1432,8 @@ const T = {
     lead_err_consent: 'El consentimiento es obligatorio.',
     lead_err_server: 'Error al enviar. Inténtalo de nuevo.',
     nav_help: 'Ayuda',
+    help_suggest_text: 'Tu caso parece complejo. ¿Quieres ayuda personalizada? Respondemos en 48h.',
+    help_suggest_btn: '📩 Pedir ayuda directa',
     lcat_jur: '⚖️ Jurídico / Inmigración', lcat_hab: '🏠 Vivienda / Alquiler',
     lcat_trab: '💼 Empleo / Trabajo', lcat_banc: '🏦 Banco / Finanzas',
     lcat_doc: '📋 Documentación / NIF / NISS', lcat_sau: '🏥 Salud / Seguro',
@@ -1618,6 +1650,8 @@ async function callClaude(userMessage) {
   const data = await response.json();
   const reply = data.reply || 'Erro na resposta.';
   conversationHistory.push({ role: 'assistant', content: reply });
+  // Guardar flag suggestHelp para usar no handleUserMessage
+  window._lastSuggestHelp = data.suggestHelp || false;
   return reply;
 }
 
@@ -1643,6 +1677,11 @@ async function handleUserMessage(text) {
     const reply = await callClaude(text);
     removeTyping();
     addMessage(reply, 'bot');
+    // Sugerir ajuda personalizada em tópicos críticos
+    if (window._lastSuggestHelp) {
+      setTimeout(() => addHelpSuggestion(), 600);
+      window._lastSuggestHelp = false;
+    }
     if (!isUnlocked) {
       questionsUsed++;
       setCookie('novu_questions', questionsUsed, 24);
@@ -1958,6 +1997,19 @@ function updateLeadModalLang(t) {
   if (navHelp) navHelp.textContent = t.nav_help;
   const mmHelp = document.getElementById('mm-help-txt');
   if (mmHelp) mmHelp.textContent = t.nav_help;
+}
+
+function addHelpSuggestion() {
+  const t = T[currentLang];
+  const chatMessages = document.getElementById('chatMessages');
+  const card = document.createElement('div');
+  card.className = 'help-suggestion-card';
+  card.innerHTML = `
+    <p>🙋 ${t.help_suggest_text || 'O teu caso parece complexo. Queres ajuda personalizada? Respondemos em 48h.'}</p>
+    <button class="help-suggestion-btn" onclick="openLeadModal()">${t.help_suggest_btn || '📩 Pedir ajuda directa'}</button>
+  `;
+  chatMessages.appendChild(card);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
 // INIT
