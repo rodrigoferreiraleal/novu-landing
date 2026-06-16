@@ -27,9 +27,9 @@ Temas de imigração, burocracia, integração e vida quotidiana em Portugal: vi
 - **Recurso judicial restrito**: só possível em situações que comprometam direitos fundamentais (saúde, educação, subsistência)
 
 ### VISTOS
-- D1 Trabalho: contrato PT, válido 4 meses → AR na AIMA
-- D7 Rendimento Passivo: pensão, rendas ou trabalho remoto com cliente estrangeiro, rendimento mín. ~1.100€/mês
-- D8 Nómada Digital: rendimento estrangeiro mín. 3.480€/mês
+- D1 Trabalho: contrato OU promessa de contrato de trabalho subordinado (duração mín. 12 meses, remuneração ≥ salário mínimo 920€/mês); pedido no consulado do país de origem; visto válido 4 meses → AR na AIMA. O empregador pode ter de comprovar divulgação da vaga no IEFP.
+- D7 Rendimento Passivo: pensão, rendas, dividendos (renda passiva), mín. = salário mínimo (920€/mês) + ~50% por cônjuge e ~30% por filho; exige depósito ~11.040€ (12× salário mínimo) em banco PT
+- D8 Nómada Digital: trabalho remoto para entidade estrangeira, rendimento mín. 3.680€/mês (4× salário mínimo)
 - D2 Empreendedor: plano de negócios aprovado IAPMEI
 - D6 Reagrupamento Familiar: AR válida há mín. 2 anos (nova regra Lei 61/2025)
 - D4 Estudante: inscrição em instituição DGES
@@ -50,7 +50,7 @@ Validade: 2 anos (1ª vez), 3 anos (renovações), permanente após 5 anos
 - Após aprovação: QR code provisório válido 6 meses enquanto novo cartão não chega
 - Cartões expirados após jun/2025: válidos **6 meses** a partir da data de vencimento
 - ⚠️ Cartões expirados até 30 jun/2025: prazo especial (15 abr/2026) já terminou — quem não renovou está irregular
-- **AIMA antecipou renovações**: quem tem AR a vencer em jul/ago 2026 já pode iniciar em portal-renovacoes.aima.gov.pt
+- **Portal das Renovações abre progressivamente por mês**: em meados de 2026 já cobre os títulos que caducam nos meses correntes — consulta o teu mês em portal-renovacoes.aima.gov.pt
 - **UNEF activa**: polícia de fronteiras faz fiscalização em empresas e ruas — ter sempre documento válido ou comprovativo AIMA
 
 ### REAGRUPAMENTO FAMILIAR (nova regra Lei 61/2025)
@@ -70,39 +70,37 @@ Validade: 2 anos (1ª vez), 3 anos (renovações), permanente após 5 anos
 ### RECIBO VERDE
 Inscrever na AT. IVA isento até 14.500€/ano. IRS 13% a 48%.
 
-### CIDADANIA (Lei da Nacionalidade — promulgada 3 de maio de 2026)
+### CIDADANIA (Lei Orgânica n.º 1/2026 — EM VIGOR desde 19 de maio de 2026)
 
-**⚠️ ATENÇÃO — dois regimes distintos:**
+A nova lei endureceu vários critérios. Pontos essenciais:
 
-**A) Naturalização (Art. 6.º) — via mais comum:**
-- Prazo base: **5 anos** de residência legal para todos (lusófonos e não lusófonos)
-- Lusófonos (BR, AO, MZ, CV, etc.): **dispensados de prova de conhecimento de português** (Art. 6.º n.º 10)
-- Requisitos cumulativos: maior de idade, 5 anos residência legal, português suficiente (dispensado para lusófonos), sem condenação ≥3 anos prisão, sem ameaça à segurança nacional
-- Processo: requerimento ao Ministro da Justiça | Portal: justica.gov.pt | Taxa: 250€
+**Naturalização por residência (via mais comum):**
+- Lusófonos (CPLP: BR, AO, MZ, CV...) e cidadãos da UE: **7 anos** de residência legal (subiu de 5)
+- Restantes países: **10 anos** de residência legal (subiu de 5)
+- A contagem do prazo passa a começar **com o título de residência em mãos** — já NÃO conta desde a data do primeiro pedido
+- Requisitos: maior de idade, prazo de residência cumprido, conhecimento de português, sem condenação relevante, adesão aos princípios do Estado de direito
+- Processo: requerimento | Portal: justica.gov.pt
 
-**B) Nova lei promulgada 3 mai/2026 — aquisição por residência (via vontade):**
-- Lusófonos (BR, AO, MZ, CV...): **7 anos** (era 5 anos)
-- Outros países: **10 anos** (era 6 anos)
-- ✅ **Processos pendentes protegidos** — quem já tem processo em curso não é afectado
-- ✅ **Morosidade do Estado não penaliza** — atrasos administrativos não contam contra o requerente
-- ⚠️ Quem já completou os anos exigidos antes de 3 mai/2026 — consulta advogado
-
-**Contagem de prazos (Art. 15.º) — importante:**
-- Períodos de residência **não têm de ser contínuos** — somam-se desde que dentro de um intervalo de 15 anos
-- O tempo desde o **pedido de AR conta** para o prazo, mesmo antes da decisão, se vier a ser deferida
+**✅ MUITO IMPORTANTE — processos pendentes protegidos:**
+- Quem já tinha processo de nacionalidade entregue à data de entrada em vigor (19 mai/2026) segue as regras antigas (incluindo o prazo de 5 anos)
+- A morosidade do Estado não penaliza o requerente
 
 **Outras vias:**
-- Por casamento/união de facto: mín. **3 anos** de relação com português/a — taxa 250€ (Art. 3.º)
-- Por descendência (pai/mãe ou avós/bisavós portugueses): sem prazo de residência — taxa 175€
-- Por adoção: automático ao ser adoptado por cidadão português (Art. 5.º)
-- Descendentes sefarditas: mín. **3 anos** de residência legal + prova de ligação a comunidade sefardita portuguesa (Art. 6.º n.º 7)
-- Menores nascidos em PT: se pai/mãe com 5 anos de residência (qualquer título), ou residência legal, ou menor frequentou 1 ano de escola em PT (Art. 6.º n.º 2)
+- Casamento/união de facto com português/a: mantém-se **3 anos** (aquisição por declaração)
+- Descendência (filho, neto ou bisneto de português): sem prazo de residência geral; mas os **netos passam a ter de provar língua, cultura, história e símbolos nacionais**
+- Adoção plena por cidadão português: aquisição por efeito da lei
 
-**Suspensão do processo (Art. 13.º):**
-- Condenação a mais de 1 ano de prisão → processo suspenso por 5 anos após trânsito em julgado
+**⚠️ Vias ENCERRADAS / eliminadas pela nova lei:**
+- Regime sefardita: **encerrado para novos pedidos**
+- Naturalização por ser pai/mãe de criança registada como portuguesa: **eliminada**
 
-**Filhos de estrangeiros nascidos em PT (Art. 1.º al. f):**
-- Nacionalidade originária se um dos pais residir legalmente em PT há ≥1 ano no momento do nascimento
+**Filhos de estrangeiros nascidos em PT:**
+- A nacionalidade originária deixou de ser automática: a criança é portuguesa de origem (se declararem querer) apenas se, no momento do nascimento, um dos progenitores residir legalmente em PT há pelo menos **5 anos** (antes bastava 1 ano) — Art. 1.º n.º 1 al. f) da Lei Orgânica 1/2026
+
+**Perda de nacionalidade:**
+- Naturalizados condenados a pena de prisão pesada podem perder a nacionalidade
+
+Para casos concretos (sobretudo quem estava perto de completar os 5 anos), sugere sempre consultar um advogado ou solicitador.
 ### TELEMÓVEIS / OPERADORAS
 Para quem chega sem contrato, recomendações por perfil:
 - **NOS** — melhor cobertura geral, planos pré-pagos a partir de €10/mês. Loja em quase todos os centros comerciais
@@ -231,26 +229,27 @@ Seg. Social: seg-social.pt | SNS: sns24.gov.pt | IRN: justica.gov.pt
 - Avalia seguro privado após estabilizar emprego e rendimento
 
 ### CARTA DE CONDUÇÃO
+**🆕 Acordo Portugal-Brasil (em vigor desde fev/2026 — Decreto n.º 4/2026):**
+- A CNH brasileira passou a ser formalmente reconhecida em Portugal (e vice-versa)
+- Permite conduzir com a carta brasileira; sendo residente, deve fazer a troca no IMT
+
 **Troca de carta estrangeira por portuguesa:**
-- **Países da UE/EEE**: troca directa, sem exame. Vai ao IMT com carta original + NIF + morada
-- **Países com acordo com Portugal** (Brasil, EUA, alguns outros): troca directa possível — verifica em imt.pt
-- **Outros países**: tens de fazer exame de condução em Portugal
+- **UE/EEE**: conduz até ao fim da validade; regista a morada no IMT em 60 dias (gratuito). Troca sem exame
+- **Países com acordo bilateral / CPLP / OCDE** (Brasil, Angola, Cabo Verde...): pode conduzir 185 dias se NÃO residente. Sendo residente, troca no IMT em regra até **2 anos** após obter residência — sem exame
+- **Países sem acordo**: tens de fazer exame de condução em Portugal
 
-**Processo geral:**
-1. Vai ao IMT (Instituto da Mobilidade e dos Transportes) — imt.pt
-2. Documentos: carta original, passaporte, NIF, AR, foto, taxa (~30€)
-3. Carta portuguesa emitida em 15–30 dias
+**Processo (portal IMTonline):**
+1. Submete o pedido em imt.pt / IMTonline
+2. Atestado médico eletrónico (enviado pelo médico ao IMT); avaliação psicológica para categorias profissionais (C/D/E); tradução se a carta não estiver em PT/EN/FR/ES
+3. A carta portuguesa mantém a validade da carta original (não a estende)
 
-**Conduzir com carta estrangeira em Portugal:**
-- UE: válida indefinidamente enquanto for residente
-- Fora da UE: válida por 185 dias após fixar residência — depois tens de trocar
+**Conduzir com carta estrangeira:**
+- Passado o prazo de troca sem a fazer, deixa de poder conduzir até concluir o processo
 
 **Compra de carro:**
-- Carro novo: ISV (imposto sobre veículos) incluído no preço
-- Carro importado: paga ISV + IUC (imposto único de circulação anual)
-- Seguro automóvel obrigatório (responsabilidade civil mínima)
-- Seguros populares: Fidelidade, Allianz, Generali, Tranquilidade
-- Preço médio seguro: 300–600€/ano (depende do carro e condutor)
+- Carro novo: ISV incluído no preço | Importado: paga ISV + IUC anual
+- Seguro automóvel obrigatório (responsabilidade civil)
+- Seguros populares: Fidelidade, Allianz, Generali, Tranquilidade | ~300–600€/ano
 
 ### VIAJAR NA UNIÃO EUROPEIA
 **Com Autorização de Residência portuguesa:**
@@ -273,6 +272,11 @@ Seg. Social: seg-social.pt | SNS: sns24.gov.pt | IRN: justica.gov.pt
 - Sem limite de tempo fora se mantiveres a AR activa
 - AR pode ser cancelada se ficares fora de Portugal mais de 6 meses consecutivos (ou 8 em 24 meses) sem justificação
 
+**🆕 EES e ETIAS (novos sistemas de fronteira):**
+- **EES (Sistema de Entrada/Saída):** em funcionamento desde 12 out/2025, pleno desde 10 abr/2026. Regista a biometria de não-UE nas fronteiras Schengen (substitui o carimbo no passaporte)
+- **ETIAS:** autorização eletrónica prévia (NÃO é visto), custa ~20€, para viajantes isentos de visto (ex.: turistas brasileiros, até 90 dias). Previsto para o ÚLTIMO TRIMESTRE de 2026 — ainda NÃO está ativo; por agora não é preciso fazer nada
+- **Quem tem AR ou visto de longa duração em Portugal NÃO precisa de ETIAS**
+
 ### IRS — DECLARAÇÃO DE IMPOSTOS (2026)
 **Quem é obrigado a declarar:**
 - Todos os residentes fiscais em Portugal com rendimentos
@@ -290,10 +294,11 @@ Seg. Social: seg-social.pt | SNS: sns24.gov.pt | IRN: justica.gov.pt
 - Ou se tiveres habitação permanente em Portugal
 
 **Regime IFICI (ex-NHR — novo desde 2024):**
-- Substituiu o NHR para novos beneficiários a partir de 2024
-- Taxa flat 20% para certas profissões qualificadas e investigadores
-- Rendimentos estrangeiros podem ser isentos (depende do tipo)
-- Válido por 10 anos — pedir no ano seguinte ao da chegada
+- Substituiu o NHR para novos beneficiários a partir de 1 jan/2024 (art. 58.º-A do CIRS)
+- Taxa flat 20% sobre trabalho dependente e independente de fonte portuguesa, durante 10 anos
+- SÓ para atividades estratégicas (investigação, tecnologia, inovação, saúde, energia, startups)
+- ⚠️ Ao contrário do antigo NHR, NÃO abrange reformados/pensões estrangeiras — estes são tributados pelo regime geral
+- Requisito: não ter sido residente fiscal em PT nos 5 anos anteriores | pedir no Portal das Finanças
 - Quem já tinha NHR activo antes de 2024 mantém até ao fim do prazo
 
 **IRS automático:**
@@ -346,15 +351,15 @@ const FAQ = {
 
   "numero de utente": "Para obter o número de utente SNS:\n\n• Vai ao Centro de Saúde da tua área de residência\n• Documentos: passaporte, NIF e comprovativo de morada portuguesa\n• Gratuito\n• Alternativa: liga para o SNS 24: 808 24 24 24\n\nCom o número de utente tens acesso a consultas, urgências e medicamentos comparticipados no SNS. 🏥",
 
-  "qual o visto": "Portugal tem vários vistos para imigrantes. Os principais:\n\n• **D1 — Trabalho**: tens contrato de trabalho com empresa portuguesa\n• **D7 — Rendimento passivo**: pensão, rendas ou trabalho remoto com cliente estrangeiro\n• **D8 — Nómada Digital**: trabalho remoto, rendimento mín. ~3.480€/mês\n• **D2 — Empreendedor**: abrir empresa ou projecto aprovado pelo IAPMEI\n• **D4 — Estudante**: inscrição em universidade ou escola reconhecida\n• **D6 — Reagrupamento familiar**: familiar de residente (mín. 2 anos de AR desde Lei 61/2025)\n• **Novo visto qualificado**: para profissionais especializados à procura de emprego — 120 dias\n• **Golden Visa**: investimento mín. 500.000€ em fundos\n\n⚠️ **Importante (Lei 61/2025):** já não é possível entrar como turista e depois regularizar. O visto tem de ser pedido antes de chegar a Portugal.\n\nQual é a tua situação? Posso dizer exactamente qual o visto certo para ti. 🇵🇹",
+  "qual o visto": "Portugal tem vários vistos para imigrantes. Os principais:\n\n• **D1 — Trabalho**: contrato OU promessa de contrato (mín. 12 meses, salário ≥ 920€)\n• **D7 — Rendimento passivo**: pensão, rendas, dividendos — mín. 920€/mês (1 salário mínimo)\n• **D8 — Nómada Digital**: trabalho remoto p/ entidade estrangeira, rendimento mín. **3.680€/mês**\n• **D2 — Empreendedor**: abrir empresa ou projecto aprovado pelo IAPMEI\n• **D4 — Estudante**: inscrição em universidade ou escola reconhecida\n• **D6 — Reagrupamento familiar**: familiar de residente (mín. 2 anos de AR desde Lei 61/2025)\n• **Novo visto qualificado**: para profissionais especializados à procura de emprego — 120 dias\n• **Golden Visa**: investimento mín. 500.000€ em fundos\n\n⚠️ **Importante (Lei 61/2025):** já não é possível entrar como turista e depois regularizar. O visto tem de ser pedido no consulado do país de origem antes de chegar a Portugal.\n\nQual é a tua situação? Posso dizer exactamente qual o visto certo para ti. 🇵🇹",
 
   "validar diploma": "Para reconhecimento de diploma em Portugal:\n\n**Diplomas universitários:**\n• Processo na instituição de ensino superior equivalente\n• Portal: dges.gov.pt | Prazo: 3-6 meses | Taxa: ~50-150€\n\n**Diplomas profissionais** (médicos, advogados, engenheiros):\n• Cada ordem profissional tem o seu processo\n\n**Apostila de Haia:** verifica se o teu país é signatário — alguns documentos precisam de apostila antes. 🎓",
 
   "seguro de saude": "Saúde em Portugal para imigrantes:\n\n**SNS (público — gratuito):**\n• Acesso com número de utente\n• Cobre consultas, urgências, internamento, medicamentos\n• Limitação: espera longa para especialidades\n\n**Saúde privada:**\n• Seguros: Médis, AdvanceCare, Multicare, Fidelidade Saúde\n• Preço: 30–80€/mês (individual)\n• Muitas empresas oferecem como benefício — pergunta antes de assinar contrato\n\n**Dica:** nos primeiros meses usa o SNS para urgências. Avalia seguro privado depois de estabilizar. 🏥",
 
-  "carta de conducao": "Troca de carta de condução em Portugal:\n\n**Países da UE:** troca directa, sem exame\n**Brasil e países com acordo:** troca directa possível — verifica em imt.pt\n**Outros países:** tens de fazer exame em Portugal\n\n**Processo:**\n1. Vai ao IMT (imt.pt)\n2. Documentos: carta original + passaporte + NIF + AR + foto\n3. Taxa: ~30€ | Prazo: 15–30 dias\n\n**Atenção:** com carta de fora da UE podes conduzir só 185 dias após fixar residência — depois tens de trocar. 🚗",
+  "carta de conducao": "Carta de condução em Portugal:\n\n**🆕 Acordo Portugal-Brasil (desde fev/2026):** a CNH brasileira é reconhecida em Portugal. Podes conduzir; sendo residente, deves trocar no IMT.\n\n**Troca por carta portuguesa:**\n• **UE/EEE:** conduz até ao fim da validade; regista a morada no IMT em 60 dias\n• **Brasil/CPLP/países com acordo:** podes conduzir; sendo residente, troca no IMT em regra **até 2 anos** após obteres residência — sem exame\n• **Países sem acordo:** tens de fazer exame em Portugal\n\n**Processo (IMTonline):**\n1. Submete o pedido em imt.pt\n2. Atestado médico eletrónico + avaliação psicológica (categorias profissionais) + tradução se necessário\n3. A carta portuguesa mantém a validade da original 🚗",
 
-  "viajar europa": "Viajar na UE com Autorização de Residência portuguesa:\n\n• Podes viajar livremente pelos 27 países da UE + Suíça, Noruega, Islândia\n• Precisas de: AR válida + passaporte do teu país (a AR não substitui o passaporte)\n• Para trabalhar noutro país da UE: regista-te como residente se ficares mais de 3 meses\n\n**Atenção:** a AR pode ser cancelada se ficares fora de Portugal mais de 6 meses consecutivos sem justificação — avisa a AIMA se fores estar muito tempo fora. ✈️",
+  "viajar europa": "Viajar na UE com Autorização de Residência portuguesa:\n\n• Podes viajar livremente pelos 27 países da UE + Suíça, Noruega, Islândia\n• Precisas de: AR válida + passaporte do teu país (a AR não substitui o passaporte)\n• Para trabalhar noutro país da UE: regista-te como residente se ficares mais de 3 meses\n\n**🆕 Novos sistemas de fronteira:**\n• **EES** (Sistema de Entrada/Saída): já em funcionamento — regista a tua biometria nas fronteiras Schengen\n• **ETIAS**: autorização eletrónica (~20€) para turistas isentos de visto (ex.: brasileiros em viagem curta). Previsto para o fim de 2026 — ainda não está ativo. **Quem tem AR ou visto de longa duração NÃO precisa de ETIAS**\n\n**Atenção:** a AR pode ser cancelada se ficares fora de Portugal mais de 6 meses consecutivos sem justificação. ✈️",
 
   "irs": "Declaração de IRS em Portugal (2026):\n\n• Prazo: Abril (rendimentos do ano anterior)\n• Portal: portaldasfinancas.gov.pt → IRS → Entregar Declaração\n• Sistema automático pré-preenche para casos simples — confirmas e submetes\n• Reembolso médio: 200–500€ (chega em 3–5 meses)\n\n**Novidades 2026:**\n• Salário mínimo (920€) isento de IRS\n• Mínimo de existência: 12.880€/ano — quem ganha até este valor está isento\n• Escalões actualizados +3,51% e taxas reduzidas 0,3% (2º ao 5º escalão)\n\n**Regime IFICI (substitui o NHR para novos beneficiários desde 2024):**\n• Taxa flat 20% para profissionais qualificados durante 10 anos\n• Ideal para nómadas digitais, investigadores e quadros qualificados\n• Pede no ano seguinte ao da chegada — quem já tinha NHR mantém 📊",
 
@@ -364,13 +369,13 @@ const FAQ = {
 
   "manifestacao de interesse": "⚠️ A Manifestação de Interesse foi extinta pela Lei 61/2025 (em vigor desde 23 outubro 2025).\n\nJá não é possível entrar em Portugal como turista ou sem visto e depois pedir residência.\n\n**O que mudou:**\n• Visto obrigatório antes de entrar em Portugal\n• Quem tinha processo a decorrer antes de out/2025 segue as regras antigas\n• Excepções humanitárias e empreendedores em incubadoras certificadas\n\nConsulta um advogado se o teu processo estava em curso. 📋",
 
-  "cidadania portuguesa": "Cidadania portuguesa — lei promulgada 3 mai/2026:\n\n**Naturalização (via mais comum) — Art. 6.º:**\n• **5 anos** de residência legal para todos\n• Lusófonos (BR, AO, MZ, CV...): **dispensados de provar português**\n• Sem condenação ≥3 anos prisão | sem ameaça à segurança nacional\n• Períodos de residência podem ser **interpolados** (somam-se se dentro de 15 anos)\n• O tempo desde o **pedido de AR conta** para o prazo\n\n**Nova lei (aquisição por residência):**\n• Lusófonos: **7 anos** | Outros países: **10 anos**\n• ✅ Processos pendentes protegidos\n• ✅ Morosidade do Estado não penaliza\n\n**Outras vias:**\n• Casamento/união de facto com português/a: 3 anos — taxa 250€\n• Descendência (pai/mãe ou avós portugueses): sem prazo — taxa 175€\n• Adoção por português/a: automático\n• Descendentes sefarditas: 3 anos residência + prova de ligação\n• Menores nascidos em PT: pai/mãe com 5 anos residência ou menor com 1 ano de escola em PT\n\nPortal: justica.gov.pt 🇵🇹",
+  "cidadania portuguesa": "Cidadania portuguesa — Lei Orgânica n.º 1/2026 (em vigor desde 19 mai/2026):\n\n**Naturalização por residência (via mais comum):**\n• Lusófonos (CPLP) e cidadãos da UE: **7 anos** de residência legal (subiu de 5)\n• Outros países: **10 anos**\n• A contagem começa com o **título de residência em mãos** (já não desde o 1.º pedido)\n\n**✅ Processos pendentes protegidos:** quem já tinha o pedido entregue a 19 mai/2026 segue as regras antigas (incl. os 5 anos). A morosidade do Estado não penaliza.\n\n**Outras vias:**\n• Casamento/união de facto com português/a: **3 anos** (por declaração)\n• Descendência (filho/neto/bisneto de português): sem prazo geral — mas os netos passam a provar língua, cultura e história\n• Adoção por português/a: por efeito da lei\n\n**⚠️ Encerradas pela nova lei:**\n• Regime sefardita (novos pedidos)\n• Naturalização por ser pai/mãe de criança portuguesa\n\nPara casos perto dos prazos antigos, consulta um advogado. Portal: justica.gov.pt 🇵🇹",
 
   "salario minimo": "Salário mínimo em Portugal em 2026:\n\n• **920€ brutos/mês** (subiu 50€ face a 2025)\n• Líquido: ~**818,80€** (desconta só 11% SS — isento de IRS)\n• Pago 14 vezes/ano (inclui subsídio férias e Natal)\n• Meta: 1.020€ em 2028 | 1.100€ em 2029\n\nO salário mínimo aplica-se a todos os trabalhadores com contrato, incluindo imigrantes. 💼",
 
   "lei 61": "Lei 61/2025 — Nova Lei de Estrangeiros (em vigor 23 out/2025):\n\n⚠️ **Fim da Manifestação de Interesse**\n📋 **Visto obrigatório antes de entrar**\n👨‍👩‍👧 **Reagrupamento familiar**: mínimo 2 anos de AR (era 1 ano)\n🔄 **Renovações digitais**: aima.gov.pt — BR €58,10 | outros €185,30\n⏱️ **AIMA tem 9 meses** para decidir\n🏛️ **UNEF criada** — nova polícia de fronteiras na PSP\n\nProcessos iniciados antes de out/2025 seguem regras antigas. 📋",
 
-  "renovar ar": "Renovar Autorização de Residência em Portugal (2026):\n\n• Iniciar **3 meses antes** da validade\n• Portal: portal-renovacoes.aima.gov.pt — processo digital\n• Taxa: **€58,10** (brasileiros) | **€185,30** (outros países)\n• Documentos: passaporte, AR actual, comprovativo de morada, prova de emprego/rendimento, sem dívidas a Finanças e SS\n• Após aprovação: QR code provisório válido enquanto aguardas o cartão\n\n**Situação dos cartões expirados:**\n• Expirados **após** 30 jun/2025: válidos por 6 meses a partir da data de vencimento\n• Expirados **até** 30 jun/2025: prazo especial já terminou (15 abr/2026) — se não renovaste, estás irregular, age agora\n\n**🆕 AIMA antecipou:** quem tem AR a vencer em jul/ago 2026 já pode renovar agora em portal-renovacoes.aima.gov.pt\n\n⚠️ **UNEF activa:** polícia faz fiscalização em empresas e ruas — tem sempre documento válido ou comprovativo AIMA contigo. 🔄",
+  "renovar ar": "Renovar Autorização de Residência em Portugal (2026):\n\n• Iniciar **3 meses antes** da validade\n• Portal: portal-renovacoes.aima.gov.pt — processo digital\n• Taxa: **€58,10** (brasileiros) | **€185,30** (outros países)\n• Documentos: passaporte, AR actual, comprovativo de morada, prova de emprego/rendimento, sem dívidas a Finanças e SS\n• Após aprovação: QR code provisório válido enquanto aguardas o cartão\n\n**Situação dos cartões expirados:**\n• Expirados **após** 30 jun/2025: válidos por 6 meses a partir da data de vencimento\n• Expirados **até** 30 jun/2025: prazo especial já terminou (15 abr/2026) — se não renovaste, estás irregular, age agora\n\n**🆕 Portal abre por mês:** o Portal das Renovações vai abrindo progressivamente — em meados de 2026 já cobre os títulos que caducam nos meses correntes. Consulta o teu mês em portal-renovacoes.aima.gov.pt\n\n⚠️ **UNEF activa:** polícia faz fiscalização em empresas e ruas — tem sempre documento válido ou comprovativo AIMA contigo. 🔄",
 
   "unef": "A UNEF (Unidade Nacional de Estrangeiros e Fronteiras) é a polícia de fronteiras criada pela Lei 61/2025.\n\n⚠️ **Está em fiscalização activa:**\n• Batidas em empresas e ruas exigindo documentos válidos\n• Mais de 83 mil pessoas abordadas em 2025\n• Pede AR válida, comprovativo AIMA ou QR code de renovação\n\n**O que tens de ter sempre contigo:**\n• AR válida (dentro do prazo), ou\n• Comprovativo digital da AIMA (portal-renovacoes.aima.gov.pt), ou\n• QR code provisório emitido após aprovação da renovação\n\nSe fores abordado sem documentos: descarrega o comprovante no portal antes de sair. 🪪",
 
