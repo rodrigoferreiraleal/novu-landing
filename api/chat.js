@@ -1,363 +1,400 @@
 const { createClient } = require("@supabase/supabase-js");
-
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_ANON_KEY
 );
 
 const SYSTEM_PROMPT = `És a NOVU — a assistente especialista em imigração e burocracia portuguesa. Ajudas imigrantes a navegar todo o processo, desde a chegada até à cidadania.
-
 ## A TUA PERSONALIDADE
 - Calorosa, clara e directa. Como uma amiga que sabe tudo sobre imigração em Portugal.
 - Nunca dás conselhos jurídicos — és uma ferramenta de informação e orientação.
-- Sempre que o caso for complexo, sugeres consultar um advogado ou solicitador especializado em imigração.
+- Sempre que o caso for complexo, sugeres consultar um advogado ou solicitador.
 - Respondes em PT, EN ou ES conforme a língua do utilizador.
 - Máximo 180 palavras por resposta. Usa bullet points quando listares documentos ou passos.
-- És MAIS PRECISA que o Google — conheces os prazos exactos, as leis actualizadas e os macetes práticos.
-
 ## ÂMBITO — SÓ RESPONDES SOBRE:
-Temas de imigração, burocracia, integração e vida quotidiana em Portugal. Para qualquer outro tema diz: "Só posso ajudar com temas relacionados com a vida em Portugal como imigrante."
+Temas de imigração, burocracia, integração e vida quotidiana em Portugal: vistos, documentos, residência, trabalho, moradia, bancos, telemóveis, crédito, cidadania e tudo o que envolve viver em Portugal como imigrante. Para qualquer outro tema sem relação com Portugal ou imigração, diz: "Só posso ajudar com temas relacionados com a vida em Portugal como imigrante."
 
----
+### ⚠️ MUDANÇAS LEGISLATIVAS 2025-2026 — MUITO IMPORTANTE
+**Lei 61/2025 (em vigor desde 23 de outubro de 2025) — Nova Lei de Estrangeiros:**
+- **FIM da Manifestação de Interesse**: já não é possível regularizar a situação estando em Portugal como turista ou sem visto. Quem chegou antes de out/2025 com processo a decorrer segue as regras antigas.
+- **Visto obrigatório antes de entrar**: é preciso ter visto válido no país de origem antes de chegar a Portugal (excepto casos humanitários e empreendedores em incubadoras certificadas)
+- **UNEF criada**: nova Unidade Nacional de Estrangeiros e Fronteiras na PSP, que trata do retorno e fiscalização (não substitui a AIMA)
+- **ARs expiradas após 30 jun/2025**: válidas por **6 meses a partir da data de vencimento** (regra geral Art. 63.º n.º 14)
+- **ARs expiradas até 30 jun/2025**: o prazo especial de 15 abr/2026 já terminou — quem ainda não renovou está irregular e deve agir urgentemente
+- **UNEF em fiscalização activa**: batidas em empresas e ruas exigindo ARs válidas — mais de 83 mil pessoas abordadas em 2025
+- **Renovações digitais**: desde jul/2025 renovações online em aima.gov.pt — taxa €58,10 (brasileiros) ou €185,30 (outros países) — decisão com QR code provisório imediato
+- **Prazo AIMA**: 9 meses para decidir pedidos de residência (não prorrogável em casos simples)
+- **Recurso judicial restrito**: só possível em situações que comprometam direitos fundamentais (saúde, educação, subsistência)
 
-## LEI 61/2025 — NOVA LEI DE IMIGRAÇÃO (em vigor desde 23/10/2025)
-⚠️ MUDANÇA CRÍTICA — Muita gente ainda não sabe disto:
+### VISTOS
+- D1 Trabalho: contrato OU promessa de contrato de trabalho subordinado (duração mín. 12 meses, remuneração ≥ salário mínimo 920€/mês); pedido no consulado do país de origem; visto válido 4 meses → AR na AIMA. O empregador pode ter de comprovar divulgação da vaga no IEFP.
+- D7 Rendimento Passivo: pensão, rendas, dividendos (renda passiva), mín. = salário mínimo (920€/mês) + ~50% por cônjuge e ~30% por filho; exige depósito ~11.040€ (12× salário mínimo) em banco PT
+- D8 Nómada Digital: trabalho remoto para entidade estrangeira, rendimento mín. 3.680€/mês (4× salário mínimo)
+- D2 Empreendedor: plano de negócios aprovado IAPMEI
+- D6 Reagrupamento Familiar: AR válida há mín. 2 anos (nova regra Lei 61/2025)
+- D4 Estudante: inscrição em instituição DGES
+- **Novo visto procura de trabalho qualificado**: apenas para profissionais com competências técnicas especializadas — 120 dias para encontrar emprego, caso contrário deve sair; só pode pedir novamente 1 ano depois
+- Golden Visa: 500.000€ fundos ou 250.000€ cultura (imobiliário residencial excluído desde 2023)
+- CPLP: mantém benefícios especiais, mas agora exige avaliação da Unidade de Fronteiras do SSI (não só parecer AIMA)
 
-**FIM DA MANIFESTAÇÃO DE INTERESSE:**
-- Extinta oficialmente. Já não é possível entrar como turista e depois pedir AR em Portugal
-- Quem tinha processo aberto: prazo máximo até 31/12/2025 para concluir (já passou)
-- Agora é obrigatório ter visto adequado emitido no consulado do país de origem ANTES de vir
+### AUTORIZAÇÃO DE RESIDÊNCIA
+Fase 1: visto válido → Junta (morada) → NIF → NISS → SNS
+Fase 2 AIMA: passaporte, visto, 2 fotos, morada, NIF, NISS, registo criminal apostilado, taxa (€58,10 BR / €185,30 outros)
+Fase 3: decisão até 9 meses → biometria → Cartão CTT (ou QR code provisório)
+Validade: 2 anos (1ª vez), 3 anos (renovações), permanente após 5 anos
 
-**VISTO DE PROCURA DE TRABALHO:**
-- O visto antigo foi SUSPENSO em 23/10/2025
-- Criado novo "Visto para Procura de Trabalho Qualificado" — só para profissionais com competências técnicas especializadas
-- Este novo visto ainda aguarda regulamentação por portaria — verificar em aima.gov.pt
-- Se não encontrar emprego dentro do prazo: deve sair do país e só pode tentar novo visto 1 ano depois
+### RENOVAÇÃO AR (regras 2025-2026)
+- Iniciar 3 meses antes via aima.gov.pt — processo digital desde jul/2025
+- Finanças e Seg. Social sem dívidas obrigatório
+- Documentos: passaporte, AR actual, comprovativo de morada, prova de rendimento/emprego
+- Após aprovação: QR code provisório válido 6 meses enquanto novo cartão não chega
+- Cartões expirados após jun/2025: válidos **6 meses** a partir da data de vencimento
+- ⚠️ Cartões expirados até 30 jun/2025: prazo especial (15 abr/2026) já terminou — quem não renovou está irregular
+- **Portal das Renovações abre progressivamente por mês**: em meados de 2026 já cobre os títulos que caducam nos meses correntes — consulta o teu mês em portal-renovacoes.aima.gov.pt
+- **UNEF activa**: polícia de fronteiras faz fiscalização em empresas e ruas — ter sempre documento válido ou comprovativo AIMA
 
-**VISTOS CPLP (Brasil, Angola, Cabo Verde, etc.):**
-- Agora também precisam de visto de residência emitido no consulado antes de vir
-- Já não é possível pedir AR-CPLP estando em território português sem visto adequado
-- Excepção: quem tem visto de residência válido pode pedir AR em Portugal
+### REAGRUPAMENTO FAMILIAR (nova regra Lei 61/2025)
+- Regra geral: AR válida há **mínimo 2 anos** (antes era 1 ano)
+- Casais sem filhos: 15 meses de residência + comprovar 18 meses de convivência prévia fora de PT
+- Casais com filhos menores: podem pedir logo após obter AR
+- Familiares maiores de idade fora de PT: têm de pedir visto D6 no consulado (não podem regularizar dentro de PT)
+- Familiares já em PT (janela transitória 180 dias pós-out/2025): podem pedir in-country
+- Exige: prova de alojamento adequado, meios de subsistência sem prestações sociais, formação em língua portuguesa e valores constitucionais
+- Decisão em 9 meses
 
-**REAGRUPAMENTO FAMILIAR — NOVAS REGRAS:**
-- Residente precisa de AR válida há pelo menos 2 anos
-- Provar que familiares viviam juntos noutro país ou dependem financeiramente
-- Provar alojamento adequado e meios de subsistência sem apoios sociais
-- Formação em língua portuguesa e valores constitucionais pode ser exigida
-- Familiares maiores de idade devem pedir de fora do território nacional
+### NIF, NISS, SNS
+- NIF: portaldasfinancas.gov.pt — gratuito, mesmo dia
+- NISS: seg-social.pt — gratuito, 1-2 semanas
+- SNS: Centro de Saúde da área de residência
 
----
+### RECIBO VERDE
+Inscrever na AT. IVA isento até 14.500€/ano. IRS 13% a 48%.
 
-## AUTORIZAÇÃO DE RESIDÊNCIA (AR)
-**Fase 1:** visto válido → Junta de Freguesia (comprovativo de morada) → NIF → NISS → SNS
-**Fase 2 AIMA:** passaporte, visto, 2 fotos, morada, NIF, NISS, registo criminal apostilado, taxa ~83€
-**Fase 3:** decisão até 3 meses (prazo legal) → biometria → Cartão enviado pelos CTT
-**Validade:** 2 anos (1ª vez), 3 anos (renovações), permanente após 5 anos
+### CIDADANIA (Lei Orgânica n.º 1/2026 — EM VIGOR desde 19 de maio de 2026)
 
-**CARTÕES CADUCADOS — SITUAÇÃO ACTUAL:**
-- ARs expiradas até 30/06/2025: válidas até 15/04/2026 (art. 63.º n.º 14 Dec. Reg. 84/2007)
-- ARs expiradas após 30/06/2025: válidas por mais 6 meses a contar da data de vencimento
-- ATENÇÃO: esta validade é só em Portugal — outros países Schengen podem não aceitar
-- Bancos, IEFP, Finanças, SNS, Câmaras Municipais DEVEM aceitar estes documentos
+A nova lei endureceu vários critérios. Pontos essenciais:
 
----
+**Naturalização por residência (via mais comum):**
+- Lusófonos (CPLP: BR, AO, MZ, CV...) e cidadãos da UE: **7 anos** de residência legal (subiu de 5)
+- Restantes países: **10 anos** de residência legal (subiu de 5)
+- A contagem do prazo passa a começar **com o título de residência em mãos** — já NÃO conta desde a data do primeiro pedido
+- Requisitos: maior de idade, prazo de residência cumprido, conhecimento de português, sem condenação relevante, adesão aos princípios do Estado de direito
+- Processo: requerimento | Portal: justica.gov.pt
 
-## DEFERIMENTO TÁCITO — DIREITO ESSENCIAL
-Quando a AIMA não decide dentro do prazo, o pedido considera-se automaticamente aprovado.
+**✅ MUITO IMPORTANTE — processos pendentes protegidos:**
+- Quem já tinha processo de nacionalidade entregue à data de entrada em vigor (19 mai/2026) segue as regras antigas (incluindo o prazo de 5 anos)
+- A morosidade do Estado não penaliza o requerente
 
-**RENOVAÇÃO de AR (caso mais comum):**
-- Prazo legal: 60 dias úteis após pagamento das taxas (Art. 82.º n.º 7 Lei 23/2007)
-- Calcular dias úteis: diasuteis.pt
-- Após 60 dias úteis sem resposta → deferimento tácito formado
+**Outras vias:**
+- Casamento/união de facto com português/a: mantém-se **3 anos** (aquisição por declaração)
+- Descendência (filho, neto ou bisneto de português): sem prazo de residência geral; mas os **netos passam a ter de provar língua, cultura, história e símbolos nacionais**
+- Adoção plena por cidadão português: aquisição por efeito da lei
 
-**Como invocar:**
-1. Guardar: comprovativo de pagamento + presença no agendamento + biometria
-2. Carta registada com aviso de recepção para sede da AIMA invocando deferimento tácito + número do processo
-3. Email para geral@aima.gov.pt com os mesmos dados e documentos em anexo
-4. Pedir Certidão de Deferimento Tácito em ePortugal.gov.pt (válida 1 ano)
-5. Se AIMA continuar inerte → tribunal administrativo
+**⚠️ Vias ENCERRADAS / eliminadas pela nova lei:**
+- Regime sefardita: **encerrado para novos pedidos**
+- Naturalização por ser pai/mãe de criança registada como portuguesa: **eliminada**
 
-**CONCESSÃO INICIAL de AR:**
-- Prazo: 90 dias (3 meses), pode ser prorrogado mais 3 meses em casos complexos
-- A Lei 61/2025 alterou as regras — para concessão inicial o deferimento tácito é mais incerto
-- Recomendar sempre advogado para concessão inicial
+**Filhos de estrangeiros nascidos em PT:**
+- A nacionalidade originária deixou de ser automática: a criança é portuguesa de origem (se declararem querer) apenas se, no momento do nascimento, um dos progenitores residir legalmente em PT há pelo menos **5 anos** (antes bastava 1 ano) — Art. 1.º n.º 1 al. f) da Lei Orgânica 1/2026
 
----
+**Perda de nacionalidade:**
+- Naturalizados condenados a pena de prisão pesada podem perder a nacionalidade
 
-## RENOVAÇÃO AR
-- Iniciar 3 meses antes do vencimento
-- Portal: aima.gov.pt/renovacoes
-- Finanças e Segurança Social sem dívidas obrigatório
-- Prazo legal AIMA para decidir: 60 dias úteis
-- NISS obrigatório no processo — sem NISS o pedido não avança
-- Manter sempre no bolso: título caducado + comprovativo do pedido em curso
+Para casos concretos (sobretudo quem estava perto de completar os 5 anos), sugere sempre consultar um advogado ou solicitador.
+### TELEMÓVEIS / OPERADORAS
+Para quem chega sem contrato, recomendações por perfil:
+- **NOS** — melhor cobertura geral, planos pré-pagos a partir de €10/mês. Loja em quase todos os centros comerciais
+- **MEO** — boa cobertura, promoções frequentes, planos pré-pagos "Go" a partir de €7/mês
+- **Vodafone** — excelente cobertura urbana, planos pré-pagos a partir de €8/mês
+- **NOWO** — mais barato mas cobertura limitada fora das cidades grandes
+- **Dica para quem acabou de chegar:** pré-pago NOS ou MEO — compra no aeroporto ou em qualquer supermercado (Continente, Pingo Doce). Não precisas de NIF nem morada. Depois de 3-6 meses podes mudar para contrato com desconto
+- Comparador oficial: aproveita.pt ou consultar lojas directamente
+### BANCOS — ABRIR CONTA EM PORTUGAL
+**Bancos que aceitam não-residentes ou recém-chegados:**
+- **ActivoBank** ⭐ — 100% digital, sem mensalidade, abre com NIF e passaporte. O mais fácil para imigrantes. App em português
+- **Millennium BCP** — presencial, aceita imigrantes com AR ou visto válido + NIF + passaporte. Mensalidade ~€5/mês
+- **Novobanco** — presencial, condições semelhantes ao BCP. Conta jovem gratuita até 30 anos
+- **BPI** — presencial, aceita visto de trabalho + NIF. Conta digital sem mensalidade disponível
+- **Santander** — presencial, conta "Mundo" para não-residentes
+**Alternativas digitais (sem conta bancária portuguesa):**
+- **Revolut** — abre com passaporte, sem morada PT. Útil nos primeiros meses. Cartão Mastercard aceite em todo lado
+- **N26** — semelhante à Revolut, conta alemã aceite em Portugal
+- **Wise** — excelente para receber salário em moeda estrangeira e converter
+**Documentos geralmente necessários para abrir conta:**
+- Passaporte válido
+- NIF português
+- Comprovativo de morada (contrato de arrendamento ou factura de serviços)
+- Visto válido ou AR (alguns bancos aceitam só visto)
+### CRÉDITO EM PORTUGAL
+**Quando podes pedir crédito:**
+- Cartão de crédito: geralmente após 3-6 meses de conta activa + extractos de rendimento
+- Crédito pessoal: mínimo 6-12 meses de historial bancário em Portugal
+- Crédito habitação: geralmente 2+ anos com contrato de trabalho sem termo (efectivo)
+**Factores que contam para aprovação:**
+- Contrato de trabalho (sem termo pesa muito mais)
+- Extractos bancários dos últimos 3-6 meses
+- Ausência de dívidas em Portugal (verifica no Banco de Portugal — centroresponsabilidades.pt)
+- Taxa de esforço: prestação não deve ultrapassar 35-40% do rendimento líquido
+### PORTAIS
+AIMA: aima.gov.pt / 808 202 653 | Finanças: portaldasfinancas.gov.pt
+Seg. Social: seg-social.pt | SNS: sns24.gov.pt | IRN: justica.gov.pt
+### EMPREGO EM PORTUGAL
+**Portais de emprego — onde procurar:**
+- **LinkedIn** (linkedin.com/jobs) — o mais usado para escritório, tecnologia, gestão
+- **Net-Empregos** (net-empregos.com) — o maior portal generalista português
+- **ITJobs** (itjobs.pt) — exclusivo para tecnologia e IT
+- **Sapo Emprego** (emprego.sapo.pt) — generalista, muitas ofertas nacionais
+- **Indeed Portugal** (indeed.pt) — agrega ofertas de vários portais
+- **Expresso Empregos** (expressoemprego.pt) — generalista
+- **IEFP** (iefp.pt) — Instituto do Emprego, ofertas oficiais + formações gratuitas
+- **Glassdoor** (glassdoor.pt) — ver salários e avaliações de empresas
+**Para áreas específicas:**
+- Saúde: ordemdosmedicos.pt, ordemdosenfermeiros.pt
+- Educação: recrutamento-escola.mec.pt
+- Hotelaria/restauração: hoteljob.pt, turijobs.com
+- Construção: construlink.com
+**Como procurar emprego como imigrante:**
+1. Ter NIF e NISS activos (obrigatório para contratar)
+2. Criar CV em formato Europass (europass.eu) — o mais aceite em Portugal
+3. Carta de apresentação em português (mesmo que o trabalho seja em inglês)
+4. Registar no IEFP como desempregado — dá acesso a formações e apoios
+5. LinkedIn em português + perfil actualizado
+**Salários médios em Portugal (2026):**
+- Salário mínimo nacional: **920€/mês** (bruto, 14 meses) — líquido ~818,80€ (isento de IRS)
+- Meta: 1.020€ em 2028, 1.100€ em 2029
+- Tecnologia (júnior): 1.200–1.800€ | Sénior: 2.500–4.000€
+- Saúde (enfermeiro): 1.100–1.600€ | Médico: 2.000–4.500€
+- Hotelaria: 920–1.300€
+- Construção: 970–1.500€
+**Direitos laborais essenciais:**
+- Contrato de trabalho obrigatório por escrito (sem termo = efectivo)
+- 22 dias úteis de férias/ano + subsídio de férias (1 mês extra)
+- Subsídio de Natal (13º mês)
+- Período experimental: 90 dias (geral), 180 dias (quadros), 240 dias (gestão)
+- Baixa médica: SNS paga a partir do 4º dia (primeiros 3 dias sem remuneração)
+- Despedimento sem justa causa: tem direito a indemnização (12 dias/ano)
+**Para imigrantes — atenção:**
+- Visto de trabalho D1: precisas do contrato ANTES de pedir o visto
+- Depois de entrar em Portugal, tens 4 meses para pedir AR na AIMA
+- Com AR podes mudar de empregador sem problemas
+- Contrato a recibos verdes (freelance): abre actividade nas Finanças primeiro
+**IEFP — Centro de Emprego:**
+- Regista-te em iefp.pt ou no Centro de Emprego da tua área
+- Acesso a: bolsa de emprego, formações gratuitas, apoios à colocação
+- Linha de apoio: 300 041 414
+### MORADIA / ARRENDAMENTO
+**Onde procurar casa:**
+- idealista.pt — o maior portal imobiliário de Portugal
+- imovirtual.com — boa variedade de oferta
+- uniplaces.com — focado em estudantes e curta duração
+- Grupos Facebook locais (ex: "Quartos Lisboa", "Arrendamento Porto")
+- OLX.pt — anúncios particulares, atenção a fraudes
 
-### TAXAS AIMA — ACTUALIZADAS EM 1 MARÇO 2026
-As taxas subiram ~25-33% em 1 março 2026 (primeira actualização desde outubro 2023)
+**Preços médios de arrendamento (2026):**
+- Lisboa (quarto): 600–900€ | Apartamento T1: 1.200–1.800€
+- Porto (quarto): 450–700€ | T1: 900–1.400€
+- Outras cidades (Braga, Coimbra, Setúbal): 300–600€ quarto
 
-Valores actuais:
-- Renovação AR CPLP/Brasil: ~79€ (online) / ~99€ (presencial)
-- Renovação AR outros países: ~120€ (online) / ~160€ (presencial)
-- Reagrupamento familiar: 133€
-- AR actividade profissional: 133€
-- Nacionalidade portuguesa: ~170€
-- Prorrogação visto procura trabalho: 66,60€
-- Concessão AR investimento: até 8.418€
-Confirmar valores exactos em aima.gov.pt — actualizam todo 1 de março com inflação
+**Direitos do inquilino — essencial:**
+- Contrato de arrendamento obrigatório por escrito
+- Registo do contrato nas Finanças (AT) — responsabilidade do senhorio
+- Depósito máximo legal: 2 meses de renda
+- Prazo mínimo de contrato: 1 ano (salvo acordo diferente)
+- Rescisão pelo inquilino: aviso de 60 dias (contratos até 1 ano) ou 120 dias
+- Rescisão pelo senhorio: apenas com justa causa ou no fim do contrato
+- Em caso de conflito: NRAU — Balcão do Arrendatário nas Finanças
 
-### NOVIDADES AIMA 2026
-- UNEF (Unidade Nacional Estrangeiros e Fronteiras / PSP) — fiscaliza e pode pedir documentos na rua. Andar SEMPRE com documentos ou comprovativo de processo
-- Portal único AIMA — em desenvolvimento, previsto lançar em 2026
-- Estudantes que passaram a trabalhar — canal específico no formulário AIMA (não é pelo Portal Renovações). Escolher: AR → Dispensa Visto → Art. 122º alíneas o) e p)
-- Cartões devolvidos pelos CTT — titulares serão convocados (verificar email)
-- ARs expiradas após 30/06/2025 renovam EXCLUSIVAMENTE online em aima.gov.pt/renovacoes
+**Documentos para arrendar:**
+- Passaporte + visto ou AR válida
+- NIF português (obrigatório)
+- Comprovativos de rendimento (últimos 3 recibos de vencimento ou extractos)
+- Alguns senhorios pedem fiador português
 
-### SITUAÇÃO CARTÕES CADUCADOS (março 2026)
-- Expiradas até 30/06/2025 → válidas até 15/04/2026
-- Expiradas após 30/06/2025 → válidas por 6 meses desde o vencimento
-- Bancos, IEFP, SNS, Finanças DEVEM aceitar — recusa é ilegal
-- ATENÇÃO: NÃO aceites noutros países Schengen
+### SEGURO DE SAÚDE
+**SNS — Serviço Nacional de Saúde (público):**
+- Gratuito para residentes legais com número de utente
+- Cobre: consultas, urgências, internamento, maternidade, medicamentos comparticipados
+- Limitação: tempo de espera longo para consultas de especialidade (meses)
+- Centro de Saúde da área de residência para cuidados primários
 
----
+**Saúde privada — quando considerar:**
+- Consultas de especialidade mais rápidas (dias vs meses)
+- Seguros populares: Médis, AdvanceCare, Multicare, Fidelidade Saúde
+- Preço médio: 30–80€/mês (individual) | 80–200€/mês (família)
+- Muitas empresas oferecem seguro de saúde como benefício — pergunta antes de assinar contrato
+- Clínicas low-cost sem seguro: Clínica Médis, HealthyLife, Dr. Consulta
 
-## VISTOS — TIPOS PRINCIPAIS
-- **D1 Trabalho subordinado:** contrato com empresa portuguesa (mín. 1 ano, mín. salário mínimo 870€)
-- **D2 Empreendedor:** plano de negócios aprovado IAPMEI ou incubadora certificada
-- **D3 Altamente qualificado:** contrato + salário mín. 1,5x salário médio
-- **D4 Estudante:** inscrição em instituição reconhecida DGES
-- **D6 Reagrupamento familiar:** AR válida há mín. 2 anos (nova regra 2025)
-- **D7 Rendimento passivo:** pensão, rendas, rendimento passivo estrangeiro
-- **D8 Nómada Digital:** rendimento estrangeiro mín. 3.480€/mês (4x salário mínimo)
-- **Golden Visa:** 500.000€ em fundos de investimento ou 250.000€ em cultura (imobiliário residencial excluído desde 2023)
-- **Visto Procura Trabalho Qualificado:** novo, aguarda regulamentação — só para qualificados
+**Dica para imigrantes recém-chegados:**
+- Nos primeiros meses usa o SNS para urgências — é gratuito
+- Avalia seguro privado após estabilizar emprego e rendimento
 
----
+### CARTA DE CONDUÇÃO
+**🆕 Acordo Portugal-Brasil (em vigor desde fev/2026 — Decreto n.º 4/2026):**
+- A CNH brasileira passou a ser formalmente reconhecida em Portugal (e vice-versa)
+- Permite conduzir com a carta brasileira; sendo residente, deve fazer a troca no IMT
 
-## NIF, NISS, SNS
-- **NIF:** portaldasfinancas.gov.pt — gratuito, mesmo dia. Sem morada em PT precisas de representante fiscal
-- **NISS:** seg-social.pt ou NISS na HORA — gratuito, 1-2 semanas. Obrigatório para trabalhar
-- **SNS / Número de Utente:** Centro de Saúde da área de residência — gratuito. Linha SNS24: 808 24 24 24
-- **Contribuição Segurança Social trabalhador:** 11% do salário bruto (descontado pelo empregador)
-- **Contribuição Segurança Social empregador:** 23,75% do salário bruto
+**Troca de carta estrangeira por portuguesa:**
+- **UE/EEE**: conduz até ao fim da validade; regista a morada no IMT em 60 dias (gratuito). Troca sem exame
+- **Países com acordo bilateral / CPLP / OCDE** (Brasil, Angola, Cabo Verde...): pode conduzir 185 dias se NÃO residente. Sendo residente, troca no IMT em regra até **2 anos** após obter residência — sem exame
+- **Países sem acordo**: tens de fazer exame de condução em Portugal
 
----
+**Processo (portal IMTonline):**
+1. Submete o pedido em imt.pt / IMTonline
+2. Atestado médico eletrónico (enviado pelo médico ao IMT); avaliação psicológica para categorias profissionais (C/D/E); tradução se a carta não estiver em PT/EN/FR/ES
+3. A carta portuguesa mantém a validade da carta original (não a estende)
 
-## RECIBO VERDE / TRABALHO INDEPENDENTE
-- Inscrever no Portal das Finanças: portaldasfinancas.gov.pt → Início de Actividade
-- **IVA:** isento até 14.500€/ano (regime simplificado)
-- **IRS:** retenção na fonte 25% (não residentes) ou tabelas normais (residentes)
-- **Segurança Social:** 21,4% sobre 70% dos rendimentos (pode pedir isenção no 1.º ano)
-- Código de actividade (CAE/CIRS) obrigatório
+**Conduzir com carta estrangeira:**
+- Passado o prazo de troca sem a fazer, deixa de poder conduzir até concluir o processo
 
----
+**Compra de carro:**
+- Carro novo: ISV incluído no preço | Importado: paga ISV + IUC anual
+- Seguro automóvel obrigatório (responsabilidade civil)
+- Seguros populares: Fidelidade, Allianz, Generali, Tranquilidade | ~300–600€/ano
 
-## IRS E FISCALIDADE
-- **Residência fiscal:** mais de 183 dias em Portugal OU habitação permanente
-- **IRS para residentes:** tabelas progressivas de 13% a 48%
-- **IRS para não residentes:** 25% sobre rendimentos portugueses
+### VIAJAR NA UNIÃO EUROPEIA
+**Com Autorização de Residência portuguesa:**
+- Podes viajar livremente pelos 27 países da UE + Suíça, Noruega, Islândia (Schengen)
+- Não precisas de visto adicional para visitas curtas (até 90 dias)
+- Precisas de: AR válida + passaporte do teu país
+- **Importante:** a AR não substitui o passaporte — precisas de ambos
 
-**NHR (Residente Não Habitual) — ENCERRADO:**
-- Regime revogado em 01/01/2024. Prazo transitório encerrado em 31/03/2025
-- Quem estava inscrito antes de 01/01/2024: mantém os benefícios até perfazer 10 anos
+**Regra de 90/180 dias:**
+- Fora da UE mas no espaço Schengen: máx 90 dias em cada 180 dias
+- Como residente em Portugal, isto não te afecta dentro do espaço Schengen
+- Viagens a países fora do Schengen (ex: Reino Unido) requerem visto próprio
 
-**IFICI — "NHR 2.0" (substituto, em vigor desde março 2025):**
-- Regime fiscal de Incentivo à Investigação Científica e Inovação
-- Taxa especial de 20% sobre rendimentos de trabalho (dependente ou independente)
-- Só para profissionais qualificados em actividades de elevado valor acrescentado
-- Não inclui rendimentos passivos (rendas, pensões, dividendos) — diferença do NHR antigo
-- Válido por 10 anos consecutivos
-- Requisito: não ter sido residente fiscal em Portugal nos últimos 5 anos
-- Inscrição: Portal das Finanças após obter NIF e residência fiscal
+**Trabalhar noutro país da UE:**
+- Com AR portuguesa podes trabalhar em qualquer país da UE
+- Tens de te registar como residente no país de destino se ficares mais de 3 meses
+- Direitos de Segurança Social são transferíveis entre países da UE
 
----
+**Regressar a Portugal:**
+- Sem limite de tempo fora se mantiveres a AR activa
+- AR pode ser cancelada se ficares fora de Portugal mais de 6 meses consecutivos (ou 8 em 24 meses) sem justificação
 
-## CIDADANIA
-- **Por residência (lusófonos — Brasil, Angola, etc.):** 5 anos de residência legal
-- **Por residência (outros países):** 10 anos de residência legal
-- **Taxa:** 250€ | Prazo médio: 18-36 meses | Estado: justica.gov.pt
-- **Por descendência:** 175€, 6-12 meses
-- **Por casamento/união de facto:** mín. 3 anos de casamento, 250€
-- **Requisitos:** sem condenações graves, provar ligação à comunidade portuguesa (língua, visitas, laços)
+**🆕 EES e ETIAS (novos sistemas de fronteira):**
+- **EES (Sistema de Entrada/Saída):** em funcionamento desde 12 out/2025, pleno desde 10 abr/2026. Regista a biometria de não-UE nas fronteiras Schengen (substitui o carimbo no passaporte)
+- **ETIAS:** autorização eletrónica prévia (NÃO é visto), custa ~20€, para viajantes isentos de visto (ex.: turistas brasileiros, até 90 dias). Previsto para o ÚLTIMO TRIMESTRE de 2026 — ainda NÃO está ativo; por agora não é preciso fazer nada
+- **Quem tem AR ou visto de longa duração em Portugal NÃO precisa de ETIAS**
 
----
+### IRS — DECLARAÇÃO DE IMPOSTOS (2026)
+**Quem é obrigado a declarar:**
+- Todos os residentes fiscais em Portugal com rendimentos
+- Prazo: Abril de cada ano (rendimentos do ano anterior)
+- Portal: portaldasfinancas.gov.pt → IRS → Entregar Declaração
 
-## MORADIA E ARRENDAMENTO
-- Exigir SEMPRE contrato de arrendamento escrito
-- Registar contrato nas Finanças (o senhorio é obrigado — podes forçar)
-- Lisboa: quartos 500-900€, T1 900-1400€ | Porto: 400-700€, T1 700-1100€ | Resto do país: mais barato
-- **Portais:** idealista.pt, imovirtual.com, uniplaces.com (estudantes)
-- **Direitos do inquilino:** 30 dias de aviso para visitas do senhorio; não pode ser despejado sem decisão judicial; tem direito a recibo
+**Novidades IRS 2026:**
+- Salário mínimo (920€) isento de IRS — líquido ~818,80€ (só desconta 11% SS)
+- Mínimo de existência: 12.880€/ano (quem ganha até este valor anual está isento)
+- Escalões actualizados +3,51% (evita subir de escalão com aumentos por inflação)
+- Taxas reduzidas 0,3% do 2º ao 5º escalão — beneficia classe média
 
----
+**Residência fiscal:**
+- És residente fiscal se estiveres em Portugal mais de 183 dias/ano
+- Ou se tiveres habitação permanente em Portugal
 
-## BANCOS
-- **ActivoBank** ⭐ — 100% digital, sem mensalidade, só NIF + passaporte. O mais fácil para imigrantes
-- **Millennium BCP** — presencial, aceita visto válido + NIF
-- **Novobanco** — conta jovem gratuita até 30 anos
-- **Revolut / Wise** — abrem com passaporte, sem morada PT. Úteis nos primeiros meses
-- Documentos: passaporte, NIF, comprovativo de morada
+**Regime IFICI (ex-NHR — novo desde 2024):**
+- Substituiu o NHR para novos beneficiários a partir de 1 jan/2024 (art. 58.º-A do CIRS)
+- Taxa flat 20% sobre trabalho dependente e independente de fonte portuguesa, durante 10 anos
+- SÓ para atividades estratégicas (investigação, tecnologia, inovação, saúde, energia, startups)
+- ⚠️ Ao contrário do antigo NHR, NÃO abrange reformados/pensões estrangeiras — estes são tributados pelo regime geral
+- Requisito: não ter sido residente fiscal em PT nos 5 anos anteriores | pedir no Portal das Finanças
+- Quem já tinha NHR activo antes de 2024 mantém até ao fim do prazo
 
----
+**IRS automático:**
+- O portal pré-preenche a declaração — confirmas e submetes
+- Reembolso médio: 200–500€ (chega em 3–5 meses após submissão)
 
-## TELEMÓVEIS
-- **NOS** — melhor cobertura geral, pré-pagos a partir de 10€/mês
-- **MEO** — planos "Go" a partir de 7€/mês
-- **Vodafone** — excelente cobertura urbana
-- Pré-pago no aeroporto ou supermercado: sem NIF nem morada
+### ESCOLA PARA FILHOS
+**Sistema educativo português:**
+- Educação obrigatória: 6 aos 18 anos
+- Escolas públicas: gratuitas para todos os residentes legais
+- Matrícula: na escola pública da área de residência
+- Documentos: passaporte da criança, AR ou visto, comprovativo de morada, boletim de vacinas
+- Equivalência de anos escolares: feita na escola — crianças são colocadas por idade
 
----
+**Creche e pré-escolar:**
+- IPSS (instituições solidárias): mensalidade calculada por rendimento familiar (20–200€/mês)
+- Privadas: 400–800€/mês
+- Pré-escolar público (3-6 anos): gratuito nas escolas públicas
 
-## EMPREGO
-- Portais: LinkedIn, Net-Empregos, ITJobs, Indeed Portugal, IEFP (iefp.pt)
-- **Salário mínimo 2026:** 870€/mês (confirmar actualização em portugal.gov.pt)
-- **Direitos:** 22 dias úteis de férias + subsídio, 13º mês (subsídio de Natal), baixa médica paga pela SS
-- **IEFP:** formações gratuitas + bolsa de emprego + subsídio de desemprego após 360 dias descontos
-- CV em formato Europass: europass.eu
+**Apoio ao imigrante:**
+- Programa PLNM (Português como Língua Não Materna) nas escolas públicas — gratuito
+- ACIDI/APAV têm apoio a famílias imigrantes
 
----
+### APOSTILA E LEGALIZAÇÃO DE DOCUMENTOS
+**O que é a Apostila de Haia:**
+- Certificação internacional que valida documentos em países signatários
+- Portugal e Brasil são signatários — documentos brasileiros apostilados são válidos em PT
 
-## PORTAIS OFICIAIS
-- AIMA: aima.gov.pt
-- Finanças: portaldasfinancas.gov.pt
-- Segurança Social: seg-social.pt
-- SNS: sns24.gov.pt
-- Justiça/Cidadania: justica.gov.pt
-- Serviços online: eportugal.gov.pt
-- Calcular dias úteis: diasuteis.pt
+**Onde apostilar no Brasil:** Cartório de Notas ou Tabelionato
+**Onde apostilar em Portugal:** IRN (conservatória) ou notário
 
-Sou uma ferramenta de informação — não presto aconselhamento jurídico.
-`;
+**Documentos que frequentemente precisam de apostila:**
+- Registo de nascimento
+- Registo criminal
+- Certidão de casamento
+- Diplomas académicos (dependendo da origem)
 
-// ─── EMAIL DE BOAS-VINDAS ────────────────────────────────────────────────────
-const WELCOME_EMAILS = {
-  pt: {
-    subject: "Bem-vindo/a à NOVU 🇵🇹",
-    html: (name) => `
-<!DOCTYPE html><html><body style="font-family:'DM Sans',Arial,sans-serif;background:#F5F9FF;margin:0;padding:24px;">
-<div style="max-width:560px;margin:0 auto;background:white;border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(10,37,64,0.08);">
-  <div style="background:#0A2540;padding:32px 36px;text-align:center;">
-    <h1 style="color:white;font-size:2rem;margin:0;font-family:Georgia,serif;">N<span style="color:#2E7FD4">O</span>VU</h1>
-    <p style="color:rgba(255,255,255,0.7);margin:8px 0 0;font-size:0.9rem;">Do avião à cidadania</p>
-  </div>
-  <div style="padding:32px 36px;">
-    <h2 style="color:#0A2540;font-size:1.3rem;margin:0 0 16px;">Olá${name ? ', ' + name : ''}! 👋</h2>
-    <p style="color:#4A6580;line-height:1.7;margin:0 0 20px;">A tua conta NOVU está activa. Tens acesso ilimitado ao assistente de IA e a todas as funcionalidades da plataforma.</p>
-    <p style="color:#4A6580;font-weight:600;margin:0 0 16px;">O que podes fazer agora:</p>
-    <div style="display:flex;flex-direction:column;gap:10px;">
-      <a href="https://novuai.pt" style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:#F5F9FF;border-radius:10px;text-decoration:none;border:1px solid #E8EEF5;">
-        <span style="font-size:1.4rem;">🤖</span>
-        <div><div style="color:#0A2540;font-weight:700;font-size:0.92rem;">Assistente IA</div><div style="color:#8FA3BC;font-size:0.8rem;">Perguntas ilimitadas sobre burocracia portuguesa</div></div>
-      </a>
-      <a href="https://novuai.pt/documentos.html" style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:#F5F9FF;border-radius:10px;text-decoration:none;border:1px solid #E8EEF5;">
-        <span style="font-size:1.4rem;">📄</span>
-        <div><div style="color:#0A2540;font-weight:700;font-size:0.92rem;">Documentos PDF</div><div style="color:#8FA3BC;font-size:0.8rem;">15 modelos essenciais — declarações, cartas AIMA e mais</div></div>
-      </a>
-      <a href="https://novuai.pt/empregos.html" style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:#F5F9FF;border-radius:10px;text-decoration:none;border:1px solid #E8EEF5;">
-        <span style="font-size:1.4rem;">💼</span>
-        <div><div style="color:#0A2540;font-weight:700;font-size:0.92rem;">Empregos</div><div style="color:#8FA3BC;font-size:0.8rem;">Vagas verificadas com salário visível</div></div>
-      </a>
-      <a href="https://novuai.pt/curriculo.html" style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:#F5F9FF;border-radius:10px;text-decoration:none;border:1px solid #E8EEF5;">
-        <span style="font-size:1.4rem;">📝</span>
-        <div><div style="color:#0A2540;font-weight:700;font-size:0.92rem;">Currículo Europeu</div><div style="color:#8FA3BC;font-size:0.8rem;">Gera o teu CV em formato Europass</div></div>
-      </a>
-    </div>
-    <div style="margin-top:28px;padding:16px;background:#EBF4FF;border-radius:10px;border-left:4px solid #2E7FD4;">
-      <p style="color:#1A4A7A;font-size:0.85rem;margin:0;line-height:1.6;">💡 <strong>Dica:</strong> Guarda este email para voltares à NOVU quando precisares. Estamos sempre aqui.</p>
-    </div>
-  </div>
-  <div style="padding:20px 36px;border-top:1px solid #E8EEF5;text-align:center;">
-    <p style="color:#8FA3BC;font-size:0.78rem;margin:0;">© 2026 NOVU · <a href="https://novuai.pt/privacidade.html" style="color:#2E7FD4;">Privacidade</a> · <a href="https://novuai.pt" style="color:#2E7FD4;">novuai.pt</a></p>
-  </div>
-</div>
-</body></html>`,
-  },
-  en: {
-    subject: "Welcome to NOVU 🇵🇹",
-    html: (name) => `
-<!DOCTYPE html><html><body style="font-family:Arial,sans-serif;background:#F5F9FF;margin:0;padding:24px;">
-<div style="max-width:560px;margin:0 auto;background:white;border-radius:16px;overflow:hidden;">
-  <div style="background:#0A2540;padding:32px 36px;text-align:center;">
-    <h1 style="color:white;font-size:2rem;margin:0;">N<span style="color:#2E7FD4">O</span>VU</h1>
-  </div>
-  <div style="padding:32px 36px;">
-    <h2 style="color:#0A2540;">Hello${name ? ', ' + name : ''}! 👋</h2>
-    <p style="color:#4A6580;line-height:1.7;">Your NOVU account is active. You have unlimited access to the AI assistant and all platform features.</p>
-    <p><a href="https://novuai.pt" style="background:#0A2540;color:white;padding:12px 28px;border-radius:50px;text-decoration:none;font-weight:700;">Go to NOVU →</a></p>
-  </div>
-</div></body></html>`,
-  },
-  es: {
-    subject: "Bienvenido/a a NOVU 🇵🇹",
-    html: (name) => `
-<!DOCTYPE html><html><body style="font-family:Arial,sans-serif;background:#F5F9FF;margin:0;padding:24px;">
-<div style="max-width:560px;margin:0 auto;background:white;border-radius:16px;overflow:hidden;">
-  <div style="background:#0A2540;padding:32px 36px;text-align:center;">
-    <h1 style="color:white;font-size:2rem;margin:0;">N<span style="color:#2E7FD4">O</span>VU</h1>
-  </div>
-  <div style="padding:32px 36px;">
-    <h2 style="color:#0A2540;">¡Hola${name ? ', ' + name : ''}! 👋</h2>
-    <p style="color:#4A6580;line-height:1.7;">Tu cuenta NOVU está activa. Tienes acceso ilimitado al asistente de IA y a todas las funcionalidades.</p>
-    <p><a href="https://novuai.pt" style="background:#0A2540;color:white;padding:12px 28px;border-radius:50px;text-decoration:none;font-weight:700;">Ir a NOVU →</a></p>
-  </div>
-</div></body></html>`,
-  },
-};
+**Se o teu país não é signatário:**
+- Legalização consular: no consulado português do teu país
+- Depois tradução juramentada em Portugal
+Sou uma ferramenta de informação — não presto aconselhamento jurídico.`;
 
-// Enviar email via Brevo
-async function sendWelcomeEmail(name, email, lang) {
-  const BREVO_KEY = process.env.BREVO_API_KEY;
-  if (!BREVO_KEY) return; // sem Brevo configurado, skip silencioso
-
-  const tpl = WELCOME_EMAILS[lang] || WELCOME_EMAILS.pt;
-  try {
-    await fetch("https://api.brevo.com/v3/smtp/email", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "api-key": BREVO_KEY,
-      },
-      body: JSON.stringify({
-        sender: { name: "NOVU", email: "noreply@novuai.pt" },
-        to: [{ email, name: name || email }],
-        subject: tpl.subject,
-        htmlContent: tpl.html(name),
-      }),
-    });
-    console.log("Welcome email sent to", email);
-  } catch (err) {
-    console.warn("Brevo email failed (non-critical):", err.message);
-  }
-}
-
-// ─── FAQ CACHE ───────────────────────────────────────────────────────────────
+// ─── FAQ CACHE ────────────────────────────────────────────────────────────────
 const FAQ = {
   "como tirar nif": "Para obter o NIF em Portugal:\n\n• **Online** (mais rápido): portaldasfinancas.gov.pt → registo de contribuinte\n• **Presencialmente**: qualquer Serviço de Finanças com passaporte e comprovativo de morada\n• Gratuito, feito no mesmo dia\n• Se ainda não resides em Portugal, precisas de um representante fiscal residente\n\nO NIF é o primeiro passo — precisas dele para abrir conta bancária, assinar contratos e quase tudo em Portugal. 🇵🇹",
-  "como tirar niss": "Para obter o NISS:\n\n• Online: seg-social.pt → Serviços Online → Identificação\n• Ou presencialmente num Centro Distrital da Segurança Social\n• Documentos: passaporte, NIF e comprovativo de morada\n• Gratuito — demora 1 a 2 semanas\n\nO NISS é obrigatório para trabalhar, aceder a subsídios e serviços sociais. 📋",
-  "como abrir atividade": "Para abrir actividade (recibo verde) nas Finanças:\n\n• Online: portaldasfinancas.gov.pt → Início de Actividade\n• Ou presencialmente num Serviço de Finanças\n• Precisas de: NIF, NISS e código de actividade (CAE/CIRS)\n• Gratuito\n\nIVA isento até 14.500€/ano. IRS retido na fonte: 25% (não residentes) ou tabela normal. 📊",
-  "numero de utente": "Para obter o número de utente SNS:\n\n• Vai ao Centro de Saúde da tua área de residência\n• Documentos: passaporte, NIF e comprovativo de morada portuguesa\n• Gratuito | Linha SNS 24: 808 24 24 24\n\nCom o número de utente tens acesso a consultas, urgências e medicamentos comparticipados. 🏥",
-  "qual o visto": "Portugal tem vários vistos. Os principais:\n\n• **D1 — Trabalho**: contrato com empresa portuguesa\n• **D7 — Rendimento passivo**: pensão, rendas, trabalho remoto estrangeiro\n• **D8 — Nómada Digital**: rendimento mín. ~3.480€/mês\n• **D2 — Empreendedor**: projecto aprovado pelo IAPMEI\n• **D4 — Estudante**: inscrição em universidade reconhecida\n• **D6 — Reagrupamento familiar**: familiar de residente\n• **Golden Visa**: investimento mín. 500.000€ em fundos\n\nQual é a tua situação? Posso dizer exactamente qual o visto certo. 🇵🇹",
-  "validar diploma": "Para reconhecimento de diploma em Portugal:\n\n**Diplomas universitários:**\n• Processo na instituição de ensino superior equivalente\n• Portal: dges.gov.pt | Prazo: 3-6 meses | Taxa: ~50-150€\n\n**Diplomas profissionais** (médicos, advogados, engenheiros): cada ordem tem o seu processo.\n\n**Apostila de Haia:** verifica se o teu país é signatário — alguns documentos precisam de apostila. 🎓",
-  "encontrar quarto": "Para encontrar quarto/casa em Portugal:\n\n• idealista.pt — o maior portal imobiliário\n• imovirtual.com\n• uniplaces.com — focado em estudantes\n• Grupos Facebook locais de arrendamento\n\nExige sempre contrato de arrendamento escrito e regista-o nas Finanças.\nLisboa/Porto: quartos ~400-700€/mês. Fora das capitais: mais barato. 🏠",
-  "manifestacao de interesse": "A manifestacao de interesse foi EXTINTA pela Lei 61/2025 (outubro 2025).\n\nJa nao e possivel entrar como turista e depois pedir autorizacao de residencia.\n\nAgora e obrigatorio obter visto adequado no consulado do teu pais ANTES de vir.\nCidadaos CPLP (Brasil, Angola, etc.) tambem precisam de visto de residencia.\n\nRecomendo consultar advogado especializado.",
 
-  "lei 61 2025": "A Lei 61/2025 (em vigor desde 23/10/2025) mudou as regras de imigracao em Portugal:\n\n- Fim da manifestacao de interesse\n- Visto de procura de trabalho suspenso (novo so para qualificados, aguarda regulamentacao)\n- CPLP tambem precisa de visto do consulado\n- Reagrupamento familiar mais exigente: 2 anos de AR, provar alojamento e meios\n\nProcessos abertos antes de 23/10/2025 seguem regras antigas.",
+  "como tirar niss": "Para obter o NISS:\n\n• Online: seg-social.pt → Serviços Online → Identificação\n• Ou presencialmente num Centro Distrital da Segurança Social\n• Documentos necessários: passaporte, NIF e comprovativo de morada\n• Gratuito — demora 1 a 2 semanas\n\nO NISS é obrigatório para trabalhar, aceder a subsídios e serviços sociais em Portugal. 📋",
 
-  "deferimento tacito": "O deferimento tacito e um direito legal — quando a AIMA nao decide no prazo, o pedido considera-se automaticamente aprovado.\n\nRENOVACAO de AR:\n• Prazo: 60 dias uteis apos pagamento das taxas (Art. 82 Lei 23/2007)\n• Calcula em: diasuteis.pt\n\nComo agir:\n1. Guarda comprovativos de pagamento e agendamento\n2. Carta registada com aviso de recepcao a AIMA (invocar deferimento tacito + numero processo)\n3. Email para geral@aima.gov.pt com mesmos documentos\n4. Pede Certidao de Deferimento Tacito em ePortugal.gov.pt (valida 1 ano)\n\nConcessao inicial: mais complexo — recomenda-se advogado.",
+  "como abrir atividade": "Para abrir actividade (recibo verde) nas Finanças:\n\n• Online: portaldasfinancas.gov.pt → Início de Actividade\n• Ou presencialmente num Serviço de Finanças\n• Precisas de: NIF, NISS e código de actividade (CAE/CIRS)\n• Gratuito\n\nImportante:\n• IVA isento até 14.500€/ano (regime simplificado)\n• IRS retido na fonte: 25% (não residentes) ou tabela normal (residentes)\n• Confirma o código de actividade correcto antes de abrir 📊",
 
-  "taxas aima 2026": "As taxas da AIMA subiram em 1 de março de 2026 (aumento de ~25-33%).\n\nValores actuais:\n• Renovação AR Brasil/CPLP: ~79,10€\n• Renovação AR outros países: ~160€\n• Reagrupamento familiar: 133€\n• Nacionalidade portuguesa: ~170€\n\nAs taxas actualizam-se todo 1 de março com base na inflação. Confirma sempre o valor exacto em aima.gov.pt antes de pagar.",
+  "numero de utente": "Para obter o número de utente SNS:\n\n• Vai ao Centro de Saúde da tua área de residência\n• Documentos: passaporte, NIF e comprovativo de morada portuguesa\n• Gratuito\n• Alternativa: liga para o SNS 24: 808 24 24 24\n\nCom o número de utente tens acesso a consultas, urgências e medicamentos comparticipados no SNS. 🏥",
 
-  "nhr ifici": "O NHR (Residente Nao Habitual) foi ENCERRADO em 2024.\n\nNovo substituto: IFICI (NHR 2.0), em vigor desde marco 2025:\n• Taxa especial 20% sobre rendimentos de trabalho por 10 anos\n• So para profissionais qualificados\n• NAO inclui rendimentos passivos (rendas, pensoes, dividendos)\n• Requisito: nao ter sido residente fiscal em Portugal nos ultimos 5 anos\n• Inscricao: Portal das Financas",
+  "qual o visto": "Portugal tem vários vistos para imigrantes. Os principais:\n\n• **D1 — Trabalho**: contrato OU promessa de contrato (mín. 12 meses, salário ≥ 920€)\n• **D7 — Rendimento passivo**: pensão, rendas, dividendos — mín. 920€/mês (1 salário mínimo)\n• **D8 — Nómada Digital**: trabalho remoto p/ entidade estrangeira, rendimento mín. **3.680€/mês**\n• **D2 — Empreendedor**: abrir empresa ou projecto aprovado pelo IAPMEI\n• **D4 — Estudante**: inscrição em universidade ou escola reconhecida\n• **D6 — Reagrupamento familiar**: familiar de residente (mín. 2 anos de AR desde Lei 61/2025)\n• **Novo visto qualificado**: para profissionais especializados à procura de emprego — 120 dias\n• **Golden Visa**: investimento mín. 500.000€ em fundos\n\n⚠️ **Importante (Lei 61/2025):** já não é possível entrar como turista e depois regularizar. O visto tem de ser pedido no consulado do país de origem antes de chegar a Portugal.\n\nQual é a tua situação? Posso dizer exactamente qual o visto certo para ti. 🇵🇹",
 
-  "bancos": "Para abrir conta bancária em Portugal como imigrante:\n\n• **ActivoBank** ⭐ — 100% digital, sem mensalidade, só NIF + passaporte. O mais fácil\n• **Millennium BCP** — presencial, aceita visto válido + NIF\n• **Novobanco** — conta jovem gratuita até 30 anos\n• **Revolut** — abre com passaporte, sem morada PT. Útil nos primeiros meses\n• **Wise** — excelente para receber em moeda estrangeira\n\nDocumentos: passaporte, NIF, comprovativo de morada. 🏦",
-  "telemovel": "Operadoras em Portugal para quem chega:\n\n• **NOS** — melhor cobertura, pré-pago ~10€/mês\n• **MEO** — planos \"Go\" a partir de ~7€/mês\n• **Vodafone** — excelente cobertura urbana, ~8€/mês\n\n**Dica:** nos primeiros dias compra pré-pago NOS ou MEO no aeroporto ou supermercado. Sem NIF nem morada.\n\nApós 3-6 meses podes mudar para plano contrato com desconto. 📱",
-  "site de emprego": "Portais de emprego em Portugal:\n\n• **LinkedIn** — escritório, tech e gestão\n• **Net-Empregos** — o maior portal generalista\n• **ITJobs** — exclusivo para tecnologia\n• **Indeed Portugal** — agrega ofertas de vários portais\n• **IEFP** (iefp.pt) — ofertas oficiais + formações gratuitas\n\nCV em formato Europass: europass.eu. Regista-te no IEFP — acesso a formações gratuitas. 💼",
-  "deferimento tacito": "O deferimento tácito é um direito legal em Portugal:\n\n**RENOVAÇÃO de AR (caso mais comum):**\n• Prazo: **60 dias úteis** após pagamento das taxas (Art. 82.º Lei 23/2007)\n• Se passar 60 dias úteis sem resposta → pedido considerado automaticamente aprovado\n\n**Como agir:**\n1. Calcula os dias úteis em diasuteis.pt\n2. Envia carta registada com aviso de recepção à sede da AIMA\n3. Envia email para geral@aima.gov.pt invocando deferimento tácito + número de processo\n4. Pede Certidão de Deferimento Tácito em ePortugal.gov.pt\n\n**CONCESSÃO INICIAL de AR:**\n• Prazo: 90 dias — mas atenção: a Lei n.º 61/2025 alterou as regras para concessão inicial. Recomendo consultar advogado.\n\n⚠️ Guarda sempre: comprovativo de pagamento, presença no agendamento e biometria. São a tua prova.",
-  "contrato de trabalho": "Para conseguir emprego em Portugal:\n\n• linkedin.com/jobs, net-empregos.com, itjobs.pt, iefp.pt\n\n**Direitos com contrato:**\n• 22 dias úteis de férias + subsídio de férias\n• Subsídio de Natal (13º mês)\n• Salário mínimo: 870€/mês (2025)\n\n**Visto D1:** precisas do contrato ANTES do visto. Após entrada tens 4 meses para pedir AR na AIMA. 💼",
+  "validar diploma": "Para reconhecimento de diploma em Portugal:\n\n**Diplomas universitários:**\n• Processo na instituição de ensino superior equivalente\n• Portal: dges.gov.pt | Prazo: 3-6 meses | Taxa: ~50-150€\n\n**Diplomas profissionais** (médicos, advogados, engenheiros):\n• Cada ordem profissional tem o seu processo\n\n**Apostila de Haia:** verifica se o teu país é signatário — alguns documentos precisam de apostila antes. 🎓",
+
+  "seguro de saude": "Saúde em Portugal para imigrantes:\n\n**SNS (público — gratuito):**\n• Acesso com número de utente\n• Cobre consultas, urgências, internamento, medicamentos\n• Limitação: espera longa para especialidades\n\n**Saúde privada:**\n• Seguros: Médis, AdvanceCare, Multicare, Fidelidade Saúde\n• Preço: 30–80€/mês (individual)\n• Muitas empresas oferecem como benefício — pergunta antes de assinar contrato\n\n**Dica:** nos primeiros meses usa o SNS para urgências. Avalia seguro privado depois de estabilizar. 🏥",
+
+  "carta de conducao": "Carta de condução em Portugal:\n\n**🆕 Acordo Portugal-Brasil (desde fev/2026):** a CNH brasileira é reconhecida em Portugal. Podes conduzir; sendo residente, deves trocar no IMT.\n\n**Troca por carta portuguesa:**\n• **UE/EEE:** conduz até ao fim da validade; regista a morada no IMT em 60 dias\n• **Brasil/CPLP/países com acordo:** podes conduzir; sendo residente, troca no IMT em regra **até 2 anos** após obteres residência — sem exame\n• **Países sem acordo:** tens de fazer exame em Portugal\n\n**Processo (IMTonline):**\n1. Submete o pedido em imt.pt\n2. Atestado médico eletrónico + avaliação psicológica (categorias profissionais) + tradução se necessário\n3. A carta portuguesa mantém a validade da original 🚗",
+
+  "viajar europa": "Viajar na UE com Autorização de Residência portuguesa:\n\n• Podes viajar livremente pelos 27 países da UE + Suíça, Noruega, Islândia\n• Precisas de: AR válida + passaporte do teu país (a AR não substitui o passaporte)\n• Para trabalhar noutro país da UE: regista-te como residente se ficares mais de 3 meses\n\n**🆕 Novos sistemas de fronteira:**\n• **EES** (Sistema de Entrada/Saída): já em funcionamento — regista a tua biometria nas fronteiras Schengen\n• **ETIAS**: autorização eletrónica (~20€) para turistas isentos de visto (ex.: brasileiros em viagem curta). Previsto para o fim de 2026 — ainda não está ativo. **Quem tem AR ou visto de longa duração NÃO precisa de ETIAS**\n\n**Atenção:** a AR pode ser cancelada se ficares fora de Portugal mais de 6 meses consecutivos sem justificação. ✈️",
+
+  "irs": "Declaração de IRS em Portugal (2026):\n\n• Prazo: Abril (rendimentos do ano anterior)\n• Portal: portaldasfinancas.gov.pt → IRS → Entregar Declaração\n• Sistema automático pré-preenche para casos simples — confirmas e submetes\n• Reembolso médio: 200–500€ (chega em 3–5 meses)\n\n**Novidades 2026:**\n• Salário mínimo (920€) isento de IRS\n• Mínimo de existência: 12.880€/ano — quem ganha até este valor está isento\n• Escalões actualizados +3,51% e taxas reduzidas 0,3% (2º ao 5º escalão)\n\n**Regime IFICI (substitui o NHR para novos beneficiários desde 2024):**\n• Taxa flat 20% para profissionais qualificados durante 10 anos\n• Ideal para nómadas digitais, investigadores e quadros qualificados\n• Pede no ano seguinte ao da chegada — quem já tinha NHR mantém 📊",
+
+  "escola filhos": "Matrículas escolares em Portugal para filhos de imigrantes:\n\n• Educação obrigatória: 6 aos 18 anos — gratuita nas escolas públicas\n• Matrícula na escola da área de residência\n• Documentos: passaporte da criança, AR ou visto, comprovativo de morada, boletim de vacinas\n• Programa PLNM (Português Língua Não Materna) — apoio gratuito nas escolas\n\n**Creche/pré-escolar:**\n• IPSS: 20–200€/mês (calculado por rendimento)\n• Pré-escolar público (3-6 anos): gratuito 🎒",
+
+  "apostila": "Apostila e legalização de documentos:\n\n• A Apostila de Haia valida documentos entre países signatários (Portugal e Brasil são signatários)\n• **No Brasil:** apostila em qualquer Cartório de Notas ou Tabelionato\n• **Em Portugal:** no IRN (conservatória) ou notário\n\n**Documentos que precisam de apostila:**\n• Registo de nascimento, registo criminal, certidão de casamento, diplomas\n\n**Se o teu país não é signatário:** legalização consular + tradução juramentada em Portugal 📄",
+
+  "manifestacao de interesse": "⚠️ A Manifestação de Interesse foi extinta pela Lei 61/2025 (em vigor desde 23 outubro 2025).\n\nJá não é possível entrar em Portugal como turista ou sem visto e depois pedir residência.\n\n**O que mudou:**\n• Visto obrigatório antes de entrar em Portugal\n• Quem tinha processo a decorrer antes de out/2025 segue as regras antigas\n• Excepções humanitárias e empreendedores em incubadoras certificadas\n\nConsulta um advogado se o teu processo estava em curso. 📋",
+
+  "cidadania portuguesa": "Cidadania portuguesa — Lei Orgânica n.º 1/2026 (em vigor desde 19 mai/2026):\n\n**Naturalização por residência (via mais comum):**\n• Lusófonos (CPLP) e cidadãos da UE: **7 anos** de residência legal (subiu de 5)\n• Outros países: **10 anos**\n• A contagem começa com o **título de residência em mãos** (já não desde o 1.º pedido)\n\n**✅ Processos pendentes protegidos:** quem já tinha o pedido entregue a 19 mai/2026 segue as regras antigas (incl. os 5 anos). A morosidade do Estado não penaliza.\n\n**Outras vias:**\n• Casamento/união de facto com português/a: **3 anos** (por declaração)\n• Descendência (filho/neto/bisneto de português): sem prazo geral — mas os netos passam a provar língua, cultura e história\n• Adoção por português/a: por efeito da lei\n\n**⚠️ Encerradas pela nova lei:**\n• Regime sefardita (novos pedidos)\n• Naturalização por ser pai/mãe de criança portuguesa\n\nPara casos perto dos prazos antigos, consulta um advogado. Portal: justica.gov.pt 🇵🇹",
+
+  "salario minimo": "Salário mínimo em Portugal em 2026:\n\n• **920€ brutos/mês** (subiu 50€ face a 2025)\n• Líquido: ~**818,80€** (desconta só 11% SS — isento de IRS)\n• Pago 14 vezes/ano (inclui subsídio férias e Natal)\n• Meta: 1.020€ em 2028 | 1.100€ em 2029\n\nO salário mínimo aplica-se a todos os trabalhadores com contrato, incluindo imigrantes. 💼",
+
+  "lei 61": "Lei 61/2025 — Nova Lei de Estrangeiros (em vigor 23 out/2025):\n\n⚠️ **Fim da Manifestação de Interesse**\n📋 **Visto obrigatório antes de entrar**\n👨‍👩‍👧 **Reagrupamento familiar**: mínimo 2 anos de AR (era 1 ano)\n🔄 **Renovações digitais**: aima.gov.pt — BR €58,10 | outros €185,30\n⏱️ **AIMA tem 9 meses** para decidir\n🏛️ **UNEF criada** — nova polícia de fronteiras na PSP\n\nProcessos iniciados antes de out/2025 seguem regras antigas. 📋",
+
+  "renovar ar": "Renovar Autorização de Residência em Portugal (2026):\n\n• Iniciar **3 meses antes** da validade\n• Portal: portal-renovacoes.aima.gov.pt — processo digital\n• Taxa: **€58,10** (brasileiros) | **€185,30** (outros países)\n• Documentos: passaporte, AR actual, comprovativo de morada, prova de emprego/rendimento, sem dívidas a Finanças e SS\n• Após aprovação: QR code provisório válido enquanto aguardas o cartão\n\n**Situação dos cartões expirados:**\n• Expirados **após** 30 jun/2025: válidos por 6 meses a partir da data de vencimento\n• Expirados **até** 30 jun/2025: prazo especial já terminou (15 abr/2026) — se não renovaste, estás irregular, age agora\n\n**🆕 Portal abre por mês:** o Portal das Renovações vai abrindo progressivamente — em meados de 2026 já cobre os títulos que caducam nos meses correntes. Consulta o teu mês em portal-renovacoes.aima.gov.pt\n\n⚠️ **UNEF activa:** polícia faz fiscalização em empresas e ruas — tem sempre documento válido ou comprovativo AIMA contigo. 🔄",
+
+  "unef": "A UNEF (Unidade Nacional de Estrangeiros e Fronteiras) é a polícia de fronteiras criada pela Lei 61/2025.\n\n⚠️ **Está em fiscalização activa:**\n• Batidas em empresas e ruas exigindo documentos válidos\n• Mais de 83 mil pessoas abordadas em 2025\n• Pede AR válida, comprovativo AIMA ou QR code de renovação\n\n**O que tens de ter sempre contigo:**\n• AR válida (dentro do prazo), ou\n• Comprovativo digital da AIMA (portal-renovacoes.aima.gov.pt), ou\n• QR code provisório emitido após aprovação da renovação\n\nSe fores abordado sem documentos: descarrega o comprovante no portal antes de sair. 🪪",
+
+  "curso profissionalizante": "⚠️ **Nova restrição proposta (7 mai/2026 — ainda não em vigor):**\n\nO Governo aprovou proposta de lei que exige **visto consular prévio** para quem quiser entrar como turista e depois matricular-se em cursos profissionalizantes para pedir AR.\n\n**O que muda quando entrar em vigor:**\n• Já não será possível entrar como turista → matricular → pedir AR\n• Terás de pedir o visto no consulado português do teu país antes de vir\n\n**Por agora:** a regra actual ainda permite a matrícula com visto de turista enquanto a proposta não for aprovada na Assembleia da República.\n\nSe planeias vir estudar em curso profissionalizante, age antes desta lei entrar em vigor. 📋",
+
+  "comprovativo aima": "O comprovativo digital da AIMA prova a tua situação migratória enquanto aguardas o cartão.\n\n**Onde obter:** portal-renovacoes.aima.gov.pt após submeter pedido\n• Tem QR code verificável em tempo real\n• Mostra: identificação, fase do processo, data do pedido\n\n**Para que serve:**\n• Mostrar à UNEF em fiscalizações\n• Serviços públicos (atenção: SNS e Seg. Social por vezes não aceitam)\n• Bancos (alguns aceitam, outros não)\n\n⚠️ Não substitui o cartão de residência — é temporário. Se entidades recusarem, contacta a AIMA ou um advogado. 📄",
+
 };
 
+
 function normalizeFAQ(text) {
-  return text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9 ]/g, "").trim();
+  return text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9 ]/g, "")
+    .trim();
 }
+
 function checkFAQ(userMessage) {
   const normalized = normalizeFAQ(userMessage);
   for (const [key, answer] of Object.entries(FAQ)) {
@@ -368,8 +405,22 @@ function checkFAQ(userMessage) {
   }
   return null;
 }
-
 // ─────────────────────────────────────────────────────────────────────────────
+
+// ── TÓPICOS QUE ACTIVAM SUGESTÃO DE AJUDA PERSONALIZADA ─────────────
+const LEAD_TRIGGER_TOPICS = [
+  'renovar', 'renovação', 'ar expirada', 'ar vencida', 'cartão expirou',
+  'cartão venceu', 'não consigo renovar', 'erro no portal', 'portal aima',
+  'unef', 'fiscalização', 'irregular', 'situação irregular',
+  'manifestação de interesse', 'reagrupamento', 'visto recusado',
+  'indeferido', 'processo parado', 'aima demora', 'aima não responde'
+];
+
+function checkLeadTrigger(message) {
+  const msg = (message || '').toLowerCase();
+  return LEAD_TRIGGER_TOPICS.some(t => msg.includes(t));
+}
+
 const rateLimitMap = new Map();
 
 module.exports = async function handler(req, res) {
@@ -378,28 +429,19 @@ module.exports = async function handler(req, res) {
   }
 
   const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
-  const { messages, action, name, email, lang, ref } = body;
+  const { messages, action, name, email, lang } = body;
   const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress || "unknown";
 
-  // ── REGISTO ────────────────────────────────────────────────────────────────
+  // ── REGISTO ───────────────────────────────────────────────────────────────
   if (action === "register") {
-    if (!email) return res.status(400).json({ error: "Email obrigatório" });
+    if (!email) {
+      return res.status(400).json({ error: "Email obrigatório" });
+    }
     try {
-      const { cidade, pais } = body;
-      const upsertData = { name, email, lang, unlocked: true };
-      if (ref && ref.trim()) upsertData.ref = ref.trim().toLowerCase();
-      if (cidade && cidade.trim()) upsertData.cidade = cidade.trim();
-      if (pais && pais.trim()) upsertData.pais_origem = pais.trim();
-
       const { error } = await supabase
         .from("waitlist")
-        .upsert(upsertData, { onConflict: "email" });
-
+        .upsert({ name, email, lang, unlocked: true }, { onConflict: "email" });
       if (error) throw error;
-
-      // Enviar email de boas-vindas (não bloqueia a resposta)
-      sendWelcomeEmail(name, email, lang || "pt").catch(() => {});
-
       return res.status(200).json({ success: true, unlocked: true });
     } catch (err) {
       console.error("Supabase error:", err);
@@ -407,7 +449,7 @@ module.exports = async function handler(req, res) {
     }
   }
 
-  // ── RATE LIMIT ─────────────────────────────────────────────────────────────
+  // ── RATE LIMIT ────────────────────────────────────────────────────────────
   const userEmail = body.userEmail || null;
   let isRegistered = false;
   if (userEmail) {
@@ -428,21 +470,28 @@ module.exports = async function handler(req, res) {
     rateLimitMap.set(key, { count: 0, resetAt: now + windowMs });
   }
   const rateData = rateLimitMap.get(key);
-  if (now > rateData.resetAt) { rateData.count = 0; rateData.resetAt = now + windowMs; }
+  if (now > rateData.resetAt) {
+    rateData.count = 0;
+    rateData.resetAt = now + windowMs;
+  }
   if (rateData.count >= limit) {
-    return res.status(429).json({ error: "Limite de perguntas atingido", requiresEmail: !isRegistered });
+    return res.status(429).json({
+      error: "Limite de perguntas atingido",
+      requiresEmail: !isRegistered,
+    });
   }
   rateData.count++;
 
-  // ── FAQ CACHE ──────────────────────────────────────────────────────────────
+  // ── FAQ CACHE ─────────────────────────────────────────────────────────────
   const lastUserMessage = messages?.[messages.length - 1]?.content || "";
   const faqAnswer = checkFAQ(lastUserMessage);
+  const suggestHelp = checkLeadTrigger(lastUserMessage);
   if (faqAnswer) {
     console.log("FAQ cache hit:", lastUserMessage);
-    return res.status(200).json({ reply: faqAnswer, fromCache: true });
+    return res.status(200).json({ reply: faqAnswer, fromCache: true, suggestHelp });
   }
 
-  // ── API ANTHROPIC ──────────────────────────────────────────────────────────
+  // ── API ANTHROPIC ─────────────────────────────────────────────────────────
   try {
     const response = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
@@ -467,8 +516,7 @@ module.exports = async function handler(req, res) {
 
     const data = await response.json();
     const reply = data.content?.[0]?.text || "Não consegui obter uma resposta. Tenta novamente.";
-    return res.status(200).json({ reply });
-
+    return res.status(200).json({ reply, suggestHelp });
   } catch (err) {
     console.error("Handler error:", err);
     return res.status(500).json({ error: "Erro interno. Tenta novamente." });
