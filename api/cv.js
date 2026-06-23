@@ -11,19 +11,36 @@ const MAX_CHARS = 7000;              // corta CV/vaga para controlar tokens
 // ── PROMPTS ───────────────────────────────────────────────────────────────────
 const SCORE_SYSTEM = `És o motor de análise de currículos da NOVU.
 Recebes o currículo (CV) de um utilizador e a descrição de uma vaga.
-Avalias a compatibilidade como um sistema ATS faria: comparas o título do cargo e as palavras-chave (sobretudo competências técnicas) da vaga com o conteúdo do CV.
+Avalias a compatibilidade como um sistema ATS faria: comparas o título do cargo e as palavras-chave (sobretudo competências técnicas, setor de atividade e requisitos obrigatórios) da vaga com o conteúdo do CV.
+Na lista "missing", dá PRIORIDADE aos termos decisivos da vaga que faltam mesmo no CV — sobretudo o setor de atividade e os requisitos técnicos obrigatórios (ex.: "setor da construção", "revestimentos metálicos", "fachadas"). São esses que mais pesam na triagem; o candidato tem de os ver primeiro.
 Responde APENAS com um objeto JSON válido, sem texto à volta e sem blocos de código markdown, exatamente neste formato:
-{"score": <inteiro de 0 a 100>, "missing": [<até 10 palavras-chave ou competências importantes da vaga que NÃO aparecem no CV, em português>], "titleMatch": <true ou false>}
-Não inventes competências. Se faltar informação, reflete isso numa pontuação mais baixa.`;
+{"score": <inteiro de 0 a 100>, "missing": [<até 10 palavras-chave ou competências importantes da vaga que NÃO aparecem no CV, em português, termos decisivos primeiro>], "titleMatch": <true ou false>}
+Não inventes competências. Se faltarem requisitos obrigatórios do setor, reflete isso numa pontuação claramente mais baixa — é melhor uma nota honesta do que otimista.`;
 
 const ADAPT_SYSTEM = `És o motor de adaptação de currículos da NOVU, especialista no mercado de trabalho português.
 Reescreves o CV do utilizador para ficar alinhado com a vaga indicada, em PORTUGUÊS DE PORTUGAL.
-Regras:
-- Mantém SEMPRE a verdade. Nunca inventes experiência, formação ou competências que o candidato não tenha.
-- Integra naturalmente as palavras-chave e o título do cargo da vaga, mas só quando correspondem ao que o candidato realmente fez.
-- Usa um formato simples e compatível com ATS: sem tabelas, sem colunas, sem gráficos. Secções claras com títulos: Contacto, Resumo Profissional, Experiência, Formação, Competências.
+
+REGRAS DE CONTEÚDO:
+- Mantém SEMPRE a verdade. Nunca inventes experiência, formação, competências ou setores que o candidato não tenha.
+- Adota o título do cargo da vaga apenas se for compatível com a experiência real do candidato.
+- PONTES HONESTAS: quando a experiência real do candidato tocar, ainda que indiretamente, no setor ou nas necessidades da vaga, torna essa ligação explícita (ex.: experiência em soluções técnicas para edifícios pode ligar-se à "envolvente de edifícios"). Nunca afirmes experiência direta num setor onde o candidato não trabalhou — fazes a ponte, não a fraude.
+- Integra naturalmente as palavras-chave da vaga que o candidato realmente possui.
 - Frases de experiência com verbos de ação e resultados concretos quando existirem.
-Responde APENAS com o texto do CV reescrito, pronto a copiar. Sem comentários, sem explicações, sem markdown de código.`;
+
+FORMATO DE RESPOSTA:
+Responde APENAS com um objeto JSON válido, sem texto à volta e sem markdown de código, exatamente neste formato:
+{
+ "name": "<nome>",
+ "title": "<título profissional alinhado à vaga>",
+ "contact": {"location":"<localidade>","phone":"<telefone>","email":"<email>","links":"<linkedin/site, se houver>"},
+ "summary": "<resumo profissional, 3-5 frases, alinhado à vaga>",
+ "experience": [{"role":"<cargo>","company":"<empresa>","period":"<período>","sector":"<setor, se aplicável>","bullets":["<resultado/responsabilidade>", "..."]}],
+ "education": [{"course":"<curso>","institution":"<instituição>"}],
+ "certifications": [{"name":"<formação/certificação>","institution":"<instituição>","detail":"<horas ou nota, se houver>"}],
+ "skills": ["<competência>", "..."],
+ "languages": [{"language":"<idioma>","level":"<nível>"}]
+}
+Usa apenas os campos com informação real; deixa strings vazias ou listas vazias quando não houver dados. Não acrescentes campos fora deste esquema.`;
 
 // ── CHAMADA À CLAUDE ──────────────────────────────────────────────────────────
 async function callClaude({ system, userContent, maxTokens }) {
@@ -65,6 +82,27 @@ function parseScore(text) {
     // fallback: tenta extrair um número
     const m = clean.match(/\d{1,3}/);
     return { score: m ? Math.min(100, parseInt(m[0], 10)) : 0, missing: [], titleMatch: false };
+  }
+}
+
+function parseAdapt(text) {
+  const clean = (text || "").replace(/```json|```/g, "").trim();
+  try {
+    const obj = JSON.parse(clean);
+    return {
+      name: obj.name || "",
+      title: obj.title || "",
+      contact: obj.contact || {},
+      summary: obj.summary || "",
+      experience: Array.isArray(obj.experience) ? obj.experience : [],
+      education: Array.isArray(obj.education) ? obj.education : [],
+      certifications: Array.isArray(obj.certifications) ? obj.certifications : [],
+      skills: Array.isArray(obj.skills) ? obj.skills : [],
+      languages: Array.isArray(obj.languages) ? obj.languages : [],
+    };
+  } catch (e) {
+    // Fallback: devolve o texto cru no resumo para o cliente nunca ficar sem nada
+    return { name: "", title: "", contact: {}, summary: clean, experience: [], education: [], certifications: [], skills: [], languages: [], _raw: true };
   }
 }
 
@@ -137,17 +175,17 @@ module.exports = async function handler(req, res) {
       }
 
       try {
-        const adaptedCv = await callClaude({
+        const text = await callClaude({
           system: ADAPT_SYSTEM,
           userContent: buildUserContent(cv, job),
-          maxTokens: 2000,
+          maxTokens: 3000,
         });
         await supabase
           .from("waitlist")
           .update({ cv_downloads: used + 1 })
           .eq("email", userEmail);
         return res.status(200).json({
-          adaptedCv,
+          cv: parseAdapt(text),
           downloadsUsed: used + 1,
           downloadsLimit: FREE_REGISTERED_DOWNLOADS,
         });
@@ -161,12 +199,12 @@ module.exports = async function handler(req, res) {
       return res.status(200).json({ requiresEmail: true });
     }
     try {
-      const adaptedCv = await callClaude({
+      const text = await callClaude({
         system: ADAPT_SYSTEM,
         userContent: buildUserContent(cv, job),
-        maxTokens: 2000,
+        maxTokens: 3000,
       });
-      return res.status(200).json({ adaptedCv, anonymousUsed: true });
+      return res.status(200).json({ cv: parseAdapt(text), anonymousUsed: true });
     } catch (err) {
       return res.status(500).json({ error: "Erro ao adaptar o CV. Tenta novamente." });
     }
