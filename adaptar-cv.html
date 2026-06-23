@@ -20,6 +20,9 @@ gtag('config', 'G-ZJLBVGPQT5');
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
+<!-- jsPDF — geração do CV adaptado em PDF (mesma biblioteca do gerador Europass) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 <style>
   :root {
     --blue-deep: #0A2540;
@@ -698,6 +701,8 @@ a:nth-child(1) .recursos-card-inner { }
   /* ── Estilos próprios do Adaptador de CV (tokens NOVU) ── */
   .cv-wrap { max-width: 920px; margin: 0 auto; padding: 110px 5% 40px; }
   .cv-hero { text-align: center; margin-bottom: 28px; }
+  .cv-pdf-badge { display: inline-block; margin-top: 16px; background: var(--blue-light); color: var(--blue-mid); border: 1.5px solid #C8DEFA; border-radius: 50px; padding: 9px 18px; font-size: 0.9rem; font-weight: 500; }
+  .cv-pdf-badge strong { color: var(--blue-deep); font-weight: 700; }
   .cv-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 700; color: var(--blue-deep); line-height: 1.15; margin: 6px 0 12px; }
   .cv-title em { font-style: normal; color: var(--blue-bright); }
   .cv-sub { color: var(--gray-600); font-size: 1.05rem; max-width: 60ch; margin: 0 auto; }
@@ -782,6 +787,7 @@ a:nth-child(1) .recursos-card-inner { }
     <div class="cv-eyebrow" data-t="eyebrow">ADAPTAR CURRÍCULO</div>
     <h1 class="cv-title" data-t="title">Adapta o teu currículo a cada <em>vaga</em></h1>
     <p class="cv-sub" data-t="subtitle">O software lê o teu CV antes de qualquer humano. Vê a tua compatibilidade e recebe um currículo alinhado com a vaga — em português, em minutos.</p>
+    <div class="cv-pdf-badge" data-t="pdfBadge">📄 Recebe o CV adaptado em <strong>PDF profissional</strong>, pronto a enviar e otimizado para os filtros ATS</div>
   </div>
 
   <!-- FORM -->
@@ -819,7 +825,7 @@ a:nth-child(1) .recursos-card-inner { }
       <div id="cvBox" class="cv-locked">
         <div class="cv-out" id="cvOut"></div>
         <div class="cv-lock-overlay" id="cvLockOverlay">
-          <button id="cvDownload" class="btn-primary" data-t="downloadBtn">Gerar e baixar CV adaptado</button>
+          <button id="cvDownload" class="btn-primary" data-t="downloadBtn">📄 Gerar e baixar CV em PDF</button>
           <span class="cv-meta" id="cvDownloadMeta" data-t="downloadMeta">1 grátis · sem registo</span>
         </div>
       </div>
@@ -893,7 +899,8 @@ const T = {
     jobLabel:"Descrição da vaga", jobHint:"(cola o anúncio)", jobPh:"Cola aqui a descrição da vaga...",
     analyze:"Analisar compatibilidade", freeNote:"A nota e as palavras-chave em falta são gratuitas e sem limite.",
     compat:"COMPATIBILIDADE COM A VAGA", missing:"Palavras-chave da vaga em falta no teu CV",
-    adapted:"O teu CV adaptado à vaga", downloadBtn:"Gerar e baixar CV adaptado", downloadMeta:"1 grátis · sem registo",
+    adapted:"O teu CV adaptado à vaga", downloadBtn:"📄 Gerar e baixar CV em PDF", downloadMeta:"1 grátis · sem registo",
+    pdfBadge:'📄 Recebe o CV adaptado em <strong>PDF profissional</strong>, pronto a enviar e otimizado para os filtros ATS',
     disclaimer:"A NOVU é uma ferramenta de informação e apoio. Revê sempre o CV antes de enviar — tu conheces a tua experiência melhor do que ninguém.",
     subEyebrow:"GOSTASTE?", subTitle:"Já usaste os teus CV adaptados gratuitos",
     subBody:"Em breve, a assinatura NOVU vai dar-te CV adaptados ilimitados, cartas de apresentação e muito mais. Queres ser dos primeiros a saber?",
@@ -913,7 +920,8 @@ const T = {
     jobLabel:"Job description", jobHint:"(paste the ad)", jobPh:"Paste the job description here...",
     analyze:"Analyse match", freeNote:"The score and missing keywords are free and unlimited.",
     compat:"MATCH WITH THE JOB", missing:"Job keywords missing from your CV",
-    adapted:"Your CV tailored to the job", downloadBtn:"Generate and download tailored CV", downloadMeta:"1 free · no sign-up",
+    adapted:"Your CV tailored to the job", downloadBtn:"📄 Generate and download CV (PDF)", downloadMeta:"1 free · no sign-up",
+    pdfBadge:'📄 Get your tailored CV as a <strong>professional PDF</strong>, ready to send and ATS-friendly',
     disclaimer:"NOVU is an information and support tool. Always review your CV before sending — you know your experience best.",
     subEyebrow:"LIKED IT?", subTitle:"You've used your free tailored CVs",
     subBody:"Soon, a NOVU subscription will give you unlimited tailored CVs, cover letters and more. Want to be the first to know?",
@@ -933,7 +941,8 @@ const T = {
     jobLabel:"Descripción de la vacante", jobHint:"(pega el anuncio)", jobPh:"Pega aquí la descripción de la vacante...",
     analyze:"Analizar compatibilidad", freeNote:"La nota y las palabras clave que faltan son gratis y sin límite.",
     compat:"COMPATIBILIDAD CON LA VACANTE", missing:"Palabras clave de la vacante que faltan en tu CV",
-    adapted:"Tu CV adaptado a la vacante", downloadBtn:"Generar y descargar CV adaptado", downloadMeta:"1 gratis · sin registro",
+    adapted:"Tu CV adaptado a la vacante", downloadBtn:"📄 Generar y descargar CV (PDF)", downloadMeta:"1 gratis · sin registro",
+    pdfBadge:'📄 Recibe tu CV adaptado en <strong>PDF profesional</strong>, listo para enviar y optimizado para filtros ATS',
     disclaimer:"NOVU es una herramienta de información y apoyo. Revisa siempre tu CV antes de enviarlo — tú conoces mejor tu experiencia.",
     subEyebrow:"¿TE GUSTÓ?", subTitle:"Ya usaste tus CV adaptados gratuitos",
     subBody:"Pronto, la suscripción NOVU te dará CV adaptados ilimitados, cartas de presentación y más. ¿Quieres ser de los primeros en saberlo?",
@@ -985,7 +994,116 @@ async function cvApi(payload){
   var res = await fetch('/api/cv', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
   return res.json();
 }
-function cvDownloadText(text){
+/* Pré-visualização legível a partir das secções estruturadas */
+function cvToText(cv){
+  if (cv._raw) return cv.summary || '';
+  var L = [];
+  if (cv.name) L.push(cv.name);
+  if (cv.title) L.push(cv.title);
+  var c = cv.contact || {};
+  var line = [c.location, c.phone, c.email, c.links].filter(Boolean).join(' | ');
+  if (line) L.push(line);
+  if (cv.summary) { L.push('', 'RESUMO PROFISSIONAL', cv.summary); }
+  if (cv.experience && cv.experience.length){
+    L.push('', 'EXPERIÊNCIA PROFISSIONAL');
+    cv.experience.forEach(function(e){
+      L.push('', [e.role, e.company].filter(Boolean).join(' — '));
+      var meta = [e.period, e.sector].filter(Boolean).join(' | ');
+      if (meta) L.push(meta);
+      (e.bullets||[]).forEach(function(b){ L.push('• ' + b); });
+    });
+  }
+  if (cv.education && cv.education.length){
+    L.push('', 'FORMAÇÃO ACADÉMICA');
+    cv.education.forEach(function(e){ L.push([e.course, e.institution].filter(Boolean).join(' — ')); });
+  }
+  if (cv.certifications && cv.certifications.length){
+    L.push('', 'FORMAÇÃO EXECUTIVA E CERTIFICAÇÕES');
+    cv.certifications.forEach(function(e){ L.push([[e.name, e.institution].filter(Boolean).join(' — '), e.detail].filter(Boolean).join(' | ')); });
+  }
+  if (cv.skills && cv.skills.length){ L.push('', 'COMPETÊNCIAS', cv.skills.join(' · ')); }
+  if (cv.languages && cv.languages.length){
+    L.push('', 'IDIOMAS', cv.languages.map(function(l){ return [l.language, l.level].filter(Boolean).join(': '); }).join('   ')); }
+  return L.join('\n');
+}
+
+/* Gera o PDF (coluna única, limpo, texto selecionável — ATS-friendly) */
+function cvBuildPDF(cv){
+  var jsPDF = window.jspdf.jsPDF;
+  var doc = new jsPDF({ unit:'pt', format:'a4' });
+  var W = doc.internal.pageSize.getWidth();
+  var H = doc.internal.pageSize.getHeight();
+  var M = 48, CW = W - M*2, y = M;
+  var INK = [10,37,64], MUTED = [90,110,128], RULE = [210,222,228];
+
+  function footer(){
+    doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(150,165,178);
+    doc.text('Gerado com NOVU — novuai.pt', M, H - 24);
+  }
+  function ensure(h){ if (y + h > H - 48){ footer(); doc.addPage(); y = M; } }
+  function rule(){ doc.setDrawColor(RULE[0],RULE[1],RULE[2]); doc.setLineWidth(0.8); doc.line(M, y, M+CW, y); y += 12; }
+  function para(text, size, color, gap){
+    doc.setFont('helvetica','normal'); doc.setFontSize(size); doc.setTextColor(color[0],color[1],color[2]);
+    var lines = doc.splitTextToSize(text, CW); var lh = size * 1.35;
+    lines.forEach(function(ln){ ensure(lh); doc.text(ln, M, y); y += lh; });
+    y += (gap||0);
+  }
+  function heading(text){
+    ensure(34); y += 6;
+    doc.setFont('helvetica','bold'); doc.setFontSize(11); doc.setTextColor(INK[0],INK[1],INK[2]);
+    doc.text(text.toUpperCase(), M, y); y += 8; rule();
+  }
+
+  // Cabeçalho
+  doc.setFont('helvetica','bold'); doc.setFontSize(20); doc.setTextColor(INK[0],INK[1],INK[2]);
+  doc.text(cv.name || 'Currículo', M, y); y += 24;
+  if (cv.title){ doc.setFont('helvetica','normal'); doc.setFontSize(12); doc.setTextColor(46,127,212); doc.text(cv.title, M, y); y += 18; }
+  var c = cv.contact || {};
+  var contact = [c.location, c.phone, c.email, c.links].filter(Boolean).join('  |  ');
+  if (contact){ doc.setFont('helvetica','normal'); doc.setFontSize(9.5); doc.setTextColor(MUTED[0],MUTED[1],MUTED[2]); doc.text(contact, M, y); y += 14; }
+  y += 4; rule();
+
+  if (cv.summary){ heading('Resumo Profissional'); para(cv.summary, 10, INK, 6); }
+
+  if (cv.experience && cv.experience.length){
+    heading('Experiência Profissional');
+    cv.experience.forEach(function(e){
+      ensure(40);
+      doc.setFont('helvetica','bold'); doc.setFontSize(10.5); doc.setTextColor(INK[0],INK[1],INK[2]);
+      var head = [e.role, e.company].filter(Boolean).join(' — ');
+      doc.splitTextToSize(head, CW).forEach(function(ln){ ensure(15); doc.text(ln, M, y); y += 15; });
+      var meta = [e.period, e.sector].filter(Boolean).join('  |  ');
+      if (meta){ doc.setFont('helvetica','italic'); doc.setFontSize(9); doc.setTextColor(MUTED[0],MUTED[1],MUTED[2]); doc.text(meta, M, y); y += 13; }
+      (e.bullets||[]).forEach(function(b){
+        doc.setFont('helvetica','normal'); doc.setFontSize(10); doc.setTextColor(INK[0],INK[1],INK[2]);
+        var lines = doc.splitTextToSize('•  ' + b, CW - 6); var lh = 13.5;
+        lines.forEach(function(ln, i){ ensure(lh); doc.text(ln, M + (i?12:0), y); y += lh; });
+      });
+      y += 8;
+    });
+  }
+
+  if (cv.education && cv.education.length){
+    heading('Formação Académica');
+    cv.education.forEach(function(e){ para([e.course, e.institution].filter(Boolean).join(' — '), 10, INK, 2); });
+    y += 4;
+  }
+  if (cv.certifications && cv.certifications.length){
+    heading('Formação Executiva e Certificações');
+    cv.certifications.forEach(function(e){ para('•  ' + [[e.name, e.institution].filter(Boolean).join(' — '), e.detail].filter(Boolean).join('  |  '), 10, INK, 2); });
+    y += 4;
+  }
+  if (cv.skills && cv.skills.length){ heading('Competências'); para(cv.skills.join('  ·  '), 10, INK, 6); }
+  if (cv.languages && cv.languages.length){
+    heading('Idiomas');
+    para(cv.languages.map(function(l){ return [l.language, l.level].filter(Boolean).join(': '); }).join('     '), 10, INK, 4);
+  }
+
+  footer();
+  var safe = (cv.name || 'CV').replace(/[^\p{L}\p{N}]+/gu, '_').replace(/^_+|_+$/g,'');
+  doc.save('CV_' + (safe || 'NOVU') + '_NOVU.pdf');
+}
+function cvDownloadFallback(text){
   var blob = new Blob([text], { type:'text/plain;charset=utf-8' });
   var url = URL.createObjectURL(blob);
   var a = document.createElement('a'); a.href = url; a.download = 'CV_NOVU.txt';
@@ -1034,10 +1152,11 @@ async function cvDoAdapt(){
   if (data.requiresEmail) { cvPendingDownload = true; cvOpenModal(); return; }
   if (data.error) { alert(data.error); return; }
 
-  $id('cvOut').textContent = data.adaptedCv;
+  $id('cvOut').textContent = cvToText(data.cv);
   $id('cvBox').classList.remove('cv-locked');
   $id('cvLockOverlay').style.display = 'none';
-  cvDownloadText(data.adaptedCv);
+  try { cvBuildPDF(data.cv); }
+  catch (e) { cvDownloadFallback(cvToText(data.cv)); }
 
   if (data.anonymousUsed) localStorage.setItem('novu_cv_anon_used', '1');
   if (typeof data.downloadsUsed === 'number') {
