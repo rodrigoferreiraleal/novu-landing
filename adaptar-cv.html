@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOVU — Adaptar o currículo à vaga</title>
+<meta name="description" content="Adapta o teu currículo a cada vaga em minutos, em português. Vê a tua compatibilidade (ATS) e recebe um CV alinhado com a vaga. PT/EN/ES.">
+<meta name="theme-color" content="#0A2540">
+
+<!-- Google Analytics — Consent Mode v2 (analytics negado por defeito; concedido só após consentimento) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZJLBVGPQT5"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', { ad_storage:'denied', ad_user_data:'denied', ad_personalization:'denied', analytics_storage:'denied' });
+try { if (document.cookie.split('; ').some(function(c){ return c.indexOf('novu_cookie_consent=all') === 0; })) { gtag('consent','update',{ analytics_storage:'granted' }); } } catch(e){}
+gtag('js', new Date());
+gtag('config', 'G-ZJLBVGPQT5');
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --blue-deep: #0A2540;
+    --blue-mid: #1A4A7A;
+    --blue-bright: #2E7FD4;
+    --blue-light: #EBF4FF;
+    --blue-pale: #F5F9FF;
+    --white: #FFFFFF;
+    --gray-100: #F8FAFC;
+    --gray-200: #E8EEF5;
+    --gray-400: #8FA3BC;
+    --gray-600: #4A6580;
+    --text: #0A2540;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 0 5%; height: 68px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo { display: flex; align-items: center; }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--blue-deep); }
+  .nav-logo span { color: var(--blue-bright); }
+  .nav-right { display: flex; align-items: center; gap: 14px; }
+  .lang-selector { display: flex; gap: 4px; }
+  .lang-btn { background: transparent; border: 1.5px solid var(--gray-200); color: var(--gray-600); padding: 4px 10px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+  .lang-btn:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
+  .lang-btn.active { background: var(--blue-deep); color: white; border-color: var(--blue-deep); }
+  .nav-cta { background: var(--blue-deep); color: white; border: none; padding: 9px 22px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+  .nav-cta:hover { background: var(--blue-mid); transform: translateY(-1px); }
+  .nav-docs-btn { background: var(--blue-light); color: var(--blue-mid); border: 1.5px solid #C8DEFA; padding: 7px 16px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.84rem; font-weight: 600; text-decoration: none; transition: all 0.2s; white-space: nowrap; }
+  .nav-docs-btn:hover { background: var(--blue-bright); color: white; border-color: var(--blue-bright); }
+
+  /* MODAL */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(10,37,64,0.6); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
+  .modal-overlay.open { display: flex; }
+  .modal { background: white; border-radius: 24px; padding: 40px 36px; max-width: 460px; width: 90%; text-align: center; box-shadow: 0 40px 80px rgba(0,0,0,0.2); position: relative; animation: slideUp 0.3s ease; }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .modal-close { position: absolute; top: 14px; right: 18px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--gray-400); }
+  .modal-icon { font-size: 2.2rem; margin-bottom: 12px; }
+  .modal h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--blue-deep); margin-bottom: 8px; }
+  .modal p { color: var(--gray-600); font-size: 0.92rem; line-height: 1.55; margin-bottom: 20px; }
+  .modal-form { display: flex; flex-direction: column; gap: 10px; }
+  .modal-input { border: 1.5px solid var(--gray-200); border-radius: 50px; padding: 12px 18px; font-family: 'DM Sans', sans-serif; font-size: 0.92rem; outline: none; transition: border-color 0.2s; text-align: center; }
+  .modal-input:focus { border-color: var(--blue-bright); }
+  .modal-submit { background: var(--blue-deep); color: white; border: none; padding: 13px 32px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+  .modal-submit:hover { background: var(--blue-mid); }
+  .modal-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+  .modal-note { font-size: 0.75rem; color: var(--gray-400); margin-top: 2px; }
+  .modal-success { display: none; color: #166534; font-size: 1rem; font-weight: 500; padding: 16px; }
+
+  /* HERO — mais compacto */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 90px 5% 52px;
+    background: linear-gradient(160deg, #F5F9FF 0%, #EBF3FF 40%, #FAFCFF 100%);
+    position: relative; overflow: hidden;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: white; border: 1px solid var(--gray-200); border-radius: 50px;
+    padding: 6px 16px; font-size: 0.8rem; font-weight: 500; color: var(--gray-600);
+    margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-badge .dot { width: 7px; height: 7px; background: #22C55E; border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(1.3); } }
+  .hero-title {
+    font-family: 'Playfair Display', serif; font-size: clamp(2.6rem, 5.5vw, 4.6rem);
+    font-weight: 700; line-height: 1.1; text-align: center; color: var(--blue-deep);
+    max-width: 760px; margin-bottom: 18px; animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .hero-title em { font-style: normal; color: var(--blue-bright); }
+  .hero-sub {
+    font-size: 1.08rem; color: var(--gray-600); text-align: center;
+    max-width: 520px; line-height: 1.65; margin-bottom: 36px;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .hero-cta-wrap { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; animation: fadeUp 0.6s 0.3s ease both; }
+  .btn-primary { background: var(--blue-deep); color: white; border: none; padding: 14px 34px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.97rem; font-weight: 600; cursor: pointer; transition: all 0.25s; box-shadow: 0 4px 20px rgba(10,37,64,0.2); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(10,37,64,0.28); }
+  .btn-secondary { background: transparent; color: var(--blue-deep); border: 1.5px solid var(--gray-200); padding: 14px 28px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.97rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+  .btn-secondary:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
+
+  /* STATS — mais compacto, integrado no hero */
+  .hero-stats {
+    display: flex; gap: 36px; margin-top: 44px; padding-top: 32px;
+    border-top: 1px solid var(--gray-200); animation: fadeUp 0.6s 0.4s ease both;
+    flex-wrap: wrap; justify-content: center;
+  }
+  .stat { text-align: center; }
+  .stat-number { font-family: 'DM Sans', sans-serif; font-size: 1.9rem; font-weight: 700; color: var(--blue-deep); display: block; letter-spacing: -0.5px; }
+  .stat-label { font-size: 0.78rem; color: var(--gray-400); font-weight: 500; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* JOURNEY — fundo branco, padding reduzido */
+  .journey { padding: 60px 5% 56px; background: white; }
+  .section-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--blue-bright); text-align: center; margin-bottom: 10px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.75rem, 3.5vw, 2.6rem); font-weight: 700; text-align: center; color: var(--blue-deep); max-width: 580px; margin: 0 auto 36px; line-height: 1.2; }
+
+  /* PHASES — grid mais compacto */
+  .phases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; max-width: 1060px; margin: 0 auto; }
+  /* HAMBURGER MOBILE */
+  .nav-mobile { display: none; align-items: center; gap: 8px; }
+  .hamburger { background: none; border: none; cursor: pointer; padding: 4px; display: flex; flex-direction: column; gap: 5px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--blue-deep); border-radius: 2px; transition: all 0.3s; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed; top: 56px; left: 0; right: 0; z-index: 99;
+    background: white; border-bottom: 1px solid var(--gray-200);
+    padding: 16px 20px 24px;
+    flex-direction: column; gap: 4px;
+    box-shadow: 0 8px 24px rgba(10,37,64,0.1);
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu-link {
+    display: flex; align-items: center; gap: 12px;
+    padding: 13px 16px; border-radius: 12px;
+    text-decoration: none; color: var(--blue-deep);
+    font-weight: 600; font-size: 0.95rem;
+    transition: background 0.2s;
+  }
+  .mobile-menu-link:hover { background: var(--blue-pale); }
+  .mobile-menu-divider { height: 1px; background: var(--gray-200); margin: 8px 0; }
+  .mobile-menu-cta {
+    background: var(--blue-deep); color: white; border: none;
+    padding: 14px; border-radius: 50px; font-size: 0.95rem;
+    font-weight: 600; font-family: 'DM Sans', sans-serif;
+    cursor: pointer; margin-top: 4px; transition: all 0.2s;
+  }
+  .mobile-menu-cta:hover { background: var(--blue-mid); }
+
+  @media (max-width: 820px) {
+    #navDesktop { display: none !important; }
+    .nav-mobile { display: flex; }
+  }
+
+  /* OVERRIDE GLOBAL DE PADDING MOBILE — todas as secções inline */
+  @media (max-width: 640px) {
+    section[style*="padding:60px"],
+    section[style*="padding: 60px"],
+    section[style*="padding:64px"],
+    section[style*="padding: 64px"] {
+      padding-top: 28px !important;
+      padding-bottom: 28px !important;
+    }
+  }
+
+  @media (max-width: 820px) { .phases { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .phases { grid-template-columns: 1fr; } }
+  .phase-card {
+    background: var(--blue-pale); border: 1px solid var(--gray-200); border-radius: 16px;
+    padding: 20px 22px; transition: all 0.3s; position: relative; overflow: hidden;
+  }
+  .phase-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--blue-bright), var(--blue-mid)); opacity: 0; transition: opacity 0.3s; }
+  .phase-card:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(10,37,64,0.09); }
+  .phase-card:hover::before { opacity: 1; }
+  .phase-num { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue-bright); margin-bottom: 6px; }
+  .phase-title { font-family: 'Playfair Display', serif; font-size: 1.08rem; font-weight: 600; color: var(--blue-deep); margin-bottom: 8px; }
+  .phase-desc { font-size: 0.84rem; color: var(--gray-600); line-height: 1.6; }
+
+  /* FAQ EXEMPLOS — fundo cinza claro, compacto */
+  .faq-examples { padding: 56px 5%; background: var(--gray-100); }
+  .faq-examples .section-title { margin-bottom: 28px; }
+  .faq-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 880px; margin: 0 auto; }
+  .faq-btn {
+    background: white; border: 1.5px solid var(--gray-200); color: var(--blue-deep);
+    padding: 10px 18px; border-radius: 50px; font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; gap: 7px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .faq-btn:hover { border-color: var(--blue-bright); color: var(--blue-bright); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(46,127,212,0.13); }
+  .faq-btn .faq-icon { font-size: 0.95rem; }
+  .faq-note { text-align: center; margin-top: 18px; font-size: 0.8rem; color: var(--gray-400); }
+
+  /* CHATBOT — fundo azul escuro */
+  .chatbot-section { padding: 60px 5%; background: linear-gradient(160deg, var(--blue-deep) 0%, #0D2E50 100%); position: relative; overflow: hidden; }
+  .chatbot-section .section-label { color: rgba(255,255,255,0.5); }
+  .chatbot-section .section-title { color: white; }
+  .chat-context-line { text-align: center; color: rgba(255,255,255,0.55); font-size: 0.92rem; margin-top: 6px; margin-bottom: 28px; font-weight: 400; }
+  .chat-container { max-width: 660px; margin: 0 auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 32px 72px rgba(0,0,0,0.28); }
+  .chat-header { background: var(--blue-deep); padding: 16px 22px; display: flex; align-items: center; gap: 12px; }
+  .chat-avatar { width: 38px; height: 38px; background: linear-gradient(135deg, var(--blue-bright), var(--blue-mid)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; color: white; }
+  .chat-header-info h3 { color: white; font-size: 0.92rem; font-weight: 600; }
+  .chat-header-info p { color: rgba(255,255,255,0.5); font-size: 0.75rem; }
+  .chat-status { margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: #22C55E; font-weight: 500; }
+  .chat-status::before { content: ''; width: 7px; height: 7px; background: #22C55E; border-radius: 50%; }
+  .chat-lang-bar { display: flex; align-items: center; justify-content: space-between; padding: 8px 16px; background: var(--gray-100); border-bottom: 1px solid var(--gray-200); }
+  .chat-lang-bar span { font-size: 0.73rem; color: var(--gray-400); font-weight: 500; }
+  .chat-lang-btns { display: flex; gap: 4px; }
+  .chat-lang-btn { background: transparent; border: 1px solid var(--gray-200); color: var(--gray-600); padding: 3px 9px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.7rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+  .chat-lang-btn:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
+  .chat-lang-btn.active { background: var(--blue-deep); color: white; border-color: var(--blue-deep); }
+  .question-counter { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 7px 16px; background: #FFF8E7; border-bottom: 1px solid #FDE68A; font-size: 0.76rem; color: #92400E; font-weight: 500; }
+  .chat-messages { padding: 20px; min-height: 280px; max-height: 380px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; background: #FAFCFF; }
+  .msg { display: flex; gap: 10px; animation: msgIn 0.35s ease both; }
+  @keyframes msgIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .msg-avatar { width: 30px; height: 30px; background: linear-gradient(135deg, var(--blue-bright), var(--blue-mid)); border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 0.72rem; font-weight: 700; color: white; }
+  .msg-bubble { background: white; border: 1px solid var(--gray-200); border-radius: 0 14px 14px 14px; padding: 10px 14px; font-size: 0.88rem; line-height: 1.55; color: var(--text); max-width: 85%; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+  .msg.user { flex-direction: row-reverse; }
+  .msg.user .msg-bubble { background: var(--blue-deep); color: white; border: none; border-radius: 14px 0 14px 14px; }
+  .msg.user .msg-avatar { background: var(--gray-200); color: var(--gray-600); font-family: 'DM Sans', sans-serif; font-size: 0.68rem; font-weight: 600; }
+  .msg-actions { display: flex; gap: 8px; margin-top: 5px; margin-left: 40px; }
+  .whatsapp-btn { display: inline-flex; align-items: center; gap: 5px; background: #25D366; color: white; border: none; padding: 4px 11px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.72rem; font-weight: 600; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+  .whatsapp-btn:hover { background: #1ebe5d; transform: translateY(-1px); }
+  .whatsapp-btn svg { width: 12px; height: 12px; fill: white; }
+  .chat-options { display: flex; flex-wrap: wrap; gap: 7px; padding: 0 20px 14px; background: #FAFCFF; }
+  .chat-opt-btn { background: white; border: 1.5px solid var(--blue-bright); color: var(--blue-bright); padding: 7px 15px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+  .chat-opt-btn:hover { background: var(--blue-bright); color: white; }
+  .chat-input-area { padding: 14px 20px; border-top: 1px solid var(--gray-200); display: flex; gap: 10px; background: white; align-items: center; }
+  .chat-input { flex: 1; border: 1.5px solid var(--gray-200); border-radius: 50px; padding: 10px 16px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; outline: none; transition: border-color 0.2s; color: var(--text); }
+  .chat-input:focus { border-color: var(--blue-bright); }
+  .chat-input::placeholder { color: var(--gray-400); }
+  .chat-send { width: 40px; height: 40px; background: var(--blue-deep); border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; flex-shrink: 0; }
+  .chat-send:hover { background: var(--blue-mid); }
+  .chat-send svg { width: 15px; height: 15px; fill: white; }
+  .email-capture { background: linear-gradient(135deg, #EBF4FF, #F0F7FF); border: 1px solid #C8DFFE; border-radius: 14px; padding: 18px; margin: 14px 20px; animation: msgIn 0.4s ease both; }
+  .email-capture p { font-size: 0.86rem; color: var(--blue-deep); font-weight: 500; margin-bottom: 10px; line-height: 1.5; }
+  .email-form { display: flex; gap: 8px; flex-wrap: wrap; }
+  .email-input { flex: 1; min-width: 130px; border: 1.5px solid var(--gray-200); border-radius: 50px; padding: 9px 14px; font-family: 'DM Sans', sans-serif; font-size: 0.83rem; outline: none; transition: border-color 0.2s; }
+  .email-input:focus { border-color: var(--blue-bright); }
+  .email-submit { background: var(--blue-deep); color: white; border: none; padding: 9px 18px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.83rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
+  .email-submit:hover { background: var(--blue-mid); }
+  .success-msg { display: none; text-align: center; padding: 14px; color: #166534; font-size: 0.88rem; font-weight: 500; }
+  .hidden { display: none !important; }
+
+  /* COMO FUNCIONA — fundo branco, compacto */
+  .how { padding: 60px 5%; background: white; }
+  .how-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 860px; margin: 0 auto; }
+  @media (max-width: 640px) { .how-steps { grid-template-columns: 1fr; gap: 14px; } }
+  .how-step { text-align: center; padding: 28px 20px; background: var(--blue-pale); border-radius: 16px; border: 1px solid var(--gray-200); transition: all 0.3s; }
+  .how-step:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(10,37,64,0.09); }
+  .how-step-num { width: 44px; height: 44px; background: var(--blue-deep); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; margin: 0 auto 16px; }
+  .how-step h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600; color: var(--blue-deep); margin-bottom: 8px; }
+  .how-step p { font-size: 0.86rem; color: var(--gray-600); line-height: 1.6; }
+
+  /* PROVA SOCIAL — fundo cinza claro, integrado com números menores */
+  .proof { padding: 52px 5%; background: var(--gray-100); text-align: center; }
+  .proof .section-title { margin-bottom: 32px; }
+  .proof-numbers { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; }
+  .proof-item .num { font-family: 'DM Sans', sans-serif; font-size: 2.5rem; font-weight: 700; color: var(--blue-deep); display: block; letter-spacing: -1px; }
+  .proof-item .label { font-size: 0.82rem; color: var(--gray-400); font-weight: 500; }
+
+  /* CTA FINAL */
+  .final-cta { padding: 72px 5%; background: var(--blue-deep); text-align: center; }
+  .final-cta h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); color: white; margin-bottom: 12px; font-weight: 700; }
+  .final-cta p { color: rgba(255,255,255,0.6); font-size: 1rem; margin-bottom: 32px; max-width: 440px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+  .final-cta .btn-primary { background: white; color: var(--blue-deep); font-size: 1rem; padding: 16px 40px; }
+  .final-cta .btn-primary:hover { background: var(--blue-light); }
+
+  footer { padding: 32px 5%; background: #071B30; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  footer .logo { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: white; }
+  footer p { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+  .footer-email { display: inline-flex; align-items: center; gap: 7px; color: rgba(255,255,255,0.75) !important; font-size: 0.88rem !important; font-weight: 500; text-decoration: none; border: 1px solid rgba(255,255,255,0.15); border-radius: 50px; padding: 7px 14px; transition: all 0.2s; }
+  .footer-email:hover { color: white !important; border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.05); }
+
+  /* COOKIE BANNER */
+  .cookie-banner {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 999;
+    background: #0A2540; border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 14px 5%; display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap;
+    animation: slideFromBottom 0.4s ease both;
+  }
+  @keyframes slideFromBottom { from { transform: translateY(100%); } to { transform: translateY(0); } }
+  .cookie-banner.hidden { display: none; }
+  .cookie-text { font-size: 0.8rem; color: rgba(255,255,255,0.7); line-height: 1.5; max-width: 660px; }
+  .cookie-text a { color: rgba(255,255,255,0.9); text-decoration: underline; }
+  .cookie-btns { display: flex; gap: 10px; flex-shrink: 0; }
+  .cookie-accept { background: white; color: var(--blue-deep); border: none; padding: 9px 22px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.83rem; font-weight: 600; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+  .cookie-accept:hover { background: var(--blue-light); }
+  .cookie-decline { background: transparent; color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.2); padding: 9px 18px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.83rem; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+  .cookie-decline:hover { color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.4); }
+
+  /* CONSENTIMENTO */
+  .consent-row { display: flex; align-items: flex-start; gap: 8px; margin-top: 4px; }
+  .consent-row input[type="checkbox"] { margin-top: 3px; accent-color: var(--blue-deep); width: 14px; height: 14px; flex-shrink: 0; cursor: pointer; }
+  .consent-label { font-size: 0.73rem; color: var(--gray-600); line-height: 1.4; cursor: pointer; }
+  .consent-label a { color: var(--blue-bright); text-decoration: none; }
+  .consent-label a:hover { text-decoration: underline; }
+
+  /* MODAL LEADS */
+  .lead-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(10,37,64,0.65); z-index: 1001; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
+  .lead-modal-overlay.open { display: flex; }
+  .lead-modal { background: white; border-radius: 24px; padding: 36px 32px; max-width: 480px; width: 92%; text-align: left; box-shadow: 0 40px 80px rgba(0,0,0,0.22); position: relative; animation: slideUp 0.3s ease; }
+  .lead-modal-close { position: absolute; top: 14px; right: 18px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--gray-400); line-height: 1; }
+  .lead-modal-icon { font-size: 2rem; margin-bottom: 10px; }
+  .lead-modal h2 { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; color: var(--blue-deep); margin-bottom: 6px; }
+  .lead-modal-desc { color: var(--gray-600); font-size: 0.88rem; line-height: 1.5; margin-bottom: 20px; }
+  .lead-field { margin-bottom: 11px; }
+  .lead-field label { font-size: 0.78rem; font-weight: 600; color: var(--gray-600); display: block; margin-bottom: 4px; letter-spacing: 0.3px; }
+  .lead-field select, .lead-field input, .lead-field textarea {
+    width: 100%; border: 1.5px solid var(--gray-200); border-radius: 12px;
+    padding: 10px 14px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem;
+    outline: none; transition: border-color 0.2s; color: var(--text);
+    background: white;
+  }
+  .lead-field select:focus, .lead-field input:focus, .lead-field textarea:focus { border-color: var(--blue-bright); }
+  .lead-field textarea { resize: vertical; min-height: 80px; border-radius: 12px; }
+  .lead-urgencia-row { display: flex; gap: 8px; }
+  .lead-urgencia-btn {
+    flex: 1; padding: 8px 6px; border: 1.5px solid var(--gray-200); border-radius: 50px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 600; cursor: pointer;
+    transition: all 0.2s; background: white; color: var(--gray-600); text-align: center;
+  }
+  .lead-urgencia-btn.selected-baixa { background: #F0FDF4; border-color: #22C55E; color: #166534; }
+  .lead-urgencia-btn.selected-media { background: #FFFBEB; border-color: #F59E0B; color: #92400E; }
+  .lead-urgencia-btn.selected-alta  { background: #FEF2F2; border-color: #EF4444; color: #991B1B; }
+  .lead-submit-btn {
+    width: 100%; background: var(--blue-deep); color: white; border: none;
+    padding: 13px; border-radius: 50px; font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+    margin-top: 4px;
+  }
+  .lead-submit-btn:hover { background: var(--blue-mid); }
+  .lead-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+  .lead-success { display: none; text-align: center; padding: 20px 10px; }
+  .lead-success-icon { font-size: 2.5rem; margin-bottom: 10px; }
+  .lead-success h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--blue-deep); margin-bottom: 8px; }
+  .lead-success p { font-size: 0.88rem; color: var(--gray-600); line-height: 1.5; }
+  .lead-error { color: #EF4444; font-size: 0.78rem; margin-top: 6px; display: none; }
+  /* Campo honeypot — invisível */
+  .lead-hp { position: absolute; left: -9999px; opacity: 0; pointer-events: none; tabindex: -1; }
+
+  /* CARD SUGESTÃO DE AJUDA NO CHAT */
+.help-suggestion-card {
+  background: linear-gradient(135deg, #FFFBEB, #FFF7ED);
+  border: 1.5px solid #F59E0B;
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin: 8px 0 4px;
+  max-width: 88%;
+}
+.help-suggestion-card p {
+  font-size: 0.82rem;
+  color: #92400E;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+.help-suggestion-btn {
+  background: linear-gradient(135deg, #F59E0B, #EF7C00);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 7px 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.help-suggestion-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(245,158,11,0.35); }
+  .typing span { width: 6px; height: 6px; background: var(--gray-400); border-radius: 50%; animation: bounce 1.2s infinite; }
+  .typing span:nth-child(2) { animation-delay: 0.2s; }
+  .typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes bounce { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-6px); } }
+
+  /* FOOTER LINKS */
+  .footer-links { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .footer-link { font-size: 0.75rem; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+  .footer-link:hover { color: rgba(255,255,255,0.65); }
+
+  /* MOBILE CTA FIXO */
+  .mobile-cta-bar {
+    display: none;
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
+    background: white; border-top: 1px solid var(--gray-200);
+    padding: 10px 20px; box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+  }
+  .mobile-cta-bar .btn-primary { width: 100%; text-align: center; padding: 13px; font-size: 0.95rem; }
+  @media (max-width: 640px) {
+    .mobile-cta-bar { display: block; }
+    body { padding-bottom: 68px; }
+    /* Hero no mobile — mais compacto */
+    .hero { padding: 70px 4% 28px; min-height: auto; }
+    .hero-stats { gap: 16px; margin-top: 20px; padding-top: 18px; }
+    .stat-number { font-size: 1.4rem; }
+    .hero-title { font-size: 2rem; margin-bottom: 12px; }
+    .hero-sub { font-size: 0.95rem; margin-bottom: 22px; }
+    /* Secções mobile — padding reduzido */
+    .journey { padding: 28px 4% 24px; }
+    .faq-examples { padding: 24px 4%; }
+    .chatbot-section { padding: 28px 4%; }
+    .how { padding: 28px 4%; }
+    .proof { padding: 24px 4%; }
+    .final-cta { padding: 36px 4%; }
+    .docs-highlight { padding: 36px 4% !important; }
+    /* Títulos de secção mobile */
+    .section-title { font-size: 1.4rem; margin-bottom: 20px; }
+    /* Phases mobile — 1 coluna, compacto */
+    .phase-card { padding: 14px 16px; }
+    .phases { gap: 8px; }
+    /* Proof mobile */
+    .proof-numbers { gap: 20px; }
+    .proof-item .num { font-size: 1.8rem; }
+    /* Recursos mobile — cards mais compactos */
+    .recursos-section { padding: 28px 4% !important; }
+    .recursos-grid { gap: 10px !important; }
+    .recursos-card-inner { padding: 16px 14px !important; }
+    /* How steps mobile */
+    .how-step { padding: 16px 14px !important; }
+    /* Badge hero menor */
+    .hero-badge { padding: 5px 12px; font-size: 0.74rem; margin-bottom: 16px; }
+    /* CTA repetido */
+    .cta-repeat { padding: 24px 4% !important; }
+  }
+  /* ── DOCS HIGHLIGHT ── */
+  .docs-highlight { background: var(--blue-deep); padding: 60px 5%; position: relative; overflow: hidden; }
+  .docs-highlight::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(46,127,212,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(46,127,212,0.05) 1px, transparent 1px); background-size: 48px 48px; pointer-events: none; }
+  .docs-highlight-inner { max-width: 1060px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; position: relative; z-index: 1; }
+  .docs-hl-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(46,127,212,0.2); border: 1px solid rgba(46,127,212,0.4); border-radius: 50px; padding: 5px 14px; font-size: 0.75rem; font-weight: 600; color: #90C4F5; margin-bottom: 18px; width: fit-content; }
+  .docs-hl-title { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; color: white; line-height: 1.2; margin-bottom: 14px; }
+  .docs-hl-sub { font-size: 0.97rem; color: rgba(255,255,255,0.6); line-height: 1.65; margin-bottom: 24px; max-width: 420px; }
+  .docs-hl-list { display: flex; flex-direction: column; gap: 9px; margin-bottom: 30px; }
+  .docs-hl-item { display: flex; align-items: center; gap: 10px; font-size: 0.88rem; color: rgba(255,255,255,0.8); }
+  .docs-hl-check { color: #4ADE80; font-weight: 700; font-size: 0.95rem; flex-shrink: 0; }
+  .docs-hl-more { color: rgba(255,255,255,0.4); font-size: 0.82rem; padding-left: 24px; cursor: pointer; }
+  .docs-hl-cta { display: inline-block; background: white; color: var(--blue-deep); padding: 13px 28px; border-radius: 50px; font-size: 0.95rem; font-weight: 700; text-decoration: none; transition: all 0.22s; }
+  .docs-hl-cta:hover { background: var(--blue-light); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+  .docs-hl-note { font-size: 0.75rem; color: rgba(255,255,255,0.35); margin-top: 12px; }
+  .docs-highlight-right { position: relative; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+  .docs-preview-card { background: white; border-radius: 16px; padding: 28px 24px 20px; width: 100%; max-width: 360px; box-shadow: 0 20px 60px rgba(0,0,0,0.25); position: relative; }
+  .docs-preview-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  .docs-preview-logo { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; color: var(--blue-deep); }
+  .docs-preview-tag { font-size: 10px; color: var(--gray-400); letter-spacing: 1px; }
+  .docs-preview-title-doc { font-size: 13px; font-weight: 700; color: var(--blue-deep); letter-spacing: 1px; text-align: center; margin-bottom: 3px; }
+  .docs-preview-subtitle { font-size: 9px; color: var(--gray-400); text-align: center; font-style: italic; margin-bottom: 12px; }
+  .docs-preview-line { height: 1px; background: var(--gray-200); margin-bottom: 14px; }
+  .docs-preview-text { font-size: 10.5px; color: var(--gray-600); line-height: 1.7; }
+  .docs-preview-blank { background: var(--blue-light); color: var(--blue-mid); border-radius: 3px; padding: 1px 4px; font-weight: 500; }
+  .docs-preview-footer { margin-top: 20px; padding-top: 12px; border-top: 1px solid var(--gray-200); }
+  .docs-preview-footer-line { width: 80px; height: 1px; background: var(--gray-400); margin-bottom: 5px; }
+  .docs-preview-footer-text { font-size: 9px; color: var(--gray-400); }
+  .docs-preview-badge { position: absolute; top: -12px; right: -10px; background: var(--blue-deep); color: white; border-radius: 50px; padding: 5px 12px; font-size: 11px; font-weight: 600; display: flex; align-items: center; gap: 5px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+  .docs-floating-chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-width: 360px; }
+  .docs-chip { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 50px; padding: 6px 14px; font-size: 0.78rem; color: rgba(255,255,255,0.65); }
+  @media (max-width: 768px) { .docs-highlight-inner { grid-template-columns: 1fr; gap: 40px; } .docs-highlight-right { display: none; } }
+  @media (max-width: 600px) {
+    nav { padding: 0 16px; height: 56px; }
+    .nav-mobile { gap: 6px; }
+  }
+  @media (max-width: 400px) {
+    .lang-btn { padding: 3px 7px; font-size: 0.7rem; }
+  }
+</style>
+
+<style>
+/* ── DESIGN UP — NOVU v2 ── */
+
+/* NAV — sombra suave */
+nav {
+  box-shadow: 0 1px 20px rgba(10,37,64,0.07) !important;
+}
+
+/* BOTÃO PRECISO DE AJUDA — laranja âmbar destacado */
+#nav-help-btn {
+  background: linear-gradient(135deg, #F59E0B, #EF7C00) !important;
+  color: white !important;
+  border-color: transparent !important;
+  font-weight: 600 !important;
+  box-shadow: 0 3px 12px rgba(245,158,11,0.35) !important;
+  transition: all 0.25s !important;
+  position: relative;
+}
+#nav-help-btn::before {
+  content: '';
+  display: inline-block;
+  width: 6px; height: 6px;
+  background: white;
+  border-radius: 50%;
+  margin-right: 6px;
+  opacity: 0.9;
+  animation: navPulse 2s infinite;
+  vertical-align: middle;
+}
+#nav-help-btn:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 18px rgba(245,158,11,0.45) !important;
+  background: linear-gradient(135deg, #FBBF24, #F59E0B) !important;
+}
+@keyframes navPulse {
+  0%, 100% { opacity: 0.9; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.5); }
+}
+
+/* HERO — círculos decorativos + gradiente mais rico */
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 420px; height: 420px;
+  border-radius: 50%;
+  border: 1px solid rgba(46,127,212,0.10);
+  pointer-events: none;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -30px; right: -30px;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  border: 1px solid rgba(46,127,212,0.08);
+  pointer-events: none;
+  z-index: 0;
+}
+.hero > * { position: relative; z-index: 1; }
+
+/* Ponto decorativo laranja no hero */
+.hero-badge::before {
+  content: '';
+  position: absolute;
+  top: -18px; right: 40px;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #F59E0B;
+  opacity: 0.6;
+}
+.hero-badge { position: relative; }
+
+/* HERO — botão secundário vira âmbar no hover */
+.btn-secondary:hover {
+  border-color: #F59E0B !important;
+  color: #EF7C00 !important;
+}
+
+/* CARDS RECURSOS — ícones com fundo colorido */
+.recursos-card-inner:nth-child(1) .recursos-icon,
+a:nth-child(1) .recursos-card-inner { }
+
+/* Wrapper de ícone nos cards */
+.recursos-card-inner > div:first-child {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 10px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem !important;
+  margin-bottom: 10px !important;
+}
+
+/* Cores por card — selectorres pelos links pai */
+.recursos-grid > a:nth-child(1) .recursos-card-inner > div:first-child { background: #EBF4FF; }
+.recursos-grid > a:nth-child(2) .recursos-card-inner > div:first-child { background: #DCFCE7; }
+.recursos-grid > a:nth-child(3) .recursos-card-inner > div:first-child { background: #FFF7ED; }
+.recursos-grid > a:nth-child(4) .recursos-card-inner > div:first-child { background: #F3F0FF; }
+.recursos-grid > a:nth-child(5) .recursos-card-inner > div:first-child { background: #EBF4FF; }
+
+/* Card hover — borda azul + sombra suave */
+.recursos-card-inner {
+  transition: all 0.22s ease !important;
+}
+.recursos-card-inner:hover {
+  border-color: var(--blue-bright) !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 24px rgba(10,37,64,0.10) !important;
+}
+
+/* CHAT CONTAINER — header com gradiente premium */
+.chat-header {
+  background: linear-gradient(135deg, #0A2540 0%, #0D3560 55%, #1A4A7A 100%) !important;
+  position: relative;
+  overflow: hidden;
+}
+.chat-header::after {
+  content: '';
+  position: absolute;
+  right: -24px; top: -24px;
+  width: 96px; height: 96px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.07);
+  pointer-events: none;
+}
+.chat-avatar {
+  border: 1.5px solid rgba(255,255,255,0.15) !important;
+}
+.chat-container {
+  box-shadow: 0 12px 48px rgba(10,37,64,0.14) !important;
+}
+
+/* MOBILE — botão preciso de ajuda no menu mobile */
+#mm-help {
+  color: #EF7C00 !important;
+  font-weight: 600 !important;
+}
+#mm-help:hover {
+  background: #FFF7ED !important;
+}
+
+/* FINAL CTA — gradiente mais vivo */
+.final-cta {
+  background: linear-gradient(145deg, #071B30 0%, #0A2540 50%, #0D3560 100%) !important;
+}
+
+/* DOCS HIGHLIGHT — profundidade */
+.docs-highlight {
+  background: linear-gradient(145deg, #071B30 0%, #0A2540 60%, #0F3265 100%) !important;
+}
+
+/* ── NOVO CSS — HOME REVISTA ── */
+
+/* Hero mais compacto — sem min-height:100vh */
+.hero {
+  min-height: auto !important;
+  padding: 100px 5% 48px !important;
+  text-align: center;
+}
+.hero-title { font-size: clamp(2rem, 4.5vw, 3.6rem) !important; margin-bottom: 14px; }
+.hero-sub { margin-bottom: 28px !important; }
+.hero-stats { margin-top: 32px !important; padding-top: 24px !important; gap: 32px !important; }
+
+/* Chat em destaque — borda azul brilhante, sombra */
+.chatbot-section {
+  padding: 0 5% 52px !important;
+  background: var(--white) !important;
+}
+.chatbot-section .section-label { color: var(--blue-bright) !important; }
+.chatbot-section .section-title { color: var(--blue-deep) !important; }
+.chat-context-line { color: var(--gray-600) !important; }
+.chat-container {
+  box-shadow: 0 8px 48px rgba(10,37,64,0.12) !important;
+  border: 2px solid var(--blue-bright) !important;
+  border-radius: 20px !important;
+}
+
+/* Separador antes do chat */
+.chat-intro-strip {
+  background: var(--blue-deep);
+  padding: 20px 5%;
+  text-align: center;
+  color: white;
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+.chat-intro-strip span { opacity: 0.7; margin: 0 12px; }
+
+/* Secção recursos — mais compacta */
+.recursos-section { padding: 44px 5% !important; background: var(--gray-100) !important; }
+.recursos-grid { grid-template-columns: repeat(auto-fill, minmax(220px,1fr)) !important; gap: 14px !important; }
+
+/* How — fundo cinza, mais compacto */
+.how { background: var(--white) !important; padding: 44px 5% !important; }
+
+/* Final CTA mais compacto */
+.final-cta { padding: 48px 5% !important; }
+
+/* Remover JORNADA e PROOF do fluxo visual — estão escondidas */
+.journey, .proof { display: none !important; }
+
+/* Mobile */
+@media (max-width: 640px) {
+  .hero { padding: 76px 4% 32px !important; }
+  .hero-title { font-size: 1.85rem !important; }
+  .chatbot-section { padding: 0 4% 36px !important; }
+  .recursos-section { padding: 28px 4% !important; }
+  .how { padding: 28px 4% !important; }
+  .final-cta { padding: 32px 4% !important; }
+  .chat-intro-strip { padding: 14px 4%; font-size: 0.8rem; }
+}
+</style>
+
+
+<style>
+  /* ── Estilos próprios do Adaptador de CV (tokens NOVU) ── */
+  .cv-wrap { max-width: 920px; margin: 0 auto; padding: 110px 5% 40px; }
+  .cv-hero { text-align: center; margin-bottom: 28px; }
+  .cv-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 700; color: var(--blue-deep); line-height: 1.15; margin: 6px 0 12px; }
+  .cv-title em { font-style: normal; color: var(--blue-bright); }
+  .cv-sub { color: var(--gray-600); font-size: 1.05rem; max-width: 60ch; margin: 0 auto; }
+
+  .cv-card { background: var(--white); border: 1.5px solid var(--gray-200); border-radius: 22px; box-shadow: 0 4px 24px rgba(10,37,64,0.05); padding: 26px; margin-bottom: 22px; }
+  .cv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px; }
+  @media (max-width: 680px) { .cv-grid { grid-template-columns: 1fr; } .cv-wrap { padding-top: 96px; } }
+
+  .cv-label { display: block; font-weight: 600; font-size: 0.9rem; color: var(--blue-deep); margin-bottom: 7px; }
+  .cv-label span { color: var(--gray-600); font-weight: 400; }
+  .cv-textarea { width: 100%; min-height: 160px; resize: vertical; border: 1.5px solid var(--gray-200); border-radius: 16px; padding: 14px 16px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--text); background: var(--blue-pale); outline: none; transition: border-color .2s; }
+  .cv-textarea:focus { border-color: var(--blue-bright); background: #fff; }
+
+  .cv-meta { color: var(--gray-600); font-size: 0.82rem; text-align: center; margin-top: 12px; }
+  .cv-eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--blue-bright); }
+
+  .cv-score-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .cv-score-num { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700; color: var(--blue-deep); line-height: 1; }
+  .cv-meter { height: 12px; border-radius: 50px; background: var(--gray-200); overflow: hidden; margin: 12px 0 4px; }
+  .cv-meter > i { display: block; height: 100%; width: 0; border-radius: 50px; background: linear-gradient(90deg, var(--blue-mid), var(--blue-bright)); transition: width .9s ease; }
+  @media (prefers-reduced-motion: reduce) { .cv-meter > i { transition: none; } }
+
+  .cv-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .cv-chip { background: var(--blue-light); color: var(--blue-mid); border: 1.5px solid #C8DEFA; border-radius: 50px; padding: 5px 13px; font-size: 0.82rem; font-weight: 600; }
+
+  .cv-block { margin-top: 22px; }
+  .cv-block-title { font-weight: 700; color: var(--blue-deep); font-size: 0.98rem; margin-bottom: 8px; }
+  .cv-out { white-space: pre-wrap; background: var(--blue-pale); border: 1.5px solid var(--gray-200); border-radius: 16px; padding: 18px; max-height: 360px; overflow: auto; font-size: 0.9rem; line-height: 1.6; color: var(--text); }
+  .cv-locked { position: relative; }
+  .cv-locked .cv-out { filter: blur(5px); user-select: none; max-height: 190px; }
+  .cv-lock-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; padding: 20px; }
+
+  .cv-disclaimer { background: var(--blue-pale); border: 1.5px solid var(--gray-200); border-radius: 16px; padding: 13px 16px; color: var(--gray-600); font-size: 0.84rem; margin-top: 22px; }
+  .cv-spinner { width: 15px; height: 15px; border: 2px solid rgba(255,255,255,.5); border-top-color: #fff; border-radius: 50%; display: inline-block; animation: cvspin .7s linear infinite; vertical-align: -2px; }
+  @keyframes cvspin { to { transform: rotate(360deg); } }
+
+  #cvSubscribe { text-align: center; }
+  #cvSubscribe .cv-big { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--blue-deep); margin: 6px 0 8px; }
+  .cv-err { color: #C0392B; font-size: 0.85rem; min-height: 16px; margin: 4px 0; }
+</style>
+</head>
+<body>
+
+<!-- NAV (consistente com o resto do site) -->
+<nav>
+  <a href="/" class="nav-logo"><img src="/logo.svg" alt="NOVU" height="38" style="display:block;"></a>
+
+  <div class="nav-right" id="navDesktop">
+    <a href="/documentos.html" class="nav-docs-btn">📄 <span data-t="navDocs">Documentos</span></a>
+    <a href="/especialistas.html" class="nav-docs-btn">🤝 <span data-t="navEsp">Especialistas</span></a>
+    <a href="/empregos.html" class="nav-docs-btn">💼 <span data-t="navEmp">Empregos</span></a>
+    <a href="/curriculo.html" class="nav-docs-btn">📝 <span data-t="navCv">Currículo</span></a>
+    <a href="/adaptar-cv.html" class="nav-docs-btn" style="background:var(--blue-deep);color:#fff;border-color:var(--blue-deep);">📊 <span data-t="navAdapt">Adaptar CV</span></a>
+    <div class="lang-selector">
+      <button class="lang-btn active" onclick="setLang('pt')" id="lang-pt">PT</button>
+      <button class="lang-btn" onclick="setLang('en')" id="lang-en">EN</button>
+      <button class="lang-btn" onclick="setLang('es')" id="lang-es">ES</button>
+    </div>
+  </div>
+
+  <div class="nav-mobile">
+    <div class="lang-selector">
+      <button class="lang-btn active" onclick="setLang('pt')" id="lang-pt-m">PT</button>
+      <button class="lang-btn" onclick="setLang('en')" id="lang-en-m">EN</button>
+      <button class="lang-btn" onclick="setLang('es')" id="lang-es-m">ES</button>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/documentos.html" class="mobile-menu-link">📄 <span data-t="navDocs">Documentos</span></a>
+  <a href="/especialistas.html" class="mobile-menu-link">🤝 <span data-t="navEsp">Especialistas</span></a>
+  <a href="/empregos.html" class="mobile-menu-link">💼 <span data-t="navEmp">Empregos</span></a>
+  <a href="/curriculo.html" class="mobile-menu-link">📝 <span data-t="navCv">Currículo</span></a>
+  <a href="/adaptar-cv.html" class="mobile-menu-link">📊 <span data-t="navAdapt">Adaptar CV</span></a>
+  <a href="/" class="mobile-menu-cta" data-t="navHome">Início</a>
+</div>
+
+<main class="cv-wrap">
+  <div class="cv-hero">
+    <div class="cv-eyebrow" data-t="eyebrow">ADAPTAR CURRÍCULO</div>
+    <h1 class="cv-title" data-t="title">Adapta o teu currículo a cada <em>vaga</em></h1>
+    <p class="cv-sub" data-t="subtitle">O software lê o teu CV antes de qualquer humano. Vê a tua compatibilidade e recebe um currículo alinhado com a vaga — em português, em minutos.</p>
+  </div>
+
+  <!-- FORM -->
+  <div class="cv-card">
+    <div class="cv-grid">
+      <div>
+        <label class="cv-label" for="cv" data-t="cvLabel">O teu currículo <span data-t="cvHint">(cola o texto)</span></label>
+        <textarea id="cv" class="cv-textarea" data-t-ph="cvPh" placeholder="Cola aqui o conteúdo do teu CV..."></textarea>
+      </div>
+      <div>
+        <label class="cv-label" for="job" data-t="jobLabel">Descrição da vaga <span data-t="jobHint">(cola o anúncio)</span></label>
+        <textarea id="job" class="cv-textarea" data-t-ph="jobPh" placeholder="Cola aqui a descrição da vaga..."></textarea>
+      </div>
+    </div>
+    <button id="analyze" class="btn-primary" style="width:100%;" data-t="analyze">Analisar compatibilidade</button>
+    <p class="cv-meta" data-t="freeNote">A nota e as palavras-chave em falta são gratuitas e sem limite.</p>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="cvResults" class="cv-card" style="display:none;" aria-live="polite">
+    <div class="cv-eyebrow" data-t="compat">COMPATIBILIDADE COM A VAGA</div>
+    <div class="cv-score-head">
+      <div class="cv-score-num"><span id="cvScoreNum">0</span>%</div>
+      <div id="cvScoreLabel" class="cv-meta" style="text-align:right;"></div>
+    </div>
+    <div class="cv-meter"><i id="cvMeterFill"></i></div>
+
+    <div class="cv-block" id="cvMissingWrap">
+      <div class="cv-block-title" data-t="missing">Palavras-chave da vaga em falta no teu CV</div>
+      <div class="cv-chips" id="cvMissingChips"></div>
+    </div>
+
+    <div class="cv-block">
+      <div class="cv-block-title" data-t="adapted">O teu CV adaptado à vaga</div>
+      <div id="cvBox" class="cv-locked">
+        <div class="cv-out" id="cvOut"></div>
+        <div class="cv-lock-overlay" id="cvLockOverlay">
+          <button id="cvDownload" class="btn-primary" data-t="downloadBtn">Gerar e baixar CV adaptado</button>
+          <span class="cv-meta" id="cvDownloadMeta" data-t="downloadMeta">1 grátis · sem registo</span>
+        </div>
+      </div>
+      <p class="cv-meta" id="cvDownloadCount" style="display:none; text-align:left;"></p>
+    </div>
+
+    <div class="cv-disclaimer" data-t="disclaimer">A NOVU é uma ferramenta de informação e apoio. Revê sempre o CV antes de enviar — tu conheces a tua experiência melhor do que ninguém.</div>
+  </div>
+
+  <!-- SUBSCRIBE -->
+  <div id="cvSubscribe" class="cv-card" style="display:none;">
+    <div class="cv-eyebrow" data-t="subEyebrow">GOSTASTE?</div>
+    <div class="cv-big" data-t="subTitle">Já usaste os teus CV adaptados gratuitos</div>
+    <p class="cv-sub" style="margin-bottom:18px;" data-t="subBody">Em breve, a assinatura NOVU vai dar-te CV adaptados ilimitados, cartas de apresentação e muito mais. Queres ser dos primeiros a saber?</p>
+    <button id="cvNotify" class="btn-primary" data-t="subCta">Avisem-me do lançamento</button>
+    <p id="cvNotifyDone" class="cv-meta" style="display:none;" data-t="subThanks">Combinado! Avisamos-te assim que abrir. 🙌</p>
+  </div>
+</main>
+
+<!-- FOOTER (igual ao site) -->
+<footer>
+  <div class="logo"><img src="/logo_footer.svg" alt="NOVU" height="32" style="display:block;"></div>
+  <div class="footer-links">
+    <p data-t="footerText">© 2026 NOVU. Informação, não aconselhamento jurídico.</p>
+    <a href="/privacidade.html" class="footer-link" data-t="footerPrivacy">Política de Privacidade</a>
+    <a href="/termos.html" class="footer-link" data-t="footerTerms">Termos de Serviço</a>
+    <a href="/documentos.html" class="footer-link" data-t="navDocs">Documentos</a>
+    <a href="/empregos.html" class="footer-link" data-t="navEmp">Empregos</a>
+    <a href="/curriculo.html" class="footer-link" data-t="navCv">Currículo</a>
+  </div>
+  <a href="#" class="footer-email" id="footer-email-link" data-u="geral" data-d="novuai.pt">✉ geral&#64;novuai.pt</a>
+  <script>
+    (function(){
+      var el = document.getElementById('footer-email-link');
+      if(el){ el.addEventListener('click', function(e){ e.preventDefault(); window.location = 'mai'+'lto:'+el.getAttribute('data-u')+'@'+el.getAttribute('data-d'); }); }
+    })();
+  </script>
+</footer>
+
+<!-- MODAL DE REGISTO (mesma classe .modal do site) -->
+<div class="modal-overlay" id="cvModal">
+  <div class="modal">
+    <button class="modal-close" onclick="cvCloseModal()">×</button>
+    <div class="modal-icon">📝</div>
+    <h2 id="cvModalTitle">Regista-te para continuar</h2>
+    <p id="cvModalDesc">Já usaste o teu CV adaptado grátis. Deixa o teu email e desbloqueia mais 3, sem custos.</p>
+    <div class="modal-form">
+      <p class="cv-err" id="cvModalErr"></p>
+      <input type="text" class="modal-input" id="cvName" placeholder="o teu nome" autocomplete="name">
+      <input type="email" class="modal-input" id="cvEmail" placeholder="o teu email" autocomplete="email">
+      <input type="text" class="modal-input" id="cvCidade" placeholder="cidade onde moras em Portugal">
+      <input type="text" class="modal-input" id="cvPais" placeholder="país de origem">
+      <button class="modal-submit" id="cvModalSubmit" onclick="cvSubmitRegister()">Desbloquear</button>
+      <div class="consent-row">
+        <input type="checkbox" id="cvConsent">
+        <label class="consent-label" for="cvConsent">Aceito a <a href="/privacidade.html" target="_blank">Política de Privacidade</a> e os <a href="/termos.html" target="_blank">Termos de Serviço</a></label>
+      </div>
+      <p class="modal-note" id="cvModalNote">Gratuito. Sem spam. Só boas novidades.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ───────── i18n ───────── */
+const T = {
+  pt: {
+    navDocs:"Documentos", navEsp:"Especialistas", navEmp:"Empregos", navCv:"Currículo", navAdapt:"Adaptar CV", navHome:"Início",
+    eyebrow:"ADAPTAR CURRÍCULO", title:"Adapta o teu currículo a cada <em>vaga</em>",
+    subtitle:"O software lê o teu CV antes de qualquer humano. Vê a tua compatibilidade e recebe um currículo alinhado com a vaga — em português, em minutos.",
+    cvLabel:"O teu currículo", cvHint:"(cola o texto)", cvPh:"Cola aqui o conteúdo do teu CV...",
+    jobLabel:"Descrição da vaga", jobHint:"(cola o anúncio)", jobPh:"Cola aqui a descrição da vaga...",
+    analyze:"Analisar compatibilidade", freeNote:"A nota e as palavras-chave em falta são gratuitas e sem limite.",
+    compat:"COMPATIBILIDADE COM A VAGA", missing:"Palavras-chave da vaga em falta no teu CV",
+    adapted:"O teu CV adaptado à vaga", downloadBtn:"Gerar e baixar CV adaptado", downloadMeta:"1 grátis · sem registo",
+    disclaimer:"A NOVU é uma ferramenta de informação e apoio. Revê sempre o CV antes de enviar — tu conheces a tua experiência melhor do que ninguém.",
+    subEyebrow:"GOSTASTE?", subTitle:"Já usaste os teus CV adaptados gratuitos",
+    subBody:"Em breve, a assinatura NOVU vai dar-te CV adaptados ilimitados, cartas de apresentação e muito mais. Queres ser dos primeiros a saber?",
+    subCta:"Avisem-me do lançamento", subThanks:"Combinado! Avisamos-te assim que abrir. 🙌",
+    footerText:"© 2026 NOVU. Informação, não aconselhamento jurídico.", footerPrivacy:"Política de Privacidade", footerTerms:"Termos de Serviço",
+    analyzing:"A analisar...", generating:"A gerar...",
+    scoreLow:"Baixa — vale a pena adaptar", scoreMid:"Razoável — dá para melhorar", scoreHigh:"Forte — estás bem posicionado",
+    needBoth:"Cola o teu currículo e a descrição da vaga.",
+    leftReg:(n)=>`Tens ${n} de 3 CV adaptados gratuitos.`,
+    consentErr:"Aceita a Política de Privacidade para continuar.", emailErr:"Escreve um email válido.", regErr:"Erro ao registar. Tenta novamente."
+  },
+  en: {
+    navDocs:"Documents", navEsp:"Specialists", navEmp:"Jobs", navCv:"CV Builder", navAdapt:"Tailor CV", navHome:"Home",
+    eyebrow:"TAILOR YOUR CV", title:"Tailor your CV to every <em>job</em>",
+    subtitle:"Software reads your CV before any human does. See your match and get a CV aligned with the job — in minutes.",
+    cvLabel:"Your CV", cvHint:"(paste the text)", cvPh:"Paste your CV content here...",
+    jobLabel:"Job description", jobHint:"(paste the ad)", jobPh:"Paste the job description here...",
+    analyze:"Analyse match", freeNote:"The score and missing keywords are free and unlimited.",
+    compat:"MATCH WITH THE JOB", missing:"Job keywords missing from your CV",
+    adapted:"Your CV tailored to the job", downloadBtn:"Generate and download tailored CV", downloadMeta:"1 free · no sign-up",
+    disclaimer:"NOVU is an information and support tool. Always review your CV before sending — you know your experience best.",
+    subEyebrow:"LIKED IT?", subTitle:"You've used your free tailored CVs",
+    subBody:"Soon, a NOVU subscription will give you unlimited tailored CVs, cover letters and more. Want to be the first to know?",
+    subCta:"Notify me at launch", subThanks:"Done! We'll let you know when it opens. 🙌",
+    footerText:"© 2026 NOVU. Information, not legal advice.", footerPrivacy:"Privacy Policy", footerTerms:"Terms of Service",
+    analyzing:"Analysing...", generating:"Generating...",
+    scoreLow:"Low — worth tailoring", scoreMid:"Fair — room to improve", scoreHigh:"Strong — well positioned",
+    needBoth:"Paste your CV and the job description.",
+    leftReg:(n)=>`You have ${n} of 3 free tailored CVs.`,
+    consentErr:"Accept the Privacy Policy to continue.", emailErr:"Enter a valid email.", regErr:"Registration error. Try again."
+  },
+  es: {
+    navDocs:"Documentos", navEsp:"Especialistas", navEmp:"Empleos", navCv:"Currículum", navAdapt:"Adaptar CV", navHome:"Inicio",
+    eyebrow:"ADAPTAR CURRÍCULUM", title:"Adapta tu currículum a cada <em>vacante</em>",
+    subtitle:"El software lee tu CV antes que cualquier humano. Mira tu compatibilidad y recibe un CV alineado con la vacante — en minutos.",
+    cvLabel:"Tu currículum", cvHint:"(pega el texto)", cvPh:"Pega aquí el contenido de tu CV...",
+    jobLabel:"Descripción de la vacante", jobHint:"(pega el anuncio)", jobPh:"Pega aquí la descripción de la vacante...",
+    analyze:"Analizar compatibilidad", freeNote:"La nota y las palabras clave que faltan son gratis y sin límite.",
+    compat:"COMPATIBILIDAD CON LA VACANTE", missing:"Palabras clave de la vacante que faltan en tu CV",
+    adapted:"Tu CV adaptado a la vacante", downloadBtn:"Generar y descargar CV adaptado", downloadMeta:"1 gratis · sin registro",
+    disclaimer:"NOVU es una herramienta de información y apoyo. Revisa siempre tu CV antes de enviarlo — tú conoces mejor tu experiencia.",
+    subEyebrow:"¿TE GUSTÓ?", subTitle:"Ya usaste tus CV adaptados gratuitos",
+    subBody:"Pronto, la suscripción NOVU te dará CV adaptados ilimitados, cartas de presentación y más. ¿Quieres ser de los primeros en saberlo?",
+    subCta:"Avísenme del lanzamiento", subThanks:"¡Hecho! Te avisamos en cuanto abra. 🙌",
+    footerText:"© 2026 NOVU. Información, no asesoramiento jurídico.", footerPrivacy:"Política de Privacidad", footerTerms:"Términos de Servicio",
+    analyzing:"Analizando...", generating:"Generando...",
+    scoreLow:"Baja — conviene adaptar", scoreMid:"Aceptable — se puede mejorar", scoreHigh:"Fuerte — bien posicionado",
+    needBoth:"Pega tu CV y la descripción de la vacante.",
+    leftReg:(n)=>`Tienes ${n} de 3 CV adaptados gratuitos.`,
+    consentErr:"Acepta la Política de Privacidad para continuar.", emailErr:"Escribe un email válido.", regErr:"Error al registrar. Inténtalo de nuevo."
+  }
+};
+
+let currentLang = localStorage.getItem('novu_lang') || 'pt';
+function tr(k){ return (T[currentLang] && T[currentLang][k]) || T.pt[k]; }
+
+function setLang(l) {
+  currentLang = T[l] ? l : 'pt';
+  localStorage.setItem('novu_lang', currentLang);
+  document.documentElement.lang = currentLang;
+  document.querySelectorAll('[data-t]').forEach(function(el){
+    var v = tr(el.getAttribute('data-t'));
+    if (typeof v === 'string') el.innerHTML = v;
+  });
+  document.querySelectorAll('[data-t-ph]').forEach(function(el){
+    var v = tr(el.getAttribute('data-t-ph'));
+    if (typeof v === 'string') el.setAttribute('placeholder', v);
+  });
+  ['pt','en','es'].forEach(function(code){
+    [document.getElementById('lang-'+code), document.getElementById('lang-'+code+'-m')].forEach(function(b){
+      if (b) b.classList.toggle('active', code === currentLang);
+    });
+  });
+}
+
+function toggleMenu(){ document.getElementById('mobileMenu').classList.toggle('open'); }
+
+/* ───────── Cookies (iguais ao site) ───────── */
+function getCookie(name){ var m = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)')); return m ? m[2] : null; }
+function setCookie(name, value, hours){ var e = new Date(Date.now() + hours*3600000).toUTCString(); document.cookie = name + '=' + value + '; expires=' + e + '; path=/'; }
+
+/* ───────── Estado ───────── */
+function getEmail(){ return localStorage.getItem('novu_email') || null; }
+function isUnlocked(){ return getCookie('novu_unlocked') === 'true'; }
+let cvPendingDownload = false;
+
+/* ───────── API ───────── */
+async function cvApi(payload){
+  var res = await fetch('/api/cv', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+  return res.json();
+}
+function cvDownloadText(text){
+  var blob = new Blob([text], { type:'text/plain;charset=utf-8' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a'); a.href = url; a.download = 'CV_NOVU.txt';
+  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+}
+function cvScoreWords(s){ return s < 55 ? tr('scoreLow') : (s < 75 ? tr('scoreMid') : tr('scoreHigh')); }
+function $id(id){ return document.getElementById(id); }
+
+/* ───────── Analisar (grátis) ───────── */
+$id('analyze').addEventListener('click', async function(){
+  var cv = $id('cv').value.trim(), job = $id('job').value.trim();
+  if (!cv || !job) { alert(tr('needBoth')); return; }
+  var btn = this; btn.disabled = true; var old = btn.textContent; btn.innerHTML = '<span class="cv-spinner"></span> ' + tr('analyzing');
+  var data = await cvApi({ action:'score', cv:cv, job:job });
+  btn.disabled = false; btn.textContent = old;
+  if (data.error) { alert(data.error); return; }
+
+  $id('cvResults').style.display = 'block';
+  $id('cvSubscribe').style.display = 'none';
+  var target = data.score || 0;
+  $id('cvMeterFill').style.width = target + '%';
+  $id('cvScoreLabel').textContent = cvScoreWords(target);
+  var cur = 0, step = Math.max(1, Math.round(target/30));
+  var tick = setInterval(function(){ cur = Math.min(target, cur+step); $id('cvScoreNum').textContent = cur; if (cur >= target) clearInterval(tick); }, 25);
+
+  var chips = $id('cvMissingChips'); chips.innerHTML = '';
+  (data.missing || []).forEach(function(k){ var s = document.createElement('span'); s.className = 'cv-chip'; s.textContent = k; chips.appendChild(s); });
+  $id('cvMissingWrap').style.display = (data.missing && data.missing.length) ? 'block' : 'none';
+
+  $id('cvBox').classList.add('cv-locked');
+  $id('cvOut').textContent = '';
+  $id('cvLockOverlay').style.display = 'flex';
+  $id('cvDownloadMeta').textContent = isUnlocked() ? '' : tr('downloadMeta');
+  $id('cvResults').scrollIntoView({ behavior:'smooth', block:'start' });
+});
+
+/* ───────── Adaptar / baixar (limitado) ───────── */
+async function cvDoAdapt(){
+  var cv = $id('cv').value.trim(), job = $id('job').value.trim();
+  if (!cv || !job) { alert(tr('needBoth')); return; }
+  var btn = $id('cvDownload'); btn.disabled = true; var old = btn.textContent; btn.innerHTML = '<span class="cv-spinner"></span> ' + tr('generating');
+  var data = await cvApi({ action:'adapt', cv:cv, job:job, userEmail: getEmail() });
+  btn.disabled = false; btn.textContent = old;
+
+  if (data.requiresSubscription) { cvShowSubscribe(); return; }
+  if (data.requiresEmail) { cvPendingDownload = true; cvOpenModal(); return; }
+  if (data.error) { alert(data.error); return; }
+
+  $id('cvOut').textContent = data.adaptedCv;
+  $id('cvBox').classList.remove('cv-locked');
+  $id('cvLockOverlay').style.display = 'none';
+  cvDownloadText(data.adaptedCv);
+
+  if (data.anonymousUsed) localStorage.setItem('novu_cv_anon_used', '1');
+  if (typeof data.downloadsUsed === 'number') {
+    var left = data.downloadsLimit - data.downloadsUsed;
+    var c = $id('cvDownloadCount'); c.style.display = 'block'; c.textContent = tr('leftReg')(left);
+  }
+}
+$id('cvDownload').addEventListener('click', cvDoAdapt);
+
+/* ───────── Ecrã de assinatura ───────── */
+function cvShowSubscribe(){
+  $id('cvResults').style.display = 'none';
+  $id('cvSubscribe').style.display = 'block';
+  $id('cvSubscribe').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+$id('cvNotify').addEventListener('click', function(){
+  // Já temos o email (utilizador registado). TODO: ligar a Brevo/api/leads para registar interesse.
+  this.style.display = 'none';
+  $id('cvNotifyDone').style.display = 'block';
+});
+
+/* ───────── Modal de registo ───────── */
+function cvOpenModal(){ $id('cvModalErr').textContent = ''; $id('cvModal').classList.add('open'); $id('cvName').focus(); }
+function cvCloseModal(){ cvPendingDownload = false; $id('cvModal').classList.remove('open'); }
+$id('cvModal').addEventListener('click', function(e){ if (e.target === this) cvCloseModal(); });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && $id('cvModal').classList.contains('open')) cvCloseModal(); });
+
+async function cvSubmitRegister(){
+  var name = $id('cvName').value.trim();
+  var email = $id('cvEmail').value.trim();
+  var cidade = $id('cvCidade').value.trim();
+  var pais = $id('cvPais').value.trim();
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { $id('cvModalErr').textContent = tr('emailErr'); return; }
+  if (!$id('cvConsent').checked) { $id('cvModalErr').textContent = tr('consentErr'); return; }
+
+  var btn = $id('cvModalSubmit'); btn.disabled = true; var old = btn.textContent; btn.innerHTML = '<span class="cv-spinner"></span>';
+  try {
+    var res = await fetch('/api/chat', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ action:'register', name:name, email:email, cidade:cidade, pais:pais, lang: currentLang })
+    });
+    var data = await res.json();
+    btn.disabled = false; btn.textContent = old;
+    if (data && data.error) { $id('cvModalErr').textContent = data.error; return; }
+    localStorage.setItem('novu_email', email);
+    setCookie('novu_unlocked', 'true', 720);
+    $id('cvModal').classList.remove('open');
+    if (cvPendingDownload) { cvPendingDownload = false; cvDoAdapt(); }
+  } catch (e) {
+    btn.disabled = false; btn.textContent = old;
+    $id('cvModalErr').textContent = tr('regErr');
+  }
+}
+
+/* ───────── Init ───────── */
+setLang(currentLang);
+</script>
+</body>
+</html>
