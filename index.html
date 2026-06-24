@@ -680,7 +680,11 @@ a:nth-child(1) .recursos-card-inner { }
 
 /* Secção recursos — mais compacta */
 .recursos-section { padding: 44px 5% !important; background: var(--gray-100) !important; }
-.recursos-grid { grid-template-columns: repeat(auto-fill, minmax(220px,1fr)) !important; gap: 14px !important; }
+.recursos-grid { grid-template-columns: repeat(4, 1fr) !important; gap: 16px !important; align-items: stretch !important; }
+.recursos-grid > a { display: flex !important; }
+.recursos-grid .recursos-card-inner { width: 100% !important; }
+@media (max-width: 920px) { .recursos-grid { grid-template-columns: repeat(2, 1fr) !important; } }
+@media (max-width: 560px) { .recursos-grid { grid-template-columns: 1fr !important; } }
 
 /* How — fundo cinza, mais compacto */
 .how { background: var(--white) !important; padding: 44px 5% !important; }
@@ -1016,6 +1020,15 @@ a:nth-child(1) .recursos-card-inner { }
           <div style="font-weight:700;font-size:0.96rem;color:var(--blue-deep);margin-bottom:5px;" id="rec-cv-title">Currículo Europeu</div>
           <div style="font-size:0.8rem;color:var(--gray-600);line-height:1.5;" id="rec-cv-desc">Gera o teu CV no formato Europass em PDF. Reconhecido em toda a UE.</div>
           <div style="margin-top:10px;display:inline-block;background:var(--blue-light);color:var(--blue-mid);border-radius:50px;padding:2px 10px;font-size:0.7rem;font-weight:700;">PDF grátis</div>
+        </div>
+      </a>
+
+      <a href="/adaptar-cv.html" style="text-decoration:none;">
+        <div class="recursos-card-inner" style="border:2px solid var(--blue-bright);border-radius:14px;padding:22px 18px;background:linear-gradient(145deg,#F5F9FF,#EBF4FF);">
+          <div style="font-size:1.5rem;margin-bottom:10px;width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#2E7FD4,#1A4A7A);display:flex;align-items:center;justify-content:center;">📊</div>
+          <div style="font-weight:700;font-size:0.96rem;color:var(--blue-deep);margin-bottom:5px;" id="rec-adapt-title">Adaptar CV</div>
+          <div style="font-size:0.8rem;color:var(--gray-600);line-height:1.5;" id="rec-adapt-desc">Adapta o teu currículo a cada vaga e recebe-o em PDF, otimizado para os filtros ATS.</div>
+          <div style="margin-top:10px;display:inline-block;background:var(--blue-deep);color:white;border-radius:50px;padding:2px 10px;font-size:0.7rem;font-weight:700;" id="rec-adapt-badge">Novo · PDF</div>
         </div>
       </a>
 
