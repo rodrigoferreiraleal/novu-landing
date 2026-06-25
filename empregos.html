@@ -187,6 +187,9 @@ nav {
   cursor: pointer; transition: all 0.2s;
 }
 .btn-candidatar:hover { background: var(--blue-bright); }
+.btn-externa { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; background: var(--blue-bright); }
+.btn-externa:hover { background: var(--blue-deep); }
+.tag-externa { background: #EFF6FF; color: var(--blue-deep); border: 1px solid #C8DEFA; }
 .btn-ver-mais {
   background: transparent; color: var(--blue-bright);
   border: 1.5px solid var(--blue-bright);
@@ -323,9 +326,9 @@ nav {
 
 <!-- NAV -->
 <nav>
-  <a href="/index.html" class="nav-logo">N<span>O</span>VU</a>
+  <a href="/index.html" class="nav-logo"><img src="/logo.svg" alt="NOVU" height="38" style="display:block;"></a>
   <div class="nav-right" id="navDesktop">
-    <a href="/index.html" class="nav-back" id="nav-home-link">🤖 Assistente</a>
+    <a href="/index.html" class="nav-back" id="nav-home-link">🏠 Início</a>
     <a href="/documentos.html" class="nav-back" id="nav-docs-link">📄 Documentos</a>
     <a href="/especialistas.html" class="nav-back" id="nav-esp-link">🤝 Especialistas</a>
     <a href="/adaptar-cv.html" class="nav-back" id="nav-adapt-link" style="background:var(--blue-deep);color:#fff;border-color:var(--blue-deep);">📊 Adaptar CV</a>
@@ -348,7 +351,7 @@ nav {
   </div>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
-  <a href="/index.html" class="mobile-menu-link">🤖 <span id="mm-home">Assistente IA</span></a>
+  <a href="/index.html" class="mobile-menu-link">🏠 <span id="mm-home">Início</span></a>
   <a href="/documentos.html" class="mobile-menu-link">📄 <span id="mm-docs">Documentos</span></a>
   <a href="/especialistas.html" class="mobile-menu-link">🤝 <span id="mm-esp">Especialistas</span></a>
   <a href="/empregos.html" class="mobile-menu-link active-page">💼 <span id="mm-emp">Empregos</span></a>
@@ -629,9 +632,9 @@ let empresasData = [];    // para sidebar
 // ── TRADUÇÕES ──
 const T = {
   pt: {
-    nav_home: '🤖 Assistente', nav_docs: '📄 Documentos', nav_esp: '🤝 Especialistas',
+    nav_home: '🏠 Início', nav_docs: '📄 Documentos', nav_esp: '🤝 Especialistas',
     nav_post: '+ Publicar Vaga',
-    mm_home: 'Assistente IA', mm_docs: 'Documentos', mm_esp: 'Especialistas', mm_emp: 'Empregos', mm_post: '+ Publicar Vaga',
+    mm_home: 'Início', mm_docs: 'Documentos', mm_esp: 'Especialistas', mm_emp: 'Empregos', mm_post: '+ Publicar Vaga',
     hero_badge: '✓ Vagas verificadas · Empresas com perfil',
     hero_title_1: 'Empregos em Portugal', hero_title_2: 'para imigrantes',
     hero_sub: 'Part-time, freelance, restauração, hotelaria e muito mais. Todas as vagas com salário visível e empresas verificadas — sem surpresas.',
@@ -643,6 +646,7 @@ const T = {
     tag_verificada: '✓ Verificada', tag_nova: 'Empresa nova',
     dias: 'dia', dias_plural: 'dias', restantes: 'restante',
     btn_candidatar: 'Candidatar-me',
+    btn_candidatar_externa: 'Ver e candidatar →', tag_externa: 'Externa',
     sb_cta_title: 'A tua empresa contrata imigrantes?',
     sb_cta_desc: 'Publica a tua vaga gratuitamente e chega a milhares de candidatos qualificados.',
     sb_cta_btn: '+ Publicar Vaga Grátis',
@@ -673,9 +677,9 @@ const T = {
     share_label: 'Partilhar:', share_copy: 'Copiar link', share_ig: 'Copiar para Instagram',
   },
   en: {
-    nav_home: '🤖 Assistant', nav_docs: '📄 Documents', nav_esp: '🤝 Specialists',
+    nav_home: '🏠 Home', nav_docs: '📄 Documents', nav_esp: '🤝 Specialists',
     nav_post: '+ Post a Job',
-    mm_home: 'AI Assistant', mm_docs: 'Documents', mm_esp: 'Specialists', mm_emp: 'Jobs', mm_post: '+ Post a Job',
+    mm_home: 'Home', mm_docs: 'Documents', mm_esp: 'Specialists', mm_emp: 'Jobs', mm_post: '+ Post a Job',
     hero_badge: '✓ Verified listings · Company profiles',
     hero_title_1: 'Jobs in Portugal', hero_title_2: 'for immigrants',
     hero_sub: 'Part-time, freelance, restaurants, hotels and more. All listings with visible salary and verified companies — no surprises.',
@@ -687,6 +691,7 @@ const T = {
     tag_verificada: '✓ Verified', tag_nova: 'New company',
     dias: 'day', dias_plural: 'days', restantes: 'left',
     btn_candidatar: 'Apply now',
+    btn_candidatar_externa: 'View & apply →', tag_externa: 'External',
     sb_cta_title: 'Does your company hire immigrants?',
     sb_cta_desc: 'Post your job for free and reach thousands of qualified candidates.',
     sb_cta_btn: '+ Post a Free Job',
@@ -715,9 +720,9 @@ const T = {
     share_label: 'Share:', share_copy: 'Copy link', share_ig: 'Copy for Instagram',
   },
   es: {
-    nav_home: '🤖 Asistente', nav_docs: '📄 Documentos', nav_esp: '🤝 Especialistas',
+    nav_home: '🏠 Inicio', nav_docs: '📄 Documentos', nav_esp: '🤝 Especialistas',
     nav_post: '+ Publicar Empleo',
-    mm_home: 'Asistente IA', mm_docs: 'Documentos', mm_esp: 'Especialistas', mm_emp: 'Empleos', mm_post: '+ Publicar Empleo',
+    mm_home: 'Inicio', mm_docs: 'Documentos', mm_esp: 'Especialistas', mm_emp: 'Empleos', mm_post: '+ Publicar Empleo',
     hero_badge: '✓ Empleos verificados · Empresas con perfil',
     hero_title_1: 'Empleos en Portugal', hero_title_2: 'para inmigrantes',
     hero_sub: 'Part-time, freelance, restauración, hostelería y mucho más. Todas las ofertas con salario visible y empresas verificadas — sin sorpresas.',
@@ -729,6 +734,7 @@ const T = {
     tag_verificada: '✓ Verificada', tag_nova: 'Empresa nueva',
     dias: 'día', dias_plural: 'días', restantes: 'restante',
     btn_candidatar: 'Postularme',
+    btn_candidatar_externa: 'Ver y postular →', tag_externa: 'Externa',
     sb_cta_title: '¿Tu empresa contrata inmigrantes?',
     sb_cta_desc: 'Publica tu oferta gratis y llega a miles de candidatos calificados.',
     sb_cta_btn: '+ Publicar Empleo Gratis',
@@ -831,6 +837,7 @@ function renderVagas(dados) {
         <span class="tag tag-tipo">${v.tipo === 'part-time' ? 'Part-time' : v.tipo === 'freelance' ? 'Freelance' : v.tipo === 'remoto' ? 'Remoto' : 'Full-time'}</span>
         <span class="tag">📍 ${v.cidade}${v.bairro ? ', ' + v.bairro : ''}</span>
         <span class="tag tag-salario">💶 ${salario}</span>
+        ${v.fonte === 'jooble' ? `<span class="tag tag-externa">🌐 ${t.tag_externa}</span>` : ''}
       </div>
       <p class="vaga-desc">${v.descricao}</p>
       <div class="vaga-footer">
@@ -838,7 +845,9 @@ function renderVagas(dados) {
           <span>⏱ ${publicado}</span>
           <span>📅 ${diasRestantes} ${diasRestantes === 1 ? t.dias : t.dias_plural} ${t.restantes}</span>
         </div>
-        <button class="btn-candidatar" onclick="openCandidaturaModal('${v.id}')">${t.btn_candidatar}</button>
+        ${(v.fonte === 'jooble' || v.link_externo)
+          ? `<a class="btn-candidatar btn-externa" href="${v.link_externo || '#'}" target="_blank" rel="noopener nofollow">${t.btn_candidatar_externa}</a>`
+          : `<button class="btn-candidatar" onclick="openCandidaturaModal('${v.id}')">${t.btn_candidatar}</button>`}
       </div>
       <div class="share-row">
         <span style="font-size:0.72rem;color:var(--gray-400);font-weight:600;">${t.share_label || 'Partilhar:'}</span>
