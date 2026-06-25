@@ -1938,7 +1938,7 @@ document.addEventListener('click', function(e) {
 
 // ── STATS REAIS ──
 async function carregarStats() {
-  const BASE_USERS = 90; // base de arranque
+  const BASE_USERS = 250; // base de arranque (mostra ~378 com a base atual de registos)
   try {
     const res = await fetch('/api/stats');
     const data = await res.json();
